@@ -1,13 +1,12 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-01-10 16:16:14
- * @LastEditTime: 2022-06-15 14:20:25
+ * @LastEditTime: 2022-06-16 10:09:05
  * @Description: 
 -->
 <script lang="ts" setup>
 import PlumBg from '~/components/PlumBg.vue';
 
-const route = useRoute();
 const router = useRouter();
 const content = ref<HTMLDivElement>();
 
@@ -48,14 +47,18 @@ onMounted(() => {
   navigate();
   setTimeout(navigate, 500);
 });
+const title = ref('');
+const setTitle = (e: string) => {
+  title.value = e;
+};
 </script>
 <template>
   <div class="main">
     <Header class="dark:text-gray-100" />
     <div class="container">
       <article ref="content" class="artical">
-        <!-- <h1 class="text-3xl text-center mb-5">{{ route.meta.frontmatter?.title }}</h1> -->
-        <router-view />
+        <h1 v-if="title" class="text-3xl text-center mb-5">{{ title }}</h1>
+        <NuxtPage class="prose prose-sm m-auto text-left" @change-title="setTitle" />
       </article>
     </div>
     <Footer />
