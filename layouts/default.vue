@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-01-10 16:16:14
- * @LastEditTime: 2022-06-16 14:29:23
+ * @LastEditTime: 2022-06-16 14:45:32
  * @Description: 
 -->
 <script lang="ts" setup>
@@ -81,7 +81,7 @@ const navHandler = (key: string) => {
       </div>
       <div
         v-if="tocTree.length"
-        class="hidden lg:block fixed right-20 w-100 top-100px h-200 overflow-y-scroll"
+        class="hidden lg:block fixed right-20 w-100 top-100px max-h-200 overflow-y-scroll"
       >
         <NMenu
           key-field="id"
