@@ -5,7 +5,6 @@ description: JavaScript 集成
 date: 2021-01-07 11:53:16
 ---
 
-[[toc]]
 
 ## 原型链继承
 

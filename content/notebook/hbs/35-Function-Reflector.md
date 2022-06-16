@@ -5,7 +5,6 @@ description: JavaScript 递归函数与尾调用优化
 date: 2021-01-15 14:00:15
 ---
 
-[[toc]]
 
 ## 递归函数
 

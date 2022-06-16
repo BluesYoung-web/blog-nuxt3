@@ -5,7 +5,6 @@ date: 2022-02-21 11:40:00
 image: /img/vue.jpeg
 ---
 
-[[toc]]
 
 ## `createApp`
 

@@ -5,7 +5,6 @@ image: /img/vitest.svg
 date: 2022-05-10 10:40:00
 ---
 
-[[toc]]
 
 ## 计时器相关
 
@@ -229,5 +228,3 @@ await asyncMock() // default
 ### [vi.resetmodules](https://cn.vitest.dev/api/#vi-resetmodules)
 
 ### [vi.unmock](https://cn.vitest.dev/api/#vi-unmock)
-
-

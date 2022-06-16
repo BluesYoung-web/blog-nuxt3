@@ -5,7 +5,6 @@ image: /img/vue.jpeg
 date: 2021-07-22 15:00:09
 ---
 
-[[toc]]
 
 ## `\<router-link\>`
 

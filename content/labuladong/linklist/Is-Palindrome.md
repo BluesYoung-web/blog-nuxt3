@@ -5,28 +5,22 @@ date: 2022-04-23 13:20:00
 image: /img/algorithm.webp
 ---
 
-[[toc]]
 
 ## 回文链表
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-234. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
+[力扣原题-234. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
 
 给定一个单链表的头结点 `head`，请判断其是否为回文链表，返回 `true | false`
 
 **提示：**
-- 链表中节点的数目 n ∈ [0, 1e5]
-- 节点值 ∈ [0, 9]
+- 链表中节点的数目 `n ∈ [0, 1e5]`
+- 节点值 ∈ `[0, 9]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -65,8 +59,7 @@ describe('示例：', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 

@@ -5,7 +5,6 @@ description: JavaScript 基本语法
 date: 2020-12-28 16:24:02
 ---
 
-[[toc]]
 
 ## 区分大小写
 

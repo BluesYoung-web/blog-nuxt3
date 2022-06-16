@@ -5,7 +5,6 @@ description: JavaScript 生成器
 date: 2021-01-05 13:53:15
 ---
 
-[[toc]]
 
 ## 概述
 
@@ -46,7 +45,7 @@ class Foo {
 } 
 ```
 
-<n-alert title="箭头函数不能用来定义生成器函数" type="warning" />
+<n-alert title="箭头函数不能用来定义生成器函数" type="warning"></n-alert>
 
 ## 执行
 
@@ -74,7 +73,7 @@ console.log(generatorObject); // generatorFn {<suspended>}
 console.log(generatorObject.next()); // { done: true, value: 'foo' } 
 ```
 
-<n-alert title="生成器函数只会在初次调用 next() 方法后开始执行" type="info" />
+<n-alert title="生成器函数只会在初次调用 next() 方法后开始执行" type="info"></n-alert>
 
 ```js
 function* generatorFn() {
@@ -119,7 +118,7 @@ console.log(generatorObject.next()); // { done: true, value: undefined }
 ### 输入输出
 
 
-<n-alert title="第一次调用 next() 传入的值不会被使用" type="info" />
+<n-alert title="第一次调用 next() 传入的值不会被使用" type="info"></n-alert>
 
 ```js
 function* generatorFn(initial) {
@@ -248,6 +247,6 @@ for(const i of f) {
 假如生成器函数**内部处理**了这个错误，那么生成器就不会关闭，而且还可以恢复执行
 
 
-<n-alert title="错误处理会跳过对应的 yield" type="info" />
-
-<n-alert class="mt-5" title="如果生成器对象还没有开始执行，那么调用 throw() 抛出的错误不会在函数内部被捕获，因为这相当于在函数块外部抛出了错误" type="warning" />
+<n-alert title="错误处理会跳过对应的 yield" type="info"></n-alert>
+<br />
+<n-alert class="mt-5" title="如果生成器对象还没有开始执行，那么调用 throw() 抛出的错误不会在函数内部被捕获，因为这相当于在函数块外部抛出了错误" type="warning"></n-alert>

@@ -5,7 +5,6 @@ image: /img/event_loop.png
 date: 2022-03-17 17:40:58
 ---
 
-[[toc]]
 
 ## 什么是事件循环
 

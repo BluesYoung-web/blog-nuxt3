@@ -5,7 +5,6 @@ description: JavaScript 定型数组
 date: 2021-01-04 14:15:08
 ---
 
-[[toc]]
 
 ## 概述
 
@@ -13,16 +12,13 @@ date: 2021-01-04 14:15:08
 
 实质上是**一种包含特殊数值类型的数组**
 
-<Step
-  title="历史"
-  class="mt-8"
-  :data="[
-    'WebGL早期版本 JavaScript 数组与原生数组之间不匹配，出现性能问题',
-    'Mozilla 为解决这个问题而实现了 CanvasFloatArray',
-    '最终，CanvasFloatArray 变成了 Float32Array，也就是今天定型数组中可用的第一个“类型”'
-  ]"
-/>
+### 历史
 
+WebGL早期版本 JavaScript 数组与原生数组之间不匹配，出现性能问题
+
+Mozilla 为解决这个问题而实现了 CanvasFloatArray
+
+最终，CanvasFloatArray 变成了 Float32Array，也就是今天定型数组中可用的第一个“类型”
 
 ## `ArrayBuffer`
 
@@ -92,40 +88,16 @@ alert(secondHalfDataView.buffer === buf); // true
 
 ### `ElementType`
 
-<script lang="ts" setup>
-const tableHead1 = [
-  { label: 'ElementType', prop: 'type' },
-  { label: 'byteLength', prop: 'len' },
-  { label: 'des', prop: 'des' },
-  { label: 'c', prop: 'c' },
-  { label: 'range', prop: 'range' },
-];
-const tableData1 = [
-  { type: '<strong>Int8</strong>', len: `1`, des: `8 位有符号整数`, c: `<strong>signed char</strong>`, range: `[-128, 127]` },
-  { type: '<strong>Uint8</strong>', len: `1`, des: `8 位无符号整数`, c: `<strong>unsigned char</strong>`, range: `[0, 255]` },
-  { type: '<strong>Int16</strong>', len: `2`, des: `16 位有符号整数`, c: `<strong>short</strong>`, range: `[-32769, 32767]` },
-  { type: '<strong>Uint16</strong>', len: `2`, des: `16 位无符号整数`, c: `<strong>unsigned short</strong>`, range: `[0, 65535]` },
-  { type: '<strong>Int32</strong>', len: `4`, des: `32 位有符号整数`, c: `<strong>int</strong>`, range: `[-2147483648, 2147483647]` },
-  { type: '<strong>Uint32</strong>', len: `4`, des: `32 位无符号整数`, c: `<strong>unsigned int</strong>`, range: `[0, 4294967295]` },
-  { type: '<strong>Float32</strong>', len: `4`, des: `32 位 IEEE-754 浮点数`, c: `<strong>float</strong>`, range: `[-3.4e+38, 3.4e+38]` },
-  { type: '<strong>Float64</strong>', len: `8`, des: `64 位 IEEE-754 浮点数`, c: `<strong>double</strong>`, range: `[-1.7e+308, 1.7e+308]` },
-];
-</script>
-
-<NTable :bordered="false" :single-line="false" striped>
-  <thead>
-    <tr>
-      <th v-for="(item, index) in tableHead1" :key="index + 'head'" :width="item.width ?? ''">
-        {{ item.label }}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="(item, index) in tableData1" :key="index + 'dasdasd'">
-      <td v-for="(it, idx) in tableHead1" :key="idx + 'eret'" v-html="item[String(it.prop)]"></td>
-    </tr>
-  </tbody>
-</NTable>
+**ElementType**	| **byteLength**	| **des** |	**c** |	**range**
+--- | --- | --- | --- | ---
+**Int8** |	1 |	8 位有符号整数 |	**signed char** |	`[-128, 127]`
+**Uint8**	| 1 |	8 位无符号整数 |	**unsigned char** |	`[0, 255]`
+**Int16** |	2 |	16 位有符号整数	| **short** |	`[-32769, 32767]`
+**Uint16** |	2	| 16 位无符号整数 |	**unsigned short** |	`[0, 65535]`
+**Int32** |	4	| 32 位有符号整数	| **int** |	`[-2147483648, 2147483647]`
+**Uint32** |	4 |	32 位无符号整数	| **unsigned int**	| `[0, 4294967295]`
+**Float32** |	4 |	32 位 IEEE-754 浮点数 |	**float**	| `[-3.4e+38, 3.4e+38]`
+**Float64** |	8 |	64 位 IEEE-754 浮点数	| **double** |	`[-1.7e+308, 1.7e+308]`
 
 ### `字节序(大小端)`
 

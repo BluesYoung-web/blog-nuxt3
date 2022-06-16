@@ -5,7 +5,6 @@ image: /img/regexp.jpg
 date: 2021-10-24 17:09:58
 ---
 
-[[toc]]
 
 ## 精髓
 

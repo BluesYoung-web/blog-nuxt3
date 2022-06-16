@@ -5,7 +5,6 @@ description: JavaScript 数据类型
 date: 2020-12-28 16:28:37
 ---
 
-[[toc]]
 
 ## 简单数据类型
 
@@ -57,89 +56,14 @@ typeof null === 'object'
 
 类型转换`Boolean()`
 
-<script lang="ts" setup>
-const tableHead1 = [
-  { label: '数据类型', prop: 'type' },
-  { label: '为真(true)', prop: 'true' },
-  { label: '为假(false)', prop: 'false' }
-];
-const tableData1 = [
-  { type: 'Boolean', true: `true`, false: `false` },
-  { type: 'String', true: `非空字符串`, false: `空字符串` },
-  { type: 'Number', true: `<span class="text-red-600 font-bold">非零，包括负数和正负无穷</span>`, false: `0, NaN` },
-  { type: 'Object', true: `任意对象`, false: `null` },
-  { type: 'Undefined', true: `<span class="text-red-600 font-bold">不存在</span>`, false: `undefined` }
-];
+数据类型 | 为真(true) | 为假(false)
+-- | -- | --
+Boolean |	true | false
+String	| 非空字符串	| 空字符串
+Number |	非零，包括负数和正负无穷 |	0, NaN
+Object |	任意对象 |	null
+Undefined |	不存在 |	undefined
 
-const tableHead2 = [
-  { label: '值', prop: 'value' },
-  { label: '转换结果', prop: 'des' }
-];
-const tableData2 = [
-  { value: `true`, des: `1` },
-  { value: `false, null, ''`, des: `0` },
-  { value: `number`, des: `number` },
-  { value: `undefined`, des: `NaN` },
-  { value: `纯数值的字符串`, des: `去掉引号转换为十进制，<span class="text-red-600 font-bold">忽略前导零</span>` },
-  { value: `十六进制字符串`, des: `转换为对应的十进制数值` },
-  { value: `其余字符串`, des: `NaN` },
-  { value: `Object`, des: `<span class="text-red-600 font-bold">优先调用 valueOf()，取其值，如果为 NaN，则调用 toString() 将其值作为字符串转换之后返回<span>` }
-];
-
-const tableHead3 = [
-  { label: '字面量', prop: 'value' },
-  { label: '含义', prop: 'des' }
-];
-const tableData3 = [
-  { value: `<strong>\\n</strong>`, des: `换行符` },
-  { value: `<strong>\\t</strong>`, des: `制表符` },
-  { value: `<strong>\\b</strong>`, des: `空格/退格` },
-  { value: `<strong>\\r</strong>`, des: `回车` },
-  { value: `<strong>\\f</strong>`, des: `进纸/换页` },
-  { value: `<strong>\\</strong>`, des: `\\` },
-  { value: `<strong>\'</strong>`, des: `'` },
-  { value: `<strong>\"</strong>`, des: `"` },
-  { value: `<strong>\`</strong>`, des: `\`` },
-  { value: `<strong>\\xnn</strong>`, des: `两个十六位进制表示字符` },
-  { value: `<strong>\\unnnn</strong>`, des: `两个十六位进制表示字符` },
-];
-
-const tableHead4 = [
-  { label: '名称', prop: 'name' },
-  { label: '类型', prop: 'type' },
-  { label: '对应含义', prop: 'des' },
-];
-const tableData4 = [
-  { name: `<strong>iterator</strong>`, type: 'Function', des: `for-of 迭代器 API 函数` },
-  { name: `<strong>asyncIterator</strong>`, type: 'Function', des: `for-await-of 异步迭代器 API 函数` },
-  { name: `<strong>hasInstance</strong>`, type: 'Function', des: `决定 instanceof 结果的函数` },
-  { name: `<strong>isConcatSpreadable</strong>`, type: 'Boolean', des: `使用 Array.prototype.concat() 拼接时，是否拆解其数组元素(合并/或整体压入)` },
-  { name: `<strong>match</strong>`, type: 'Function', des: `由 String.prototype.match() 方法使用` },
-  { name: `<strong>replace</strong>`, type: 'Function', des: `由 String.prototype.replace() 方法使用` },
-  { name: `<strong>search</strong>`, type: 'Function', des: `由 String.prototype.search() 方法使用` },
-  { name: `<strong>split</strong>`, type: 'Function', des: `由 String.prototype.split() 方法使用` },
-  { name: `<strong>toStringTag</strong>`, type: 'Function', des: `由 Object.prototype.toString() 方法使用` },
-  { name: `<strong>species</strong>`, type: 'Function', des: `<strong>作为创建派生对象的构造函数,用 Symbol.species 定义静态的获取器(getter)方法，可以覆盖新创建实例的原型定义</strong>` },
-  { name: `<strong>toPrimitive</strong>`, type: 'Function', des: `将对象转换为相应的原始值(<strong>隐式转换</strong>)，由 ToPrimitive 抽象操作使用` },
-  { name: `<strong>unscopables</strong>`, type: 'Object', des: `<strong>该对象所有的以及继承的属性， 都会从关联对象的 with 环境绑定中排除，不推荐使用</strong>` },
-
-];
-</script>
-
-<NTable :bordered="false" :single-line="false" striped>
-  <thead>
-    <tr>
-      <th v-for="(item, index) in tableHead1" :key="index + 'head'" :width="item.width ?? ''">
-        {{ item.label }}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="(item, index) in tableData1" :key="index + 'dasdasd'">
-      <td v-for="(it, idx) in tableHead1" :key="idx + 'eret'" v-html="item[String(it.prop)]"></td>
-    </tr>
-  </tbody>
-</NTable>
 
 ```js
 Boolean(true) === true
@@ -205,21 +129,16 @@ Boolean(NaN) === false
 
 ### `Number`
 
-<NTable :bordered="false" :single-line="false" striped>
-  <thead>
-    <tr>
-      <th v-for="(item, index) in tableHead2" :key="index + 'head'" :width="item.width ?? ''">
-        {{ item.label }}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="(item, index) in tableData2" :key="index + 'dasdasd'">
-      <td v-for="(it, idx) in tableHead2" :key="idx + 'eret'" v-html="item[String(it.prop)]"></td>
-    </tr>
-  </tbody>
-</NTable>
-
+值 | 转换结果
+-- | --
+true | 1
+false, null, '' |	0
+number |	number
+undefined |	NaN
+纯数值的字符串 |	去掉引号转换为十进制，忽略前导零
+十六进制字符串 |	转换为对应的十进制数值
+其余字符串 |	NaN
+Object |	**优先调用 valueOf()，取其值，如果为 NaN，则调用 toString() 将其值作为字符串转换之后返回**
 
 ### `parseInt`
 
@@ -276,20 +195,19 @@ parseFloat('0448.99') => 448.99
 
 **字符串不可变，修改字符串的值等效于销毁原始字符串，保存新的字符串到变量**
 
-<NTable :bordered="false" :single-line="false" striped>
-  <thead>
-    <tr>
-      <th v-for="(item, index) in tableHead3" :key="index + 'head'" :width="item.width ?? ''">
-        {{ item.label }}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="(item, index) in tableData3" :key="index + 'dasdasd'">
-      <td v-for="(it, idx) in tableHead3" :key="idx + 'eret'" v-html="item[String(it.prop)]"></td>
-    </tr>
-  </tbody>
-</NTable>
+字面量 |	含义
+--- | ---
+\n |	换行符
+\t |	制表符
+\b |	空格/退格
+\r |	回车
+\f |	进纸/换页
+\	| \
+' |	'
+" |	"
+`	| `
+\xnn |	两个十六位进制表示字符
+\unnnn |	两个十六位进制表示字符
 
 
 ### `toString()`
@@ -468,20 +386,20 @@ console.log(Reflect.ownKeys(o));
 以 `Symbol` 工厂函数字符串属性的形式存在(**静态属性**)
 
 
-<NTable :bordered="false" :single-line="false" striped>
-  <thead>
-    <tr>
-      <th v-for="(item, index) in tableHead4" :key="index + 'head'" :width="item.width ?? ''">
-        {{ item.label }}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="(item, index) in tableData4" :key="index + 'dasdasd'">
-      <td v-for="(it, idx) in tableHead4" :key="idx + 'eret'" v-html="item[String(it.prop)]"></td>
-    </tr>
-  </tbody>
-</NTable>
+名称 |	类型 |	对应含义
+--- | --- | ---
+**iterator** |	Function |	for-of 迭代器 API 函数
+**asyncIterator** |	Function |	for-await-of 异步迭代器 API 函数
+**hasInstance** |	Function |	决定 instanceof 结果的函数
+**isConcatSpreadable** |	Boolean |	使用 Array.prototype.concat() 拼接时，是否拆解其数组元素(合并/或整体压入)
+**match** |	Function |	由 String.prototype.match() 方法使用
+**replace** |	Function |	由 String.prototype.replace() 方法使用
+**search** |	Function |	由 String.prototype.search() 方法使用
+**split** |	Function |	由 String.prototype.split() 方法使用
+**toStringTag** |	Function |	由 Object.prototype.toString() 方法使用
+**species** |	Function |	作为创建派生对象的构造函数,用 Symbol.species 定义静态的获取器(getter)方法，可以覆盖新创建实例的原型定义
+**toPrimitive** |	Function |	将对象转换为相应的原始值(隐式转换)，由 ToPrimitive 抽象操作使用
+**unscopables** |	Object |	该对象所有的以及继承的属性， 都会从关联对象的 with 环境绑定中排除，不推荐使用
 
 
 ```js

@@ -5,7 +5,6 @@ description: JavaScript 动画 API
 date: 2021-01-25 08:38:36
 ---
 
-[[toc]]
 
 ## 由来
 

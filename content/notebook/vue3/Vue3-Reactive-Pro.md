@@ -5,7 +5,6 @@ date: 2022-02-20 10:25:00
 image: /img/vue.jpeg
 ---
 
-[[toc]]
 
 ## `shallowRef`
 

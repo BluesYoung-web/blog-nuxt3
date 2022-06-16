@@ -5,7 +5,6 @@ date: 2022-02-22 10:20:00
 image: /img/vue.jpeg
 ---
 
-[[toc]]
 
 ## 渲染函数 `h()`
 
@@ -155,7 +154,7 @@ function isVNode(value: unknown): boolean
 **用于使用名称索引一个已经注册过的组件，如果找不到则直接返回字符串并触发 `Vue` 警告**
 
 <n-alert type="info">**如果可以直接导入组件，建议不要使用此函数**</n-alert>
-
+<br />
 <n-alert type="warning">**为了正确的解析组件上下文，必须在 `setup` 内部调用**</n-alert>
 
 ```ts
@@ -177,7 +176,7 @@ export default {
 **用于使用名称索引一个已经注册过的指令，如果找不到则返回 `undefined` 并触发 `Vue` 警告**
 
 <n-alert type="info">**如果可以直接导入指令，建议不要使用此函数**</n-alert>
-
+<br />
 <n-alert type="warning">**为了正确的解析组件上下文，必须在 `setup` 内部调用**</n-alert>
 
 ### `widthDirectives`

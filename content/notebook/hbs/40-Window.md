@@ -5,7 +5,6 @@ description: JavaScript Window 对象
 date: 2021-01-19 14:51:35
 ---
 
-[[toc]]
 
 ## 定义
 

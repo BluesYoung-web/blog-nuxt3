@@ -5,7 +5,6 @@ description: JavaScript XHR(AJAX)
 date: 2021-02-03 16:23:53
 ---
 
-[[toc]]
 
 ## `AJAX`
 

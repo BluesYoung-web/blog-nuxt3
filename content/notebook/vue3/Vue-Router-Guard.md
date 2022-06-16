@@ -5,7 +5,6 @@ image: /img/vue.jpeg
 date: 2021-07-27 15:34:17
 ---
 
-[[toc]]
 
 ## 导航守卫
 
@@ -100,22 +99,27 @@ export default {
 
 ### 完整解析流程
 
-<Step
-  class="mt-6"
-  title="路由解析流程"
-  :data="[
-    '导航被触发',
-    '失活的组件里面调用 beforeRouteLeave',
-    '调用全局 beforeEach',
-    '重用组件内部调用 beforeRouteUpdate',
-    '路由配置调用 beforeEnter',
-    '解析异步路由组件',
-    '被激活的组件里面调用 beforeRouteEnter',
-    '调用全局 beforeResolve',
-    '导航被确认',
-    '调用全局的 afterEach',
-    '触发 DOM 更新',
-    '调用 beforeRouteEnter 之中传递给 next 的回调函数, 并将创建好的组件实例作为回调函数的参数传入'
-  ]"
-/>
+导航被触发
+
+失活的组件里面调用 beforeRouteLeave
+
+调用全局 beforeEach
+
+重用组件内部调用 beforeRouteUpdate
+
+路由配置调用 beforeEnter
+
+解析异步路由组件
+
+被激活的组件里面调用 beforeRouteEnter
+
+调用全局 beforeResolve
+
+导航被确认
+
+调用全局的 afterEach
+
+触发 DOM 更新
+
+调用 beforeRouteEnter 之中传递给 next 的回调函数, 并将创建好的组件实例作为回调函数的参数传入
 

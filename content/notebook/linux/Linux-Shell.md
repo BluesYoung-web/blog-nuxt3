@@ -5,7 +5,6 @@ image: /img/linux.jpeg
 date: 2022-04-07 09:00:00
 ---
 
-[[toc]]
 
 ## 登录式 Shell 与非登录式 Shell
 

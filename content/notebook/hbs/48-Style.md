@@ -5,7 +5,6 @@ description: JavaScript Style
 date: 2021-01-22 10:03:31
 ---
 
-[[toc]]
 
 ## 存取元素样式
 

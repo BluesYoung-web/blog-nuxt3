@@ -5,7 +5,6 @@ description: JavaScript 事件模拟
 date: 2021-01-23 16:02:17
 ---
 
-[[toc]]
 
 ## 创建模拟事件
 

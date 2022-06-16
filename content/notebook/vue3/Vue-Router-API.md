@@ -5,7 +5,6 @@ image: /img/vue.jpeg
 date: 2021-08-03 09:49:54
 ---
 
-[[toc]]
 
 ## `createRouter(options: RouterOptions)`
 

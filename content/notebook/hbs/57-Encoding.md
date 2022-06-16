@@ -5,7 +5,6 @@ description: JavaScript 编解码
 date: 2021-01-28 13:43:47
 ---
 
-[[toc]]
 
 ## 文本编码
 

@@ -5,7 +5,6 @@ image: /img/ts.jpeg
 date: 2022-03-15 17:00:28
 ---
 
-[[toc]]
 
 ## `typeof`
 

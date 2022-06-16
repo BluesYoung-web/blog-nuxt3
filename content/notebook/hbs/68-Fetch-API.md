@@ -5,7 +5,6 @@ description: JavaScript Fetch
 date: 2021-02-04 14:48:14
 ---
 
-[[toc]]
 
 ## 定义
 

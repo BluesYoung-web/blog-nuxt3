@@ -5,7 +5,6 @@ date: 2022-02-22 09:30:00
 image: /img/vue.jpeg
 ---
 
-[[toc]]
 
 ## `Virtual DOM`
 

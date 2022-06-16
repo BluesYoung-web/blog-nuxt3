@@ -5,28 +5,22 @@ date: 2022-04-26 10:30:00
 image: /img/algorithm.webp
 ---
 
-[[toc]]
 
 ## 旋转图像
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-48. 旋转图像](https://leetcode-cn.com/problems/rotate-image/)
+[力扣原题-48. 旋转图像](https://leetcode-cn.com/problems/rotate-image/)
 
 给定一个 `n * n` 的二维矩阵 `matrix` 表示一个图像，请**将图像顺时针旋转 90°(原地旋转，不得使用额外的矩阵空间)**
 
 **提示：**
-- n ∈ [1, 20]
-- matrix[i][j] ∈ [-1000, 1000]
+- `n ∈ [1, 20]`
+- `matrix[i][j] ∈ [-1000, 1000]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -63,8 +57,7 @@ describe('旋转图像', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -109,24 +102,19 @@ function rotate(arr: number[][]): void {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-54. 螺旋矩阵](https://leetcode-cn.com/problems/spiral-matrix/)
+[力扣原题-54. 螺旋矩阵](https://leetcode-cn.com/problems/spiral-matrix/)
 
 给定一个 `m * n` 的二维矩阵 `matrix`，请**按顺时针螺旋顺序(右→下→左→上→右...)，返回矩阵中所有的元素**
 
 **提示：**
-- m = matrix.length, n = matrix[i].length
-- m ∈ [1, 10]
-- n ∈ [1, 10]
-- matrix[i][j] ∈ [-100, 100]
+- `m = matrix.length, n = matrix[i].length`
+- `m ∈ [1, 10]`
+- `n ∈ [1, 10]`
+- `matrix[i][j] ∈ [-100, 100]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -153,8 +141,7 @@ describe('螺旋矩阵', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -211,21 +198,16 @@ function spiralOrder(matrix: number[][]): number[] {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-59. 螺旋矩阵 II](https://leetcode-cn.com/problems/spiral-matrix-ii/)
+[力扣原题-59. 螺旋矩阵 II](https://leetcode-cn.com/problems/spiral-matrix-ii/)
 
 给定一个正整数 `n`，生成一个从 `1` 到 `n`<sup>2</sup> 所有的元素，且元素按顺时针螺旋排列的 `n * n` 正方形矩阵 `matrix`
 
 **提示：**
-- n ∈ [1, 20]
+- `n ∈ [1, 20]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -256,8 +238,7 @@ describe('螺旋矩阵 II', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 

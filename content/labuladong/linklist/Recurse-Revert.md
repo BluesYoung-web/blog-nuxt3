@@ -5,28 +5,22 @@ date: 2022-04-13 09:00:00
 image: /img/algorithm.webp
 ---
 
-[[toc]]
 
 ## 反转链表
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-206.反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
+[力扣原题-206.反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
 
 给定一个单链表的头结点 `head`，请你反转链表，并返回反转后的链表
 
 **提示：**
-- 链表中节点的数目 ∈ [0, 5000]
-- 节点值 ∈ [-5000, 5000]
+- 链表中节点的数目 ∈ `[0, 5000]`
+- 节点值 ∈ `[-5000, 5000]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, it, expect } from 'vitest';
@@ -66,8 +60,7 @@ describe('反转链表', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -117,23 +110,18 @@ function reverseList(
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-92.反转链表 II](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
+[力扣原题-92.反转链表 II](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
 
 给定一个单链表的头结点 `head`，和两个正整数 `left <= right`，请你反转位置从 `left` 到 `right` 的链表节点，并返回反转后的链表
 
 **提示：**
-- 链表中节点的数目 ∈ [1, 500]
-- 节点值 ∈ [-500, 500]
-- left, right ∈ [1, n]
+- 链表中节点的数目 ∈ `[1, 500]`
+- 节点值 ∈ `[-500, 500]`
+- left, right ∈ `[1, n]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, it, expect } from 'vitest';
@@ -168,14 +156,13 @@ describe('反转链表 II', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 解题思路
 
-先实现一个反转链表前 N 个节点的函数
+先实现一个反转链表前 `N` 个节点的函数
 
-然后对于 `left === 1` 的情况，直接调用反转前 N 个节点的函数
+然后对于 `left === 1` 的情况，直接调用反转前 `N` 个节点的函数
 
 对于 `left > 1` 的情况，将头结点前进至第 `left` 个节点，然后调用反转前 `N` 个节点的函数
 

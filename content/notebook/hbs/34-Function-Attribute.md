@@ -5,7 +5,6 @@ description: JavaScript 函数属性与方法
 date: 2021-01-15 11:09:56
 ---
 
-[[toc]]
 
 ## `length`
 

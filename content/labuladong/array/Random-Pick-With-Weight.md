@@ -5,33 +5,28 @@ date: 2022-05-04 14:30:00
 image: /img/algorithm.webp
 ---
 
-[[toc]]
 
 ## 按权重随机选择
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-528. 按权重随机选择](https://leetcode-cn.com/problems/random-pick-with-weight/)
+[力扣原题-528. 按权重随机选择](https://leetcode-cn.com/problems/random-pick-with-weight/)
 
 给定一个**下标从 0 开始的正整数数组 `w`**，其中 `w[i]` 代表第 `i` 个下标的权重
 
 请实现一个函数 `pickIndex`，它可以**随机地**从范围 `[0, w.length - 1]` 内选出并返回一个下标。选取下标 `i` 的概率为 `w[i] / sum(w)`
 
 **提示：**
-- w.length ∈ [1, 1e4]
-- w[i] ∈ [1, 1e5]
-- pickIndex 被调用的次数不超过 1e4 次
+- `w.length ∈ [1, 1e4]`
+- `w[i] ∈ [1, 1e5]`
+- `pickIndex` 被调用的次数不超过 `1e4` 次
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码(随机结果，不便测试，仅展示示例情况)</span>
-    </template>
+<strong>测试代码(随机结果，不便测试，仅展示示例情况)</strong>
 
 **示例 1：**
+
 ```js
 输入：
 ["Solution","pickIndex"]
@@ -75,8 +70,7 @@ solution.pickIndex();
 [null,1,0,1,0,0]
 ......
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 

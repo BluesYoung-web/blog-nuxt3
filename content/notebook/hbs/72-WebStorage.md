@@ -5,7 +5,6 @@ description: JavaScript WebStorage
 date: 2021-02-06 14:40:35
 ---
 
-[[toc]]
 
 ## IE用户数据
 

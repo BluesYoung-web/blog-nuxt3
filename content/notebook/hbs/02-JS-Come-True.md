@@ -5,7 +5,6 @@ image: /img/hbs.png
 description: JavaScript 的组成
 ---
 
-[[toc]]
 
 ## 组成
 

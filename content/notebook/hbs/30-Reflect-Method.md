@@ -5,7 +5,6 @@ description: JavaScript Reflect Methods
 date: 2021-01-13 11:43:53
 ---
 
-[[toc]]
 
 ## `get(target, propName, reciver)`
 

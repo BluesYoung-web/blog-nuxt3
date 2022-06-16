@@ -5,7 +5,6 @@ description: JavaScript 文件处理
 date: 2021-01-28 14:54:23
 ---
 
-[[toc]]
 
 ## `File API`
 

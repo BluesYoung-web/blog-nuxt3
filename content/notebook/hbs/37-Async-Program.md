@@ -5,7 +5,6 @@ description: JavaScript 异步编程
 date: 2021-01-18 15:02:06
 ---
 
-[[toc]]
 
 ## 同步与异步
 
@@ -72,15 +71,16 @@ console.log('tong bu 3');
 
 5. `js` 引擎存在 `monitoring process` 进程，会持续不断的检查主线程执行栈是否为空，一旦为空，就会去`Event Queue` 那里检查是否有等待被调用的函数
 
-<Step
-  class="mt-10"
-  title="异步发展进程"
-  :data="[
-    '异步返回值——回调函数',
-    '失败处理——成功回调+失败回调',
-    '嵌套异步——回调地狱',
-    'Promise',
-    'Gernerator',
-    'Async/Await'
-  ]"
-/>
+## 异步发展进程
+    
+异步返回值——回调函数
+
+失败处理——成功回调+失败回调
+
+嵌套异步——回调地狱
+
+Promise
+
+Gernerator
+
+Async/Await

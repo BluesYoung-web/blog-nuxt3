@@ -5,8 +5,6 @@ image: /img/css.jpg
 description: CSS 伪类选择器
 ---
 
-[[toc]]
-
 
 ## 类型
 

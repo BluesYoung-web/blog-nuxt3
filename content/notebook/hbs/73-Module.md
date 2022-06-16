@@ -5,7 +5,6 @@ description: JavaScript 模块
 date: 2021-02-06 16:18:46
 ---
 
-[[toc]]
 
 ## 模块模式
 

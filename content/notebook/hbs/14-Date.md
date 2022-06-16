@@ -5,7 +5,6 @@ description: JavaScript Date 类
 date: 2020-12-28 17:27:33
 ---
 
-[[toc]]
 
 
 ## 时间戳
@@ -112,57 +111,36 @@ date: 2020-12-28 17:27:33
 
 ## 日期/时间组件方法
 
-<script lang="ts" setup>
-const tableHead1 = [
-  { label: '方法', prop: 'method' },
-  { label: '说明', prop: 'des' },
-];
-const tableData1 = [
-  { method: '<strong>getTime()</strong>', des: `返回毫秒数同 <strong>valueOf()</strong>` },
-  { method: '<strong>setTime()</strong>', des: `以毫秒数设置日期，全部改变` },
-  { method: '<strong>getFullYear()</strong>', des: `获取 4 位数年份` },
-  { method: '<strong>getUTCFullYear()</strong>', des: `获取 <strong>UTC</strong> 4 位数年份` },
-  { method: '<strong>setFullYear()</strong>', des: `设置 4 位年份` },
-  { method: '<strong>setUTCFullYear()</strong>', des: `设置 <strong>UTC</strong> 4 位年份` },
-  { method: '<strong>getMonth()</strong>', des: `获取月份，0 开始` },
-  { method: '<strong>getUTCMonth()</strong>', des: `---` },
-  { method: '<strong>setMonth()</strong>', des: `---` },
-  { method: '<strong>setUTCMonth()</strong>', des: `---` },
-  { method: '<strong>getDate()</strong>', des: `获取天数` },
-  { method: '<strong>getUTCDate()</strong>', des: `---` },
-  { method: '<strong>setDate()</strong>', des: `---` },
-  { method: '<strong>setUTCDate()</strong>', des: `---` },
-  { method: '<strong>getDay()</strong>', des: `获取星期几，0 星期天` },
-  { method: '<strong>getHours()</strong>', des: `获取小时数 0` },
-  { method: '<strong>getUTCHours()</strong>', des: `---` },
-  { method: '<strong>setHours()</strong>', des: `---` },
-  { method: '<strong>setUTCHours()</strong>', des: `---` },
-  { method: '<strong>getMinutes()</strong>', des: `---` },
-  { method: '<strong>getUTCMinutes()</strong>', des: `---` },
-  { method: '<strong>setMinutes()</strong>', des: `---` },
-  { method: '<strong>setUTCMinutes()</strong>', des: `---` },
-  { method: '<strong>getSeconds()</strong>', des: `---` },
-  { method: '<strong>setSeconds()</strong>', des: `---` },
-  { method: '<strong>setUTCSeconds()</strong>', des: `---` },
-  { method: '<strong>getMilliseconds()</strong>', des: `---` },
-  { method: '<strong>getUTCMilliseconds()</strong>', des: `---` },
-  { method: '<strong>setMilliseconds()</strong>', des: `---` },
-  { method: '<strong>setUTCMilliseconds()</strong>', des: `---` },
-  { method: '<strong>getTimezoneOffset()</strong>', des: `返回本地时间与 UTC 时间相差的分钟数` },
-];
-</script>
-
-<NTable :bordered="false" :single-line="false" striped>
-  <thead>
-    <tr>
-      <th v-for="(item, index) in tableHead1" :key="index + 'head'" :width="item.width ?? ''">
-        {{ item.label }}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="(item, index) in tableData1" :key="index + 'dasdasd'">
-      <td v-for="(it, idx) in tableHead1" :key="idx + 'eret'" v-html="item[String(it.prop)]"></td>
-    </tr>
-  </tbody>
-</NTable>
+方法 |	说明
+--- | ---
+getTime() |	返回毫秒数同 valueOf()
+setTime() |	以毫秒数设置日期，全部改变
+getFullYear() |	获取 4 位数年份
+getUTCFullYear() |	获取 UTC 4 位数年份
+setFullYear() |	设置 4 位年份
+setUTCFullYear() |	设置 UTC 4 位年份
+getMonth() |	获取月份，0 开始
+getUTCMonth()	| ---
+setMonth() |	---
+setUTCMonth() |	---
+getDate()	| 获取天数
+getUTCDate() |	---
+setDate()	| ---
+setUTCDate()	| ---
+getDay()	| 获取星期几，0 星期天
+getHours()	| 获取小时数 0
+getUTCHours()	| ---
+setHours()	| ---
+setUTCHours()	| ---
+getMinutes()	| ---
+getUTCMinutes()	| ---
+setMinutes()	| ---
+setUTCMinutes()	| ---
+getSeconds()	| ---
+setSeconds()	| ---
+setUTCSeconds()	| ---
+getMilliseconds()	| ---
+getUTCMilliseconds() |	---
+setMilliseconds()	| ---
+setUTCMilliseconds() |	---
+getTimezoneOffset()	| 返回本地时间与 UTC 时间相差的分钟数

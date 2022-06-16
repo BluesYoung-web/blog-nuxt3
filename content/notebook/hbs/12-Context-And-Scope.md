@@ -5,7 +5,6 @@ date: 2020-12-28 17:24:46
 description: JavaScript 执行上下文与作用域
 ---
 
-[[toc]]
 
 ## 执行上下文
 

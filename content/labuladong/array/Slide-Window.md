@@ -5,34 +5,28 @@ date: 2022-05-01 09:30:00
 image: /img/algorithm.webp
 ---
 
-[[toc]]
 
 ## 最小覆盖字串
 
-[详见](../../notebook/js/Quick-Slow-Pointer#最小覆盖子串)
+[详见](/notebook/js/quick-slow-pointer#最小覆盖子串)
 
 ## 字符串的排列
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-567. 字符串的排列](https://leetcode-cn.com/problems/permutation-in-string/)
+[力扣原题-567. 字符串的排列](https://leetcode-cn.com/problems/permutation-in-string/)
 
 给定两个字符串 `s1` 和 `s2`，实现一个函数来判断 `s2` 是否包含 `s1` 的排列，如果存在则返回 `true`，否则返回 `false`
 
 
 **提示：**
-- s1, s2 仅包含小写字母
-- s1.length ∈ [1, 1e4]
-- s2.length ∈ [1, 1e4]
+- `s1`, `s2` 仅包含小写字母
+- `s1.length ∈ [1, 1e4]`
+- `s2.length ∈ [1, 1e4]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -57,8 +51,7 @@ describe('字符串的排列', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -126,23 +119,18 @@ function checkInclusion(s1: string, s2: string): boolean {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-438. 找到字符串中所有字母异位词](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)
+[力扣原题-438. 找到字符串中所有字母异位词](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)
 
 给定两个字符串 `s` 和 `p`，找到 `s` 中所有 `p` 的**异位词**的子串，返回这些子串的起始索引，不用考虑顺序
 
 **提示：**
-- s, p 仅包含小写字母
-- s.length ∈ [1, 3e4]
-- p.length ∈ [1, 3e4]
+- `s`, `p` 仅包含小写字母
+- `s.length ∈ [1, 3e4]`
+- `p.length ∈ [1, 3e4]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -163,8 +151,7 @@ describe('找到字母的异位词', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -235,22 +222,17 @@ function findAnagrams(srcStr: string, targetStr: string): number[] {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+[力扣原题-3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
 
 给定一个字符串 `s`，请你找出其中不含有重复字符的**最长字串**的长度
 
 **提示：**
-- s.length ∈ [0, 5e4]
-- s 由英文字母、数字、符号和空格组成
+- `s.length ∈ [0, 5e4]`
+- `s` 由英文字母、数字、符号和空格组成
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -272,8 +254,7 @@ describe('无重复最长字串', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -303,4 +284,4 @@ function lengthOfLongestSubstring(s: string): number {
 }
 ```
 
-[another](../../notebook/js/Quick-Slow-Pointer#无重复最长子串)
+[another](/notebook/js/quick-slow-pointer#无重复最长子串)

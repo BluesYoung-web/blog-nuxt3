@@ -5,7 +5,6 @@ description: JavaScript 原子化操作
 date: 2021-01-28 09:49:03
 ---
 
-[[toc]]
 
 ## `SharedArrayBuffer`
 

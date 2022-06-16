@@ -5,7 +5,6 @@ description: JavaScript XML & JSON
 date: 2021-02-03 15:22:34
 ---
 
-[[toc]]
 
 ## 创建 `XML` 文档
 

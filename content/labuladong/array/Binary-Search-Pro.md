@@ -5,35 +5,29 @@ date: 2022-05-06 17:00:00
 image: /img/algorithm.webp
 ---
 
-[[toc]]
 
 ## 爱吃香蕉的 koko
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-875. 爱吃香蕉的珂珂](https://leetcode-cn.com/problems/koko-eating-bananas/)
+[力扣原题-875. 爱吃香蕉的珂珂](https://leetcode-cn.com/problems/koko-eating-bananas/)
 
-珂珂喜欢吃香蕉。这里有 n 堆香蕉，第 i 堆中有 piles[i] 根香蕉。警卫已经离开了，将在 h 小时后回来。
+珂珂喜欢吃香蕉。这里有 `n` 堆香蕉，第 `i` 堆中有 `piles[i]` 根香蕉。警卫已经离开了，将在 `h` 小时后回来。
 
-珂珂可以决定她吃香蕉的速度 k(根/小时)。每个小时，她将会选择一堆香蕉，从中吃掉 k 根。如果这堆香蕉少于 k 根，她将吃掉这堆所有的香蕉，然后这一小时内不会再吃更多的香蕉。
+珂珂可以决定她吃香蕉的速度 `k`(根/小时)。每个小时，她将会选择一堆香蕉，从中吃掉 `k` 根。如果这堆香蕉少于 `k` 根，她将吃掉这堆所有的香蕉，然后这一小时内不会再吃更多的香蕉。
 
 珂珂喜欢慢慢吃，但仍想在警卫回来之前吃掉所有的香蕉。
 
-求她可以在 h 小时内吃完所有香蕉的**最小速度 k(k为整数)**
+求她可以在 `h` 小时内吃完所有香蕉的**最小速度 `k`(`k`为整数)**
 
 **提示：**
-- piles.length ∈ [1, 1e4]
-- h ∈ [piles.length, 1e9]
-- piles[i] ∈ [1, 1e9]
+- `piles.length ∈ [1, 1e4]`
+- `h ∈ [piles.length, 1e9]`
+- `piles[i] ∈ [1, 1e9]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, it, expect } from 'vitest';
@@ -56,11 +50,8 @@ describe('爱吃香蕉的珂珂', () => {
     const h = 6;
     expect(minEatingSpeed(piles, h)).toBe(23);
   });
-
 });
 ```
-  </n-collapse-item>
-</n-collapse>
 
 ### 具体实现
 
@@ -94,27 +85,22 @@ function minEatingSpeed(piles: number[], h: number): number {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-1011. 在 D 天内送达包裹的能力](https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/)
+[力扣原题-1011. 在 D 天内送达包裹的能力](https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/)
 
-传送带上的包裹必须在 days 天内从一个港口运送到另一个港口。
+传送带上的包裹必须在 `days` 天内从一个港口运送到另一个港口。
 
-传送带上第 i 个包裹的重量为 weights[i]。每一天我们都会按给出重量的**顺序**往传送带上装载包裹。**装载的重量不会超过船只的最大运载重量**。
+传送带上第 `i` 个包裹的重量为 `weights[i]`。每一天我们都会按给出重量的**顺序**往传送带上装载包裹。**装载的重量不会超过船只的最大运载重量**。
 
-返回能在 days 天内将传送带上的所有包裹送达的船只的**最低运载能力**。
+返回能在 `days` 天内将传送带上的所有包裹送达的船只的**最低运载能力**。
 
 **提示：**
-- weights.length ∈ [1, 5e4]
-- days ∈ [1, weights.length]
-- weights[i] ∈ [1, 500]
+- `weights.length ∈ [1, 5e4]`
+- `days ∈ [1, weights.length]`
+- `weights[i] ∈ [1, 500]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, it, expect } from 'vitest';
@@ -145,8 +131,7 @@ describe('在 D 天内送达包裹的能力', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -200,25 +185,20 @@ function shipWithinDays(weights: number[], days: number): number {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-410. 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)
+[力扣原题-410. 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)
 
-给定一个非负整数数组 nums 和一个整数 m，需要将这个数组分成 m 个**非空的连续子数组**
+给定一个非负整数数组 `nums` 和一个整数 `m`，需要将这个数组分成 `m` 个**非空的连续子数组**
 
-设计一个算法使得这 m 个子数组各自和的最大值最小，返回这个**最大值**
+设计一个算法使得这 `m` 个子数组各自和的最大值最小，返回这个**最大值**
 
 **提示：**
-- nums.length ∈ [1, 1000]
-- nums[i] ∈ [0, 1e6]
-- m ∈ [1, Math.min(50, nums.length)]
+- `nums.length ∈ [1, 1000]`
+- `nums[i] ∈ [0, 1e6]`
+- `m ∈ [1, Math.min(50, nums.length)]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, it, expect } from 'vitest';
@@ -249,8 +229,7 @@ describe('分割数组的最大值', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 

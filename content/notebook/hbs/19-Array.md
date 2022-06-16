@@ -5,7 +5,6 @@ description: JavaScript 数组
 date: 2020-12-29 09:36:46
 ---
 
-[[toc]]
 
 ## 概述
 

@@ -5,7 +5,6 @@ description: JavaScript 原始值的包装对象
 date: 2020-12-28 17:30:08
 ---
 
-[[toc]]
 
 ## 概述
 

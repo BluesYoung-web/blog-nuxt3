@@ -5,7 +5,6 @@ description: JavaScript 事件类型
 date: 2021-01-23 11:39:12
 ---
 
-[[toc]]
 
 ## 事件类型
 

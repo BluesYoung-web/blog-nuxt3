@@ -5,12 +5,11 @@ date: 2022-02-22 12:00:00
 image: /img/vue.jpeg
 ---
 
-[[toc]]
 
 ## 计算属性与函数
 
 <n-alert type="info">**仅当响应式依赖发生改变时才会重新计算**</n-alert>
-
+<br />
 <n-alert type="warning">**函数每次都会重新计算**</n-alert>
 
 ```html

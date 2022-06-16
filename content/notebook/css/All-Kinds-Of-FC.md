@@ -5,7 +5,6 @@ image: /img/css.jpg
 date: 2022-03-15 17:16:50
 ---
 
-[[toc]]
 
 ## FC
 
@@ -89,7 +88,7 @@ date: 2022-03-15 17:16:50
 行内元素 `display: inline-flex`
 
 <n-alert type="warning">**FFC 布局中，float、clear、vertical-align 属性不会生效**</n-alert>
-
+<br />
 <n-alert type="info">**只能指定子元素针对轴线的位置，可以看做一维布局**</n-alert>
 
 ### 应用场景

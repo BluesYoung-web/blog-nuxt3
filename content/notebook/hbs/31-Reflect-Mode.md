@@ -5,7 +5,6 @@ description: JavaScript 代理模式
 date: 2021-01-13 16:36:13
 ---
 
-[[toc]]
 
 ## 跟踪属性访问
 

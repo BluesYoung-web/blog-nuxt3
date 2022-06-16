@@ -5,7 +5,6 @@ description: JavaScript 节点层级
 date: 2021-01-20 17:41:10
 ---
 
-[[toc]]
 
 ## 节点类型
 

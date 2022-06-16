@@ -5,7 +5,6 @@ description: JavaScript Promise
 date: 2021-01-19 10:31:57
 ---
 
-[[toc]]
 
 ## `Promise` 基础
 

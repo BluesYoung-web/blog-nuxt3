@@ -4,8 +4,6 @@ image: /img/hbs.png
 description: JavaScript 的原始值与引用值
 date: 2020-12-28 17:23:45
 ---
-<!-- 自动目录 -->
-[[toc]]
 
 ## 原始值
 

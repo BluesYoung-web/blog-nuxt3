@@ -5,7 +5,6 @@ image: /img/linux.jpeg
 date: 2021-06-12 17:38:49
 ---
 
-[[toc]]
 
 ## 命令别名固化
 

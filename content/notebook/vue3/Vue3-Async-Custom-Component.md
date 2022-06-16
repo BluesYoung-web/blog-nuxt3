@@ -5,7 +5,6 @@ date: 2022-02-21 10:00:00
 image: /img/vue.jpeg
 ---
 
-[[toc]]
 
 ## `defineAsyncComponent`
 

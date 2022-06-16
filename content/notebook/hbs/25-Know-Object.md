@@ -5,7 +5,7 @@ description: JavaScript 对象详解
 date: 2021-01-06 09:20:51
 ---
 
-[[toc]]
+
 
 ## 定义
 
@@ -34,10 +34,10 @@ date: 2021-01-06 09:20:51
   - 默认 `undefined`
 
 <n-alert title="修改属性的默认值" type="info">`Object.defineProperty(obj, propName, configObj)`</n-alert>
-
-<n-alert title="configObj 中没有显示提供的属性都会默认为 false" type="warning" />
-
-<n-alert class="mt-4" title="configurable 定义为 false 之后不能再次定义为 true，再次修改任何非 writable 的属性都会导致错误" type="error" />
+<br />
+<n-alert title="configObj 中没有显示提供的属性都会默认为 false" type="warning"></n-alert>
+<br />
+<n-alert class="mt-4" title="configurable 定义为 false 之后不能再次定义为 true，再次修改任何非 writable 的属性都会导致错误" type="error"></n-alert>
 
 ```js
 var p = {};
@@ -54,7 +54,7 @@ console.log(p.name); // blues
 
 **必须使用 `Object.defineProperty()` 定义**
 
-<n-alert title="在不支持 Object.defineProperty() 的浏览器中没有办法修改 [[Configurable]] 或 [[Enumerable]]" type="warning" />
+<n-alert title="在不支持 Object.defineProperty() 的浏览器中没有办法修改 [[Configurable]] 或 [[Enumerable]]" type="warning"></n-alert>
 
 **在 `ES5` 以前，开发者会使用两个非标准的访问创建访问器属性：`__defineGetter__()` 和 `__defineSetter__()`**。这两个方法最早是 Firefox 引入的，后来 Safari、Chrome 和 Opera 也实现了
 

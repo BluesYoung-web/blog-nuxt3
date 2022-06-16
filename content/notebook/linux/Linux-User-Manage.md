@@ -5,7 +5,6 @@ image: /img/linux.jpeg
 date: 2022-01-02 16:24:05
 ---
 
-[[toc]]
 
 ## 查看全部
 

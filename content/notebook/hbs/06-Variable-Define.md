@@ -5,7 +5,6 @@ date: 2020-12-28 16:26:48
 description: JavaScript 变量声明
 ---
 
-[[toc]]
 
 ## `var`
 

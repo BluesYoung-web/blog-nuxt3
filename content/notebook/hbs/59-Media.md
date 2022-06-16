@@ -5,7 +5,6 @@ description: JavaScript 媒体元素
 date: 2021-01-28 17:17:39
 ---
 
-[[toc]]
 
 ## 媒体元素
 

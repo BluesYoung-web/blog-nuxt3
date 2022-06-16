@@ -5,7 +5,7 @@ description: JavaScript 创建对象
 date: 2021-01-06 15:50:07
 ---
 
-[[toc]]
+
 
 ## 概述
 
@@ -95,7 +95,7 @@ person2.sayName(); // Greg
 
 默认情况下，所有原型对象自动获得一个名为 `constructor` 的属性，指回与之关联的构造函数
 
-<n-alert title="Person.prototype.constructor === Person" type="info" />
+<n-alert title="Person.prototype.constructor === Person" type="info"></n-alert>
 
 然后，因构造函数而异，会给原型对象添加其他属性和方法
 

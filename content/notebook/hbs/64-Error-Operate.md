@@ -5,7 +5,6 @@ description: JavaScript 错误处理
 date: 2021-02-03 11:28:11
 ---
 
-[[toc]]
 
 ## try-catch
 
@@ -16,7 +15,7 @@ date: 2021-02-03 11:28:11
 `finally` 无论是否出错都会执行，`try` 或 `catch` 内部的 `return` 会被忽略
 
 ```js
-try{
+try {
 	const a = '1324';
 	a = 222;
 } catch (e) {

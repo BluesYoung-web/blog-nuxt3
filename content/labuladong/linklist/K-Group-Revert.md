@@ -5,33 +5,27 @@ date: 2022-04-23 09:00:00
 image: /img/algorithm.webp
 ---
 
-[[toc]]
 
 ## K 个一组反转链表
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-25. K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)
+[力扣原题-25. K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)
 
 给定一个单链表的头结点 `head`，每 `k` 个节点一组进行翻转，请你返回修改后的链表
 
-如果节点的总数不是 k 的整数倍，请将剩余节点保持原有的顺序
+如果节点的总数不是 `k` 的整数倍，请将剩余节点保持原有的顺序
 
 **你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换**
 
 **提示：**
-- 链表中节点的数目 n
-- 1 <= k <= n <= 5000
-- 节点值 ∈ [0, 1000]
+- 链表中节点的数目 `n`
+- `1 <= k <= n <= 5000`
+- 节点值 ∈ `[0, 1000]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -78,8 +72,7 @@ describe('测试用例：', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 

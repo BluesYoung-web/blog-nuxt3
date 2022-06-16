@@ -5,7 +5,7 @@ date: 2022-04-09 15:30:50
 image: /img/algorithm.webp
 ---
 
-[[toc]]
+
 
 ## 数据结构的存储方式
 

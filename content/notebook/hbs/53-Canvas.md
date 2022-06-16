@@ -5,7 +5,6 @@ description: JavaScript Canvas
 date: 2021-01-25 09:46:23
 ---
 
-[[toc]]
 
 ## 画布类型
 

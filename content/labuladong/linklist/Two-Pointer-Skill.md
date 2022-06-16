@@ -5,29 +5,23 @@ date: 2022-04-10 10:00:00
 image: /img/algorithm.webp
 ---
 
-[[toc]]
 
 ## 合并两个有序链表
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+[力扣原题-21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
 
 将两个**升序链表**合并为一个**升序**链表并返回，新的链表是通过拼接给定的两个链表的所有节点组成的
 
 **提示：**
-- 两个链表的节点数目 ∈ [0, 50]
-- 节点的值 ∈ [-100, 100]
+- 两个链表的节点数目 ∈ `[0, 50]`
+- 节点的值 ∈ `[-100, 100]`
 - 两个链表均为**非递减排序**
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -75,8 +69,7 @@ describe('官方示例：', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -117,25 +110,20 @@ function mergeTwoLists(
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-23. 合并K个升序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)
+[力扣原题-23. 合并K个升序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)
 
 给定一个链表数组，其中每个链表都已经按升序排序，请将所有链表合并为一个升序链表，返回合并后的链表
 
 **提示：**
-- k === lists.length
-- k ∈ [0, 1e4]
-- lists[i].length ∈ [0, 500]，且总和小于等于 1e4
-- lists[i][j] ∈ [-1e4, 1e4]
-- lists[i] **升序排序**
+- `k === lists.length`
+- `k ∈ [0, 1e4]`
+- `lists[i].length ∈ [0, 500]，且总和小于等于 1e4`
+- `lists[i][j] ∈ [-1e4, 1e4]`
+- `lists[i] **升序排序**`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -181,8 +169,7 @@ describe('官方示例：', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -221,24 +208,19 @@ function mergeKLists(lists: Array<ListNode | null>): ListNode | null {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-19. 删除链表的倒数第 N 个结点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)
+[力扣原题-19. 删除链表的倒数第 N 个结点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)
 
 给定一个链表和一个正整数 n，删除链表倒数第 n 个节点，并返回链表的头节点
 
 **提示：**
-- 链表中节点的数目为 sz
-- sz ∈ [1, 30]
-- 节点的值 ∈ [0, 100]
-- n ∈ [1, sz]
+- 链表中节点的数目为 `sz`
+- `sz ∈ [1, 30]`
+- 节点的值 ∈ `[0, 100]`
+- `n ∈ [1, sz]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -280,13 +262,12 @@ describe('官方示例：', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
 **思路：**
-- 倒数第 n 个节点 === 正数第 sz - n + 1 个节点
+- `倒数第 n 个节点 === 正数第 sz - n + 1 个节点`
 - 找到单链表的**倒数第 n + 1 个节点(sz - n)**，将其与目标节点的下一个节点拼接即可删除目标节点
 
 ```ts
@@ -319,22 +300,17 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-876. 链表的中间结点](https://leetcode-cn.com/problems/middle-of-the-linked-list/)
+[力扣原题-876. 链表的中间结点](https://leetcode-cn.com/problems/middle-of-the-linked-list/)
 
 给定一个头结点为 `head` 的非空单链表，返回链表的中间结点。如果有两个中间节点，则返回第二个中间节点
 
 **提示：**
-- 链表中节点的数目为 sz
-- sz ∈ [1, 100]
+- 链表中节点的数目为 `sz`
+- `sz ∈ [1, 100]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -375,8 +351,7 @@ describe('官方示例：', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -399,7 +374,7 @@ function middleNode(head: ListNode | null): ListNode | null {
 
 ### 环形链表 I
 
-[<cib-leetcode /> 力扣原题-141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+[力扣原题-141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
 
 给你一个链表的头节点 `head` ，判断链表中是否有环
 
@@ -429,7 +404,7 @@ function hasCycle(head: ListNode | null): boolean {
 
 ### 环形链表 II
 
-[<cib-leetcode /> 力扣原题-142. 环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
+[力扣原题-142. 环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
 
 给定一个链表的头节点  `head` ，返回链表开始入环的第一个节点。 如果链表无环，则返回 `null`
 
@@ -465,7 +440,7 @@ function detectCycle(head: ListNode | null): ListNode | null {
 
 ## 判断两个单链表是否相交并找出交点
 
-[<cib-leetcode /> 力扣原题-160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+[力扣原题-160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
 
 给你两个单链表的头节点 `headA` 和 `headB` ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 `null` 
 

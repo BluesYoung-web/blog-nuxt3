@@ -5,7 +5,6 @@ image: /img/node.jpg
 date: 2022-05-18 18:05:29
 ---
 
-[[toc]]
 
 ## 脚本的编写
 

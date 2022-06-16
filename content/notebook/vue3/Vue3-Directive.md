@@ -5,7 +5,6 @@ date: 2022-02-18 14:32:00
 image: /img/vue.jpeg
 ---
 
-[[toc]]
 
 ## `v-bind`
 

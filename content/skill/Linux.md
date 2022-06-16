@@ -4,7 +4,6 @@ description: Linux 相关的技巧
 date: 2022-03-19 14:41:47
 ---
 
-[[toc]]
 
 ## U 盘格式化
 

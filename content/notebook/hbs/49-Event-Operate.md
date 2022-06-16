@@ -5,7 +5,6 @@ description: JavaScript 事件处理
 date: 2021-01-23 09:29:17
 ---
 
-[[toc]]
 
 ## 事件阶段
 

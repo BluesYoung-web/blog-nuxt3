@@ -5,7 +5,6 @@ date: 2022-02-20 11:35:00
 image: /img/vue.jpeg
 ---
 
-[[toc]]
 
 ## `provide`
 

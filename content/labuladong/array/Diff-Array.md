@@ -5,26 +5,19 @@ date: 2022-04-25 15:30:00
 image: /img/algorithm.webp
 ---
 
-[[toc]]
-
 <n-alert type="info">**常用于频繁对数组某个区间的元素进行增减**</n-alert>
 
 ## 区间加法
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-370.区间加法(会员专享，需要氪金)](https://leetcode-cn.com/problems/range-addition/)
+[力扣原题-370.区间加法(会员专享，需要氪金)](https://leetcode-cn.com/problems/range-addition/)
 
-假设你有一个长度为 n 的数组，初始情况下所有的元素值都为 0，你将会被给出 k 个更新操作；其中每个操作会被表示为一个三元组：[startIndex, endIndex, incNum]，你需要将数组中 startIndex 至 endIndex 之间的所有元素增加 incNum，请返回 k 次操作之后的数组
+假设你有一个长度为 `n` 的数组，初始情况下所有的元素值都为 0，你将会被给出 `k` 个更新操作；其中每个操作会被表示为一个三元组：`[startIndex, endIndex, incNum]`，你需要将数组中 `startIndex` 至 `endIndex` 之间的所有元素增加 `incNum`，请返回 `k` 次操作之后的数组
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -49,8 +42,7 @@ describe('差分数组', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -90,13 +82,13 @@ class DiffArray {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-1109. 航班预订统计](https://leetcode-cn.com/problems/corporate-flight-bookings/)
+[力扣原题-1109. 航班预订统计](https://leetcode-cn.com/problems/corporate-flight-bookings/)
 
-这里有 n 个航班，它们**分别从 1 到 n 进行编号**
+这里有 `n` 个航班，它们**分别从 `1` 到 `n` 进行编号**
 
-有一份航班预订表 bookings ，表中第 i 条预订记录 bookings[i] = [firsti, lasti, seatsi] 意味着在从 firsti 到 lasti （包含 firsti 和 lasti ）的 每个航班 上预订了 seatsi 个座位
+有一份航班预订表 `bookings` ，表中第 `i` 条预订记录 `bookings[i]` = `[firsti, lasti, seatsi]` 意味着在从 `firsti` 到 `lasti` （包含 `firsti` 和 `lasti` ）的 每个航班 上预订了 `seatsi` 个座位
 
-请你返回一个长度为 n 的数组 answer，里面的元素是每个航班预定的座位总数
+请你返回一个长度为 `n` 的数组 `answer`，里面的元素是每个航班预定的座位总数
 
 
 ### 具体实现
@@ -121,30 +113,25 @@ function corpFlightBookings(
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-1094. 拼车](https://leetcode-cn.com/problems/car-pooling/)
+[力扣原题-1094. 拼车](https://leetcode-cn.com/problems/car-pooling/)
 
 车上最初有 `capacity` 个空座位，**并且只能向一个方向行驶**
 
-给定一个数组 `trips` 和一个整数 `capacity`, `trip[i] = [numPassengersi, fromi, toi]` 表示第 `i` 次旅行有 `numPassengersi` 乘客，接他们和放他们的位置分别是 fromi 和 toi 。这些位置是从汽车的初始位置向东的公里数
+给定一个数组 `trips` 和一个整数 `capacity`, `trip[i] = [numPassengersi, fromi, toi]` 表示第 `i` 次旅行有 `numPassengersi` 乘客，接他们和放他们的位置分别是 `fromi` 和 `toi` 。这些位置是从汽车的初始位置向东的公里数
 
 **当且仅当你可以在所有给定的行程中接送所有乘客时，返回 true，否则请返回 false**
 
 **提示：**
 
-- 1 <= trips.length <= 1000
-- trips[i].length == 3
-- 1 <= numPassengersi <= 100
-- **0 <= fromi < toi <= 1000**
-- 1 <= capacity <= 105
+- `1 <= trips.length <= 1000`
+- `trips[i].length == 3`
+- `1 <= numPassengersi <= 100`
+- **`0 <= fromi < toi <= 1000`**
+- `1 <= capacity <= 105`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -159,8 +146,7 @@ describe('拼车', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 

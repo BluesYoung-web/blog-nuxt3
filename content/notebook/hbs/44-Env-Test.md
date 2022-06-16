@@ -5,7 +5,6 @@ description: JavaScript 能力(环境)检测
 date: 2021-01-20 14:03:33
 ---
 
-[[toc]]
 
 ## 功能检测
 
@@ -82,24 +81,31 @@ class BrowserDetector {
 }
 ```
 
-<n-alert class="mt-5" title="能力检测最适合用于决定下一步该怎么做，而不一定能够作为辨识浏览器的标志" type="warning" />
+<n-alert class="mt-5" title="能力检测最适合用于决定下一步该怎么做，而不一定能够作为辨识浏览器的标志" type="warning"></n-alert>
 
-<Step
-	title="navigator.userAgent——历史回顾"
-	:data="[
-		'Mosaic/0.9',
-		'Mozilla/Version [Language] (Platform; Encryption)',
-		'Mozilla/Version (Platform; Encryption [; OS-or-CPU description])',
-		`Mozilla/MozillaVersion (Platform; Encryption; OS-or-CPU; Language; PrereleaseVersion)Gecko/GeckoVersion ApplicationProduct/ApplicationProductVersion`,
-		`Mozilla/5.0 (Platform; Encryption; OS-or-CPU; Language AppleWebKit/AppleWebKitVersion (KHTML, like Gecko) Safari/SafariVersion`,
-		`Mozilla/5.0 (compatible; Konqueror/Version; OS-or-CPU)`,
-		`Mozilla/5.0 (compatible; Konqueror/Version; OS-or-CPU) KHTML/KHTMLVersion (like Gecko)`,
-		`Mozilla/5.0 (Platform; Encryption; OS-or-CPU; Language) AppleWebKit/AppleWebKitVersion (KHTML, like Gecko) Chrome/ChromeVersion Safari/SafariVersion`,
-		`Opera/Version (OS-or-CPU; Encryption) [Language]`,
-		`Mozilla/5.0 (Windows NT 5.1; U; en; rv:1.8.1) Gecko/20061208 Firefox/2.0.0 Opera 9.50`,
-		`Opera/9.80 (OS-or-CPU; Encryption; Language) Presto/PrestoVersion Version/Version`
-	]"
-/>
+## navigator.userAgent——历史回顾
+
+`Mosaic/0.9`
+
+`Mozilla/Version [Language] (Platform; Encryption)`
+
+`Mozilla/Version (Platform; Encryption [; OS-or-CPU description])`
+
+`Mozilla/MozillaVersion (Platform; Encryption; OS-or-CPU; Language; PrereleaseVersion)Gecko/GeckoVersion ApplicationProduct/ApplicationProductVersion`
+
+`Mozilla/5.0 (Platform; Encryption; OS-or-CPU; Language AppleWebKit/AppleWebKitVersion (KHTML, like Gecko) Safari/SafariVersion`
+
+`Mozilla/5.0 (compatible; Konqueror/Version; OS-or-CPU)`
+
+`Mozilla/5.0 (compatible; Konqueror/Version; OS-or-CPU) KHTML/KHTMLVersion (like Gecko)`
+
+`Mozilla/5.0 (Platform; Encryption; OS-or-CPU; Language) AppleWebKit/AppleWebKitVersion (KHTML, like Gecko) Chrome/ChromeVersion Safari/SafariVersion`
+
+`Opera/Version (OS-or-CPU; Encryption) [Language]`
+
+`Mozilla/5.0 (Windows NT 5.1; U; en; rv:1.8.1) Gecko/20061208 Firefox/2.0.0 Opera 9.50`
+
+`Opera/9.80 (OS-or-CPU; Encryption; Language) Presto/PrestoVersion Version/Version`
 
 ## 设备平台检测
 

@@ -5,7 +5,6 @@ description: JavaScript DOM 扩展
 date: 2021-01-21 17:09:04
 ---
 
-[[toc]]
 
 ## 元素获取扩展
 

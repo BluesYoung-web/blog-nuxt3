@@ -4,7 +4,6 @@ image: /img/raspberrypi.jpg
 date: 2021-04-10 20:18:01
 ---
 
-[[toc]]
 
 ## Samba
 

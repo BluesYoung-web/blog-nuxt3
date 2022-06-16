@@ -5,7 +5,6 @@ date: 2022-06-13 10:12:00
 image: /img/electron.svg
 ---
 
-[[toc]]
 
 ## 安装
 

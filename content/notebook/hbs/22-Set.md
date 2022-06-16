@@ -5,7 +5,6 @@ description: JavaScript Set 集合
 date: 2021-01-04 17:48:32
 ---
 
-[[toc]]
 
 ## 概述
 
@@ -59,9 +58,9 @@ alert(s2.size); // 3
 `Set` 实例会维护键值对的**插入顺序**，因此可以根据插入顺序执行迭代操作
 
 迭代器：
-  - keys()
-  - values()
-  - entries()
+  - `keys()`
+  - `values()`
+  - `entries()`
 
 ## 集合的实现
 

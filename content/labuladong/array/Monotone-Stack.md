@@ -5,33 +5,28 @@ date: 2022-05-11 15:42:00
 image: /img/algorithm.webp
 ---
 
-[[toc]]
+
 
 ## 去除重复字母
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-316. 去除重复字母](https://leetcode-cn.com/problems/remove-duplicate-letters/)
+[力扣原题-316. 去除重复字母](https://leetcode-cn.com/problems/remove-duplicate-letters/)
 
-[<cib-leetcode /> 力扣原题-1081. 不同字符的最小子序列](https://leetcode-cn.com/problems/smallest-subsequence-of-distinct-characters/)
+[力扣原题-1081. 不同字符的最小子序列](https://leetcode-cn.com/problems/smallest-subsequence-of-distinct-characters/)
 
 给定一个字符串 `s`，请去除字符串中重复的字母，使得每个字母只出现一次
 
 在**不打乱字符顺序的情况下返回结果的字典序最小**
 
 **提示：**
-- s.length ∈ [1, 1e4]
+- `s.length ∈ [1, 1e4]`
 - s 全部由小写字母组成
 
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { it, expect, describe } from 'vitest';
@@ -45,8 +40,7 @@ describe('demo', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -83,28 +77,23 @@ function removeDuplicateLetters(str: string) {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-496. 下一个更大元素 I](https://leetcode-cn.com/problems/next-greater-element-i/)
+[力扣原题-496. 下一个更大元素 I](https://leetcode-cn.com/problems/next-greater-element-i/)
 
-nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 **右侧** 的 **第一个** 比 x 大的元素
+`nums1` 中数字 `x` 的 下一个更大元素是指 `x` 在 `nums2` 中对应位置 **右侧** 的 **第一个** 比 `x` 大的元素
 
-给你两个 **没有重复元素** 的数组 nums1 和 nums2，下标从 0 开始计数，**其中nums1 是 nums2 的子集**
+给你两个 **没有重复元素** 的数组 `nums1` 和 `nums2`，下标从 `0` 开始计数，**其中nums1 是 nums2 的子集**
 
-对于每个 0 <= i < nums1.length ，找出满足 nums1[i] === nums2[j] 的下标 j，并且在 nums2 确定 nums2[j] 的 **下一个更大元素**。如果不存在下一个更大元素，那么本次查询的答案是 -1
+对于每个 `0 <= i < nums1.length` ，找出满足 `nums1[i] === nums2[j]` 的下标 `j`，并且在 `nums2` 确定 `nums2[j]` 的 **下一个更大元素**。如果不存在下一个更大元素，那么本次查询的答案是 `-1`
 
-返回一个长度为 nums1.length 的数组 ans 作为答案，满足 ans[i] 是如上所述的 下一个更大元素
+返回一个长度为 `nums1.length` 的数组 `ans` 作为答案，满足 `ans[i]` 是如上所述的 下一个更大元素
 
 **提示：**
-- nums.length ∈ [1, 1000]
-- nums[i] ∈ [0, 1e4]
+- `nums.length ∈ [1, 1000]`
+- `nums[i] ∈ [0, 1e4]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { it, expect, describe } from 'vitest';
@@ -126,8 +115,7 @@ describe('demo', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -165,24 +153,19 @@ function nextGreaterElement(
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-503. 下一个更大元素 II](https://leetcode-cn.com/problems/next-greater-element-ii/)
+[力扣原题-503. 下一个更大元素 II](https://leetcode-cn.com/problems/next-greater-element-ii/)
 
-给定一个**循环数组** nums （**nums[nums.length - 1] 的下一个元素是 nums[0]**），返回 nums 中每个元素的 **下一个更大元素**
+给定一个**循环数组** `nums` （**`nums[nums.length - 1]` 的下一个元素是 `nums[0]`**），返回 `nums` 中每个元素的 **下一个更大元素**
 
-数字 x 的 下一个更大的元素是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1
+数字 `x` 的 下一个更大的元素是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 `-1`
 
 **提示：**
-- nums.length ∈ [1, 1e4]
-- nums[i] ∈ [-1e9, 1e9]
+- `nums.length ∈ [1, 1e4]`
+- `nums[i] ∈ [-1e9, 1e9]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { it, expect, describe } from 'vitest';
@@ -202,8 +185,7 @@ describe('demo', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -233,24 +215,19 @@ function nextGreaterElements(nums: number[]): number[] {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)
+[力扣原题-739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)
 
-给定一个整数数组 temperatures，表示每天的温度，返回一个数组 answer，其中 answer[i] 是指在第 i 天之后，才会有更高的温度
+给定一个整数数组 `temperatures`，表示每天的温度，返回一个数组 `answer`，其中 `answer[i]` 是指在第 `i` 天之后，才会有更高的温度
 
-如果气温在这之后都不会升高，请在该位置用 0 来代替
+如果气温在这之后都不会升高，请在该位置用 `0` 来代替
 
 **提示：**
-- temperatures.length ∈ [1, 1e5]
-- temperatures[i] ∈ [30, 100]
+- `temperatures.length ∈ [1, 1e5]`
+- `temperatures[i] ∈ [30, 100]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { it, expect, describe } from 'vitest';
@@ -274,8 +251,7 @@ describe('demo', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 

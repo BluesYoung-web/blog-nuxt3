@@ -5,7 +5,6 @@ description: JavaScript 类
 date: 2021-01-07 14:25:50
 ---
 
-[[toc]]
 
 ## 定义
 
@@ -61,9 +60,9 @@ date: 2021-01-07 14:25:50
 
 引用父类
 
-<n-alert title="只能在构造函数、实例方法、静态方法中使用" type="info" />
+<n-alert title="只能在构造函数、实例方法、静态方法中使用" type="info"></n-alert>
 
-<n-alert class="mt-4" title="后代构造函数第一行必须执行 super()，否则不能使用 this" type="warning" />
+<n-alert class="mt-4" title="后代构造函数第一行必须执行 super()，否则不能使用 this" type="warning"></n-alert>
 
 <n-alert class="mt-4" title="不能单独引用 super 关键字" type="warning">要么用它调用构造函数，要么用它引用静态方法</n-alert>
 

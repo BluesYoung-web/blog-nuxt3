@@ -5,31 +5,25 @@ date: 2022-05-07 19:40:00
 image: /img/algorithm.webp
 ---
 
-[[toc]]
 
 ## 优势洗牌
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-870. 优势洗牌](https://leetcode-cn.com/problems/advantage-shuffle/)
+[力扣原题-870. 优势洗牌](https://leetcode-cn.com/problems/advantage-shuffle/)
 
-给定两个长度相等的数组 nums1 和 nums2，nums1 相对于 nums2 的*优势*可以用**满足 nums1[i] > nums2[i] 的索引 i 的数目**来描述
+给定两个长度相等的数组 `nums1` 和 `nums2`，`nums1` 相对于 `nums2` 的*优势*可以用**满足 `nums1[i]` > `nums2[i]` 的索引 `i` 的数目**来描述
 
-返回 nums1 的**任意排列**，使得其**优势最大化**
+返回 `nums1` 的**任意排列**，使得其**优势最大化**
 
 **提示：**
-- nums1.length === nums2.length ∈ [1, 1e5]
-- nums1[i] ∈ [0, 1e9]
-- nums2[i] ∈ [0, 1e9]
+- `nums1.length === nums2.length ∈ [1, 1e5]`
+- `nums1[i] ∈ [0, 1e9]`
+- `nums2[i] ∈ [0, 1e9]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, it, expect } from 'vitest';
@@ -58,8 +52,7 @@ describe('分割数组的最大值', () => {
   })
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 

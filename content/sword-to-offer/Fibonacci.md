@@ -4,11 +4,10 @@ description: 剑指 Offer 10- I. 斐波那契数列
 date: 2022-04-08 19:17:41
 ---
 
-[[toc]]
 
 ## 题目描述
 
-[<cib-leetcode /> 力扣原题-剑指 Offer 10- I. 斐波那契数列](https://leetcode-cn.com/problems/reverse-string/)
+[力扣原题-剑指 Offer 10- I. 斐波那契数列](https://leetcode-cn.com/problems/reverse-string/)
 
 写一个函数，输入 n ，**求斐波那契（Fibonacci）数列的第 n 项**（即 F(N)）。斐波那契数列的定义如下：
 
@@ -23,12 +22,7 @@ F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
 
 ## TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 describe('斐波那契', () => {
@@ -57,8 +51,6 @@ describe('斐波那契', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
 
 ## 具体实现
 

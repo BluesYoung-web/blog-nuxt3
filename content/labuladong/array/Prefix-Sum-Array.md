@@ -5,7 +5,6 @@ date: 2022-04-24 15:30:00
 image: /img/algorithm.webp
 ---
 
-[[toc]]
 
 <n-alert type="info">**常用于频繁查询数组某个区间的累加和**</n-alert>
 
@@ -13,25 +12,20 @@ image: /img/algorithm.webp
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-303. 区域和检索 - 数组不可变](https://leetcode-cn.com/problems/range-sum-query-immutable/)
+[力扣原题-303. 区域和检索 - 数组不可变](https://leetcode-cn.com/problems/range-sum-query-immutable/)
 
 给定一个整数数组 `nums`，处理以下类型的多个查询：
 1. 计算索引 `left` 和 `right` 闭区间内所有元素的和，`left <= right`
 
 **提示：**
-- nums.length ∈ [1, 1e4]
-- nums[i] ∈ [-1e5, 1e5]
-- 0 <= left <= right <= nums.length>
+- `nums.length ∈ [1, 1e4]`
+- `nums[i] ∈ [-1e5, 1e5]`
+- `0 <= left <= right <= nums.length`
 - **最多调用 `1e4` 次 `sumRange` 方法**
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -52,8 +46,7 @@ describe('区域和搜索', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
@@ -81,27 +74,22 @@ class NumArray {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-304. 二维区域和检索 - 矩阵不可变](https://leetcode-cn.com/problems/range-sum-query-2d-immutable/)
+[力扣原题-304. 二维区域和检索 - 矩阵不可变](https://leetcode-cn.com/problems/range-sum-query-2d-immutable/)
 
 给定一个二维矩阵 `matrix`，计算其子矩阵范围内元素的总和<br/> `(x1, y1, x2, y2)`
 
 
 **提示：**
-- m === matrix.length && 1<= m <= 200
-- n === matrix[i].length && 1<= m <= 200
-- matrix[i][j] ∈ [-1e5, 1e5]
-- 0 <= x1 <= x2 <= m
-- 0 <= y1 <= y2 <= n
-- 最多调用 1e4 次求和方法
+- `m === matrix.length && 1<= m <= 200`
+- `n === matrix[i].length && 1<= m <= 200`
+- `matrix[i][j] ∈ [-1e5, 1e5]`
+- `0 <= x1 <= x2 <= m`
+- `0 <= y1 <= y2 <= n`
+- 最多调用 `1e4` 次求和方法
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -128,12 +116,11 @@ describe('二维区域和搜索', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 
-![思路](https://labuladong.gitee.io/algo/images/%e5%89%8d%e7%bc%80%e5%92%8c/5.png)
+![思路](https://labuladong.gitee.io/algo/images/%e5%89%8d%e7%bc%80%e5%92%8c/5.jpeg)
 
 **红色 = 绿色 - 蓝色 - 橙色 + 粉色**
 
@@ -180,23 +167,18 @@ class NumMatrix {
 
 ### 题目描述
 
-[<cib-leetcode /> 力扣原题-560. 和为 K 的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k/)
+[力扣原题-560. 和为 K 的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k/)
 
 给定一个整数数组 `nums` 和一个整数 `k`，**请统计并返回该数组中和为 k 的子数组的个数**
 
 **提示：**
-- nums.length ∈ [1, 2e4]
-- nums[i] ∈ [-1000, 1000]
-- k ∈ [-1e7, 1e7]
+- `nums.length ∈ [1, 2e4]`
+- `nums[i] ∈ [-1000, 1000]`
+- `k ∈ [-1e7, 1e7]`
 
 ### TDD
 
-<n-collapse>
-  <n-collapse-item name="1">
-    <template #header>
-      <vscode-icons-file-type-testts />
-      <span class="ml-1">测试代码</span>
-    </template>
+<strong>测试代码：</strong>
 
 ```ts
 import { describe, expect, it } from 'vitest'
@@ -215,8 +197,7 @@ describe('和为 k 的子数组', () => {
   });
 });
 ```
-  </n-collapse-item>
-</n-collapse>
+
 
 ### 具体实现
 

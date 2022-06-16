@@ -5,7 +5,6 @@ description: JavaScript 箭头函数
 date: 2021-01-14 09:39:12
 ---
 
-[[toc]]
 
 ## 基本特性
 

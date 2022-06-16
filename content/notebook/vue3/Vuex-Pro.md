@@ -5,7 +5,6 @@ image: /img/vue.jpeg
 date: 2021-07-21 16:24:25
 ---
 
-[[toc]]
 
 ## `Composition API`
 

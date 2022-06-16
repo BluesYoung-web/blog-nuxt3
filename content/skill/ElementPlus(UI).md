@@ -4,24 +4,10 @@ description: ElementUI 相关
 date: 2022-03-07 11:42:25
 ---
 
-[[toc]]
 
 ## 模拟点击事件
 
 > **使用 Element UI 编写的组件，无法直接通过获取元素 + `.click()` 触发点击事件**
-
-<script setup>
-const data = [
-  `.click() 直接触发——失败`,
-  `document.createEvent() 专业模拟——失败`,
-  `<strong>阅读 Element UI 的单元测试源码——成功</strong>`
-];
-</script>
-
-<Step
-  title="尝试历程"
-  :data="data"
-/>
 
 ### 源代码
 

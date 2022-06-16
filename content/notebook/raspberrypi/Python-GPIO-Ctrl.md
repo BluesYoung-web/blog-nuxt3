@@ -5,7 +5,6 @@ image: /img/raspberrypi.jpg
 date: 2021-11-20 16:54:36
 ---
 
-[[toc]]
 
 ## 目标
 

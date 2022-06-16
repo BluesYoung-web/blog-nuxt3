@@ -5,7 +5,6 @@ date: 2022-04-03 16:05:41
 image: /img/design-mode.jpeg
 ---
 
-[[toc]]
 
 ## 基本原则
 
@@ -14,14 +13,14 @@ image: /img/design-mode.jpeg
 **一个对象(方法)只做一件事**
 
 **相关的设计模式：**
-- [代理模式](./3-Proxy-Mode)
-- [迭代器模式](./4-Iterator-Mode)
-- [生成器模式](./17-Generator-Mode)
-- [单例模式](./1-Singleton)
-- [命令模式](./6-Command-Mode)
-- [装饰器模式](./12-Decorator-Mode)
-- [桥接模式](./19-Bridge-Mode)
-- [访问者模式](./22-Visitor-Mode)
+- [代理模式](/notebook/design-patterns/03-proxy-mode)
+- [迭代器模式](/notebook/design-patterns/04-iterator-mode)
+- [生成器模式](/notebook/design-patterns/17-generator-mode)
+- [单例模式](/notebook/design-patterns/01-singleton)
+- [命令模式](/notebook/design-patterns/06-command-mode)
+- [装饰器模式](/notebook/design-patterns/12-decorator-mode)
+- [桥接模式](/notebook/design-patterns/19-bridge-mode)
+- [访问者模式](/notebook/design-patterns/22-visitor-mode)
 
 **优点：**
 - 降低单个类或对象的复杂度
@@ -37,8 +36,8 @@ image: /img/design-mode.jpeg
 **一个软件实体应当尽可能少的与其他实体发生相互作用，减少对象之间的联系**
 
 **相关的设计模式：**
-- [中介者模式](./11-Mediator-Mode)
-- [外观模式](./20-Appearance-Mode)
+- [中介者模式](/notebook/design-patterns/11-mediator-mode)
+- [外观模式](/notebook/design-patterns/20-appearance-mode)
 
 ### 开闭
 
@@ -51,18 +50,18 @@ image: /img/design-mode.jpeg
 使用**接口**和**抽象类**
 
 **相关的设计模式：**
-- [发布订阅(观察者)模式](./5-Observer-Mode)
-- [组合模式](./7-Composite-Mode)
-- [模板方法模式](./8-Template-Mode)
-- [策略模式](./2-Strategy-Mode)
-- [代理模式](./3-Proxy-Mode)
-- [责任链模式](./10-CoR-Mode)
-- [状态模式](./13-State-Mode)
-- [适配器模式](./14-Adapter-Mode)
-- [工厂模式](./15-Factory-Mode)
-- [抽象工厂模式](./16-Abstract-Factory-Mode)
-- [原型模式](./18-Prototype-Mode)
-- [备忘录模式](./21-Memo-Mode)
+- [发布订阅(观察者)模式](/notebook/design-patterns/05-observer-mode)
+- [组合模式](/notebook/design-patterns/07-composite-mode)
+- [模板方法模式](/notebook/design-patterns/08-template-mode)
+- [策略模式](/notebook/design-patterns/02-strategy-mode)
+- [代理模式](/notebook/design-patterns/03-proxy-mode)
+- [责任链模式](/notebook/design-patterns/10-cor-mode)
+- [状态模式](/notebook/design-patterns/13-state-mode)
+- [适配器模式](/notebook/design-patterns/14-adapter-mode)
+- [工厂模式](/notebook/design-patterns/15-factory-mode)
+- [抽象工厂模式](/notebook/design-patterns/16-abstract-factory-mode)
+- [原型模式](/notebook/design-patterns/18-prototype-mode)
+- [备忘录模式](/notebook/design-patterns/21-memo-mode)
 
 ### 里氏替换
 
@@ -102,4 +101,4 @@ image: /img/design-mode.jpeg
 
 分解大类型
 
-使用 return 退出多重循环
+使用 `return` 退出多重循环

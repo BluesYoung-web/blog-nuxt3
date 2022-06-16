@@ -5,7 +5,6 @@ description: JavaScript 函数参数
 date: 2021-01-14 15:02:38
 ---
 
-[[toc]]
 
 ## 理解参数
 

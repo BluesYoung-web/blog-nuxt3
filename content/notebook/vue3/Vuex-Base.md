@@ -5,7 +5,6 @@ image: /img/vue.jpeg
 date: 2021-07-20 09:13:07
 ---
 
-[[toc]]
 
 ## State
 

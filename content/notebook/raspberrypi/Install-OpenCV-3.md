@@ -4,7 +4,6 @@ date: 2020-12-23 15:40:26
 image: /img/raspberrypi.jpg
 ---
 
-[[toc]]
 
 ## 安装 OpenCV 3
 

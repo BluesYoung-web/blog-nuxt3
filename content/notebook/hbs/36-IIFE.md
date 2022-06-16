@@ -5,7 +5,6 @@ description: JavaScript 闭包
 date: 2021-01-15 15:05:49
 ---
 
-[[toc]]
 
 ## 定义
 

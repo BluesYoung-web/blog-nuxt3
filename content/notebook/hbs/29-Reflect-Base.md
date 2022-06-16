@@ -5,7 +5,6 @@ description: JavaScript Reflect
 date: 2021-01-07 16:42:57
 ---
 
-[[toc]]
 
 ## 定义
 
@@ -13,7 +12,7 @@ date: 2021-01-07 16:42:57
 
 在对目标对象的各种操作影响目标对象之前，可以在代理对象中对这些操作加以控制
 
-<n-alert title="代理是一种新的基础特性，要么支持，要么不支持，无法通过转译程序实现支持" type="warning" />
+<n-alert title="代理是一种新的基础特性，要么支持，要么不支持，无法通过转译程序实现支持" type="warning"></n-alert>
 
 
 ## `new Proxy(targetObj, handlerObj)`

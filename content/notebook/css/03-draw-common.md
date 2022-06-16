@@ -5,7 +5,6 @@ image: /img/css.jpg
 description: 绘制常见图形
 ---
 
-[[toc]]
 
 <style lang="scss" scoped>
 * {

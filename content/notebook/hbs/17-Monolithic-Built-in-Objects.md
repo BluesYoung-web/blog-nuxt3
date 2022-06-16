@@ -5,7 +5,6 @@ description: JavaScript 单体内置对象
 date: 2020-12-28 17:31:47
 ---
 
-[[toc]]
 
 ## Global
 
