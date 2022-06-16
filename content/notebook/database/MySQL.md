@@ -5,8 +5,6 @@ date: 2022-06-14 10:30:00
 image: /img/mysql.svg
 ---
 
-[[toc]]
-
 ## 注意事项
 
 **SQL关键字总是大写，以示突出，表名和列名均使用小写**
@@ -22,7 +20,7 @@ image: /img/mysql.svg
 **唯一区分出不同记录的字段**
 
 <n-alert type="warning">**不使用任何业务相关的字段作为主键**</n-alert>
-
+<br />
 <n-alert type="info">如果使用INT自增类型，那么当一张表的记录数超过 2147483647（约21亿）时，会达到上限而出错。**使用BIGINT自增类型则可以最多约922亿亿条记录。**</n-alert>
 
 **联合主键：**
@@ -351,9 +349,9 @@ ORDER BY score DESC;
 **OUTER JOIN**
 
 <n-alert type="info">`RIGHT OUTER JOIN` **返回右表都存在的记录(A&B+B)**。如果某一行仅在右表存在，那么结果集就会以 `NULL` 填充剩下的字段</n-alert>
-
+<br />
 <n-alert type="info">`LEFT OUTER JOIN` **返回左表都存在的记录(A&B+A)**</n-alert>
-
+<br />
 <n-alert type="info">`FULL OUTER JOIN` **返回两张表所有的记录(A+B)，并且将对方不存在的列填充为 `NULL`**</n-alert>
 
 
