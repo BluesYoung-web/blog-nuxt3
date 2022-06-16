@@ -1,26 +1,49 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-01-18 14:28:36
- * @LastEditTime: 2022-06-15 16:06:14
+ * @LastEditTime: 2022-06-16 11:32:39
  * @Description: 文章列表
 -->
 <script lang="ts" setup>
-import { NCard, NImage, NTime } from 'naive-ui';
-const data = await queryContent()
-  .sort({ date: -1 })
-  .limit(10)
-  .find();
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types';
+import { NCard, NImage, NTime, NButton } from 'naive-ui';
+
+const props = withDefaults(defineProps<{
+  isList?: boolean;
+}>(), ({ isList: false }));
+
+const page = ref(0);
+const hasMore = ref(props.isList);
+const allData = ref<ParsedContent[]>([]);
+
+const getList = async () => {
+  const data = await queryContent()
+    .sort({ date: -1 })
+    .skip(page.value * 10)
+    .limit(10)
+    .find();
+  if (data.length) {
+    allData.value.push(...data);
+  } else {
+    hasMore.value = false;
+  }
+  if (props.isList) {
+    page.value++;
+  }
+};
+
+await getList();
 </script>
 
 <template>
   <div class="list">
     <div
-      v-for="(item, index) in data"
+      v-for="(item, index) in allData"
       :key="index"
       class="item"
     >
       <NCard class="my-4 rounded" :title="item.title" hoverable @click="$router.push(item._path as string)">
-        <template #cover>
+        <template v-if="isList === false" #cover>
           <NImage :src="item.image ?? '/img/default.jpg'" fallback-src="/img/default.jpg" object-fit="fill" @click.prevent="null" />
         </template>
         {{ item.description }}
@@ -29,6 +52,7 @@ const data = await queryContent()
         </template>
       </NCard>
     </div>
+    <NButton v-if="hasMore" block @click="getList">More...</NButton>
   </div>
 </template>
 
