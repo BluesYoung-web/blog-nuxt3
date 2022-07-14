@@ -1,29 +1,30 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-01-20 14:33:40
- * @LastEditTime: 2022-06-15 15:35:44
+ * @LastEditTime: 2022-07-14 08:33:35
  * @Description: 文章目录
 -->
 <script lang="ts" setup>
-import { NCard, NSpace, NInput, NTree } from 'naive-ui';
-import type { DocTree } from '~/server/api/dirs';
-const router = useRouter();
-const { intro } = useConfig();
-const { data } = useFetch('/api/dirs');
-const pattern = ref('');
+import { NCard, NInput, NSpace, NTree } from 'naive-ui'
+import type { DocTree } from '~/server/api/dirs'
+const router = useRouter()
+const { intro } = useConfig()
+const { data } = useFetch('/api/dirs')
+const pattern = ref('')
 
-const jump = (_: any, [v , ...__]: DocTree[]) => {
-  if (v.path) {
-    router.push(v.path as string);
-  }
-};
+const jump = (_: any, [v, ...__]: DocTree[]) => {
+  if (v.path)
+    router.push(v.path as string)
+}
 </script>
 
 <template>
   <div class="main">
     <NCard hoverable>
       <div class="container">
-        <p class="title">{{ `${intro.doc_toc}(${data.total})` }}</p>
+        <p class="title">
+          {{ `${intro.doc_toc}(${data?.total ?? 0})` }}
+        </p>
         <div class="data">
           <n-space vertical :size="12" class="w-80">
             <n-input v-model:value="pattern" :placeholder="intro.search" />
