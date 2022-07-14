@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-01-20 14:33:40
- * @LastEditTime: 2022-07-14 08:33:35
+ * @LastEditTime: 2022-07-14 08:53:27
  * @Description: 文章目录
 -->
 <script lang="ts" setup>
@@ -30,7 +30,7 @@ const jump = (_: any, [v, ...__]: DocTree[]) => {
             <n-input v-model:value="pattern" :placeholder="intro.search" />
             <n-tree
               :pattern="pattern"
-              :data="data.tree"
+              :data="data?.tree ?? []"
               block-line
               class="max-h-120 overflow-auto"
               :on-update:selected-keys="jump"
