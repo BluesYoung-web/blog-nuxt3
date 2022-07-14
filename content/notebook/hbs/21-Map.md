@@ -23,24 +23,24 @@ date: 2021-01-04 16:21:55
 ```js
 // 使用嵌套数组初始化映射
 const m1 = new Map([
-  ["key1", "val1"],
-  ["key2", "val2"],
-  ["key3", "val3"]
-]);
-alert(m1.size); // 3
+  ['key1', 'val1'],
+  ['key2', 'val2'],
+  ['key3', 'val3']
+])
+alert(m1.size) // 3
 // 使用自定义迭代器初始化映射
 const m2 = new Map({
-  [Symbol.iterator]: function*() {
-    yield ["key1", "val1"];
-    yield ["key2", "val2"];
-    yield ["key3", "val3"];
+  *[Symbol.iterator]() {
+    yield ['key1', 'val1']
+    yield ['key2', 'val2']
+    yield ['key3', 'val3']
   }
-});
-alert(m2.size); // 3
+})
+alert(m2.size) // 3
 // 映射期待的键/值对，无论是否提供
-const m3 = new Map([[]]);
-alert(m3.has(undefined)); // true
-alert(m3.get(undefined)); // undefined 
+const m3 = new Map([[]])
+alert(m3.has(undefined)) // true
+alert(m3.get(undefined)) // undefined
 ```
 
 ## 方法及属性
@@ -90,41 +90,45 @@ alert(m3.get(undefined)); // undefined
 
 ```js
 const User = (() => {
- const wm = new WeakMap();
- class User {
+  const wm = new WeakMap()
+  class User {
  	 constructor(id) {
-    this.idProperty = Symbol('id'); 
-    this.setId(id);
-   }
-   setPrivate(property, value) {
-    const privateMembers = wm.get(this) || {};
-    privateMembers[property] = value;
-    wm.set(this, privateMembers);
-   }
-   getPrivate(property) {
-    return wm.get(this)[property];
-   }
-   setId(id) {
-    this.setPrivate(this.idProperty, id);
-   }
-   getId(id) {
-    return this.getPrivate(this.idProperty);
-   }
- }
- return User;
-})();
-const user = new User(123);
-alert(user.getId()); // 123
-user.setId(456);
-alert(user.getId()); // 456
+      this.idProperty = Symbol('id')
+      this.setId(id)
+    }
+
+    setPrivate(property, value) {
+      const privateMembers = wm.get(this) || {}
+      privateMembers[property] = value
+      wm.set(this, privateMembers)
+    }
+
+    getPrivate(property) {
+      return wm.get(this)[property]
+    }
+
+    setId(id) {
+      this.setPrivate(this.idProperty, id)
+    }
+
+    getId(id) {
+      return this.getPrivate(this.idProperty)
+    }
+  }
+  return User
+})()
+const user = new User(123)
+alert(user.getId()) // 123
+user.setId(456)
+alert(user.getId()) // 456
 ```
 
 **`DOM` 节点元数据**
 
 ```js
-const wm = new WeakMap();
-const loginButton = document.querySelector('#login');
+const wm = new WeakMap()
+const loginButton = document.querySelector('#login')
 // 给这个节点关联一些元数据
-wm.set(loginButton, {disabled: true}); 
+wm.set(loginButton, { disabled: true })
 // 删除按钮，关联数据自行删除
 ```

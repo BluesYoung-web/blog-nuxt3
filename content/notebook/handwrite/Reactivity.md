@@ -18,86 +18,90 @@ date: 2021-03-11 14:53:22
  * ref: Object.defineProperty(obj, prop, getter | setter)
  * reactive: Proxy
  */
-let currentEffect;
+let currentEffect
 class Dep {
   constructor(val) {
     /**
      * 存储依赖
      */
-    this.effects = new Set();
-    this._val = val;
+    this.effects = new Set()
+    this._val = val
   }
+
   /**
    * 收集依赖(订阅)
    */
   gatherEffect() {
-    currentEffect && this.effects.add(currentEffect);
+    currentEffect && this.effects.add(currentEffect)
   }
+
   /**
    * 触发依赖(发布)
    */
   emitEffect() {
-    this.effects.forEach((fn) => fn());
+    this.effects.forEach(fn => fn())
   }
 
   get value() {
     // 依赖收集
-    this.gatherEffect();
-    return this._val;
+    this.gatherEffect()
+    return this._val
   }
+
   set value(v) {
-    this._val = v;
+    this._val = v
     // 触发依赖内容的更新
-    this.emitEffect();
+    this.emitEffect()
   }
 }
 
 function watchEffect(fn) {
   if (fn instanceof Function) {
-    currentEffect = fn;
-    fn();
-    currentEffect = null;
-  } else {
-    throw new TypeError('fn must be a function');
+    currentEffect = fn
+    fn()
+    currentEffect = null
+  }
+  else {
+    throw new TypeError('fn must be a function')
   }
 }
 
 function ref(v = null) {
-  return new Dep(v);
+  return new Dep(v)
 }
 
 /**
  * 存储所有对象及其对应的依赖
  */
-const targetMaps = new Map();
+const targetMaps = new Map()
 function getCurrentTarget(target, property) {
-  let effectsMap = targetMaps.get(target);
+  let effectsMap = targetMaps.get(target)
   if (!effectsMap) {
-    effectsMap = new Map();
-    targetMaps.set(target, effectsMap);
+    effectsMap = new Map()
+    targetMaps.set(target, effectsMap)
   }
-  let effect = effectsMap.get(property);
+  let effect = effectsMap.get(property)
   if (!effect) {
-    effect = new Dep();
-    effectsMap.set(property, effect);
+    effect = new Dep()
+    effectsMap.set(property, effect)
   }
-  return effect;
+  return effect
 }
 
 function reactive(obj = {}) {
   return new Proxy(obj, {
     get(target, property) {
-      const effect = getCurrentTarget(target, property);
-      effect.gatherEffect();
-      return Reflect.get(target, property);
+      const effect = getCurrentTarget(target, property)
+      effect.gatherEffect()
+      return Reflect.get(target, property)
     },
     set(target, property, value) {
-      const result = Reflect.set(target, property, value);
-      const effect = getCurrentTarget(target, property);
-      effect.emitEffect();
-      return result;
+      const result = Reflect.set(target, property, value)
+      const effect = getCurrentTarget(target, property)
+      effect.emitEffect()
+      return result
     }
-  });
+  })
 }
 
 export {
@@ -116,20 +120,20 @@ export {
 `createApp` 函数**收集依赖，挂载应用**
 
 ```js
-import { watchEffect } from './reactivity.js';
+import { watchEffect } from './reactivity.js'
 // 模拟 createApp
 export const createApp = (rootComponent) => {
   return {
     mount(query) {
-      const ctx = rootComponent.setup();
-      let fragment;
-      const root = document.querySelector(query);
+      const ctx = rootComponent.setup()
+      let fragment
+      const root = document.querySelector(query)
 
       watchEffect(() => {
-        root.innerHTML = '';
-        fragment = rootComponent.render(ctx);
-        root.appendChild(fragment);
-      });
+        root.innerHTML = ''
+        fragment = rootComponent.render(ctx)
+        root.appendChild(fragment)
+      })
     }
   }
 }

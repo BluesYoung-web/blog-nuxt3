@@ -126,8 +126,8 @@ this.globalThis || (this.globalThis = this);
 ### 360 极速浏览器图片设置为百分比高度，首次加载变形
 
 ```js
-img.onload = function(e) {
-  e.style.height = e.natureHeight + 'px';
+img.onload = function (e) {
+  e.style.height = `${e.natureHeight}px`
 }
 ```
 
@@ -254,7 +254,7 @@ server {
 
 ```ts
 declare module '*.vue' {
-  import { DefineComponent } from 'vue'
+  import type { DefineComponent } from 'vue'
   const component: DefineComponent<{}, {}, any>
   export default component
 }
@@ -285,7 +285,7 @@ export default defineConfig({
 ```ts
 // 关闭报错
 // @ts-nocheck       忽略当前文件
-// @ts-ignore        忽略下一行
+// @ts-expect-error        忽略下一行
 ```
 
 ## vite
@@ -319,9 +319,9 @@ export default {
 **原因：`vite` 不支持直接导入 `umd` 模块的源文件**[(issues)](https://github.com/vitejs/vite/issues/945)
 
 ```ts
-import moment from 'moment';
-import 'moment/dist/locale/zh-cn';
-moment.duration(120, 's').humanize(); // 两分钟
+import moment from 'moment'
+import 'moment/dist/locale/zh-cn'
+moment.duration(120, 's').humanize() // 两分钟
 ```
 
 ### SSG
@@ -414,9 +414,9 @@ const { y } = useScroll(isClient ? window : null);
 **解决方案：修改配置文件**
 
 ```ts
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import legacy from '@vitejs/plugin-legacy';
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import legacy from '@vitejs/plugin-legacy'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -456,11 +456,11 @@ const form = ref(null);
 
 ```ts
 // 直接将内容作为默认插槽的内容，会产生警告
-h(ComponentA, { prop: value }, '我是内容');
+h(ComponentA, { prop: value }, '我是内容')
 // 以函数的方式放入，拥有更好的性能，警告消除
 h(ComponentA, { prop: value }, {
   default: () => '我是内容'
-});
+})
 ```
 
 ## yarn
@@ -480,21 +480,21 @@ h(ComponentA, { prop: value }, {
 所以各种字符串解密的方法都无法**直接**将其恢复为正常的字符串
 
 ```js
-let str = '\\u5929\\u771F\\u721B\\u6F2B\\u9AD8\\u895F\\u59EB';
-function decodeTransferredString(str){
-  str = JSON.stringify(str).split('\\');
+const str = '\\u5929\\u771F\\u721B\\u6F2B\\u9AD8\\u895F\\u59EB'
+function decodeTransferredString(str) {
+  str = JSON.stringify(str).split('\\')
   // 将字符串根据 \\ 分割
   // [""", "", "u5929", "", "u771F", "", "u721B", "", "u6F2B", "", "u9AD8", "", "u895F", "", "u59EB""]
-  str = str.filter((item) => item.match(/u/));
+  str = str.filter(item => item.match(/u/))
   // 筛选出包含 u 的
   // ["u5929", "u771F", "u721B", "u6F2B", "u9AD8", "u895F", "u59EB""]
-  str = str.map((item) => item.replace('u', '0x'));
+  str = str.map(item => item.replace('u', '0x'))
   // 将 u 替换为 0x
   // ["0x5929", "0x771F", "0x721B", "0x6F2B", "0x9AD8", "0x895F", "0x59EB""]
-  str[str.length-1]=str[str.length-1].slice(0,str[str.length-1].length-1);
+  str[str.length - 1] = str[str.length - 1].slice(0, str[str.length - 1].length - 1)
   // 切割最后一个元素多余的字符串
   // ["0x5929", "0x771F", "0x721B", "0x6F2B", "0x9AD8", "0x895F", "0x59EB"]
-  str = str.map((item) => parseInt(item));
+  str = str.map(item => parseInt(item))
   // 将十六进制转换为十进制，不要这一步也可以
   return String.fromCharCode(...str)
   // 将其恢复为字符串
@@ -511,36 +511,36 @@ function decodeTransferredString(str){
 **正确使用：**
 
 ```ts
-import { mount } from '@vue/test-utils';
-import { createI18n } from 'vue-i18n';
-import Footer from '../src/components/Footer.vue';
+import { mount } from '@vue/test-utils'
+import { createI18n } from 'vue-i18n'
+import Footer from '../src/components/Footer.vue'
 
 describe('Footer.vue', () => {
-  it('should be interactive', async() => {
+  it('should be interactive', async () => {
     const i18n = createI18n({
       legacy: false,
       locale: 'zh-CN',
       messages,
-    });
+    })
     const wrapper = mount(Footer, {
       global: {
         // 先在此处安装插件
         plugins: [i18n]
       }
-    });
-    expect(wrapper.findAll('a').length).toBe(2);
-    
-    const [gitee, refer] = wrapper.findAll('a');
-    const giteeAttr = gitee.attributes();
-    const referAttr = refer.attributes();
-    expect(giteeAttr.target).toBe('_blank');
-    // 然后在 vm 上调用对应的属性
-    expect(giteeAttr.href).toBe(wrapper.vm.t('nav.gitee_addr'));
+    })
+    expect(wrapper.findAll('a').length).toBe(2)
 
-    expect(referAttr.target).toBe('_blank');
-    expect(referAttr.href).toBe('https://github.com/antfu/vitesse');
-  });
-});
+    const [gitee, refer] = wrapper.findAll('a')
+    const giteeAttr = gitee.attributes()
+    const referAttr = refer.attributes()
+    expect(giteeAttr.target).toBe('_blank')
+    // 然后在 vm 上调用对应的属性
+    expect(giteeAttr.href).toBe(wrapper.vm.t('nav.gitee_addr'))
+
+    expect(referAttr.target).toBe('_blank')
+    expect(referAttr.href).toBe('https://github.com/antfu/vitesse')
+  })
+})
 ```
 
 ## 浏览器插件
@@ -553,17 +553,17 @@ describe('Footer.vue', () => {
 const code = `
 localStorage.setItem('young-plugin', '[12138, 9527]')
 console.log("🚀 ~ file: App.vue ~ storageDemo", ${localStorage.length})
-`;
+`
 const src = window.URL.createObjectURL(
   new Blob([code], { type: 'text/javascript' })
-);
-const script = document.createElement('script');
-script.src = src;
-document.body.appendChild(script);
+)
+const script = document.createElement('script')
+script.src = src
+document.body.appendChild(script)
 
 const getData = () => {
-  const res = localStorage.getItem('young-plugin');
-  console.log("🚀 ~ file: App.vue ~ getData ~ res", res)
+  const res = localStorage.getItem('young-plugin')
+  console.log('🚀 ~ file: App.vue ~ getData ~ res', res)
 }
 ```
 
@@ -578,15 +578,15 @@ const getData = () => {
 
 ```ts
 // 主窗口
-window.open('子窗口的地址');
+window.open('子窗口的地址')
 window.addEventListener('message', (e) => {
-  (e.source as Window)?.postMessage(token, e.origin);
-});
+  (e.source as Window)?.postMessage(token, e.origin)
+})
 
 // 子窗口(被打开的窗口)
 window.addEventListener('message', (e) => {
-  console.log(e.data);
-});
+  console.log(e.data)
+})
 // 如果知道主窗口的地址，可以替换 * ，否则最好为 *
-window.opener?.postMessage('消息传递的数据，可以是任意值', '*');
+window.opener?.postMessage('消息传递的数据，可以是任意值', '*')
 ```

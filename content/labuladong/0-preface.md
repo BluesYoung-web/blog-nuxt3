@@ -82,8 +82,8 @@ function traverse<T>(arr: T[]) {
 ```ts
 /* 基本的单链表节点 */
 class ListNode<T> {
-  public val: T;
-  public next: ListNode<T> | null;
+  public val: T
+  public next: ListNode<T> | null
 }
 
 function traverse<T>(head: ListNode<T>) {
@@ -95,7 +95,7 @@ function traverse<T>(head: ListNode<T>) {
 function traverse<T>(head: ListNode<T>) {
   if (head) {
     // 访问 head.val
-    traverse(head.next);
+    traverse(head.next)
   }
 }
 ```
@@ -105,16 +105,16 @@ function traverse<T>(head: ListNode<T>) {
 ```ts
 /* 基本的二叉树节点 */
 class TreeNode<T> {
-  public val: T;
-  public left: T | null;
-  public right: T | null;
+  public val: T
+  public left: T | null
+  public right: T | null
 }
 
 function traverse<T>(root: TreeNode<T>) {
   if (root) {
     // root.val
-    traverse(root.left);
-    traverse(root.right);
+    traverse(root.left)
+    traverse(root.right)
   }
 }
 ```
@@ -124,28 +124,27 @@ function traverse<T>(root: TreeNode<T>) {
 ```ts
 /* 基本的 N 叉树节点 */
 class TreeNode<T> {
-  public val: T;
-  public children: TreeNode<T>[];
+  public val: T
+  public children: TreeNode<T>[]
 }
-
 
 function traverse<T>(root: TreeNode<T>, dp: Set<T>) {
   // root.val
   if (root.children) {
     for (const child of root.children) {
-      if (dp.has(child)) {
-        continue;
-      } else {
-        traverse(child, dp);
-      }
-      dp.add(child);
+      if (dp.has(child))
+        continue
+      else
+        traverse(child, dp)
+
+      dp.add(child)
     }
   }
 }
 
 function traverseHelper<T>(root: TreeNode<T>) {
-  const dp = new Set<T>();
-  traverse(root, dp);
+  const dp = new Set<T>()
+  traverse(root, dp)
 }
 ```
 

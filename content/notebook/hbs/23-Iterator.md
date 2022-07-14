@@ -91,16 +91,16 @@ for-of 循环
 
 ```js
 // 可迭代对象
-let arr = ['foo', 'bar'];
+const arr = ['foo', 'bar']
 // 迭代器工厂函数
-console.log(arr[Symbol.iterator]); // f values() { [native code] }
+console.log(arr[Symbol.iterator]) // f values() { [native code] }
 // 迭代器
-let iter = arr[Symbol.iterator]();
-console.log(iter); // ArrayIterator {}
+const iter = arr[Symbol.iterator]()
+console.log(iter) // ArrayIterator {}
 // 执行迭代
-console.log(iter.next()); // { done: false, value: 'foo' }
-console.log(iter.next()); // { done: false, value: 'bar' }
-console.log(iter.next()); // { done: true, value: undefined } 
+console.log(iter.next()) // { done: false, value: 'foo' }
+console.log(iter.next()) // { done: false, value: 'bar' }
+console.log(iter.next()) // { done: true, value: undefined }
 ```
 
 每个迭代器都表示对可迭代对象的**一次性**有序遍历
@@ -108,26 +108,26 @@ console.log(iter.next()); // { done: true, value: undefined }
 不同迭代器的实例**相互之间没有联系**，只会**独立**地遍历可迭代对象
 
 ```js
-let arr = ['foo', 'bar'];
-let iter1 = arr[Symbol.iterator]();
-let iter2 = arr[Symbol.iterator]();
-console.log(iter1.next()); // { done: false, value: 'foo' }
-console.log(iter2.next()); // { done: false, value: 'foo' }
-console.log(iter2.next()); // { done: false, value: 'bar' }
-console.log(iter1.next()); // { done: false, value: 'bar' } 
+const arr = ['foo', 'bar']
+const iter1 = arr[Symbol.iterator]()
+const iter2 = arr[Symbol.iterator]()
+console.log(iter1.next()) // { done: false, value: 'foo' }
+console.log(iter2.next()) // { done: false, value: 'foo' }
+console.log(iter2.next()) // { done: false, value: 'bar' }
+console.log(iter1.next()) // { done: false, value: 'bar' }
 ```
 
 迭代器并**不与可迭代对象某个时刻的快照绑定**，如果可迭代对象在迭代期间被修改了，那么迭代器也会反映相应的变化(**引用关系**)
 
 ```js
-let arr = ['foo', 'baz'];
-let iter = arr[Symbol.iterator]();
-console.log(iter.next()); // { done: false, value: 'foo' }
+const arr = ['foo', 'baz']
+const iter = arr[Symbol.iterator]()
+console.log(iter.next()) // { done: false, value: 'foo' }
 // 在数组中间插入值
-arr.splice(1, 0, 'bar');
-console.log(iter.next()); // { done: false, value: 'bar' }
-console.log(iter.next()); // { done: false, value: 'baz' }
-console.log(iter.next()); // { done: true, value: undefined } 
+arr.splice(1, 0, 'bar')
+console.log(iter.next()) // { done: false, value: 'bar' }
+console.log(iter.next()) // { done: false, value: 'baz' }
+console.log(iter.next()) // { done: true, value: undefined }
 ```
 
 ## 自定义迭代器
@@ -135,21 +135,22 @@ console.log(iter.next()); // { done: true, value: undefined }
 ```js
 class Counter {
   constructor(limit) {
-    this.limit = limit;
+    this.limit = limit
   }
+
   [Symbol.iterator]() {
-    let count = 1, limit = this.limit;
+    let count = 1; const limit = this.limit
     return {
       next() {
-        if (count <= limit) {
-          return { done: false, value: count++ };
-        } else {
-          return { done: true, value: undefined };
-        }
+        if (count <= limit)
+          return { done: false, value: count++ }
+        else
+          return { done: true, value: undefined }
+
       }
-    };
+    }
   }
-} 
+}
 ```
 
 ## 提前终止迭代器
@@ -167,51 +168,52 @@ class Counter {
 ```js
 class Counter {
   constructor(limit) {
-    this.limit = limit;
+    this.limit = limit
   }
+
   [Symbol.iterator]() {
-    let count = 1, limit = this.limit;
+    let count = 1; const limit = this.limit
     return {
       next() {
-        if (count <= limit) {
-          return { done: false, value: count++ };
-        } else {
-          return { done: true };
-        }
+        if (count <= limit)
+          return { done: false, value: count++ }
+        else
+          return { done: true }
+
       },
       return() {
-        console.log('Exiting early');
-        return { done: true };
+        console.log('Exiting early')
+        return { done: true }
       }
-    };
+    }
   }
 }
-let counter1 = new Counter(5);
-for (let i of counter1) {
-  if (i > 2) {
-    break;
-  }
-  console.log(i);
-} 
+const counter1 = new Counter(5)
+for (const i of counter1) {
+  if (i > 2)
+    break
+
+  console.log(i)
+}
 // 1
 // 2
-// Exiting early 
-//////////////------------//////////////////////////
-let a = [1, 2, 3, 4, 5];
-let iter = a[Symbol.iterator]();
-for (let i of iter) {
-  console.log(i);
-  if (i > 2) {
-    break;
-  }
+// Exiting early
+/// ///////////------------//////////////////////////
+const a = [1, 2, 3, 4, 5]
+const iter = a[Symbol.iterator]()
+for (const i of iter) {
+  console.log(i)
+  if (i > 2)
+    break
+
 }
 // 1
 // 2
 // 3
-for (let i of iter) {
-  console.log(i);
-}
+for (const i of iter)
+  console.log(i)
+
 // 4
-// 5 
+// 5
 ```
 

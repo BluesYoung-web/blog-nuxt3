@@ -245,11 +245,11 @@ defer 脚本
 **通过 JS 设置**
 
 ```js
-const res = document.createElement("link"); 
-res.rel = "preload"; 
-res.as = "style"; 
-res.href = "css/mystyles.css"; 
-document.head.appendChild(res); 
+const res = document.createElement('link')
+res.rel = 'preload'
+res.as = 'style'
+res.href = 'css/mystyles.css'
+document.head.appendChild(res)
 ```
 
 **通过 HTTP 响应头设置**

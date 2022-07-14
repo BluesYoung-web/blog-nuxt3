@@ -24,20 +24,20 @@ date: 2021-01-15 11:09:56
 
 ```js
 function sum(num1, num2) {
-  return num1 + num2;
+  return num1 + num2
 }
 function applySum1(num1, num2) {
-  return sum.apply(this, arguments);
+  return sum.apply(this, arguments)
 }
 function applySum2(num1, num2) {
-  return sum.apply(this, [num1, num2]);
+  return sum.apply(this, [num1, num2])
 }
-console.log(applySum2(10, 10)); // 20
-console.log(applySum2(10, 10)); // 20 
+console.log(applySum2(10, 10)) // 20
+console.log(applySum2(10, 10)) // 20
 
-const obj = {name: '321321'};
-function sayName() { console.log(this.name); }
-sayName.apply(obj); // 将 sayName 的执行上下文改为 obj, this.name === obj.name
+const obj = { name: '321321' }
+function sayName() { console.log(this.name) }
+sayName.apply(obj) // 将 sayName 的执行上下文改为 obj, this.name === obj.name
 ```
 
 ## `call(thisObj, ...args || ...arguments)`
@@ -47,17 +47,17 @@ sayName.apply(obj); // 将 sayName 的执行上下文改为 obj, this.name === o
 **只能一个一个的传参**
 
 ```js
-window.color = 'red';
-let o = {
+window.color = 'red'
+const o = {
   color: 'blue'
-};
-function sayColor() {
-  console.log(this.color);
 }
-sayColor(); // red
-sayColor.call(this); // red
-sayColor.call(window); // red
-sayColor.call(o); // blue 
+function sayColor() {
+  console.log(this.color)
+}
+sayColor() // red
+sayColor.call(this) // red
+sayColor.call(window) // red
+sayColor.call(o) // blue
 ```
 
 ## `bind(thisObj)`
@@ -67,22 +67,22 @@ sayColor.call(o); // blue
 创建一个**绑定**了 `this` 值的对象
 
 ```js
-window.color = 'red';
-var o = {
+window.color = 'red'
+const o = {
   color: 'blue'
-};
-function sayColor() {
-  console.log(this.color);
 }
-let objectSayColor = sayColor.bind(o);
+function sayColor() {
+  console.log(this.color)
+}
+const objectSayColor = sayColor.bind(o)
 /**
  * 等效于修改函数
  * function sayColor() {
  *		var o = { color: 'blue' };
- *		console.log(o.color); 
- * }  
+ *		console.log(o.color);
+ * }
  */
-objectSayColor(); // blue
+objectSayColor() // blue
 ```
 
 ## 继承的方法
@@ -90,7 +90,7 @@ objectSayColor(); // blue
 **`toString()、toLocaleString()`**，始终返回函数的代码
 
 ```js
-"function () { [native code] }"
+'function () { [native code] }'
 ```
 
 **`valueOf()`**，返回函数本身

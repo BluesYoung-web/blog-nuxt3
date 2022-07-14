@@ -16,13 +16,15 @@ date: 2021-02-03 11:28:11
 
 ```js
 try {
-	const a = '1324';
-	a = 222;
-} catch (e) {
-	console.log(e);
-	console.log(e.message);
-} finally {
-	alert('are you ok');
+  const a = '1324'
+  a = 222
+}
+catch (e) {
+  console.log(e)
+  console.log(e.message)
+}
+finally {
+  alert('are you ok')
 }
 ```
 
@@ -46,7 +48,7 @@ try {
 
 ```js
 // 抛出错误
-throw new Error('msg ...');
+throw new Error('msg ...')
 ```
 
 ## 抛出错误
@@ -56,29 +58,29 @@ throw new Error('msg ...');
 - 在遇到throw操作符时代码会立即停止执行，仅当被捕获时才会继续执行
 
 ```js
-throw 12345;
-throw 'hello';
-throw true;
-throw {name: 'zfb'};
-throw new Error('afgkasdjfg');
+throw 12345
+throw 'hello'
+throw true
+throw { name: 'zfb' }
+throw new Error('afgkasdjfg')
 /**
  * 自定义错误类型
  */
-class MyError extends Error{
-	constructor(message){
-		super();
-		this.name = 'MyError';
-		this.message = message;
-	}
+class MyError extends Error {
+  constructor(message) {
+    super()
+    this.name = 'MyError'
+    this.message = message
+  }
 }
 
-throw new MyError('惟有饮者留其名');
+throw new MyError('惟有饮者留其名')
 //////////////////////////////////////////////////////////////////
-function process(values){
-	if(!(values instanceof Array)){
-		throw new Error('process(): argument must be an array');
-	}
-	console.log('processing');
+function process(values) {
+  if (!(Array.isArray(values)))
+    throw new TypeError('process(): argument must be an array')
+
+  console.log('processing')
 }
 ```
 
@@ -98,11 +100,11 @@ function process(values){
 
 ```js
 window.onerror = (msg, url, line) => {
-  console.log(msg);
-  console.log(url);
-  console.log(line);
-  return false;
-};
+  console.log(msg)
+  console.log(url)
+  console.log(line)
+  return false
+}
 ```
 
 ## 多catch从句
@@ -122,48 +124,48 @@ try{
 
 ```js
 // not good
-function concat(str1, str2, str3){
-	var res = str1 + str2;
-	if(str3){
-		res += str3;
-	}
-	return res;
+function concat(str1, str2, str3) {
+  let res = str1 + str2
+  if (str3)
+    res += str3
+
+  return res
 }
 // good
-function concat(str1, str2, str3){
-	var res = str1 + str2;
-	if(typeof str3 === 'string'){
-		res += str3;
-	}
-	return res;
+function concat(str1, str2, str3) {
+  let res = str1 + str2
+  if (typeof str3 === 'string')
+    res += str3
+
+  return res
 }
 ```
 
 ### 数据类型错误
 
 ```js
-function getSearch(url){
-	if(typeof url === 'string'){
-		var pos = url.indexOf("?");
-		if(pos > -1){
-			return url.substring(++pos);
-		}
-	}
-	return "";
+function getSearch(url) {
+  if (typeof url === 'string') {
+    let pos = url.indexOf('?')
+    if (pos > -1)
+      return url.substring(++pos)
+
+  }
+  return ''
 }
 ```
 
 ### 通信错误
 
 ```js
-function addQueryString(url, name, value){
-	if(url.indexOf("?") == -1){
-		url += '?';
-	} else {
-		url += '&';
-	}
-	url = `${url}${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
-	return url;
+function addQueryString(url, name, value) {
+  if (!url.includes('?'))
+    url += '?'
+	 else
+    url += '&'
+
+  url = `${url}${encodeURIComponent(name)}=${encodeURIComponent(value)}`
+  return url
 }
 ```
 
@@ -189,11 +191,11 @@ function addQueryString(url, name, value){
 
 ```js
 function assert(cond, errMsg) {
-	if(!cond) {
-		throw new Error(errMsg);
-	}
+  if (!cond)
+    throw new Error(errMsg)
+
 }
-assert(1 > 2, '开什么玩笑');
+assert(1 > 2, '开什么玩笑')
 ```
 
 ## 旧版 `IE` 常见的错误

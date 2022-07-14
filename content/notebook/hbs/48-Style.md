@@ -65,14 +65,14 @@ date: 2021-01-22 10:03:31
 `sheet.insertRule(rule, index)`，在指定位置向 `cssRules` 中插入规则
 
 ```js
-let sheet = document.styleSheets[0];
-let rules = sheet.cssRules || sheet.rules; // 取得规则集合
-let rule = rules[0]; // 取得第一条规则
-console.log(rule.selectorText); // "div.box"
-console.log(rule.style.cssText); // 完整的 CSS 代码
-console.log(rule.style.backgroundColor); // "blue"
-console.log(rule.style.width); // "100px"
-console.log(rule.style.height); // "200px" 
+const sheet = document.styleSheets[0]
+const rules = sheet.cssRules || sheet.rules // 取得规则集合
+const rule = rules[0] // 取得第一条规则
+console.log(rule.selectorText) // "div.box"
+console.log(rule.style.cssText) // 完整的 CSS 代码
+console.log(rule.style.backgroundColor) // "blue"
+console.log(rule.style.width) // "100px"
+console.log(rule.style.height) // "200px"
 ```
 
 ## `NodeIterator`
@@ -96,18 +96,18 @@ console.log(rule.style.height); // "200px"
   - 除了 `NodeFilter.SHOW_ALL` 之外，都可以组合使用
 
 ```js
-let div = document.getElementById("div1");
-let filter = function(node) {
-	return node.tagName.toLowerCase() == "li"
-		? NodeFilter.FILTER_ACCEPT
-		: NodeFilter.FILTER_SKIP;
-};
-let iterator = document.createNodeIterator(div, NodeFilter.SHOW_ELEMENT, filter, false);
-let node = iterator.nextNode();
+const div = document.getElementById('div1')
+const filter = function (node) {
+  return node.tagName.toLowerCase() == 'li'
+    ? NodeFilter.FILTER_ACCEPT
+    : NodeFilter.FILTER_SKIP
+}
+const iterator = document.createNodeIterator(div, NodeFilter.SHOW_ELEMENT, filter, false)
+let node = iterator.nextNode()
 while (node !== null) {
-	console.log(node.tagName); // 输出标签名
-	node = iterator.nextNode();
-} 
+  console.log(node.tagName) // 输出标签名
+  node = iterator.nextNode()
+}
 ```
 
 ## `TreeWalker`
@@ -123,12 +123,12 @@ while (node !== null) {
 `walker.previousSibling()` 遍历到当前节点的上一个同胞节点
 
 ```js
-let walker = document.createTreeWalker(div, NodeFilter.SHOW_ELEMENT, filter, false);
-let node = iterator.nextNode();
+const walker = document.createTreeWalker(div, NodeFilter.SHOW_ELEMENT, filter, false)
+let node = iterator.nextNode()
 while (node !== null) {
-	console.log(node.tagName); // 输出标签名
-	node = iterator.nextNode();
-} 
+  console.log(node.tagName) // 输出标签名
+  node = iterator.nextNode()
+}
 ```
 
 ## `DOM` 范围
@@ -181,5 +181,5 @@ while (node !== null) {
 `range.detach()` 从文档中剥离范围
 
 ```js
-let range = document.createRange();
+const range = document.createRange()
 ```

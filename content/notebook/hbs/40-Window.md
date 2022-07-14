@@ -59,17 +59,18 @@ date: 2021-01-19 14:51:35
 调整窗口大小的方法可能被浏览器禁用
 
 ```js
-let pageWidth = window.innerWidth;
-let pageHeight = window.innerHeight;
-if (typeof pageWidth != "number") {
-	if (document.compatMode == "CSS1Compat"){
-		pageWidth = document.documentElement.clientWidth;
-		pageHeight = document.documentElement.clientHeight;
-	} else {
-		pageWidth = document.body.clientWidth;
-		pageHeight = document.body.clientHeight;
-	}
-} 
+let pageWidth = window.innerWidth
+let pageHeight = window.innerHeight
+if (typeof pageWidth != 'number') {
+  if (document.compatMode == 'CSS1Compat') {
+    pageWidth = document.documentElement.clientWidth
+    pageHeight = document.documentElement.clientHeight
+  }
+  else {
+    pageWidth = document.body.clientWidth
+    pageHeight = document.body.clientHeight
+  }
+}
 ```
 
 ### 视口位置
@@ -87,16 +88,16 @@ if (typeof pageWidth != "number") {
 ```js
 // 正常滚动
 window.scrollTo({
-	left: 100,
-	top: 100,
-	behavior: 'auto'
-});
+  left: 100,
+  top: 100,
+  behavior: 'auto'
+})
 // 平滑滚动
 window.scrollTo({
-	left: 100,
-	top: 100,
-	behavior: 'smooth'
-}); 
+  left: 100,
+  top: 100,
+  behavior: 'smooth'
+})
 ```
 
 ### 导航与打开新窗口
@@ -139,20 +140,21 @@ window.scrollTo({
 
 ```js
 // 与<a href="http://www.wrox.com" target="topFrame"/>相同
-window.open("http://www.wrox.com/", "topFrame"); 
+window.open('http://www.wrox.com/', 'topFrame')
 // 检测是否屏蔽弹窗
-let blocked = false;
+let blocked = false
 try {
-  const newWindow = window.open('');
-  if(newWindow === null) {
-    blocked = true;
-  }
-} catch(e) {
-  blocked = true;
+  const newWindow = window.open('')
+  if (newWindow === null)
+    blocked = true
+
 }
-if(blocked) {
-  alert('the popup was blocked');
+catch (e) {
+  blocked = true
 }
+if (blocked)
+  alert('the popup was blocked')
+
 ```
 
 ## 定时器

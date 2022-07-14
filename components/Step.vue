@@ -6,28 +6,32 @@
 -->
 <script lang="ts" setup>
 type Item = {
-  title: string;
-  time: string;
-  img?: string;
-} | string;
+  title: string
+  time: string
+  img?: string
+} | string
 
 interface Props {
-  title: string;
-  data: Item[];
-};
+  title: string
+  data: Item[]
+}
 
-defineProps<Props>();
+defineProps<Props>()
 </script>
 
 <template>
   <div>
     <NTimeline size="large">
       <NTimelineItem type="info">
-        <div class="text-2xl">{{ title }}</div>
+        <div class="text-2xl">
+          {{ title }}
+        </div>
       </NTimelineItem>
       <NTimelineItem v-for="(item, index) in data" :key="index" type="info">
         <div v-if="typeof item === 'string'" v-html="item" />
-        <div v-else>{{ item }}</div>
+        <div v-else>
+          {{ item }}
+        </div>
       </NTimelineItem>
     </NTimeline>
   </div>

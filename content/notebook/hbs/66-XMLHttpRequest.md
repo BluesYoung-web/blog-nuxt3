@@ -17,27 +17,30 @@ date: 2021-02-03 16:23:53
 **跨浏览器：**
 
 ```js
-function createXHR(){
-	if(typeof XMLHttpRequest != undefined){
-		return new XMLHttpRequest();
-	} else if(ActiveXObject != undefined) {
-		// IE6及之前
-		let versions = [
-			"MSXML2.XMLHttp.6.0", 
-			"MSXML2.XMLHttp.3.0", 
-			"MSXML2.XMLHttp"
-		];
-		for(let item of versions){
-			try{
-				let xhr = new ActiveXObject(item);
-				return xhr;
-			} catch(e) {
-				continue;
-			}
-		}
-	} else {
-		throw new Error('No XHR Object available.');
-	}
+function createXHR() {
+  if (typeof XMLHttpRequest != undefined) {
+    return new XMLHttpRequest()
+  }
+  else if (ActiveXObject != undefined) {
+    // IE6及之前
+    const versions = [
+      'MSXML2.XMLHttp.6.0',
+      'MSXML2.XMLHttp.3.0',
+      'MSXML2.XMLHttp'
+    ]
+    for (const item of versions) {
+      try {
+        const xhr = new ActiveXObject(item)
+        return xhr
+      }
+      catch (e) {
+        continue
+      }
+    }
+  }
+  else {
+    throw new Error('No XHR Object available.')
+  }
 }
 ```
 
@@ -45,27 +48,27 @@ function createXHR(){
 
 ```js
 // 1. 实例化请求对象
-const ajax = new XMLHttpRequest();
+const ajax = new XMLHttpRequest()
 // 2. 设置请求回调函数
 ajax.onreadystatechange = () => {
-  if(ajax.readyState === 4) {
-    if((ajax.status >= 200 && ajax.status < 300) || ajax.status === 304) {
-      console.log(ajax.responseText);
-    } else {
-      console.log(ajax.status);
-    }
+  if (ajax.readyState === 4) {
+    if ((ajax.status >= 200 && ajax.status < 300) || ajax.status === 304)
+      console.log(ajax.responseText)
+    else
+      console.log(ajax.status)
+
   }
-};
+}
 ajax.ontimeout = () => console.log('超时的回调函数')
 // 3. 设置请求方法及请求地址
-ajax.open('get || post', 'url', isAsync = true);
+ajax.open('get || post', 'url', isAsync = true)
 // 4. 设置请求头
-ajax.setRequestHeader(key, value);
-ajax.timeout = 5000; // 设置超时时间，5s
+ajax.setRequestHeader(key, value)
+ajax.timeout = 5000 // 设置超时时间，5s
 // 5. 作为请求体发送数据，如果不传则必须为 null
-ajax.send(reqBody);
+ajax.send(reqBody)
 // 6. 取消请求
-ajax.abort();
+ajax.abort()
 ```
 
 ### `ajax` 对象属性及方法
@@ -160,20 +163,20 @@ ajax.abort();
 **`event.totalSize` 响应的 `Content-Length` 头部定义的总字节数**
 
 ```js
-let xhr = new XMLHttpRequest();
-xhr.onload = function(event) {
- if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-	alert(xhr.responseText);
- } else {
-	alert("Request was unsuccessful: " + xhr.status);
- }
-};
-xhr.onprogress = function(event) {
- let divStatus = document.getElementById("status");
- if (event.lengthComputable) {
-	 	divStatus.innerHTML = "Received " + event.position + " of " + event.totalSize + " bytes";
- }
-};
-xhr.open("get", "altevents.php", true);
-xhr.send(null); 
+const xhr = new XMLHttpRequest()
+xhr.onload = function (event) {
+  if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304)
+    alert(xhr.responseText)
+  else
+    alert(`Request was unsuccessful: ${xhr.status}`)
+
+}
+xhr.onprogress = function (event) {
+  const divStatus = document.getElementById('status')
+  if (event.lengthComputable)
+	 	divStatus.innerHTML = `Received ${event.position} of ${event.totalSize} bytes`
+
+}
+xhr.open('get', 'altevents.php', true)
+xhr.send(null)
 ```

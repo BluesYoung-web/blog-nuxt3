@@ -46,42 +46,44 @@ image: /img/design-mode.jpeg
  * 定义执行命令的方法
  */
 interface Command {
-  execute(): void;
+  execute(): void
 }
 /**
  * 简单命令实现
  */
 class SimpleCommand implements Command {
-  private payload: string;
+  private payload: string
   constructor(payload: string) {
-    this.payload = payload;
+    this.payload = payload
   }
+
   public execute() {
-    console.log(`我执行了简单命令 (${this.payload})`);
+    console.log(`我执行了简单命令 (${this.payload})`)
   }
 }
 /**
  * 复杂命令实现
  */
 class ComplexCommand implements Command {
-  private receiver: Receiver;
+  private receiver: Receiver
   /**
    * 上下文数据
    */
-  private a: string;
-  private b: string;
+  private a: string
+  private b: string
   /**
    * 复杂命令
    */
   constructor(receiver: Receiver, a: string, b: string) {
-    this.receiver = receiver;
-    this.a = a;
-    this.b = b;
+    this.receiver = receiver
+    this.a = a
+    this.b = b
   }
+
   public execute() {
-    console.log('复杂命令需要委派给下一级执行');
-    this.receiver.doSomething(this.a);
-    this.receiver.doSomethingElse(this.b);
+    console.log('复杂命令需要委派给下一级执行')
+    this.receiver.doSomething(this.a)
+    this.receiver.doSomethingElse(this.b)
   }
 }
 /**
@@ -89,48 +91,52 @@ class ComplexCommand implements Command {
  */
 class Receiver {
   public doSomething(a: string) {
-    console.log(`a执行 (${a}.)`);
+    console.log(`a执行 (${a}.)`)
   }
+
   public doSomethingElse(b: string) {
-    console.log(`b执行 (${b}.)`);
+    console.log(`b执行 (${b}.)`)
   }
 }
 /**
  * 命令栈
  */
 class Invoker {
-  private onStart: Command;
-  private onFinish: Command;
+  private onStart: Command
+  private onFinish: Command
   public setOnStart(command: Command) {
-    this.onStart = command;
+    this.onStart = command
   }
+
   public setOnFinish(command: Command) {
-    this.onFinish = command;
+    this.onFinish = command
   }
+
   public doSomethingImportant() {
-    console.log('是否存在优先级更高的事情需要执行?');
+    console.log('是否存在优先级更高的事情需要执行?')
     if (this.isCommand(this.onStart)) {
-      this.onStart.execute();
-      console.log('执行了优先级更高的事情');
+      this.onStart.execute()
+      console.log('执行了优先级更高的事情')
     }
-    console.log('是否还有事情要做?');
+    console.log('是否还有事情要做?')
     if (this.isCommand(this.onFinish)) {
-      this.onFinish.execute();
-      console.log('最后一件事情已经完成了');
+      this.onFinish.execute()
+      console.log('最后一件事情已经完成了')
     }
   }
+
   private isCommand(object: Command) {
-    return object.execute !== undefined;
+    return object.execute !== undefined
   }
 }
 /**
  * 客户端
  */
-const invoker = new Invoker();
-invoker.setOnStart(new SimpleCommand('你好'));
-const receiver = new Receiver();
-invoker.setOnFinish(new ComplexCommand(receiver, '发邮件', '打电话'));
-invoker.doSomethingImportant();
+const invoker = new Invoker()
+invoker.setOnStart(new SimpleCommand('你好'))
+const receiver = new Receiver()
+invoker.setOnFinish(new ComplexCommand(receiver, '发邮件', '打电话'))
+invoker.doSomethingImportant()
 // 是否存在优先级更高的事情需要执行?
 // 我执行了简单命令 (你好)
 // 执行了优先级更高的事情

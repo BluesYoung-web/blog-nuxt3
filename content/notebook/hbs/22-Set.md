@@ -28,17 +28,17 @@ date: 2021-01-04 17:48:32
 
 ```js
 // 使用数组初始化集合
-const s1 = new Set(["val1", "val2", "val3"]);
-alert(s1.size); // 3
+const s1 = new Set(['val1', 'val2', 'val3'])
+alert(s1.size) // 3
 // 使用自定义迭代器初始化集合
 const s2 = new Set({
-  [Symbol.iterator]: function*() {
-    yield "val1";
-    yield "val2";
-    yield "val3";
+  *[Symbol.iterator]() {
+    yield 'val1'
+    yield 'val2'
+    yield 'val3'
   }
-});
-alert(s2.size); // 3 
+})
+alert(s2.size) // 3
 ```
 
 ## 属性及方法
@@ -69,80 +69,91 @@ class XSet extends Set {
   union(...sets) {
     return XSet.union(this, ...sets)
   }
+
   intersection(...sets) {
-    return XSet.intersection(this, ...sets);
+    return XSet.intersection(this, ...sets)
   }
+
   difference(set) {
-    return XSet.difference(this, set);
+    return XSet.difference(this, set)
   }
+
   symmetricDifference(set) {
-    return XSet.symmetricDifference(this, set);
+    return XSet.symmetricDifference(this, set)
   }
+
   cartesianProduct(set) {
-    return XSet.cartesianProduct(this, set);
+    return XSet.cartesianProduct(this, set)
   }
+
   powerSet() {
-    return XSet.powerSet(this);
+    return XSet.powerSet(this)
   }
+
   // 返回两个或更多集合的并集
   static union(a, ...bSets) {
-    const unionSet = new XSet(a);
+    const unionSet = new XSet(a)
     for (const b of bSets) {
-      for (const bValue of b) {
-        unionSet.add(bValue);
-      }
+      for (const bValue of b)
+        unionSet.add(bValue)
+
     }
-    return unionSet;
+    return unionSet
   }
+
   // 返回两个或更多集合的交集
   static intersection(a, ...bSets) {
-    const intersectionSet = new XSet(a);
+    const intersectionSet = new XSet(a)
     for (const aValue of intersectionSet) {
       for (const b of bSets) {
-        if (!b.has(aValue)) {
-          intersectionSet.delete(aValue);
-        }
+        if (!b.has(aValue))
+          intersectionSet.delete(aValue)
+
       }
     }
-    return intersectionSet;
+    return intersectionSet
   }
+
   // 返回两个集合的差集
   static difference(a, b) {
-    const differenceSet = new XSet(a);
+    const differenceSet = new XSet(a)
     for (const bValue of b) {
-      if (a.has(bValue)) {
-        differenceSet.delete(bValue);
-      }
+      if (a.has(bValue))
+        differenceSet.delete(bValue)
+
     }
-    return differenceSet;
+    return differenceSet
   }
+
   // 返回两个集合的对称差集
   static symmetricDifference(a, b) {
   // 按照定义，对称差集可以表达为
-    return a.union(b).difference(a.intersection(b));
+    return a.union(b).difference(a.intersection(b))
   }
+
   // 返回两个集合（数组对形式）的笛卡儿积
   // 必须返回数组集合，因为笛卡儿积可能包含相同值的对
   static cartesianProduct(a, b) {
-    const cartesianProductSet = new XSet();
+    const cartesianProductSet = new XSet()
     for (const aValue of a) {
-      for (const bValue of b) {
-        cartesianProductSet.add([aValue, bValue]);
-      }
+      for (const bValue of b)
+        cartesianProductSet.add([aValue, bValue])
+
     }
-    return cartesianProductSet;
+    return cartesianProductSet
   }
+
   // 返回一个集合的幂集
   static powerSet(a) {
-    const powerSet = new XSet().add(new XSet());
+    const powerSet = new XSet().add(new XSet())
     for (const aValue of a) {
-      for (const set of new XSet(powerSet)) {
-        powerSet.add(new XSet(set).add(aValue));
-      }
+      for (const set of new XSet(powerSet))
+        powerSet.add(new XSet(set).add(aValue))
+
     }
-    return powerSet;
+    return powerSet
   }
-} 
+}
 ```
 
 ## `WeakSet`
@@ -158,10 +169,10 @@ class XSet extends Set {
 给元素打标签
 
 ```js
-const disabledElements = new WeakSet();
-const loginButton = document.querySelector('#login');
+const disabledElements = new WeakSet()
+const loginButton = document.querySelector('#login')
 // 通过加入对应集合，给这个节点打上“禁用”标签
-disabledElements.add(loginButton); 
+disabledElements.add(loginButton)
 // 只要节点消失，其相应的内存就会被立即释放
 ```
 

@@ -12,19 +12,19 @@ date: 2021-07-23 20:03:07
 
 ```ts
 // router.ts
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [{
-		path: '/:pathMatch(.*)*',
-		component: PageComponent
+    path: '/:pathMatch(.*)*',
+    component: PageComponent
   }],
-});
+})
 // `vite.config.ts`
 export default {
-	base: '/basePath'
-};
+  base: '/basePath'
+}
 ```
 
 ### nginx

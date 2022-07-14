@@ -23,17 +23,17 @@ date: 2021-01-06 15:50:07
 
 ```js
 function createPerson(name, age, job) {
-  let o = new Object();
-  o.name = name;
-  o.age = age;
-  o.job = job;
-  o.sayName = function() {
-    console.log(this.name);
-  };
-  return o;
+  const o = new Object()
+  o.name = name
+  o.age = age
+  o.job = job
+  o.sayName = function () {
+    console.log(this.name)
+  }
+  return o
 }
-let person1 = createPerson("Nicholas", 29, "Software Engineer");
-let person2 = createPerson("Greg", 27, "Doctor"); 
+const person1 = createPerson('Nicholas', 29, 'Software Engineer')
+const person2 = createPerson('Greg', 27, 'Doctor')
 ```
 
 ## 构造函数模式
@@ -55,18 +55,18 @@ let person2 = createPerson("Greg", 27, "Doctor");
 5. **如果构造函数返回非空对象，则返回该对象；否则返回刚创建的新对象**
 
 ```js
-function Person(name, age, job){
-  this.name = name;
-  this.age = age;
-  this.job = job;
-  this.sayName = function() {
-    console.log(this.name);
-  };
+function Person(name, age, job) {
+  this.name = name
+  this.age = age
+  this.job = job
+  this.sayName = function () {
+    console.log(this.name)
+  }
 }
-let person1 = new Person("Nicholas", 29, "Software Engineer");
-let person2 = new Person("Greg", 27, "Doctor");
-person1.sayName(); // Nicholas
-person2.sayName(); // Greg 
+const person1 = new Person('Nicholas', 29, 'Software Engineer')
+const person2 = new Person('Greg', 27, 'Doctor')
+person1.sayName() // Nicholas
+person2.sayName() // Greg
 ```
 
 ### 构造函数也是函数
@@ -113,7 +113,7 @@ person2.sayName(); // Greg
 
 ```js
 function Person() {}
-var p = new Person();
+const p = new Person()
 p.__proto__ === Person.prototype
 p.__proto__.constructor === Person
 p.__proto__.__proto__ === Object.prototype

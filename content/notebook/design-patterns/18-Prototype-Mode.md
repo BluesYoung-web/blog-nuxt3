@@ -34,48 +34,48 @@ image: /img/design-mode.jpeg
  * 原型
  */
 class Prototype {
-  public primitive!: number | string | boolean;
-  public component!: object;
-  public circularReference!: ComponentWithBackReference;
+  public primitive!: number | string | boolean
+  public component!: object
+  public circularReference!: ComponentWithBackReference
   public clone(): this {
-    const clone = Object.create(this);
-    clone.component = Object.create(this.component);
+    const clone = Object.create(this)
+    clone.component = Object.create(this.component)
     clone.circularReference = {
       ...this.circularReference,
       prototype: { ...this },
-    };
-    return clone;
+    }
+    return clone
   }
 }
 class ComponentWithBackReference {
   constructor(public prototype: Prototype) {}
 }
 function clientCode() {
-  const p1 = new Prototype();
-  p1.primitive = 245;
-  p1.component = new Date();
-  p1.circularReference = new ComponentWithBackReference(p1);
-  const p2 = p1.clone();
-  if (p1.primitive === p2.primitive) {
-    console.log('变量复制成功');
-  } else {
-    console.log('变量复制失败');
-  }
-  if (p1.component === p2.component) {
-    console.log('组件未被复制');
-  } else {
-    console.log('组件复制成功');
-  }
-  if (p1.circularReference === p2.circularReference) {
-    console.log('循环引用复制失败');
-  } else {
-    console.log('循环引用复制成功');
-  }
-  if (p1.circularReference.prototype === p2.circularReference.prototype) {
-    console.log('原型链接到原有对象，复制失败');
-  } else {
-    console.log('原型链接到复制对象，复制成功');
-  }
+  const p1 = new Prototype()
+  p1.primitive = 245
+  p1.component = new Date()
+  p1.circularReference = new ComponentWithBackReference(p1)
+  const p2 = p1.clone()
+  if (p1.primitive === p2.primitive)
+    console.log('变量复制成功')
+  else
+    console.log('变量复制失败')
+
+  if (p1.component === p2.component)
+    console.log('组件未被复制')
+  else
+    console.log('组件复制成功')
+
+  if (p1.circularReference === p2.circularReference)
+    console.log('循环引用复制失败')
+  else
+    console.log('循环引用复制成功')
+
+  if (p1.circularReference.prototype === p2.circularReference.prototype)
+    console.log('原型链接到原有对象，复制失败')
+  else
+    console.log('原型链接到复制对象，复制成功')
+
 }
-clientCode();
+clientCode()
 ```

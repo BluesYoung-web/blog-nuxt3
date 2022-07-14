@@ -14,7 +14,7 @@ date: 2022-05-17 10:29:29
 # 指出所包含的子包(包名为子目录下 package.json 的 name)
 packages:
   - 'packages/*' # 此目录下的所有包
-  - 'playground' # 单个包
+  - playground # 单个包
 ```
 
 3. 分别进入每个子目录，执行 `pnpm init`，最终的目录结构如下：
@@ -62,7 +62,7 @@ pnpm test --filter playground
   "module": "dist/index.es.js",
   // 指定 TypeScript 类型声明文件
   "types": "dist/index.d.ts",
-  
+
   // 多入口导出
   "exports": {
     ".": {

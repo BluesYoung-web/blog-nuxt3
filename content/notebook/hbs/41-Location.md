@@ -17,17 +17,17 @@ date: 2021-01-20 08:37:33
 **`http://user:pass@www.abc.com:80/admin/?q=young#target`**
 
 ```js
-location.hash === '#target';
-location.host === 'www.abc.com:80';
-location.hostname === 'www.abc.com';
-location.href === 'http://user:pass@www.abc.com:80/admin/?q=young#target';
-location.pathname === `/admin/`;
-location.port === '80';
-location.protocol === 'http:';
-location.search === `?q=young`;
-location.username === 'user';
-location.password === 'pass';
-location.origin === 'http://www.abc.com'; // 源地址，**只读**
+location.hash === '#target'
+location.host === 'www.abc.com:80'
+location.hostname === 'www.abc.com'
+location.href === 'http://user:pass@www.abc.com:80/admin/?q=young#target'
+location.pathname === '/admin/'
+location.port === '80'
+location.protocol === 'http:'
+location.search === '?q=young'
+location.username === 'user'
+location.password === 'pass'
+location.origin === 'http://www.abc.com' // 源地址，**只读**
 ```
 
 ### `URL`
@@ -37,7 +37,7 @@ location.origin === 'http://www.abc.com'; // 源地址，**只读**
 **new URL().searchParams 为 URLSearchParams 实例**
 
 ```js
-new URL("https://developer.mozilla.org/en-US/docs/Web/API/URL_API")
+new URL('https://developer.mozilla.org/en-US/docs/Web/API/URL_API')
 ```
 
 ## 查询字符串
@@ -46,14 +46,14 @@ new URL("https://developer.mozilla.org/en-US/docs/Web/API/URL_API")
 
 ```js
 function queryParse(sq = location.search) {
-  const qs = (sq.length > 0 ? sq.substring(1) : '');
-  const map = new Map();
-  for(const [key, value] of qs.split('&').map((kv) => kv.split('='))){
-    const k = decodeURIComponent(key);
-    const v = decodeURIComponent(value);
-    k && map.set(k, v);
+  const qs = (sq.length > 0 ? sq.substring(1) : '')
+  const map = new Map()
+  for (const [key, value] of qs.split('&').map(kv => kv.split('='))) {
+    const k = decodeURIComponent(key)
+    const v = decodeURIComponent(value)
+    k && map.set(k, v)
   }
-  return map;
+  return map
 }
 ```
 
@@ -61,7 +61,7 @@ function queryParse(sq = location.search) {
 
 ```js
 function queryParse(sq = location.search) {
-  return new Map(new URLSearchParams(sq));
+  return new Map(new URLSearchParams(sq))
 }
 ```
 
@@ -70,9 +70,9 @@ function queryParse(sq = location.search) {
 自带 `encodeURIComponent` 编码效果
 
 ```js
-new URLSearchParams('?tn=60017574_oem_dg&ie=utf-8&wd=%E6%9D%A5%E5%88%B8');
-new URLSearchParams([["foo", 1], ["bar", 2]]);
-new URLSearchParams({"foo" : 1, "bar" : 2});
+new URLSearchParams('?tn=60017574_oem_dg&ie=utf-8&wd=%E6%9D%A5%E5%88%B8')
+new URLSearchParams([['foo', 1], ['bar', 2]])
+new URLSearchParams({ foo: 1, bar: 2 })
 ```
 
 #### 实例方法

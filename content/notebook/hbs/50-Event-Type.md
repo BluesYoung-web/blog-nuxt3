@@ -102,16 +102,16 @@ date: 2021-01-23 11:39:12
 
 ```js
 // mouseout | mouseover
-const atedTarget = function(event) {
-	if (event.relatedTarget) {
-		return event.relatedTarget;
-	} else if (event.toElement) {
-		return event.toElement;
-	} else if (event.fromElement) {
-		return event.fromElement;
-	} else {
-		return null;
-	}
+const atedTarget = function (event) {
+  if (event.relatedTarget)
+    return event.relatedTarget
+	 else if (event.toElement)
+    return event.toElement
+	 else if (event.fromElement)
+    return event.fromElement
+	 else
+    return null
+
 }
 ```
 

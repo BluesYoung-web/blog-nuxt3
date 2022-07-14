@@ -18,32 +18,32 @@ date: 2020-12-23 14:22:18
 ### 编写自定义指令
 
 ```ts
-import type { App, DirectiveBinding } from 'vue';
+import type { App, DirectiveBinding } from 'vue'
 
 const lazyLoad = (
-	el: HTMLElement,
-	binding: DirectiveBinding<string>
+  el: HTMLElement,
+  binding: DirectiveBinding<string>
 ) => {
   useIntersectionObserver(el, ([{ isIntersecting }]) => {
     // img 元素首次插入可视区域
-    if (isIntersecting && !el.getAttribute('src')) {
+    if (isIntersecting && !el.getAttribute('src'))
       el.setAttribute('src', binding.value)
-    }
-  });
+
+  })
 }
 
 export default {
   install: (app: App<Element>) => {
-    app.directive('lazyload', lazyLoad);
+    app.directive('lazyload', lazyLoad)
   }
-};
+}
 ```
 
 ### 使用
 
 ```ts
-import lazyload from './plugins/directives/lazyload';
-app.use(lazyload);
+import lazyload from './plugins/directives/lazyload'
+app.use(lazyload)
 ```
 
 ```html
@@ -71,23 +71,23 @@ app.use(lazyload);
 引入后**可直接使用**
 
 ```js
-;(function(Vue) {
-	Vue.component('young', {
-		props: {
-			msg: String
-		},
-		template: `
+(function (Vue) {
+  Vue.component('Young', {
+    props: {
+      msg: String
+    },
+    methods: {
+      test() {
+        alert(this.msg)
+      }
+    },
+    template: `
 			<div>
 				<div class="taiji" @click="test">{{msg}}</div>
 			</div>
-		`,
-		methods: {
-			test() {
-				alert(this.msg)
-			}
-		}
-	})
-})(window.Vue);
+		`
+  })
+})(window.Vue)
 ```
 
 ### 仅全局定义
@@ -95,22 +95,22 @@ app.use(lazyload);
 引入后**挂载到 window 对象上，需要手动注册**
 
 ```js
-;(function(Vue) {
-	window.Young = Vue.extend({
-		name: 'Young',
-		props: {
-			msg: String
-		},
-		template: `
+(function (Vue) {
+  window.Young = Vue.extend({
+    name: 'Young',
+    props: {
+      msg: String
+    },
+    methods: {
+      test() {
+        alert(this.msg)
+      }
+    },
+    template: `
 			<div>
 				<div class="taiji" @click="test">{{msg}}</div>
 			</div>
-		`,
-		methods: {
-			test() {
-				alert(this.msg)
-			}
-		}
-	})
-})(window.Vue);
+		`
+  })
+})(window.Vue)
 ```

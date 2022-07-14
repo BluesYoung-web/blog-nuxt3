@@ -59,58 +59,61 @@ image: /img/design-mode.jpeg
  * 基类接口
  */
 interface Subject {
-  request(): void;
+  request(): void
 }
 /**
  * 接口实现1
  */
 class RealSubject implements Subject {
   public request(): void {
-    console.log('这是真实对象产生的请求');
+    console.log('这是真实对象产生的请求')
   }
 }
 /**
  * 接口实现2
  */
 class MyProxy implements Subject {
-  private realSubject: RealSubject;
+  private realSubject: RealSubject
   constructor(realSubject: RealSubject) {
-    this.realSubject = realSubject;
+    this.realSubject = realSubject
   }
+
   /**
    * 请求代理
     */
   public request(): void {
     if (this.checkAccess()) {
-      this.realSubject.request();
-      this.logAccess();
+      this.realSubject.request()
+      this.logAccess()
     }
   }
+
   /**
    * 是否校验数据库
    */
   private checkAccess(): boolean {
-    console.log('代理需要校验数据库');
-    return true;
+    console.log('代理需要校验数据库')
+    return true
   }
+
   /**
    * 记录日志
    */
   private logAccess(): void {
-    console.log('代理记录请求日志');
+    console.log('代理记录请求日志')
   }
 }
 /**
  * 客户端
  */
 function clientCode(subject: Subject) {
-  subject.request();
+  subject.request()
 }
-console.log('不使用代理：');
-const realSubject = new RealSubject();
-clientCode(realSubject);
-console.log('\n');
-console.log('使用代理：');
-const proxy = new MyProxy(realSubject);
-clientCode(proxy);
+console.log('不使用代理：')
+const realSubject = new RealSubject()
+clientCode(realSubject)
+console.log('\n')
+console.log('使用代理：')
+const proxy = new MyProxy(realSubject)
+clientCode(proxy)
 ```

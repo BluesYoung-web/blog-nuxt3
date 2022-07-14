@@ -40,13 +40,13 @@ class Facade {
   ) {}
 
   public operation() {
-    let result = '基类初始化子系统:\n';
-    result += this.subsystem1.operation1();
-    result += this.subsystem2.operation1();
-    result += '基类按照顺序调用子系统的方法:\n';
-    result += this.subsystem1.operationN();
-    result += this.subsystem2.operationZ();
-    return result;
+    let result = '基类初始化子系统:\n'
+    result += this.subsystem1.operation1()
+    result += this.subsystem2.operation1()
+    result += '基类按照顺序调用子系统的方法:\n'
+    result += this.subsystem1.operationN()
+    result += this.subsystem2.operationZ()
+    return result
   }
 }
 /**
@@ -54,10 +54,11 @@ class Facade {
  */
 class Subsystem1 {
   public operation1(): string {
-    return '子系统1准备完毕\n';
+    return '子系统1准备完毕\n'
   }
+
   public operationN(): string {
-    return '子系统1出发\n';
+    return '子系统1出发\n'
   }
 }
 /**
@@ -65,20 +66,21 @@ class Subsystem1 {
  */
 class Subsystem2 {
   public operation1(): string {
-    return '子系统2准备完毕\n';
+    return '子系统2准备完毕\n'
   }
+
   public operationZ(): string {
-    return '子系统2发射';
+    return '子系统2发射'
   }
 }
 /**
  * 客户端
  */
 function clientCode(facade: Facade) {
-  console.log(facade.operation());
+  console.log(facade.operation())
 }
-const subsystem1 = new Subsystem1();
-const subsystem2 = new Subsystem2();
-const facade = new Facade(subsystem1, subsystem2);
-clientCode(facade);
+const subsystem1 = new Subsystem1()
+const subsystem2 = new Subsystem2()
+const facade = new Facade(subsystem1, subsystem2)
+clientCode(facade)
 ```

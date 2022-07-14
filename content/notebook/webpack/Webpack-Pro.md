@@ -73,7 +73,7 @@ module.exports = {
           cacheDirectory: true
         }
       }
-  ]
+    ]
   }
 }
 ```
@@ -91,7 +91,7 @@ module.exports = {
           {
             loader: 'thread-loader',
             options: {
-              workers: 2 //两个进程
+              workers: 2 // 两个进程
             }
           },
           // ...

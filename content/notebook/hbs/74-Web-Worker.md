@@ -135,8 +135,8 @@ worker.addEventListener('message', console.log);
 
 ```js
 // test.js
-self.addEventListener('message', console.log);
-self.postMessage('好嗨哟');
+self.addEventListener('message', console.log)
+self.postMessage('好嗨哟')
 ```
 
 ### 安全限制
@@ -164,28 +164,28 @@ self.postMessage('好嗨哟');
 ```js
 // -------- 内部终止 ----------
 // closeWorker.js
-self.postMessage('foo');
-self.close(); // 取消事件循环中的所有任务，并阻止继续添加新任务
-self.postMessage('bar');
-setTimeout(() => self.postMessage('baz'), 0);
+self.postMessage('foo')
+self.close() // 取消事件循环中的所有任务，并阻止继续添加新任务
+self.postMessage('bar')
+setTimeout(() => self.postMessage('baz'), 0)
 // main.js
-const worker = new Worker('./closeWorker.js');
-worker.onmessage = ({data}) => console.log(data);
+const worker = new Worker('./closeWorker.js')
+worker.onmessage = ({ data }) => console.log(data)
 // foo
-// bar 
+// bar
 // -------- 外部终止 ----------
 // terminateWorker.js
-self.onmessage = ({data}) => console.log(data);
+self.onmessage = ({ data }) => console.log(data)
 // main.js
-const worker = new Worker('./terminateWorker.js');
+const worker = new Worker('./terminateWorker.js')
 // 给 1000 毫秒让工作者线程初始化
 setTimeout(() => {
-  worker.postMessage('foo');
-  worker.terminate(); // 清理并锁住消息队列
-  worker.postMessage('bar');
-  setTimeout(() => worker.postMessage('baz'), 0);
-}, 1000);
-// foo 
+  worker.postMessage('foo')
+  worker.terminate() // 清理并锁住消息队列
+  worker.postMessage('bar')
+  setTimeout(() => worker.postMessage('baz'), 0)
+}, 1000)
+// foo
 ```
 
 `close()` 和 `terminate()` 是幂等操作，多次调用没有问题。这两个方法仅仅是将 `Worker` 标记为 `teardown`，因此多次调用不会有不好的影响
@@ -215,29 +215,31 @@ setTimeout(() => {
 // 要执行的工作者线程的代码
 const ws = `
 self.onmessage = ({ data }) => console.log(data);
-`;
+`
 // 基于脚本生成 Blob 对象
-const wb = new Blob([ws]);
+const wb = new Blob([ws])
 // 基于 Blob 生成引用的 URL
-const bl = URL.createObjectURL(wb);
+const bl = URL.createObjectURL(wb)
 // 基于 URL 创建工作者线程
-const worker = new Worker(bl);
-worker.postMessage('来了老弟');
+const worker = new Worker(bl)
+worker.postMessage('来了老弟')
 // 来了老弟
 // ----------------- 实际应用 -------------------------
 // --------- 将需要大量计算的东西丢给工作者线程 ------------
 function fibonacci(n) {
-   return n < 1 ? 0
-     : n <= 2 ? 1
-     : fibonacci(n - 1) + fibonacci(n - 2);
+  return n < 1
+    ? 0
+    : n <= 2
+      ? 1
+      : fibonacci(n - 1) + fibonacci(n - 2)
 }
 const workerScript = `
  self.postMessage(
  (${fibonacci.toString()})(29)
  );
-`;
-const worker = new Worker(URL.createObjectURL(new Blob([workerScript])));
-worker.onmessage = ({data}) => console.log(data);
+`
+const worker = new Worker(URL.createObjectURL(new Blob([workerScript])))
+worker.onmessage = ({ data }) => console.log(data)
 // 514229
 ```
 
@@ -271,15 +273,15 @@ worker.addEventListener('message', ({ data }) => console.log(data));
 
 ```js
 // test.js
-const token = 'aloha';
-self.addEventListener('message', ({ data }) => console.log(data));
-self.postMessage('我要引入脚本了哦');
-importScripts('./a.js', './b.js');
-self.postMessage('脚本引入完毕');
+const token = 'aloha'
+self.addEventListener('message', ({ data }) => console.log(data))
+self.postMessage('我要引入脚本了哦')
+importScripts('./a.js', './b.js')
+self.postMessage('脚本引入完毕')
 // a.js
-console.log(`${self.name}---aaaaaa---${token}`);
+console.log(`${self.name}---aaaaaa---${token}`)
 // b.js
-console.log(`${self.name}---bbbbbb---${token}`);
+console.log(`${self.name}---bbbbbb---${token}`)
 /*
   我要引入脚本了哦
   young---aaaaaa---aloha
@@ -297,14 +299,14 @@ console.log(`${self.name}---bbbbbb---${token}`);
 
 ```js
 // --- main.js
-const worker = new Worker('./js/worker.js');
+const worker = new Worker('./js/worker.js')
 // worker
 // subworker
 // --- js/worker.js
-console.log('worker');
-const worker = new Worker('./subworker.js');
+console.log('worker')
+const worker = new Worker('./subworker.js')
 // --- js/subworker.js
-console.log('subworker');
+console.log('subworker')
 ```
 
 顶级工作者线程的脚本和子工作者线程的脚本都必须从与主页相同的源加载
@@ -324,54 +326,54 @@ console.log('subworker');
 ```js
 // --- worker.js
 // 在监听器中存储全局 messagePort
-let messagePort = null;
+let messagePort = null
 function factorial(n) {
-  let result = 1;
-  while(n) { result *= n--; }
-  return result;
+  let result = 1
+  while (n) result *= n--
+  return result
 }
 // 在全局对象上添加消息处理程序
 self.onmessage = ({ ports }) => {
   // 只设置一次端口
-  if(!messagePort) {
+  if (!messagePort) {
     // 初始化消息发送端口
     // 给变量赋值并重置监听器
-    messagePort = ports[0];
-    self.onmessage = null;
+    messagePort = ports[0]
+    self.onmessage = null
     // 在全局对象上设置消息处理程序
     messagePort.onmessage = ({ data }) => {
-      messagePort.postMessage(`${data} != ${factorial(data)}`);
-    };
+      messagePort.postMessage(`${data} != ${factorial(data)}`)
+    }
   }
-};
+}
 // --- main.js
-const channel = new MessageChannel();
-const factorialWorker = new Worker('./worker.js');
+const channel = new MessageChannel()
+const factorialWorker = new Worker('./worker.js')
 // 把`MessagePort`对象发送到工作者线程
 // 工作者线程负责处理初始化信道
-factorialWorker.postMessage(null, [channel.port1]);
+factorialWorker.postMessage(null, [channel.port1])
 // 通过信道实际发送数据
-channel.port2.onmessage = ({data}) => console.log(data);
+channel.port2.onmessage = ({ data }) => console.log(data)
 // 工作者线程通过信道响应
-channel.port2.postMessage(5); 
-// 5 != 120 
+channel.port2.postMessage(5)
+// 5 != 120
 ```
 
 使用 `BroadcastChannel`
 
 ```js
 // --- worker.js
-const channel = new BroadcastChannel('worker_channel');
-channel.onmessage = ({data}) => {
-  console.log(`heard ${data} in worker`);
-  channel.postMessage('bar');
+const channel = new BroadcastChannel('worker_channel')
+channel.onmessage = ({ data }) => {
+  console.log(`heard ${data} in worker`)
+  channel.postMessage('bar')
 }
 // --- main.js
-const channel = new BroadcastChannel('worker_channel');
-const worker = new Worker('./worker.js');
-channel.onmessage = ({data}) => console.log(`heard ${data} on page`);
+const channel = new BroadcastChannel('worker_channel')
+const worker = new Worker('./worker.js')
+channel.onmessage = ({ data }) => console.log(`heard ${data} on page`)
 // 没有端口所有权的概念，如果没有实体监听该信道，则不会有人处理
-setTimeout(() => channel.postMessage('foo'), 1000);
+setTimeout(() => channel.postMessage('foo'), 1000)
 // heard foo in worker
 // heard bar on page
 ```
@@ -419,28 +421,28 @@ setTimeout(() => channel.postMessage('foo'), 1000);
 
 ```js
 // --- main.js
-const worker = new Worker('./worker.js');
+const worker = new Worker('./worker.js')
 // 创建 32 位缓冲区
-const arrayBuffer = new ArrayBuffer(32);
-console.log(`page's buffer size: ${arrayBuffer.byteLength}`); // 32
-worker.postMessage(arrayBuffer);
-console.log(`page's buffer size: ${arrayBuffer.byteLength}`); // 32
+const arrayBuffer = new ArrayBuffer(32)
+console.log(`page's buffer size: ${arrayBuffer.byteLength}`) // 32
+worker.postMessage(arrayBuffer)
+console.log(`page's buffer size: ${arrayBuffer.byteLength}`) // 32
 // --- worker.js
-self.onmessage = ({data}) => {
-  console.log(`worker's buffer size: ${data.byteLength}`); // 32
-};
+self.onmessage = ({ data }) => {
+  console.log(`worker's buffer size: ${data.byteLength}`) // 32
+}
 // ------------ 转移 --------------
 // --- main.js
-const worker = new Worker('./worker.js');
+const worker = new Worker('./worker.js')
 // 创建 32 位缓冲区
-const arrayBuffer = new ArrayBuffer(32);
-console.log(`page's buffer size: ${arrayBuffer.byteLength}`); // 32
-worker.postMessage(arrayBuffer, [arrayBuffer]);
-console.log(`page's buffer size: ${arrayBuffer.byteLength}`); // 0
+const arrayBuffer = new ArrayBuffer(32)
+console.log(`page's buffer size: ${arrayBuffer.byteLength}`) // 32
+worker.postMessage(arrayBuffer, [arrayBuffer])
+console.log(`page's buffer size: ${arrayBuffer.byteLength}`) // 0
 // --- worker.js
-self.onmessage = ({data}) => {
-  console.log(`worker's buffer size: ${data.byteLength}`); // 32
-};
+self.onmessage = ({ data }) => {
+  console.log(`worker's buffer size: ${data.byteLength}`) // 32
+}
 ```
 
 **共享数组缓冲区**

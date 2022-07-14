@@ -38,8 +38,8 @@ image: /img/design-mode.jpeg
  * 抽象工厂定义一系列的产品接口
  */
 interface AbstractFactory {
-  createProductA(): AbstractProductA;
-  createProductB(): AbstractProductB;
+  createProductA(): AbstractProductA
+  createProductB(): AbstractProductB
 }
 /**
  * 具体工厂1实现抽象工厂
@@ -47,11 +47,12 @@ interface AbstractFactory {
 class ConcreteFactory1 implements AbstractFactory {
   // 生产具体产品A
   public createProductA() {
-    return new ConcreteProductA1();
+    return new ConcreteProductA1()
   }
+
   // 生产具体产品B
   public createProductB() {
-    return new ConcreteProductB1();
+    return new ConcreteProductB1()
   }
 }
 /**
@@ -60,25 +61,26 @@ class ConcreteFactory1 implements AbstractFactory {
 class ConcreteFactory2 implements AbstractFactory {
   // 生产具体产品A
   public createProductA() {
-    return new ConcreteProductA2();
+    return new ConcreteProductA2()
   }
+
   // 生产具体产品B
   public createProductB() {
-    return new ConcreteProductB2();
+    return new ConcreteProductB2()
   }
 }
 /**
  * 定义抽象产品A的接口
  */
 interface AbstractProductA {
-  usefulFunctionA(): string;
+  usefulFunctionA(): string
 }
 /**
  * 具体产品A1实现抽象产品接口A
  */
 class ConcreteProductA1 implements AbstractProductA {
   public usefulFunctionA() {
-    return '这是具体产品A1';
+    return '这是具体产品A1'
   }
 }
 /**
@@ -86,32 +88,33 @@ class ConcreteProductA1 implements AbstractProductA {
  */
 class ConcreteProductA2 implements AbstractProductA {
   public usefulFunctionA() {
-    return '这是具体产品A2';
+    return '这是具体产品A2'
   }
 }
 /**
  * 定义抽象产品B的接口
  */
 interface AbstractProductB {
-  usefulFunctionB(): string;
+  usefulFunctionB(): string
   /**
    * 与抽象产品A不同的特性
    */
-  anotherUsefulFunctionB(collaborator: AbstractProductA): string;
+  anotherUsefulFunctionB(collaborator: AbstractProductA): string
 }
 /**
  * 具体产品B1实现抽象产品接口B
  */
 class ConcreteProductB1 implements AbstractProductB {
   public usefulFunctionB() {
-    return '我是产品B1';
+    return '我是产品B1'
   }
+
   /**
    * 实现具体特性，可调用任意的产品A
    */
   public anotherUsefulFunctionB(collaborator: AbstractProductA) {
-    const result = collaborator.usefulFunctionA();
-    return `这是B1调用的结果(${result})`;
+    const result = collaborator.usefulFunctionA()
+    return `这是B1调用的结果(${result})`
   }
 }
 /**
@@ -119,31 +122,32 @@ class ConcreteProductB1 implements AbstractProductB {
  */
 class ConcreteProductB2 implements AbstractProductB {
   public usefulFunctionB() {
-    return '我是产品B2';
+    return '我是产品B2'
   }
+
   /**
    * 实现具体特性，可调用任意的产品A
    */
   public anotherUsefulFunctionB(collaborator: AbstractProductA) {
-    const result = collaborator.usefulFunctionA();
-    return `这是B2调用的结果(${result})`;
+    const result = collaborator.usefulFunctionA()
+    return `这是B2调用的结果(${result})`
   }
 }
 /**
  * 客户端
  */
 function clientCode2(factory: AbstractFactory) {
-  const productA = factory.createProductA();
-  const productB = factory.createProductB();
-  console.log(productB.usefulFunctionB());
-  console.log(productB.anotherUsefulFunctionB(productA));
+  const productA = factory.createProductA()
+  const productB = factory.createProductB()
+  console.log(productB.usefulFunctionB())
+  console.log(productB.anotherUsefulFunctionB(productA))
 }
 /**
  * 客户端随意调用
  */
-console.log('我是具体工厂1');
-clientCode2(new ConcreteFactory1());
-console.log('\n');
-console.log('我是具体工厂2');
-clientCode2(new ConcreteFactory2());
+console.log('我是具体工厂1')
+clientCode2(new ConcreteFactory1())
+console.log('\n')
+console.log('我是具体工厂2')
+clientCode2(new ConcreteFactory2())
 ```

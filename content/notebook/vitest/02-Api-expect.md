@@ -112,9 +112,9 @@ date: 2022-05-09 10:30:00
 
 ```ts
 function getFruitStock(type) {
-  if (type === 'pineapples') {
-    throw new Error('Pineapples is not good for people with diabetes');
-  }
+  if (type === 'pineapples')
+    throw new Error('Pineapples is not good for people with diabetes')
+
   // 可以做一些其他的事情
 }
 
@@ -122,17 +122,17 @@ it('throws on pineapples', () => {
   // 测试错误消息是否在某处显示 "diabetes" ：这些是等效的
   expect(
     () => getFruitStock('pineapples')
-  ).toThrowError(/diabetes/);
-  
+  ).toThrowError(/diabetes/)
+
   expect(
     () => getFruitStock('pineapples')
-  ).toThrowError('diabetes');
+  ).toThrowError('diabetes')
 
   // 测试确切的错误信息
   expect(() => getFruitStock('pineapples')).toThrowError(
     /^Pineapples is not good for people with diabetes$/,
-  );
-});
+  )
+})
 ```
 
 ## 快照相关
@@ -162,23 +162,23 @@ it('throws on pineapples', () => {
 **断言一个函数是否被调用过，需要给 `expect` 传递一个监听函数**
 
 ```ts
-import { it, expect, vi } from 'vitest';
+import { expect, it, vi } from 'vitest'
 
 const market = {
   buy(subject: string, amount: number) {
     // ...
   },
-};
+}
 
 it('spy function', () => {
-  const buySpy = vi.spyOn(market, 'buy');
+  const buySpy = vi.spyOn(market, 'buy')
 
-  expect(buySpy).not.toHaveBeenCalled();
+  expect(buySpy).not.toHaveBeenCalled()
 
-  market.buy('apples', 10);
+  market.buy('apples', 10)
 
-  expect(buySpy).toHaveBeenCalled();
-});
+  expect(buySpy).toHaveBeenCalled()
+})
 ```
 
 ### `.toHaveBeenCalledTimes(num)`
@@ -186,7 +186,7 @@ it('spy function', () => {
 **断言一个函数是否被调用了 num 次**
 
 ```ts
-expect(buySpy).toHaveBeenCalledTimes(1);
+expect(buySpy).toHaveBeenCalledTimes(1)
 ```
 
 ### `.toHaveBeenCalledWith(...args)`
@@ -194,7 +194,7 @@ expect(buySpy).toHaveBeenCalledTimes(1);
 断言一个函数是否被调用过，**并且传递了指定的参数**
 
 ```ts
-expect(buySpy).toHaveBeenCalledWith('apples', 10);
+expect(buySpy).toHaveBeenCalledWith('apples', 10)
 ```
 
 ### `.toHaveBeenLastCalledWith(...args)`
@@ -220,13 +220,13 @@ expect(buySpy).toHaveBeenCalledWith('apples', 10);
 ```ts
 it('spy function returns a product', () => {
   const sell = vi.fn((product: string) => {
-    return { product };
-  });
+    return { product }
+  })
 
-  sell('apples');
+  sell('apples')
 
-  expect(sell).toHaveReturnedWith({ product: 'apples' });
-});
+  expect(sell).toHaveReturnedWith({ product: 'apples' })
+})
 ```
 
 ### `.toHaveLastReturnedWith(v)`
@@ -250,8 +250,8 @@ it('spy function returns a product', () => {
 ```ts
 it('buyApples returns new stock id', async () => {
   // toEqual 现在返回一个 Promise ，所以我们必须等待它
-  await expect(buyApples()).resolves.toEqual({ id: 1 });
-});
+  await expect(buyApples()).resolves.toEqual({ id: 1 })
+})
 ```
 
 ### `.rejects`
@@ -261,8 +261,8 @@ it('buyApples returns new stock id', async () => {
 ```ts
 it('buyApples returns new stock id', async () => {
   // toEqual 现在返回一个 Promise ，所以我们必须等待它
-  await expect(buyApples()).rejects.toThrow('no id');
-});
+  await expect(buyApples()).rejects.toThrow('no id')
+})
 ```
 
 ### `.assertions(n)`
@@ -275,20 +275,20 @@ it('buyApples returns new stock id', async () => {
 async function doAsync(...cbs) {
   await Promise.all(
     cbs.map((cb, index) => cb({ index }))
-  );
+  )
 }
 
 test('all assertions are called', async () => {
-  expect.assertions(2);
+  expect.assertions(2)
   function callback1(data) {
-    expect(data).toBeTruthy();
+    expect(data).toBeTruthy()
   }
   function callback2(data) {
-    expect(data).toBeTruthy();
+    expect(data).toBeTruthy()
   }
 
-  await doAsync(callback1, callback2);
-});
+  await doAsync(callback1, callback2)
+})
 ```
 
 ### `.hasAssertions()`

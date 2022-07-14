@@ -5,22 +5,21 @@
  * @Description: 头部导航栏组件
 -->
 <script lang="ts" setup>
-import { isClient } from '@vueuse/core';
-const { nav } = useConfig();
-const { directions, y } = useScroll(isClient ? window : null);
-const { top, bottom } = toRefs(directions);
-const isScrollUp = ref(false);
+import { isClient } from '@vueuse/core'
+const { nav } = useConfig()
+const { directions, y } = useScroll(isClient ? window : null)
+const { top, bottom } = toRefs(directions)
+const isScrollUp = ref(false)
 watchEffect(() => {
-  if (top.value) {
-    isScrollUp.value = true;
-  } else if (bottom.value || y.value === 0) {
-    isScrollUp.value = false;
-  }
-});
+  if (top.value)
+    isScrollUp.value = true
+  else if (bottom.value || y.value === 0)
+    isScrollUp.value = false
+})
 </script>
 
 <template>
-  <nav :class="{ 'nav': true, 'up': isScrollUp }">
+  <nav class="nav" :class="{ up: isScrollUp }">
     <div class="left">
       <a href="/">{{ nav.title }}</a>
     </div>

@@ -115,30 +115,28 @@ date: 2021-01-25 10:43:21
 ```js
 // 选取文本
 ele.addEventListener('focus', (e) => {
-  e.target.select();
-});
+  e.target.select()
+})
 
 // 获取选中的文本
 function getSelectedText(element) {
-  const value = element.value;
+  const value = element.value
   // 设置选中范围
-  element.setSelectionRange(selectionStart, selectionStart);
+  element.setSelectionRange(selectionStart, selectionStart)
   // 开始偏移地址，结束偏移地址
-	return value.substring(element.selectionStart, element.selectionEnd);
+  return value.substring(element.selectionStart, element.selectionEnd)
 }
 
 // 屏蔽特定字符的输入
-element.addEventListener("keypress", (event) => {
- if (
-   !/\d/.test(String.fromCharCode(event.charCode))
-   &&
-   event.charCode > 9
-   &&
-   !event.ctrlKey
-  ) {
-  event.preventDefault();
- }
-});
+element.addEventListener('keypress', (event) => {
+  if (
+    !/\d/.test(String.fromCharCode(event.charCode))
+   && event.charCode > 9
+   && !event.ctrlKey
+  )
+    event.preventDefault()
+
+})
 ```
 
 ## 剪切板
@@ -156,23 +154,23 @@ element.addEventListener("keypress", (event) => {
 `paste` 粘贴之后
 
 ```js
-function getClipboardText(event){
- var clipboardData = (event.clipboardData || window.clipboardData);
- return clipboardData.getData("text");
+function getClipboardText(event) {
+  const clipboardData = (event.clipboardData || window.clipboardData)
+  return clipboardData.getData('text')
 }
-function setClipboardText (event, value){
- if (event.clipboardData){
- return event.clipboardData.setData("text/plain", value);
- } else if (window.clipboardData){
- return window.clipboardData.setData("text", value);
- }
+function setClipboardText(event, value) {
+  if (event.clipboardData)
+    return event.clipboardData.setData('text/plain', value)
+  else if (window.clipboardData)
+    return window.clipboardData.setData('text', value)
+
 }
-textbox.addEventListener("paste", (event) => {
- let text = getClipboardText(event);
- if (!/^\d*$/.test(text)){
- 	event.preventDefault(); 
- }
-});
+textbox.addEventListener('paste', (event) => {
+  const text = getClipboardText(event)
+  if (!/^\d*$/.test(text))
+ 	event.preventDefault()
+
+})
 ```
 
 ## 自动切换
@@ -220,9 +218,9 @@ let textbox3 = document.getElementById("txtTel3");
 
 ```js
 // 检测浏览器是否支持 required 属性：
-let isRequiredSupported = "required" in document.createElement("input"); 
+const isRequiredSupported = 'required' in document.createElement('input')
 // 检测对应元素的 required 属性来判断表单字段是否为必填：
-let isUsernameRequired = document.forms[0].elements["username"].required; 
+const isUsernameRequired = document.forms[0].elements.username.required
 ```
 
 ### 更多输入类型
@@ -268,15 +266,17 @@ let isUsernameRequired = document.forms[0].elements["username"].required;
 - `.valueMissing` 如果字段是必填的但没有值则返回 `true`
 
 ```js
-if (input.validity && !input.validity.valid){
-	if (input.validity.valueMissing){
-		console.log("Please specify a value.")
-	} else if (input.validity.typeMismatch){
-		console.log("Please enter an email address.");
-	} else {
-		console.log("Value is invalid.");
-	}
-} 
+if (input.validity && !input.validity.valid) {
+  if (input.validity.valueMissing)
+    console.log('Please specify a value.')
+
+  else if (input.validity.typeMismatch)
+    console.log('Please enter an email address.')
+
+  else
+    console.log('Value is invalid.')
+
+}
 ```
 
 ### 禁用验证
@@ -326,30 +326,30 @@ if (input.validity && !input.validity.valid){
 **添加选项：**
 
 ```js
-let newOption = document.createElement("option");
-newOption.appendChild(document.createTextNode("Option text"));
-newOption.setAttribute("value", "Option value");
-selectbox.appendChild(newOption); 
+let newOption = document.createElement('option')
+newOption.appendChild(document.createTextNode('Option text'))
+newOption.setAttribute('value', 'Option value')
+selectbox.appendChild(newOption)
 // ---------------
-let newOption = new Option("Option text", "Option value");
-selectbox.appendChild(newOption); // 在 IE8 及更低版本中有问题
-selectbox.add(newOption, undefined); // 最佳方案
+let newOption = new Option('Option text', 'Option value')
+selectbox.appendChild(newOption) // 在 IE8 及更低版本中有问题
+selectbox.add(newOption, undefined) // 最佳方案
 ```
 
 **移除选项：**
 
 ```js
-selectbox.removeChild(selectbox.options[0]); // 移除第一项
-selectbox.remove(0); // 移除第一项
-selectbox.options[0] = null; // 移除第一项
+selectbox.removeChild(selectbox.options[0]) // 移除第一项
+selectbox.remove(0) // 移除第一项
+selectbox.options[0] = null // 移除第一项
 ```
 
 **移动选项：**
 
 ```js
-let selectbox1 = document.getElementById("selLocations1");
-let selectbox2 = document.getElementById("selLocations2");
-selectbox2.appendChild(selectbox1.options[0]);
+const selectbox1 = document.getElementById('selLocations1')
+const selectbox2 = document.getElementById('selLocations2')
+selectbox2.appendChild(selectbox1.options[0])
 ```
 
 ## 表单发送至服务器

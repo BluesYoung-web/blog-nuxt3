@@ -38,39 +38,39 @@ class ListNode {
 }
 
 function createHelper(arr: number[]) {
-  let p = new ListNode();
-  const res = p;
+  let p = new ListNode()
+  const res = p
   for (const i of arr) {
-    p.next = new ListNode(i);
-    p = p.next;
+    p.next = new ListNode(i)
+    p = p.next
   }
-  return res.next;
+  return res.next
 }
 
 describe('测试用例：', () => {
   it('1', () => {
-    const p = createHelper([1, 2, 3, 4, 5]);
-    const res = createHelper([2, 1, 4, 3, 5]);
-    expect(reverseKGroup(p, 2)).toEqual(res);
-  });
+    const p = createHelper([1, 2, 3, 4, 5])
+    const res = createHelper([2, 1, 4, 3, 5])
+    expect(reverseKGroup(p, 2)).toEqual(res)
+  })
 
   it('2', () => {
-    const p = createHelper([1, 2, 3, 4, 5]);
-    const res = createHelper([3, 2, 1, 4, 5]);
-    expect(reverseKGroup(p, 3)).toEqual(res);
-  });
+    const p = createHelper([1, 2, 3, 4, 5])
+    const res = createHelper([3, 2, 1, 4, 5])
+    expect(reverseKGroup(p, 3)).toEqual(res)
+  })
 
   it('3', () => {
-    const p = createHelper([1, 2, 3, 4, 5, 6]);
-    const res = createHelper([2, 1, 4, 3, 6, 5]);
-    expect(reverseKGroup(p, 2)).toEqual(res);
-  });
+    const p = createHelper([1, 2, 3, 4, 5, 6])
+    const res = createHelper([2, 1, 4, 3, 6, 5])
+    expect(reverseKGroup(p, 2)).toEqual(res)
+  })
 
   it('4', () => {
-    const p = createHelper([1, 2, 3, 4, 5, 6]);
-    expect(reverseKGroup(p, 1)).toEqual(p);
-  });
-});
+    const p = createHelper([1, 2, 3, 4, 5, 6])
+    expect(reverseKGroup(p, 1)).toEqual(p)
+  })
+})
 ```
 
 
@@ -84,41 +84,41 @@ function reverse(
   start: ListNode | null,
   end: ListNode | null
 ): ListNode | null {
-  let pre = null;
-  let curr = start;
-  let next = start;
+  let pre = null
+  let curr = start
+  let next = start
   while (curr !== end) {
-    next = curr.next;
-    curr.next = pre;
-    pre = curr;
-    curr = next;
+    next = curr.next
+    curr.next = pre
+    pre = curr
+    curr = next
   }
   // 返回翻转之后的头结点
-  return pre;
+  return pre
 }
 
 function reverseKGroup(
   head: ListNode | null,
   k: number
-  ): ListNode | null {
-  if (k === 1 || head === null) {
-    return head;
-  }
-  let start = head;
-  let end = head;
+): ListNode | null {
+  if (k === 1 || head === null)
+    return head
+
+  const start = head
+  let end = head
 
   for (let i = 0; i < k; i++) {
     // 剩余数量不足 k 个，直接返回
-    if (end === null) {
+    if (end === null)
       return head
-    }
-    end = end.next;
+
+    end = end.next
   }
   // 翻转前 k 个元素
-  let newHead = reverse(start, end);
+  const newHead = reverse(start, end)
   // 递归翻转后续元素
-  start.next = reverseKGroup(end, k);
-  return newHead;
+  start.next = reverseKGroup(end, k)
+  return newHead
 }
 ```
 

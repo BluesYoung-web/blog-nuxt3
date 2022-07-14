@@ -2,7 +2,7 @@
  * @Author: zhangyang
  * @Date: 2022-06-15 08:59:22
  * @LastEditTime: 2022-06-16 14:41:24
- * @Description: 
+ * @Description:
  */
 import { defineNuxtConfig } from 'nuxt'
 
@@ -37,9 +37,9 @@ export default defineNuxtConfig({
         'ini',
         'nginx',
         'py',
-        'python'
-      ]
-    }
+        'python',
+      ],
+    },
   },
   unocss: {
     preflight: true,
@@ -52,12 +52,12 @@ export default defineNuxtConfig({
       'naive-ui',
       'vueuc',
       '@css-render/vue3-ssr',
-      '@juggle/resize-observer'
-    ]
+      '@juggle/resize-observer',
+    ],
   },
   vite: {
     optimizeDeps: {
-      include: ['date-fns-tz/esm/formatInTimeZone']
-    }
-  }
+      include: ['date-fns-tz/esm/formatInTimeZone'],
+    },
+  },
 })

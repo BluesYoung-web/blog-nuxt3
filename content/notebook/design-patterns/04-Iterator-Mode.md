@@ -57,109 +57,118 @@ interface Iterator<T> {
   /**
    * 当前元素
    */
-  current(): T;
+  current(): T
   /**
    * 下一个元素
    */
-  next(): T;
+  next(): T
   /**
    * 当前元素的键名
    */
-  key(): number;
+  key(): number
   /**
    * 检验是否合法
    */
-  valid(): boolean;
+  valid(): boolean
   /**
    * 重新遍历
    */
-  rewind(): void;
+  rewind(): void
 }
 /**
  * 拥有迭代器的集合
  */
 interface Aggregator {
-  getItems(): string[];
-  getCount(): number;
-  addItem(item: string): void;
-  getIterator(): Iterator<string>;
-  getReverseIterator(): Iterator<string>;
+  getItems(): string[]
+  getCount(): number
+  addItem(item: string): void
+  getIterator(): Iterator<string>
+  getReverseIterator(): Iterator<string>
 }
 /**
  * 阿拉伯数字迭代器
  */
 class AlphabeticalOrderIterator implements Iterator<string> {
-  private collection: WordsCollection;
+  private collection: WordsCollection
   /**
    * 存储当前位置
    */
-  private position: number = 0;
+  private position = 0
   /**
    * 遍历顺序
    */
-  private reverse: boolean = false;
-  constructor(collection: WordsCollection, reverse: boolean = false) {
-    this.collection = collection;
-    this.reverse = reverse;
-    if (reverse) {
-      this.position = collection.getCount() - 1;
-    }
+  private reverse = false
+  constructor(collection: WordsCollection, reverse = false) {
+    this.collection = collection
+    this.reverse = reverse
+    if (reverse)
+      this.position = collection.getCount() - 1
+
   }
+
   public rewind() {
-    this.position = this.reverse ? (this.collection.getCount() - 1) : 0;
+    this.position = this.reverse ? (this.collection.getCount() - 1) : 0
   }
+
   public current(): string {
-    return this.collection.getItems()[this.position];
+    return this.collection.getItems()[this.position]
   }
+
   public key(): number {
-    return this.position;
+    return this.position
   }
+
   public next(): any {
-    const item = this.collection.getItems()[this.position];
-    this.position += this.reverse ? -1 : 1;
-    return item;
+    const item = this.collection.getItems()[this.position]
+    this.position += this.reverse ? -1 : 1
+    return item
   }
+
   public valid(): boolean {
-    return this.reverse ? (this.position >= 0) : (this.position < this.collection.getCount());
+    return this.reverse ? (this.position >= 0) : (this.position < this.collection.getCount())
   }
 }
 /**
  * 集合
  */
 class WordsCollection implements Aggregator {
-  private items: string[] = [];
+  private items: string[] = []
   public getItems(): string[] {
-    return this.items;
+    return this.items
   }
+
   public getCount(): number {
-    return this.items.length;
+    return this.items.length
   }
+
   public addItem(item: string): void {
-    this.items.push(item);
+    this.items.push(item)
   }
+
   public getIterator(): Iterator<string> {
-    return new AlphabeticalOrderIterator(this);
+    return new AlphabeticalOrderIterator(this)
   }
+
   public getReverseIterator(): Iterator<string> {
-    return new AlphabeticalOrderIterator(this, true);
+    return new AlphabeticalOrderIterator(this, true)
   }
 }
 /**
  * 客户端
  */
-const collection = new WordsCollection();
-collection.addItem('张三丰');
-collection.addItem('张翠山');
-collection.addItem('张无忌');
-const iterator = collection.getIterator();
-console.log('顺序遍历:');
-while (iterator.valid()) {
-  console.log(iterator.next());
-}
-console.log('');
-console.log('逆序遍历:');
-const reverseIterator = collection.getReverseIterator();
-while (reverseIterator.valid()) {
-  console.log(reverseIterator.next());
-}
+const collection = new WordsCollection()
+collection.addItem('张三丰')
+collection.addItem('张翠山')
+collection.addItem('张无忌')
+const iterator = collection.getIterator()
+console.log('顺序遍历:')
+while (iterator.valid())
+  console.log(iterator.next())
+
+console.log('')
+console.log('逆序遍历:')
+const reverseIterator = collection.getReverseIterator()
+while (reverseIterator.valid())
+  console.log(reverseIterator.next())
+
 ```

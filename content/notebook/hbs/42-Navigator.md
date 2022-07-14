@@ -107,12 +107,12 @@ date: 2021-01-20 10:20:06
 
 ```js
 function hasPlugin(p_name) {
-  for(const { name } of navigator.plugins) {
-    if(name.toLowerCase().indexOf(p_name.toLowerCase()) > -1) {
-    	return true;
-  	}
+  for (const { name } of navigator.plugins) {
+    if (name.toLowerCase().includes(p_name.toLowerCase()))
+    	return true
+
   }
-	return false;
+  return false
 }
 ```
 

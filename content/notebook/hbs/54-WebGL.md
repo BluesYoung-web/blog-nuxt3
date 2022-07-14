@@ -22,14 +22,14 @@ date: 2021-01-25 10:16:05
 `ArrayBuffer` 对象能获得的信息只有它包含的字节数
 
 ```js
-var buffer = new ArrayBuffer(20);
-var bytes = buffer.byteLength;
+const buffer = new ArrayBuffer(20)
+const bytes = buffer.byteLength
 // 基于缓冲区创建视图
-var view = new DataView(buffer);
+var view = new DataView(buffer)
 // 创建一个开始于字节9的视图
-var view = new DataView(buffer, 9);
+var view = new DataView(buffer, 9)
 // 创建一个从字节9到字节18的视图
-var view = new DataView(buffer, 9, 10);
+var view = new DataView(buffer, 9, 10)
 ```
 
 [Web GL 中文网](http://www.hewebgl.com/)

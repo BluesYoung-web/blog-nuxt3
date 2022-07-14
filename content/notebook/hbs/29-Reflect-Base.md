@@ -30,10 +30,10 @@ date: 2021-01-07 16:42:57
 ```js
 const targetObj = {
   name: '张三疯'
-};
-const handlerObj = {};
-const proxy = new Proxy(targetObj, handlerObj);
-console.log(target === proxy); // false 
+}
+const handlerObj = {}
+const proxy = new Proxy(targetObj, handlerObj)
+console.log(target === proxy) // false
 ```
 
 ## 捕获器
@@ -42,15 +42,15 @@ console.log(target === proxy); // false
 
 ```js
 const target = {
-   foo: 'bar'
-};
+  foo: 'bar'
+}
 const handler = {
-   // 捕获器在处理程序对象中以方法名为键
-   get() {
-      return 'handler override';
-   }
-};
-const proxy = new Proxy(target, handler); 
+  // 捕获器在处理程序对象中以方法名为键
+  get() {
+    return 'handler override'
+  }
+}
+const proxy = new Proxy(target, handler)
 // proxy.any || proxy[any] || Object.create(proxy)[any] === 'handler override'
 ```
 
@@ -63,37 +63,37 @@ const proxy = new Proxy(target, handler);
 ```js
 // 另类空对象
 const target = {
-   foo: 'bar'
-};
+  foo: 'bar'
+}
 const handler = {
-   get() {
-      return Reflect.get(...arguments);
-   }
-};
-const proxy = new Proxy(target, handler); 
+  get() {
+    return Reflect.get(...arguments)
+  }
+}
+const proxy = new Proxy(target, handler)
 // 更简洁一点
 const handler = {
-   get: Reflect.get
-};
-//--------------------------------------------
+  get: Reflect.get
+}
+// --------------------------------------------
 const target = {
-   foo: 'bar',
-   baz: 'qux'
-};
+  foo: 'bar',
+  baz: 'qux'
+}
 const handler = {
-   get(trapTarget, property, receiver) {
-     let decoration = '';
-     if (property === 'foo') {
-     		decoration = '!!!';
-     }
-     return Reflect.get(...arguments) + decoration;
-   }
-};
-const proxy = new Proxy(target, handler);
-console.log(proxy.foo); // bar!!!
-console.log(target.foo); // bar
-console.log(proxy.baz); // qux
-console.log(target.baz); // qux
+  get(trapTarget, property, receiver) {
+    let decoration = ''
+    if (property === 'foo')
+     		decoration = '!!!'
+
+    return Reflect.get(...arguments) + decoration
+  }
+}
+const proxy = new Proxy(target, handler)
+console.log(proxy.foo) // bar!!!
+console.log(target.foo) // bar
+console.log(proxy.baz) // qux
+console.log(target.baz) // qux
 ```
 
 ## 捕获器不变式
@@ -101,19 +101,19 @@ console.log(target.baz); // qux
 如果目标对象有一个**不可配置**且**不可写**的数据属性，那么么在捕获器返回一个与该属性不同的值时，会抛出错误
 
 ```js
-const target = {};
+const target = {}
 Object.defineProperty(target, 'foo', {
-   configurable: false,
-   writable: false,
-   value: 'bar'
-});
+  configurable: false,
+  writable: false,
+  value: 'bar'
+})
 const handler = {
-   get() {
-      return 'qux';
-   }
-};
-const proxy = new Proxy(target, handler);
-console.log(proxy.foo);
+  get() {
+    return 'qux'
+  }
+}
+const proxy = new Proxy(target, handler)
+console.log(proxy.foo)
 // TypeError
 ```
 
@@ -127,18 +127,18 @@ console.log(proxy.foo);
 
 ```js
 const target = {
-   foo: 'bar'
-};
+  foo: 'bar'
+}
 const handler = {
-   get() {
-      return 'intercepted';
-   }
-};
-const { proxy, revoke } = Proxy.revocable(target, handler);
-console.log(proxy.foo); // intercepted
-console.log(target.foo); // bar
-revoke();
-console.log(proxy.foo); // TypeError 
+  get() {
+    return 'intercepted'
+  }
+}
+const { proxy, revoke } = Proxy.revocable(target, handler)
+console.log(proxy.foo) // intercepted
+console.log(target.foo) // bar
+revoke()
+console.log(proxy.foo) // TypeError
 ```
 
 ## 使用反射 `API`
@@ -156,21 +156,22 @@ console.log(proxy.foo); // TypeError
 `Reflect.deleteProperty()`
 
 ```js
-// 初始代码 
-const o = {}; 
-try { 
-   Object.defineProperty(o, 'foo', 'bar'); 
-   console.log('success'); 
-} catch(e) { 
-   console.log('failure'); 
+// 初始代码
+const o = {}
+try {
+  Object.defineProperty(o, 'foo', 'bar')
+  console.log('success')
+}
+catch (e) {
+  console.log('failure')
 }
 // 重构后的代码
-const o = {}; 
-if(Reflect.defineProperty(o, 'foo', {value: 'bar'})) { 
-   console.log('success'); 
-} else { 
-   console.log('failure'); 
-}
+const o = {}
+if (Reflect.defineProperty(o, 'foo', { value: 'bar' }))
+  console.log('success')
+else
+  console.log('failure')
+
 ```
 
 ### 替代操作符
@@ -188,9 +189,9 @@ if(Reflect.defineProperty(o, 'foo', {value: 'bar'})) {
 ### 安全的使用函数
 
 ```js
-Function.prototype.apply.call(myFunc, thisVal, argumentList); 
+Function.prototype.apply.call(myFunc, thisVal, argumentList)
 // 等效
-Reflect.apply(myFunc, thisVal, argumentsList);
+Reflect.apply(myFunc, thisVal, argumentsList)
 ```
 
 ### 代理的代理
@@ -198,24 +199,24 @@ Reflect.apply(myFunc, thisVal, argumentsList);
 多层代理，每层负责特定的拦截操作
 
 ```js
-const target = { 
-   foo: 'bar' 
-}; 
-const firstProxy = new Proxy(target, { 
-   get() { 
-      console.log('first proxy'); 
-      return Reflect.get(...arguments); 
-   } 
-}); 
-const secondProxy = new Proxy(firstProxy, { 
-   get() { 
-      console.log('second proxy'); 
-      return Reflect.get(...arguments); 
-   } 
-}); 
-console.log(secondProxy.foo); 
-// second proxy 
-// first proxy 
+const target = {
+  foo: 'bar'
+}
+const firstProxy = new Proxy(target, {
+  get() {
+    console.log('first proxy')
+    return Reflect.get(...arguments)
+  }
+})
+const secondProxy = new Proxy(firstProxy, {
+  get() {
+    console.log('second proxy')
+    return Reflect.get(...arguments)
+  }
+})
+console.log(secondProxy.foo)
+// second proxy
+// first proxy
 // bar
 ```
 
@@ -228,28 +229,30 @@ console.log(secondProxy.foo);
 如果目标对象**依赖于对象标识**，那就可能碰到意料之外的问题
 
 ```js
-const wm = new WeakMap(); 
-class User { 
-   constructor(userId) { 
-      wm.set(this, userId); 
-   } 
-   set id(userId) { 
-      wm.set(this, userId); 
-   } 
-   get id() { 
-      return wm.get(this); 
-   } 
+const wm = new WeakMap()
+class User {
+  constructor(userId) {
+    wm.set(this, userId)
+  }
+
+  set id(userId) {
+    wm.set(this, userId)
+  }
+
+  get id() {
+    return wm.get(this)
+  }
 }
 
-const user = new User(123); 
-console.log(user.id); // 123 
+const user = new User(123)
+console.log(user.id) // 123
 // 代理实例
-const userInstanceProxy = new Proxy(user, {}); 
-console.log(userInstanceProxy.id); // undefined
+const userInstanceProxy = new Proxy(user, {})
+console.log(userInstanceProxy.id) // undefined
 // 代理类
-const UserClassProxy = new Proxy(User, {}); 
-const proxyUser = new UserClassProxy(456); 
-console.log(proxyUser.id);
+const UserClassProxy = new Proxy(User, {})
+const proxyUser = new UserClassProxy(456)
+console.log(proxyUser.id)
 ```
 
 ### 代理与内部槽位
@@ -259,8 +262,8 @@ console.log(proxyUser.id);
 但是有些类型可能会存在代理无法控制的机制，从而导致抛出错误
 
 ```js
-const target = new Date(); 
-const proxy = new Proxy(target, {}); 
-console.log(proxy instanceof Date); // true 
-proxy.getDate(); // TypeError: 'this' is not a Date object
+const target = new Date()
+const proxy = new Proxy(target, {})
+console.log(proxy instanceof Date) // true
+proxy.getDate() // TypeError: 'this' is not a Date object
 ```

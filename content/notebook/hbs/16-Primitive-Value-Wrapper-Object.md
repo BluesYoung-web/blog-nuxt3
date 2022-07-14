@@ -18,12 +18,12 @@ date: 2020-12-28 17:30:08
   3. 销毁实例
 
 ```js
-let s1 = "some text";
-let s2 = s1.substring(2); 
+let s1 = 'some text'
+let s2 = s1.substring(2)
 // ===>
-let s1 = new String("some text");
-let s2 = s1.substring(2);
-s1 = null; 
+let s1 = new String('some text')
+let s2 = s1.substring(2)
+s1 = null
 ```
 
 ## 引用类型与包装类型的区别
@@ -33,19 +33,19 @@ s1 = null;
 而自动创建的原始值包装对象则**只存在于访问它的那行代码执行期间**
 
 ```js
-let s1 = "some text";
-s1.color = "red";
-console.log(s1.color); // undefined 
+let s1 = 'some text'
+s1.color = 'red'
+console.log(s1.color) // undefined
 ///////////////////////////////////
-let s1 = new String("some text");
-s1.color = "red";
-console.log(s1.color); // red
+let s1 = new String('some text')
+s1.color = 'red'
+console.log(s1.color) // red
 ///////////////////////////////////
-let value = "25";
-let number = Number(value); // 转型函数
-console.log(typeof number); // "number"
-let obj = new Number(value); // 构造函数
-console.log(typeof obj); // "object" 
+const value = '25'
+const number = Number(value) // 转型函数
+console.log(typeof number) // "number"
+const obj = new Number(value) // 构造函数
+console.log(typeof obj) // "object"
 ```
 
 ## `Boolean`
@@ -65,13 +65,13 @@ console.log(typeof obj); // "object"
 **不推荐使用包装对象，容易出错**
 
 ```js
-let falseObject = new Boolean(false);
-let result = falseObject && true;
-console.log(result); // true
+const falseObject = new Boolean(false)
+let result = falseObject && true
+console.log(result) // true
 
-let falseValue = false;
-result = falseValue && true;
-console.log(result); // false 
+const falseValue = false
+result = falseValue && true
+console.log(result) // false
 ```
 
 ## `Number`
@@ -101,8 +101,8 @@ console.log(result); // false
 返回以科学记数法表示的数值字符串，保留 n 位小数
 
 ```js
-let num = 10;
-console.log(num.toExponential(1)); // "1.0e+1" 
+const num = 10
+console.log(num.toExponential(1)) // "1.0e+1"
 ```
 
 #### `toPrecision(n)`
@@ -143,10 +143,10 @@ n **为数字总位数**，不包括小数点及指数
   - 查看指定码元的**字符编码**
 
 ```js
-let message = "abcde";
-console.log(message.charAt(2)); // "c" 
+const message = 'abcde'
+console.log(message.charAt(2)) // "c"
 // Unicode "Latin small letter C"的编码是 U+0063
-console.log(message.charCodeAt(2)); // 99 === 0x63
+console.log(message.charCodeAt(2)) // 99 === 0x63
 ```
 
 **`fromCharCode()`**
@@ -158,13 +158,13 @@ console.log(message.charCodeAt(2)); // 99 === 0x63
 // Unicode "Latin small letter C"的编码是 U+0063
 // Unicode "Latin small letter D"的编码是 U+0064
 // Unicode "Latin small letter E"的编码是 U+0065
-console.log(String.fromCharCode(0x61, 0x62, 0x63, 0x64, 0x65)); // "abcde"
+console.log(String.fromCharCode(0x61, 0x62, 0x63, 0x64, 0x65)) // "abcde"
 // 0x0061 === 97
 // 0x0062 === 98
 // 0x0063 === 99
 // 0x0064 === 100
 // 0x0065 === 101
-console.log(String.fromCharCode(97, 98, 99, 100, 101)); // "abcde" 
+console.log(String.fromCharCode(97, 98, 99, 100, 101)) // "abcde"
 ```
 
 对于 `U+0000~U+FFFF` 范围内的字符，`length`、`charAt()`、`charCodeAt()`和 `fromCharCode()` 返回的结果都跟预期是一样的。这是因为在这个范围内，每个字符都是用 16 位表示的，而这几个方法也都基于 16 位码元完成操作。只要字符编码大小与码元大小一一对应，这些方法就能如期工作。 **这个对应关系在扩展到 Unicode 增补字符平面时就不成立了**。问题很简单，即 16 位只能唯一表示 65536 个字符。这对于大多数语言字符集是足够了，在 Unicode 中称为基本多语言平面（`BMP`）。为了表示更多的字符，Unicode 采用了一个策略，即每个字符使用另外 16 位去选择一个增补平面。这种**每个字符使用两个 16 位码元**的策略称为**代理对**
@@ -172,18 +172,18 @@ console.log(String.fromCharCode(97, 98, 99, 100, 101)); // "abcde"
 ```js
 // "smiling face with smiling eyes" 表情符号的编码是 U+1F60A
 // 0x1F60A === 128522
-let message = "ab☺de";
-console.log(message.length); // 6
-console.log(message.charAt(1)); // b
-console.log(message.charAt(2)); // <?>
-console.log(message.charAt(3)); // <?>
-console.log(message.charAt(4)); // d
-console.log(message.charCodeAt(1)); // 98
-console.log(message.charCodeAt(2)); // 55357
-console.log(message.charCodeAt(3)); // 56842
-console.log(message.charCodeAt(4)); // 100
-console.log(String.fromCodePoint(0x1F60A)); // ☺
-console.log(String.fromCharCode(97, 98, 55357, 56842, 100, 101)); // ab☺de 
+const message = 'ab☺de'
+console.log(message.length) // 6
+console.log(message.charAt(1)) // b
+console.log(message.charAt(2)) // <?>
+console.log(message.charAt(3)) // <?>
+console.log(message.charAt(4)) // d
+console.log(message.charCodeAt(1)) // 98
+console.log(message.charCodeAt(2)) // 55357
+console.log(message.charCodeAt(3)) // 56842
+console.log(message.charCodeAt(4)) // 100
+console.log(String.fromCodePoint(0x1F60A)) // ☺
+console.log(String.fromCharCode(97, 98, 55357, 56842, 100, 101)) // ab☺de
 ```
 
 ### Unicode 增补字符平面替代方案
@@ -201,33 +201,33 @@ console.log(String.fromCharCode(97, 98, 55357, 56842, 100, 101)); // ab☺de
 某些 `Unicode `字符可以有多种编码方式。有的字符既可以通过一个 `BMP` 字符表示，也可以通过一个代理对表示
 
 ```js
-let a1 = String.fromCharCode(0x00C5),
-    a2 = String.fromCharCode(0x212B),
-    a3 = String.fromCharCode(0x0041, 0x030A);
-console.log(a1, a2, a3); // Å, Å, Å
-console.log(a1 === a2); // false
-console.log(a1 === a3); // false
-console.log(a2 === a3); // false 
+const a1 = String.fromCharCode(0x00C5)
+const a2 = String.fromCharCode(0x212B)
+const a3 = String.fromCharCode(0x0041, 0x030A)
+console.log(a1, a2, a3) // Å, Å, Å
+console.log(a1 === a2) // false
+console.log(a1 === a3) // false
+console.log(a2 === a3) // false
 //////////////////////////////////////////////
 // U+00C5 是对 0+212B 进行 NFC/NFKC 规范化之后的结果
-console.log(a1 === a1.normalize("NFD")); // false
-console.log(a1 === a1.normalize("NFC")); // true
-console.log(a1 === a1.normalize("NFKD")); // false
-console.log(a1 === a1.normalize("NFKC")); // true
+console.log(a1 === a1.normalize('NFD')) // false
+console.log(a1 === a1.normalize('NFC')) // true
+console.log(a1 === a1.normalize('NFKD')) // false
+console.log(a1 === a1.normalize('NFKC')) // true
 // U+212B 是未规范化的
-console.log(a2 === a2.normalize("NFD")); // false
-console.log(a2 === a2.normalize("NFC")); // false
-console.log(a2 === a2.normalize("NFKD")); // false
-console.log(a2 === a2.normalize("NFKC")); // false
+console.log(a2 === a2.normalize('NFD')) // false
+console.log(a2 === a2.normalize('NFC')) // false
+console.log(a2 === a2.normalize('NFKD')) // false
+console.log(a2 === a2.normalize('NFKC')) // false
 // U+0041/U+030A 是对 0+212B 进行 NFD/NFKD 规范化之后的结果
-console.log(a3 === a3.normalize("NFD")); // true
-console.log(a3 === a3.normalize("NFC")); // false
-console.log(a3 === a3.normalize("NFKD")); // true
-console.log(a3 === a3.normalize("NFKC")); // false 
+console.log(a3 === a3.normalize('NFD')) // true
+console.log(a3 === a3.normalize('NFC')) // false
+console.log(a3 === a3.normalize('NFKD')) // true
+console.log(a3 === a3.normalize('NFKC')) // false
 ////////////////////////////////////////////////
-console.log(a1.normalize("NFD") === a2.normalize("NFD")); // true
-console.log(a2.normalize("NFKC") === a3.normalize("NFKC")); // true
-console.log(a1.normalize("NFC") === a3.normalize("NFC")); // true 
+console.log(a1.normalize('NFD') === a2.normalize('NFD')) // true
+console.log(a2.normalize('NFKC') === a3.normalize('NFKC')) // true
+console.log(a1.normalize('NFC') === a3.normalize('NFC')) // true
 ```
 
 ### 操作方法
@@ -247,20 +247,20 @@ console.log(a1.normalize("NFC") === a3.normalize("NFC")); // true
   - **第一个负参数值当成字符串长度加上该值，第二个负参数值转换为 0**
 
 ```js
-let stringValue = "hello world";
-console.log(stringValue.slice(3)); // "lo world"
-console.log(stringValue.substring(3)); // "lo world"
-console.log(stringValue.substr(3)); // "lo world"
-console.log(stringValue.slice(3, 7)); // "lo w"
-console.log(stringValue.substring(3,7)); // "lo w"
-console.log(stringValue.substr(3, 7)); // "lo worl" 
+const stringValue = 'hello world'
+console.log(stringValue.slice(3)) // "lo world"
+console.log(stringValue.substring(3)) // "lo world"
+console.log(stringValue.substr(3)) // "lo world"
+console.log(stringValue.slice(3, 7)) // "lo w"
+console.log(stringValue.substring(3, 7)) // "lo w"
+console.log(stringValue.substr(3, 7)) // "lo worl"
 ////////////////////////////////////////////////////////
-console.log(stringValue.slice(-3)); // "rld"				  8 - end
-console.log(stringValue.substring(-3)); // "hello world"      0 - end
-console.log(stringValue.substr(-3)); // "rld"				  8 - end
-console.log(stringValue.slice(3, -4)); // "lo w"			  3, 7
-console.log(stringValue.substring(3, -4)); // "hel"			  3, 0 反向切片
-console.log(stringValue.substr(3, -4)); // "" (empty string)  3, 0 长度为0
+console.log(stringValue.slice(-3)) // "rld"				  8 - end
+console.log(stringValue.substring(-3)) // "hello world"      0 - end
+console.log(stringValue.substr(-3)) // "rld"				  8 - end
+console.log(stringValue.slice(3, -4)) // "lo w"			  3, 7
+console.log(stringValue.substring(3, -4)) // "hel"			  3, 0 反向切片
+console.log(stringValue.substr(3, -4)) // "" (empty string)  3, 0 长度为0
 ```
 
 ### 位置方法
@@ -292,9 +292,9 @@ console.log(stringValue.substr(3, -4)); // "" (empty string)  3, 0 长度为0
 **`repeat(n)`**，接收一个整数参数，表示要将字符串复制多少次，然后返回拼接所有副本后的结果
 
 ```js
-let stringValue = "na ";
-console.log(stringValue.repeat(16) + "batman");
-// na na na na na na na na na na na na na na na na batman 
+const stringValue = 'na '
+console.log(`${stringValue.repeat(16)}batman`)
+// na na na na na na na na na na na na na na na na batman
 ```
 
 ### 填充方法
@@ -314,24 +314,24 @@ console.log(stringValue.repeat(16) + "batman");
 ### 迭代器方法
 
 ```js
-let message = "abc";
-let stringIterator = message[Symbol.iterator]();
-console.log(stringIterator.next()); // {value: "a", done: false}
-console.log(stringIterator.next()); // {value: "b", done: false}
-console.log(stringIterator.next()); // {value: "c", done: false}
-console.log(stringIterator.next()); // {value: undefined, done: true} 
+let message = 'abc'
+const stringIterator = message[Symbol.iterator]()
+console.log(stringIterator.next()) // {value: "a", done: false}
+console.log(stringIterator.next()) // {value: "b", done: false}
+console.log(stringIterator.next()) // {value: "c", done: false}
+console.log(stringIterator.next()) // {value: undefined, done: true}
 //////////////////////////////////////////////////////////////////////
-for (const c of "abcde") {
- console.log(c);
-}
+for (const c of 'abcde')
+  console.log(c)
+
 // a
 // b
 // c
 // d
-// e 
+// e
 //////////////////////////////////////////////////////////////////////
-let message = "abcde";
-console.log([...message]); // ["a", "b", "c", "d", "e"] 
+let message = 'abcde'
+console.log([...message]) // ["a", "b", "c", "d", "e"]
 ```
 
 ### 大小写转换方法
@@ -358,17 +358,17 @@ console.log([...message]); // ["a", "b", "c", "d", "e"]
 ### `HTML` 方法
 
 ```js
-'str'.anchor(name) === `<a name="name">str</a>`;
-'str'.big() === `<big>str</big>`;
-'str'.bold() === `<b>str</b>`;
-'str'.fixed() === `<tt>str</tt>`;
-'str'.fixed(color) === `<font color="color">str</font>`;
-'str'.fontsize(size) === `<font size="size">str</font>`;
-'str'.italics() === `<i>str</i>`;
-'str'.link(url) === `<a href="link">str</a>`;
-'str'.small() === `<small>str</small>`;
-'str'.strike() === `<strike>str</strike>`;
-'str'.sub() === `<sub>str</sub>`;
-'str'.sup() === `<sup>str</sup>`;
-'str'.blink() === `<blink>str</blink>`;
+'str'.anchor(name) === '<a name="name">str</a>'
+'str'.big() === '<big>str</big>'
+'str'.bold() === '<b>str</b>'
+'str'.fixed() === '<tt>str</tt>'
+'str'.fixed(color) === '<font color="color">str</font>'
+'str'.fontsize(size) === '<font size="size">str</font>'
+'str'.italics() === '<i>str</i>'
+'str'.link(url) === '<a href="link">str</a>'
+'str'.small() === '<small>str</small>'
+'str'.strike() === '<strike>str</strike>'
+'str'.sub() === '<sub>str</sub>'
+'str'.sup() === '<sup>str</sup>'
+'str'.blink() === '<blink>str</blink>'
 ```

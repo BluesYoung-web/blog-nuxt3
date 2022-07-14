@@ -21,18 +21,18 @@ date: 2022-03-15 14:56:28
 ### 都可以用来描述对象或者函数
 
 ```ts
-type Point = {
-  x: number;
-  y: number;
-};
-type SetPoint = (x: number, y: number) => void;
+interface Point {
+  x: number
+  y: number
+}
+type SetPoint = (x: number, y: number) => void
 //////////////////////////
 interface Point {
-  x: number;
-  y: number;
+  x: number
+  y: number
 }
 interface SetPoint {
-  (x: number, y: number): void;
+  (x: number, y: number): void
 }
 ```
 
@@ -41,21 +41,21 @@ interface SetPoint {
 ```ts
 interface Person {
   name: string
-};
-interface Student extends Person { stuNo: number };
-//////////////////////////
-type Person = {
-  name: string;
-};
-interface Student extends Person { stuNo: number };
-//////////////////////////
-type Person = {
-  name: string;
-};
-type Student = Person & { stuNo: number };
+}
+interface Student extends Person { stuNo: number }
 //////////////////////////
 interface Person {
-  name: string;
+  name: string
+}
+interface Student extends Person { stuNo: number }
+//////////////////////////
+interface Person {
+  name: string
+}
+type Student = Person & { stuNo: number }
+//////////////////////////
+interface Person {
+  name: string
 }
 type Student = Person & { stuNo: number }
 ```
@@ -65,34 +65,34 @@ type Student = Person & { stuNo: number }
 <n-alert class="my-4" type="error">**type 联合类型无法实现**</n-alert>
 
 ```ts
-interface ICat{
-  setName(name:string): void;
-};
-class Cat implements ICat{
-  setName(name:string):void{
+interface ICat {
+  setName(name: string): void
+}
+class Cat implements ICat {
+  setName(name: string): void {
     // todo
   }
-};
-// type 
-type ICat = {
-  setName(name:string): void;
-};
-class Cat implements ICat{
-  setName(name:string):void{
+}
+// type
+interface ICat {
+  setName(name: string): void
+}
+class Cat implements ICat {
+  setName(name: string): void {
     // todo
   }
-};
+}
 /////////////////////////////////////////////////////////////////////////////////////
-type Person = { name: string; } | { setName(name:string): void };
+type Person = { name: string } | { setName(name: string): void }
 
 // 无法对联合类型Person进行实现
-// error: 
+// error:
 // A class can only implement an object type
 // or intersection of object types with statically known members.
 // 一个类只能实现对象类型或者拥有已知数量的静态成员的交叉对象类型
 class Student implements Person {
-  name= "张三";
-  setName(name:string):void{
+  name = '张三'
+  setName(name: string): void {
     // todo
   }
 }

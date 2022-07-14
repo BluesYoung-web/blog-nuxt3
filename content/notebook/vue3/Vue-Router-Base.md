@@ -50,7 +50,7 @@ const routes = [
 ## 嵌套路由
 
 ```js
-import Layout from '/src/layout/index.vue';
+import Layout from '/src/layout/index.vue'
 const routes = [
   {
     path: '/',
@@ -72,7 +72,7 @@ const routes = [
       }
     ]
   }
-];
+]
 ```
 
 ## 编程式导航
@@ -82,8 +82,8 @@ const routes = [
 效果同 `<router-link>`
 
 ```js
-import { useRouter } from 'vue-router';
-const router = useRouter();
+import { useRouter } from 'vue-router'
+const router = useRouter()
 // 我们可以手动建立 url，但我们必须自己处理编码!!!
 router.push(`/user/${username}`) // -> /user/eduardo
 // 同样
@@ -125,7 +125,7 @@ router.push({ path: '/about', hash: '#team' })
 ```
 
 ```js
-import { createRouter } from 'vue-router';
+import { createRouter } from 'vue-router'
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -138,19 +138,19 @@ const router = createRouter({
       }
     }
   ]
-});
+})
 ```
 
 ## <span style="color: red">重定向</span>
 
 ```js
-const routes = [{ path: '/home', redirect: '/' }];
-const routes = [{ path: '/home', redirect: { name: 'homepage' } }];
+const routes = [{ path: '/home', redirect: '/' }]
+const routes = [{ path: '/home', redirect: { name: 'homepage' } }]
 const routes = [
   {
     // /search/screens -> /search?q=screens
     path: '/search/:searchText',
-    redirect: to => {
+    redirect: (to) => {
       // 方法接收目标路由作为参数
       // return 重定向的字符串路径/路径对象
       return { path: '/search', query: { q: to.params.searchText } }
@@ -160,13 +160,13 @@ const routes = [
     path: '/search',
     // ...
   },
-];
+]
 ```
 
 ## 路径别名
 
 ```js
-const routes = [{ path: '/', component: Homepage, alias: '/home' }];
+const routes = [{ path: '/', component: Homepage, alias: '/home' }]
 const routes = [
   {
     path: '/users/:id',
@@ -178,7 +178,7 @@ const routes = [
       { path: 'list', component: UserList, alias: ['/:id', ''] }
     ]
   }
-];
+]
 ```
 
 ## props 组件传参
@@ -192,7 +192,7 @@ const routes = [
     components: { default: User, sidebar: Sidebar },
     props: { default: true, sidebar: false }
   }
-];
+]
 ```
 
 **对象模式，原封不动的设置为组件 `props` 的属性**
@@ -204,7 +204,7 @@ const routes = [
     component: Promotion,
     props: { newsletterPopup: false }
   }
-];
+]
 ```
 
 **布尔模式，`$route.params` 设置为组件 `props` 的属性**
@@ -213,9 +213,9 @@ const routes = [
 const User = {
   props: ['id'],
   template: '<div>User {{ id }}</div>'
-};
+}
 // props: true => $route.params 会被 mixin 为组件的 props
-const routes = [{ path: '/user/:id', component: User, props: true }];
+const routes = [{ path: '/user/:id', component: User, props: true }]
 ```
 
 **函数模式，函数的返回值作为组件的 `props` 属性**
@@ -228,7 +228,7 @@ const routes = [
     // URL /search?q=vue 将传递 {query: 'vue'} 作为 props 传给 SearchUser 组件
     props: route => ({ query: route.query.q })
   }
-];
+]
 ```
 
 ## 路由模式
@@ -241,7 +241,7 @@ const routes = [
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHashHistory() // createWebHistory()
-});
+})
 ```
 
 ```nginx

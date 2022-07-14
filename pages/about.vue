@@ -2,24 +2,27 @@
  * @Author: zhangyang
  * @Date: 2022-06-15 16:38:45
  * @LastEditTime: 2022-06-16 10:57:00
- * @Description: 
+ * @Description:
 -->
 <script lang="ts" setup>
-import { NTag } from 'naive-ui';
-const { nav } = useConfig();
+import { NTag } from 'naive-ui'
+const { nav } = useConfig()
 </script>
+
 <template>
   <div>
     <h1>❤️ 关于本人</h1>
     <div class="title">
-      <div class="i-flat-color-icons-contacts"></div>
-      <div ml-1>联系方式</div>
+      <div class="i-flat-color-icons-contacts" />
+      <div ml-1>
+        联系方式
+      </div>
     </div>
 
     <div>
       <a :href="nav.mail_addr" :title="nav.mail">
         <div class="contact-item">
-          <div i-noto-open-mailbox-with-raised-flag></div>
+          <div i-noto-open-mailbox-with-raised-flag />
           <div ml-1>{{ nav.mail_addr.slice(7) }}</div>
         </div>
       </a>
@@ -27,7 +30,7 @@ const { nav } = useConfig();
     <div>
       <a target="_blank" :title="nav.gitee" :href="nav.gitee_addr">
         <div class="contact-item">
-          <div class="i-simple-icons-gitee text-sm"></div>
+          <div class="i-simple-icons-gitee text-sm" />
           <div ml-1>{{ nav.gitee_addr }}</div>
         </div>
       </a>
@@ -35,27 +38,37 @@ const { nav } = useConfig();
     <div>
       <a target="_blank" :title="nav.github" :href="nav.github_addr">
         <div class="contact-item">
-          <div class="i-ci-github"></div>
+          <div class="i-ci-github" />
           <div ml-1>{{ nav.github_addr }}</div>
         </div>
       </a>
     </div>
 
     <h2 class="title">
-      <div class="i-fxemoji-notepage"></div>
-      <div ml-1>简介</div>
+      <div class="i-fxemoji-notepage" />
+      <div ml-1>
+        简介
+      </div>
     </h2>
 
     <p>🎓 2020 年毕业于武汉工程大学</p>
     <div>
-      <NTag class="mr-2" type="success"> 三好学生 </NTag>
-      <NTag class="mr-2" type="warning"> 国家励志奖学金 </NTag>
-      <NTag class="mr-2" type="info"> 优秀毕业生 </NTag>
+      <NTag class="mr-2" type="success">
+        三好学生
+      </NTag>
+      <NTag class="mr-2" type="warning">
+        国家励志奖学金
+      </NTag>
+      <NTag class="mr-2" type="info">
+        优秀毕业生
+      </NTag>
     </div>
 
     <h2 class="title">
       <div>🔧</div>
-      <div ml-1>技能</div>
+      <div ml-1>
+        技能
+      </div>
     </h2>
 
     <p>🦸‍♂️ 熟悉 ES6+、Vue3，熟悉 TypeScript 的基本使用，<strong>习惯在 Linux 系统下工作</strong></p>
@@ -64,24 +77,26 @@ const { nav } = useConfig();
     <p>🦸‍♂️ 有过使用 docker 在树莓派上搭建服务器的经验</p>
 
     <div class="flex justify-center my-8 children:text-5xl children:not-last:mr-2">
-      <div class="i-logos-javascript"></div>
-      <div class="i-logos-html-5"></div>
-      <div class="i-logos-css-3"></div>
-      <div class="i-logos-vue"></div>
-      <div class="i-logos-nodejs-icon"></div>
-      <div class="i-logos-typescript-icon"></div>
+      <div class="i-logos-javascript" />
+      <div class="i-logos-html-5" />
+      <div class="i-logos-css-3" />
+      <div class="i-logos-vue" />
+      <div class="i-logos-nodejs-icon" />
+      <div class="i-logos-typescript-icon" />
     </div>
 
     <div class="flex justify-center mt-2 children:text-5xl children:not-last:mr-2">
-      <div class="i-logos-raspberry-pi"></div>
-      <div class="i-logos-linux-tux"></div>
-      <div class="i-logos-nginx"></div>
-      <div class="i-logos-docker-icon"></div>
+      <div class="i-logos-raspberry-pi" />
+      <div class="i-logos-linux-tux" />
+      <div class="i-logos-nginx" />
+      <div class="i-logos-docker-icon" />
     </div>
 
     <h2 class="title">
       <div>💻️</div>
-      <div ml-1>工作经历</div>
+      <div ml-1>
+        工作经历
+      </div>
     </h2>
 
     <p>🏢 武汉卓讯互动信息科技有限公司(2020 年 7 月 —— 至今)</p>

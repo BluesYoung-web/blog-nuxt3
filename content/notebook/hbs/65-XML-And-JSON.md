@@ -10,33 +10,33 @@ date: 2021-02-03 15:22:34
 
 ```js
 // 检查浏览器是否支持 DOM Level 2 XML
-let hasXmlDom = document.implementation.hasFeature("XML", "2.0"); 
+const hasXmlDom = document.implementation.hasFeature('XML', '2.0')
 
-let xmldom = document.implementation.createDocument("", "root", null);
-console.log(xmldom.documentElement.tagName); // "root"
-let child = xmldom.createElement("child");
-xmldom.documentElement.appendChild(child); 
+const xmldom = document.implementation.createDocument('', 'root', null)
+console.log(xmldom.documentElement.tagName) // "root"
+const child = xmldom.createElement('child')
+xmldom.documentElement.appendChild(child)
 ```
 
 ## 解析 `XML`
 
 ```js
-let parser = new DOMParser();
-let xmldom = parser.parseFromString("<root><child/></root>", "text/xml");
-console.log(xmldom.documentElement.tagName); // "root"
-console.log(xmldom.documentElement.firstChild.tagName); // "child"
-let anotherChild = xmldom.createElement("child");
-xmldom.documentElement.appendChild(anotherChild);
-let children = xmldom.getElementsByTagName("child");
-console.log(children.length); // 2 
+const parser = new DOMParser()
+const xmldom = parser.parseFromString('<root><child/></root>', 'text/xml')
+console.log(xmldom.documentElement.tagName) // "root"
+console.log(xmldom.documentElement.firstChild.tagName) // "child"
+const anotherChild = xmldom.createElement('child')
+xmldom.documentElement.appendChild(anotherChild)
+const children = xmldom.getElementsByTagName('child')
+console.log(children.length) // 2
 ```
 
 ## `XML` 序列化
 
 ```js
-let serializer = new XMLSerializer();
-let xml = serializer.serializeToString(xmldom);
-console.log(xml); 
+const serializer = new XMLSerializer()
+const xml = serializer.serializeToString(xmldom)
+console.log(xml)
 ```
 
 ## 对 `XPath` 的支持
@@ -81,29 +81,29 @@ console.log(xml);
 - `char` 数字代表缩进空格数，字符代表填充字符；都不超过 10 个
 
 ```js
-var book = {
+const book = {
   title: 'The Red Book',
   authors: [
-    "张三丰", 
-    "张无忌"
+    '张三丰',
+    '张无忌'
   ],
   edition: 3,
   year: 2020
 }
 
-var str1 = JSON.stringify(book, ['authors', 'year']);
-var str2 = JSON.stringify(book, (key, value) => {
-	switch(key){
-		case 'authors':
-			return value.join(',');
-		case 'edition':
-			return 666;
-		default:
-			return value;
-	}
-});
-console.log(str1);
-console.log(str2);
+const str1 = JSON.stringify(book, ['authors', 'year'])
+const str2 = JSON.stringify(book, (key, value) => {
+  switch (key) {
+    case 'authors':
+      return value.join(',')
+    case 'edition':
+      return 666
+    default:
+      return value
+  }
+})
+console.log(str1)
+console.log(str2)
 ```
 
 **`JSON.parse(str, rev)`**
@@ -111,16 +111,16 @@ console.log(str2);
 - `rev` 对应每一项的处理函数
 
 ```js
-let book = {
-	title: "Professional JavaScript",
-	authors: ["Nicholas C. Zakas", "Matt Frisbie"],
-	edition: 4,
-	year: 2017,
-	releaseDate: new Date(2017, 11, 1)
-};
-let jsonText = JSON.stringify(book);
-let bookCopy = JSON.parse(jsonText, (key, value) => key == "releaseDate" ? new Date(value) : value);
-alert(bookCopy.releaseDate.getFullYear()); 
+const book = {
+  title: 'Professional JavaScript',
+  authors: ['Nicholas C. Zakas', 'Matt Frisbie'],
+  edition: 4,
+  year: 2017,
+  releaseDate: new Date(2017, 11, 1)
+}
+const jsonText = JSON.stringify(book)
+const bookCopy = JSON.parse(jsonText, (key, value) => key == 'releaseDate' ? new Date(value) : value)
+alert(bookCopy.releaseDate.getFullYear())
 ```
 
 ### `toJSON()` 方法

@@ -136,10 +136,10 @@ setInterval(() => {
 ## 音频类型
 
 ```js
-const audio = new Audio('src');
+const audio = new Audio('src')
 audio.addEventListener('canplaythrough', (e) => {
   // 目前浏览器会阻止非用户自愿的播放(用户与界面进行交互之前)
-  audio.play();
+  audio.play()
 })
 ```
 

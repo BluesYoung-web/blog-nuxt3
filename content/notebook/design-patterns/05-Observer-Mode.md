@@ -37,60 +37,63 @@ image: /img/design-mode.jpeg
 
 ```ts
 interface Observer {
-  update(s: Subject): void;
-};
+  update(s: Subject): void
+}
 interface Subject {
-  state: number;
-  on(o: Observer): this;
-  off(o: Observer): this;
-  emit(): void;
-};
+  state: number
+  on(o: Observer): this
+  off(o: Observer): this
+  emit(): void
+}
 
 class S1 implements Subject {
-  public state = 0;
-  private observers: Set<Observer> = new Set();
+  public state = 0
+  private observers: Set<Observer> = new Set()
   public on(o: Observer) {
-    this.observers.add(o);
-    return this;
+    this.observers.add(o)
+    return this
   }
+
   public off(o: Observer) {
-    this.observers.delete(o);
-    return this;
+    this.observers.delete(o)
+    return this
   }
+
   public emit() {
-    for (const observer of this.observers) {
-      observer.update(this);
-    }
+    for (const observer of this.observers)
+      observer.update(this)
+
   }
+
   public doSth() {
-    console.log('我做了一件事');
-    this.state = Math.floor(Math.random() * (10 + 1));
-    console.log('发布者', this.state);
-    this.emit();
-    return this;
+    console.log('我做了一件事')
+    this.state = Math.floor(Math.random() * (10 + 1))
+    console.log('发布者', this.state)
+    this.emit()
+    return this
   }
-};
+}
 
 class O1 implements Observer {
   public update(s: Subject) {
-    if (s.state < 5) {
-      console.log('观察者1作出响应');
-    }
+    if (s.state < 5)
+      console.log('观察者1作出响应')
+
   }
-};
+}
 
 class O2 implements Observer {
   public update(s: Subject) {
-    if (s.state >= 5) {
-      console.log('观察者2作出响应');
-    }
-  }
-};
+    if (s.state >= 5)
+      console.log('观察者2作出响应')
 
-const s = new S1();
-const o1 = new O1();
-const o2 = new O2();
-s.on(o1).on(o2).doSth().doSth().off(o2).doSth();
+  }
+}
+
+const s = new S1()
+const o1 = new O1()
+const o2 = new O2()
+s.on(o1).on(o2).doSth().doSth().off(o2).doSth()
 // 我做了一件事
 // 发布者 9
 // 观察者2作出响应

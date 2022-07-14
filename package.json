@@ -5,7 +5,11 @@
     "build": "nuxi build",
     "dev": "nuxi dev",
     "start": "node .output/server/index.mjs",
-    "lint": "eslint ."
+    "lint": "eslint . --fix"
+  },
+  "dependencies": {
+    "aplayer": "^1.10.1",
+    "prism-theme-vars": "^0.2.4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",
@@ -22,9 +26,5 @@
     "pinia": "^2.0.16",
     "sass": "^1.53.0",
     "typescript": "^4.7.4"
-  },
-  "dependencies": {
-    "aplayer": "^1.10.1",
-    "prism-theme-vars": "^0.2.4"
   }
 }

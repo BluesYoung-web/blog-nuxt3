@@ -18,48 +18,49 @@ const flatHelper = (arr, dep, res) => {
   for (const item of arr) {
     // 需要深度拍平且该元素为数组
     if (dep > 0 && Array.isArray(item)) {
-      res.push(...flat(item, dep - 1));
-    } else {
+      res.push(...flat(item, dep - 1))
+    }
+    else {
       // 普通元素或者无需深度拍平
-      res.push(item);
+      res.push(item)
     }
   }
-};
+}
 const flat = (arr, dep = 1) => {
-  const res = [];
-  flatHelper(arr, dep, res);
-  return res;
-};
-const arr = [1, 2, [3, 4, [5, 6, [7, 8]]]];
-console.log(flat(arr)); // [1, 2, 3, 4, [5, 6, [7, 8]]];
-console.log(flat(arr, 2)); // [1, 2, 3, 4, 5, 6, [7, 8]];
-console.log(flat(arr, 3)); // [1, 2, 3, 4, 5, 6, 7, 8];
+  const res = []
+  flatHelper(arr, dep, res)
+  return res
+}
+const arr = [1, 2, [3, 4, [5, 6, [7, 8]]]]
+console.log(flat(arr)) // [1, 2, 3, 4, [5, 6, [7, 8]]];
+console.log(flat(arr, 2)) // [1, 2, 3, 4, 5, 6, [7, 8]];
+console.log(flat(arr, 3)) // [1, 2, 3, 4, 5, 6, 7, 8];
 ```
 
 ## 2.0 循环
 
 ```js
 const flat = (arr, dep = 1) => {
-  let count = 0;
-  let res;
-  while(count < dep) {
-    res = [];
+  let count = 0
+  let res
+  while (count < dep) {
+    res = []
     for (const item of arr) {
-      if (Array.isArray(item)) {
-        res.push(...item);
-      } else {
-        res.push(item);
-      }
+      if (Array.isArray(item))
+        res.push(...item)
+      else
+        res.push(item)
+
     }
-    count++;
-    arr = res.slice();
+    count++
+    arr = res.slice()
   }
-  return res;
-};
-const arr = [1, 2, [3, 4, [5, 6, [7, 8]]]];
-console.log(flat(arr)); // [1, 2, 3, 4, [5, 6, [7, 8]]];
-console.log(flat(arr, 2)); // [1, 2, 3, 4, 5, 6, [7, 8]];
-console.log(flat(arr, 3)); // [1, 2, 3, 4, 5, 6, 7, 8];
+  return res
+}
+const arr = [1, 2, [3, 4, [5, 6, [7, 8]]]]
+console.log(flat(arr)) // [1, 2, 3, 4, [5, 6, [7, 8]]];
+console.log(flat(arr, 2)) // [1, 2, 3, 4, 5, 6, [7, 8]];
+console.log(flat(arr, 3)) // [1, 2, 3, 4, 5, 6, 7, 8];
 ```
 
 ## 3.0 reduce
@@ -71,17 +72,18 @@ const flat = (arr, dep = 1) => {
       pre = [
         ...pre,
         ...flat(curr, dep - 1)
-      ];
-    } else {
-      pre.push(curr);
+      ]
     }
-    return pre;
-  }, []);
-};
-const arr = [1, 2, [3, 4, [5, 6, [7, 8]]]];
-console.log(flat(arr)); // [1, 2, 3, 4, [5, 6, [7, 8]]];
-console.log(flat(arr, 2)); // [1, 2, 3, 4, 5, 6, [7, 8]];
-console.log(flat(arr, 3)); // [1, 2, 3, 4, 5, 6, 7, 8];
+    else {
+      pre.push(curr)
+    }
+    return pre
+  }, [])
+}
+const arr = [1, 2, [3, 4, [5, 6, [7, 8]]]]
+console.log(flat(arr)) // [1, 2, 3, 4, [5, 6, [7, 8]]];
+console.log(flat(arr, 2)) // [1, 2, 3, 4, 5, 6, [7, 8]];
+console.log(flat(arr, 3)) // [1, 2, 3, 4, 5, 6, 7, 8];
 ```
 
 ## 4.0 reduce + concat
@@ -94,12 +96,12 @@ const flat = (arr, dep = 1) => {
         Array.isArray(curr)
           ? flat(curr, dep - 1)
           : curr
-      );
+      )
     }, [])
     : arr.slice()
-};
-const arr = [1, 2, [3, 4, [5, 6, [7, 8]]]];
-console.log(flat(arr)); // [1, 2, 3, 4, [5, 6, [7, 8]]];
-console.log(flat(arr, 2)); // [1, 2, 3, 4, 5, 6, [7, 8]];
-console.log(flat(arr, 3)); // [1, 2, 3, 4, 5, 6, 7, 8];
+}
+const arr = [1, 2, [3, 4, [5, 6, [7, 8]]]]
+console.log(flat(arr)) // [1, 2, 3, 4, [5, 6, [7, 8]]];
+console.log(flat(arr, 2)) // [1, 2, 3, 4, 5, 6, [7, 8]];
+console.log(flat(arr, 3)) // [1, 2, 3, 4, 5, 6, 7, 8];
 ```

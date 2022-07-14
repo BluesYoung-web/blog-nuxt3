@@ -22,18 +22,18 @@ date: 2020-12-29 09:36:46
 
 ```js
 // 创建一个长度为 20 的数组，初始值都为 undefined
-const arr = new Array(20);
+const arr = new Array(20)
 // 创建一个包含特定值的数组
-const brr = new Array('blues', 'young');
+const brr = ['blues', 'young']
 ```
 
 ### 使用字面量
 
 ```js
 // 创建一个包含 3 个元素的数组
-const color = ['red', 'blue', 'green'];
+const color = ['red', 'blue', 'green']
 // 创建一个空数组
-const names = [];
+const names = []
 // 创建一个包含 2 个元素的数组
 const values = [1, 2,];
 ```
@@ -50,21 +50,21 @@ const values = [1, 2,];
   - 对现有数组执行**浅拷贝**
 
 ```js
-const arr =  {
+const arr = {
   0: 1,
   1: 2,
   2: 3,
   3: 4,
   length: 4
-};
-const brr = Array.from(arr);
-const crr = Array.from(arr, (item) => item ** 2);
+}
+const brr = Array.from(arr)
+const crr = Array.from(arr, item => item ** 2)
 // 箭头函数无 this
-const drr = Array.from(arr, function (item) { return item ** this.p }, { p: 3 });
+const drr = Array.from(arr, function (item) { return item ** this.p }, { p: 3 })
 
-brr = [1, 2, 3, 4];
-crr = [1, 4, 9, 16];
-drr = [1, 8, 27, 64];
+brr = [1, 2, 3, 4]
+crr = [1, 4, 9, 16]
+drr = [1, 8, 27, 64]
 ```
 
 ### `of(...args)`
@@ -96,8 +96,8 @@ Array.of(1, 2, 3, 4) => [1, 2, 3, 4]
 由于行为不一致和存在性能隐患，因此要避免使用数组空位。如果确实需要使用，建议显示填写 `undefined`
 
 ```js
-console.log(options.map(() => 6)); // [6, undefined, undefined, undefined, 6]
-console.log(options.join('-')); // "1----5"
+console.log(options.map(() => 6)) // [6, undefined, undefined, undefined, 6]
+console.log(options.join('-')) // "1----5"
 ```
 
 
@@ -133,15 +133,15 @@ console.log(options.join('-')); // "1----5"
   - `entries` 返回 **索引，值** 对的迭代器
 
 ```js
-const a = ["foo", "bar", "baz", "qux"];
+const a = ['foo', 'bar', 'baz', 'qux']
 // 因为这些方法都返回迭代器，所以可以将它们的内容
 // 通过 Array.from()直接转换为数组实例
-const aKeys = Array.from(a.keys());
-const aValues = Array.from(a.values());
-const aEntries = Array.from(a.entries());
-console.log(aKeys); // [0, 1, 2, 3]
-console.log(aValues); // ["foo", "bar", "baz", "qux"]
-console.log(aEntries); // [[0, "foo"], [1, "bar"], [2, "baz"], [3, "qux"]] 
+const aKeys = Array.from(a.keys())
+const aValues = Array.from(a.values())
+const aEntries = Array.from(a.entries())
+console.log(aKeys) // [0, 1, 2, 3]
+console.log(aValues) // ["foo", "bar", "baz", "qux"]
+console.log(aEntries) // [[0, "foo"], [1, "bar"], [2, "baz"], [3, "qux"]]
 ```
 
 ### 填充方法与复制方法
@@ -155,37 +155,37 @@ console.log(aEntries); // [[0, "foo"], [1, "bar"], [2, "baz"], [3, "qux"]]
     - `start > end`
 
 ```js
-const zeroes = [0, 0, 0, 0, 0];
+const zeroes = [0, 0, 0, 0, 0]
 // 用 5 填充整个数组
-zeroes.fill(5);
-console.log(zeroes); // [5, 5, 5, 5, 5]
-zeroes.fill(0); // 重置
+zeroes.fill(5)
+console.log(zeroes) // [5, 5, 5, 5, 5]
+zeroes.fill(0) // 重置
 // 用 6 填充索引大于等于 3 的元素
-zeroes.fill(6, 3);
-console.log(zeroes); // [0, 0, 0, 6, 6]
-zeroes.fill(0); // 重置
+zeroes.fill(6, 3)
+console.log(zeroes) // [0, 0, 0, 6, 6]
+zeroes.fill(0) // 重置
 // 用 7 填充索引大于等于 1 且小于 3 的元素
-zeroes.fill(7, 1, 3);
-console.log(zeroes); // [0, 7, 7, 0, 0];
-zeroes.fill(0); // 重置
+zeroes.fill(7, 1, 3)
+console.log(zeroes) // [0, 7, 7, 0, 0];
+zeroes.fill(0) // 重置
 // 用 8 填充索引大于等于 1 且小于 4 的元素
 // (-4 + zeroes.length = 1)
 // (-1 + zeroes.length = 4)
-zeroes.fill(8, -4, -1);
-console.log(zeroes); // [0, 8, 8, 8, 0]; 
+zeroes.fill(8, -4, -1)
+console.log(zeroes) // [0, 8, 8, 8, 0];
 
 // 索引过低，忽略
-zeroes.fill(1, -10, -6);
-console.log(zeroes); // [0, 0, 0, 0, 0]
+zeroes.fill(1, -10, -6)
+console.log(zeroes) // [0, 0, 0, 0, 0]
 // 索引过高，忽略
-zeroes.fill(1, 10, 15);
-console.log(zeroes); // [0, 0, 0, 0, 0]
+zeroes.fill(1, 10, 15)
+console.log(zeroes) // [0, 0, 0, 0, 0]
 // 索引反向，忽略
-zeroes.fill(2, 4, 2);
-console.log(zeroes); // [0, 0, 0, 0, 0]
+zeroes.fill(2, 4, 2)
+console.log(zeroes) // [0, 0, 0, 0, 0]
 // 索引部分可用，填充可用部分
 zeroes.fill(4, 3, 10)
-console.log(zeroes); // [0, 0, 0, 4, 4] 
+console.log(zeroes) // [0, 0, 0, 4, 4]
 ```
 
 **`arr.copyWith(target, start = 0, end = arr.length)`**
@@ -193,48 +193,48 @@ console.log(zeroes); // [0, 0, 0, 4, 4]
   - 后两个参数的规则同上
 
 ```js
-let ints;
-const reset = () => ints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-reset();
+let ints
+const reset = () => ints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+reset()
 // 从 ints 中复制索引 0 开始的内容，插入到索引 5 开始的位置
 // 在源索引或目标索引到达数组边界时停止
-ints.copyWithin(5);
-console.log(ints); // [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
-reset();
+ints.copyWithin(5)
+console.log(ints) // [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
+reset()
 // 从 ints 中复制索引 5 开始的内容，插入到索引 0 开始的位置
-ints.copyWithin(0, 5);
-console.log(ints); // [5, 6, 7, 8, 9, 5, 6, 7, 8, 9] 
-reset();
+ints.copyWithin(0, 5)
+console.log(ints) // [5, 6, 7, 8, 9, 5, 6, 7, 8, 9]
+reset()
 // 从 ints 中复制索引 0 开始到索引 3 结束的内容
 // 插入到索引 4 开始的位置
-ints.copyWithin(4, 0, 3);
-console.log(ints); // [0, 1, 2, 3, 0, 1, 2, 7, 8, 9]
-reset();
+ints.copyWithin(4, 0, 3)
+console.log(ints) // [0, 1, 2, 3, 0, 1, 2, 7, 8, 9]
+reset()
 // JavaScript 引擎在插值前会完整复制范围内的值
 // 因此复制期间不存在重写的风险
-ints.copyWithin(2, 0, 6);
-console.log(ints); // [0, 1, 0, 1, 2, 3, 4, 5, 8, 9]
-reset();
+ints.copyWithin(2, 0, 6)
+console.log(ints) // [0, 1, 0, 1, 2, 3, 4, 5, 8, 9]
+reset()
 // 支持负索引值，与 fill()相对于数组末尾计算正向索引的过程是一样的
-ints.copyWithin(-4, -7, -3);
-console.log(ints); // [0, 1, 2, 3, 4, 5, 3, 4, 5, 6] 
-reset();
+ints.copyWithin(-4, -7, -3)
+console.log(ints) // [0, 1, 2, 3, 4, 5, 3, 4, 5, 6]
+reset()
 
 // 索引过低，忽略
-ints.copyWithin(1, -15, -12);
-console.log(ints); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+ints.copyWithin(1, -15, -12)
+console.log(ints) // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 reset()
 // 索引过高，忽略
-ints.copyWithin(1, 12, 15);
-console.log(ints); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-reset();
+ints.copyWithin(1, 12, 15)
+console.log(ints) // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+reset()
 // 索引反向，忽略
-ints.copyWithin(2, 4, 2);
-console.log(ints); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-reset();
+ints.copyWithin(2, 4, 2)
+console.log(ints) // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+reset()
 // 索引部分可用，复制、填充可用部分
 ints.copyWithin(4, 7, 10)
-console.log(ints); // [0, 1, 2, 3, 7, 8, 9, 7, 8, 9]; 
+console.log(ints) // [0, 1, 2, 3, 7, 8, 9, 7, 8, 9];
 ```
 
 ### 转换方法
@@ -339,11 +339,11 @@ console.log(ints); // [0, 1, 2, 3, 7, 8, 9, 7, 8, 9];
 // 第一次执行归并函数时，prev 是 1，cur 是 2
 // 第二次执行时，prev 是 3（1 + 2），cur 是 3（数组第三项）
 // 如此递进，直到把所有项都遍历一次
-let values = [1, 2, 3, 4, 5];
-let sum1 = values.reduce((prev, cur, index, array) => prev + cur);
-let sum2 = values.reduce((prev, cur, index, array) => prev + cur, 5);
-alert(sum1); // 15 
-alert(sum2); // 20
+const values = [1, 2, 3, 4, 5]
+const sum1 = values.reduce((prev, cur, index, array) => prev + cur)
+const sum2 = values.reduce((prev, cur, index, array) => prev + cur, 5)
+alert(sum1) // 15
+alert(sum2) // 20
 ```
 
 **`Array.prototype.reduceRight((pre, cur, index, arr) => do sth, startValue)`**，基本同上，只是从右到左

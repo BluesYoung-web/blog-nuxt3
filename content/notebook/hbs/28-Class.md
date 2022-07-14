@@ -77,43 +77,43 @@ date: 2021-01-07 14:25:50
 ```js
 // 抽象基类
 class Vehicle {
-	constructor() {
-		if (new.target === Vehicle) {
-			throw new Error('Vehicle cannot be directly instantiated');
-		}
-		if (!this.foo) {
-			throw new Error('Inheriting class must define foo()');
-		}
-		console.log('success!');
-	}
+  constructor() {
+    if (new.target === Vehicle)
+      throw new Error('Vehicle cannot be directly instantiated')
+
+    if (!this.foo)
+      throw new Error('Inheriting class must define foo()')
+
+    console.log('success!')
+  }
 }
 // 派生类
 class Bus extends Vehicle {
-	foo() {}
+  foo() {}
 }
 // 派生类
 class Van extends Vehicle {}
-new Bus(); // success!
-new Van(); // Error: Inheriting class must define foo() 
-new Bus(); // class Bus {}
-new Vehicle(); // class Vehicle {}
-// Error: Vehicle cannot be directly instantiated 
+new Bus() // success!
+new Van() // Error: Inheriting class must define foo()
+new Bus() // class Bus {}
+new Vehicle() // class Vehicle {}
+// Error: Vehicle cannot be directly instantiated
 ```
 
 ## 修改继承内置类型
 
 ```js
 class SuperArray extends Array {
-	static get [Symbol.species]() {
-		return Array;
-	}
+  static get [Symbol.species]() {
+    return Array
+  }
 }
-let a1 = new SuperArray(1, 2, 3, 4, 5);
-let a2 = a1.filter(x => !!(x%2))
-console.log(a1); // [1, 2, 3, 4, 5]
-console.log(a2); // [1, 3, 5]
-console.log(a1 instanceof SuperArray); // true
-console.log(a2 instanceof SuperArray); // false 
+const a1 = new SuperArray(1, 2, 3, 4, 5)
+const a2 = a1.filter(x => !!(x % 2))
+console.log(a1) // [1, 2, 3, 4, 5]
+console.log(a2) // [1, 3, 5]
+console.log(a1 instanceof SuperArray) // true
+console.log(a2 instanceof SuperArray) // false
 ```
 
 ## 多继承(混入)
@@ -124,29 +124,29 @@ console.log(a2 instanceof SuperArray); // false
 
 ```js
 class Vehicle {}
-let FooMixin = (Superclass) => class extends Superclass {
-	foo() {
-		console.log('foo');
-	}
-};
-let BarMixin = (Superclass) => class extends Superclass {
-	bar() {
-		console.log('bar');
-	}
-};
-let BazMixin = (Superclass) => class extends Superclass {
-	baz() {
-		console.log('baz');
-	}
-};
-function mix(BaseClass, ...Mixins) {
-	return Mixins.reduce((accumulator, current) => current(accumulator), BaseClass);
+const FooMixin = Superclass => class extends Superclass {
+  foo() {
+    console.log('foo')
+  }
 }
-class Bus extends mix(Vehicle, FooMixin, BarMixin, BazMixin) {} 
-let b = new Bus();
-b.foo(); // foo
-b.bar(); // bar
-b.baz(); // baz 
+const BarMixin = Superclass => class extends Superclass {
+  bar() {
+    console.log('bar')
+  }
+}
+const BazMixin = Superclass => class extends Superclass {
+  baz() {
+    console.log('baz')
+  }
+}
+function mix(BaseClass, ...Mixins) {
+  return Mixins.reduce((accumulator, current) => current(accumulator), BaseClass)
+}
+class Bus extends mix(Vehicle, FooMixin, BarMixin, BazMixin) {}
+const b = new Bus()
+b.foo() // foo
+b.bar() // bar
+b.baz() // baz
 ```
 
 很多 `JavaScript` 框架（特别是 `React`）已经抛弃混入模式，转向了组合模式（把方法提取到独立的类和辅助对象中，然后把它们组合起来，但不使用继承）。这反映了那个众所周知的软件设计原则：“**组合胜过继承**（`composition over inheritance`）。”这个设计原则被很多人遵循，在代码设计中能提供极大的灵活性

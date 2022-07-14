@@ -32,32 +32,32 @@ image: /img/algorithm.webp
 import { describe, expect, it } from 'vitest'
 
 describe('O1', () => {
-  const s = new RandomizedSet();
+  const s = new RandomizedSet()
   it('1', () => {
-    expect(s.insert(1)).toBe(true);
-  });
+    expect(s.insert(1)).toBe(true)
+  })
 
   it('2', () => {
-    expect(s.remove(2)).toBe(false);
-    expect(s.insert(2)).toBe(true);
-  });
+    expect(s.remove(2)).toBe(false)
+    expect(s.insert(2)).toBe(true)
+  })
 
   it('3', () => {
-    expect([1, 2]).toContain(s.getRandom());
-  });
+    expect([1, 2]).toContain(s.getRandom())
+  })
 
   it('4', () => {
-    expect(s.remove(1)).toBe(true);
-  });
+    expect(s.remove(1)).toBe(true)
+  })
 
   it('5', () => {
-    expect(s.insert(2)).toBe(false);
-  });
+    expect(s.insert(2)).toBe(false)
+  })
 
   it('6', () => {
-    expect(s.getRandom()).toBe(2);
-  });
-});
+    expect(s.getRandom()).toBe(2)
+  })
+})
 ```
 
 
@@ -65,48 +65,50 @@ describe('O1', () => {
 
 ```ts
 class RandomizedSet {
-  private IndexMap = new Map<number, number>();
-  private data: number[] = [];
+  private IndexMap = new Map<number, number>()
+  private data: number[] = []
 
   insert(val: number): boolean {
     if (!this.IndexMap.has(val)) {
-      const index = this.data.length;
-      this.data[index] = val;
-      this.IndexMap.set(val, index);
-      return true;
-    } else {
-      return false;
+      const index = this.data.length
+      this.data[index] = val
+      this.IndexMap.set(val, index)
+      return true
+    }
+    else {
+      return false
     }
   }
 
   remove(val: number): boolean {
     if (this.IndexMap.has(val)) {
       // 将需要删除的元素移动到尾部
-      const index1 = this.IndexMap.get(val);
-      const index2 = this.IndexMap.size - 1;
+      const index1 = this.IndexMap.get(val)
+      const index2 = this.IndexMap.size - 1
       if (index1 !== index2) {
-        [this.data[index1], this.data[index2]] = [this.data[index2], this.data[index1]];
+        [this.data[index1], this.data[index2]] = [this.data[index2], this.data[index1]]
         // 更新索引
-        this.IndexMap.set(this.data[index1], index1); 
+        this.IndexMap.set(this.data[index1], index1)
       }
       // 弹出尾部元素
-      this.data.pop(); 
+      this.data.pop()
       // 删除索引
-      this.IndexMap.delete(val);
-      return true;
-    } else {
-      return false;
+      this.IndexMap.delete(val)
+      return true
+    }
+    else {
+      return false
     }
   }
 
   getRandom(): number {
-    const size = this.IndexMap.size;
+    const size = this.IndexMap.size
     // 测试用例保证获取元素时集合中存在元素
     // if (size < 1) {
     //   throw new Error('can\'t get element from a null set !');
     // } else {
-      const index = Math.floor(Math.random() * size);
-      return this.data[index];
+    const index = Math.floor(Math.random() * size)
+    return this.data[index]
     // }
   }
 }
@@ -144,35 +146,34 @@ class RandomizedSet {
 
 ```ts
 class Solution {
-  private realLength = 0;
-  private blackMap = new Map<number, number>();
+  private realLength = 0
+  private blackMap = new Map<number, number>()
   constructor(n: number, blacklist: number[]) {
     // 有效数值的长度
-    this.realLength = n - blacklist.length;
+    this.realLength = n - blacklist.length
     // 初始化
-    for (const b of blacklist) {
-      this.blackMap.set(b, -1);
-    }
+    for (const b of blacklist)
+      this.blackMap.set(b, -1)
 
-    let last = n - 1;
+    let last = n - 1
     for (const b of blacklist) {
       // 有效范围之外的 黑名单中的数，不用管
-      if (b >= this.realLength) {
-        continue;
-      }
+      if (b >= this.realLength)
+        continue
+
       // 防止将黑名单中的数映射到黑名单中的数
-      while (this.blackMap.has(last)) {
-        last--;
-      }
+      while (this.blackMap.has(last))
+        last--
+
       // 将黑名单中的数映射为 有效范围之外的 合法的数
-      this.blackMap.set(b, last);
-      last--;
+      this.blackMap.set(b, last)
+      last--
     }
   }
 
   pick(): number {
-    const n = Math.floor(Math.random() * this.realLength);
-    return this.blackMap.get(n) || n;
+    const n = Math.floor(Math.random() * this.realLength)
+    return this.blackMap.get(n) || n
   }
 }
 ```

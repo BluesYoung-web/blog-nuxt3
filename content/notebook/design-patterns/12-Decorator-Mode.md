@@ -38,29 +38,30 @@ image: /img/design-mode.jpeg
  * 基础组件
  */
 interface Component {
-  operation(): string;
+  operation(): string
 }
 /**
  * 提供默认值的基础组件
  */
 class ConcreteComponent implements Component {
   public operation(): string {
-    return '默认值';
+    return '默认值'
   }
 }
 /**
  * 装饰器
  */
 class Decorator implements Component {
-  protected component: Component;
+  protected component: Component
   constructor(component: Component) {
-    this.component = component;
+    this.component = component
   }
+
   /**
    * 调用原有组件的方法
    */
   public operation(): string {
-    return this.component.operation();
+    return this.component.operation()
   }
 }
 /**
@@ -71,12 +72,12 @@ class ConcreteDecoratorA extends Decorator {
    * 增加自己操作的同时调用父级方法
    */
   public operation(): string {
-    return `子装饰器A(${super.operation()})`;
+    return `子装饰器A(${super.operation()})`
   }
 }
 class ConcreteDecoratorB extends Decorator {
   public operation(): string {
-    return `子装饰器B(${super.operation()})`;
+    return `子装饰器B(${super.operation()})`
   }
 }
 /**
@@ -84,17 +85,17 @@ class ConcreteDecoratorB extends Decorator {
  */
 function clientCode(component: Component) {
   // ...
-  console.log(`客户端调用结果: ${component.operation()}`);
+  console.log(`客户端调用结果: ${component.operation()}`)
   // ...
 }
-const simple = new ConcreteComponent();
-console.log('调用基础组件:');
-clientCode(simple);
-console.log('');
-const decorator1 = new ConcreteDecoratorA(simple);
-const decorator2 = new ConcreteDecoratorB(decorator1);
-console.log('调用装饰后的组件:');
-clientCode(decorator2);
+const simple = new ConcreteComponent()
+console.log('调用基础组件:')
+clientCode(simple)
+console.log('')
+const decorator1 = new ConcreteDecoratorA(simple)
+const decorator2 = new ConcreteDecoratorB(decorator1)
+console.log('调用装饰后的组件:')
+clientCode(decorator2)
 // 调用基础组件:
 // 客户端调用结果: 默认值
 

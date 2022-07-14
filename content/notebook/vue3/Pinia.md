@@ -20,21 +20,20 @@ date: 2022-02-23 11:18:01
 
 ```ts
 // vue3
-import { createApp } from 'vue';
-import { createPinia } from 'pinia';
-const app = createApp();
-app.use(createPinia());
-app.mount('#app');
+import { createApp } from 'vue'
+import { PiniaVuePlugin, createPinia, } from 'pinia'
 
 // vue2
-import Vue from 'vue';
-import { createPinia, PiniaVuePlugin } from 'pinia';
+import Vue from 'vue'
+const app = createApp()
+app.use(createPinia())
+app.mount('#app')
 
-Vue.use(PiniaVuePlugin());
+Vue.use(PiniaVuePlugin())
 new Vue({
   el: '#app',
   pinia
-});
+})
 ```
 
 ## `defineStore`
@@ -167,8 +166,8 @@ const { propA, propB } = storeToRefs(demo_store);
 ### 简单示例
 
 ```ts
-import { createPinia } from 'pinia';
-import type { PiniaPluginContext } from 'pinia';
+import { createPinia } from 'pinia'
+import type { PiniaPluginContext } from 'pinia'
 
 function SecretPiniaPlugin(
   { pinia, app, store, options }: PiniaPluginContext
@@ -195,14 +194,14 @@ store.secret // 'the cake is a lie'
 // 新增属性/方法
 import 'pinia'
 
+// 新增配置选项
+import 'pinia'
+
 declare module 'pinia' {
   export interface PiniaCustomProperties<Y extends any = any> {
     $my_conf?: Y
   }
 }
-
-// 新增配置选项
-import 'pinia'
 
 declare module 'pinia' {
   export interface DefineStoreOptionsBase<S, Store> {

@@ -39,114 +39,121 @@ image: /img/design-mode.jpeg
  * 生成器对象接口，定义了生产产品的每一步
  */
 interface Builder {
-  producePartA(): void;
-  producePartB(): void;
-  producePartC(): void;
+  producePartA(): void
+  producePartB(): void
+  producePartC(): void
 }
 /**
  * 生成器1实现生成器接口
  */
 class ConcreteBuilder1 implements Builder {
   // ! 类型断言，明确知道必定会被赋值
-  private product!: Product1;
+  private product!: Product1
   /**
    * 执行构造函数
    */
   constructor() {
     console.log('调用构造函数')
-    this.reset();
+    this.reset()
   }
+
   public reset() {
     console.log('调用---')
-    this.product = new Product1();
+    this.product = new Product1()
   }
+
   public producePartA() {
-    this.product.parts.push('第一部分');
+    this.product.parts.push('第一部分')
   }
+
   public producePartB() {
-    this.product.parts.push('第二部分');
+    this.product.parts.push('第二部分')
   }
+
   public producePartC() {
-    this.product.parts.push('第三部分');
+    this.product.parts.push('第三部分')
   }
+
   /**
    * 获取产品（this.reset(); 保证为独立的产品）
    */
   public getProduct() {
-    const result = this.product;
-    this.reset();
-    return result;
+    const result = this.product
+    this.reset()
+    return result
   }
 }
 /**
  * 产品1
  */
 class Product1 {
-  public parts: string[] = [];
+  public parts: string[] = []
   public listParts() {
-    console.log(`我的产品组成: ${this.parts.join(', ')}\n`);
+    console.log(`我的产品组成: ${this.parts.join(', ')}\n`)
   }
 }
 /**
  * 主管类，控制产品的具体生产
  */
 class Director {
-  private builder!: Builder;
+  private builder!: Builder
   /**
    * 设置要生产的具体产品
    */
   public setBuilder(builder: Builder) {
-    this.builder = builder;
+    this.builder = builder
   }
+
   /**
    * 具体生产步骤1
    */
   public buildMinimalViableProduct() {
-    this.builder.producePartA();
+    this.builder.producePartA()
   }
+
   /**
    * 具体生产步骤2
    */
   public buildFullFeaturedProduct() {
-    this.builder.producePartA();
-    this.builder.producePartB();
-    this.builder.producePartC();
+    this.builder.producePartA()
+    this.builder.producePartB()
+    this.builder.producePartC()
   }
 }
 /**
  * 客户端
  */
 function clientCode(director: Director) {
-  const builder = new ConcreteBuilder1();
-  director.setBuilder(builder);
-  console.log('这是简化版:');
-  director.buildMinimalViableProduct();
-  builder.getProduct().listParts();
-  console.log('这是完整版:');
-  director.buildFullFeaturedProduct();
-  builder.getProduct().listParts();
+  const builder = new ConcreteBuilder1()
+  director.setBuilder(builder)
+  console.log('这是简化版:')
+  director.buildMinimalViableProduct()
+  builder.getProduct().listParts()
+  console.log('这是完整版:')
+  director.buildFullFeaturedProduct()
+  builder.getProduct().listParts()
   // 不使用主管类
-  console.log('这是用户自定义:');
-  builder.producePartA();
-  builder.producePartC();
-  builder.getProduct().listParts();
+  console.log('这是用户自定义:')
+  builder.producePartA()
+  builder.producePartC()
+  builder.getProduct().listParts()
 }
 /**
  * 实例化主管对象
  */
-const director = new Director();
-clientCode(director);
+const director = new Director()
+clientCode(director)
 /**
-"调用构造函数" 
-"调用---" 
-"这是简化版:" 
-"调用---" 
-"我的产品组成: 第一部分" 
-"这是完整版:" 
-"调用---" 
-"我的产品组成: 第一部分, 第二部分, 第三部分" 
-"这是用户自定义:" 
-"调用---" 
-"我的产品组成: 第一部分, 第三部分" 
+"调用构造函数"
+"调用---"
+"这是简化版:"
+"调用---"
+"我的产品组成: 第一部分"
+"这是完整版:"
+"调用---"
+"我的产品组成: 第一部分, 第二部分, 第三部分"
+"这是用户自定义:"
+"调用---"
+"我的产品组成: 第一部分, 第三部分"
  */
 ```

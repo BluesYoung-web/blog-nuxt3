@@ -43,20 +43,20 @@ description: JavaScript 执行上下文与作用域
 **内部上下文可以通过作用域链访问外部上下文中的一切，但外部上下文无法访问内部上下文中的任何东西**
 
 ```js
-var color = "blue";
+let color = 'blue'
 function changeColor() {
- let anotherColor = "red";
- function swapColors() {
- let tempColor = anotherColor;
- anotherColor = color;
- color = tempColor;
- // 这里可以访问 color、anotherColor 和 tempColor
- }
- // 这里可以访问 color 和 anotherColor，但访问不到 tempColor
- swapColors();
+  let anotherColor = 'red'
+  function swapColors() {
+    const tempColor = anotherColor
+    anotherColor = color
+    color = tempColor
+    // 这里可以访问 color、anotherColor 和 tempColor
+  }
+  // 这里可以访问 color 和 anotherColor，但访问不到 tempColor
+  swapColors()
 }
 // 这里只能访问 color
-changeColor(); 
+changeColor()
 ```
 
 ### 作用域链增强

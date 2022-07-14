@@ -41,16 +41,16 @@ module.exports = function(source, map, meta){
 适用于计算量大，耗时较长的场景
 
 ```js
-module.exports = function(content, map, meta) {
+module.exports = function (content, map, meta) {
   // 获取callback函数
-  const callback = this.async();
+  const callback = this.async()
   // 用setTimeout模拟该异步过程
   setTimeout(() => {
     // 处理后获得的结果output
-    const output = dealOperation(source);
+    const output = dealOperation(source)
     // 调用回调函数
-    callback(null, output, map, meta);
-  }, 100);
+    callback(null, output, map, meta)
+  }, 100)
 }
 ```
 
@@ -70,20 +70,20 @@ module.exports = {
         test: /\.(png|jpg|gif)$/,
         use: [
           'url-loader',
-          'raw-test-loader',// 自己的loader
+          'raw-test-loader', // 自己的loader
         ]
       }
     ]
   }
 }
 // raw-test-loader.js
-module.exports = function(source, map, meta) {
+module.exports = function (source, map, meta) {
   // 处理输入的资源
-  const output = dealOperation(source);
-  return output;
+  const output = dealOperation(source)
+  return output
 }
 // 通过该属性告诉webpack该loader是否需要二进制数据
-module.exports.raw = true;
+module.exports.raw = true
 ```
 
 ### `options` 选项
@@ -93,13 +93,13 @@ module.exports.raw = true;
 推荐使用官方提供的 `loader-utils` 获取 `options` 参数
 
 ```js
-const loaderUtils = require('loader-utils');
+const loaderUtils = require('loader-utils')
 
-module.exports = function (source, map, meta){
+module.exports = function (source, map, meta) {
   // 获取options
-  const options = loaderUtils.getOptions(this);
-  const output = dealOperation(source, options); 
-  return output;
+  const options = loaderUtils.getOptions(this)
+  const output = dealOperation(source, options)
+  return output
 }
 ```
 
@@ -113,30 +113,30 @@ module.exports = function (source, map, meta){
 
 ```js
 // format-letters-loader.js
-const loaderUtils = require('loader-utils');
+const loaderUtils = require('loader-utils')
 
-const Lowercase2Uppercase = 'L2U';
-const Uppercase2Lowercase = 'U2L';
+const Lowercase2Uppercase = 'L2U'
+const Uppercase2Lowercase = 'U2L'
 
 module.exports = function (source, map, meta) {
-  let output = '';
+  let output = ''
   // 获取options
-  const options = loaderUtils.getOptions(this);
-  const { formatType } = options;
-  switch(formatType) {
-    case Lowercase2Uppercase: 
-      output = source.toUpperCase();
-      break;
-    case Uppercase2Lowercase: 
-      output = source.toLowerCase();
-      break;
-    default: 
-      output = source;
-      break;
+  const options = loaderUtils.getOptions(this)
+  const { formatType } = options
+  switch (formatType) {
+    case Lowercase2Uppercase:
+      output = source.toUpperCase()
+      break
+    case Uppercase2Lowercase:
+      output = source.toLowerCase()
+      break
+    default:
+      output = source
+      break
   }
 
-  this.callback(null, output, map, meta);
-};
+  this.callback(null, output, map, meta)
+}
 // webpack.config.js
 module.exports = {
   // ...

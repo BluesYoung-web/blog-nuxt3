@@ -23,7 +23,7 @@ image: /img/algorithm.webp
 <strong>测试代码：</strong>
 
 ```ts
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
 class ListNode {
   constructor(
@@ -33,32 +33,32 @@ class ListNode {
 }
 
 function createHelper(arr: number[]) {
-  let p = new ListNode();
-  const res = p;
+  let p = new ListNode()
+  const res = p
   for (const i of arr) {
-    p.next = new ListNode(i);
-    p = p.next;
+    p.next = new ListNode(i)
+    p = p.next
   }
-  return res.next;
+  return res.next
 }
 
 describe('反转链表', () => {
   it('1', () => {
-    const list = createHelper([1, 2, 3, 4, 5]);
-    const res = createHelper([5, 4, 3, 2, 1]);
-    expect(reverseList(list)).toEqual(res);
-  });
+    const list = createHelper([1, 2, 3, 4, 5])
+    const res = createHelper([5, 4, 3, 2, 1])
+    expect(reverseList(list)).toEqual(res)
+  })
   it('2', () => {
-    const list = createHelper([1, 2]);
-    const res = createHelper([2, 1]);
-    expect(reverseList(list)).toEqual(res);
-  });
+    const list = createHelper([1, 2])
+    const res = createHelper([2, 1])
+    expect(reverseList(list)).toEqual(res)
+  })
   it('3', () => {
-    const list = createHelper([]);
-    const res = createHelper([]);
-    expect(reverseList(list)).toEqual(res);
-  });
-});
+    const list = createHelper([])
+    const res = createHelper([])
+    expect(reverseList(list)).toEqual(res)
+  })
+})
 ```
 
 
@@ -71,38 +71,38 @@ function reverseList(
 ): ListNode | null {
   if (head === null || head.next === null) {
     // 链表为空或者链表只有一个元素，直接返回
-    return head;
+    return head
   }
 
   // 递归(全程依赖引用关系!!!)
-  const res = reverseList(head.next);
+  const res = reverseList(head.next)
   // head.next 为反转之前的第一个节点，也就是反转之后的最后一个节点
   // 将倒数第二个节点拼接上最初的头结点
-  head.next.next = head;
+  head.next.next = head
   // 将最初的头结点的下一个节点置为 null，断开双向链接关系
-  head.next = null;
-  
-  return res;
+  head.next = null
+
+  return res
 }
 // 迭代 时间复杂度 O(N)，空间复杂度 O(1)
 function reverseList(
   head: ListNode | null
 ): ListNode | null {
   // 慢指针
-  let pre = null;
+  let pre = null
   // 快指针
-  let curr = head;
-  while(curr) {
+  let curr = head
+  while (curr) {
     // 临时存储当前节点的下一个节点
-    const n = curr.next;
+    const n = curr.next
     // 反转链表元素
-    curr.next = pre;
+    curr.next = pre
     // 慢指针前进
-    pre = curr;
+    pre = curr
     // 快指针前进
-    curr = n;
+    curr = n
   }
-  return pre;
+  return pre
 }
 ```
 
@@ -124,7 +124,7 @@ function reverseList(
 <strong>测试代码：</strong>
 
 ```ts
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
 class ListNode {
   constructor(
@@ -134,27 +134,27 @@ class ListNode {
 }
 
 function createHelper(arr: number[]) {
-  let p = new ListNode();
-  const res = p;
+  let p = new ListNode()
+  const res = p
   for (const i of arr) {
-    p.next = new ListNode(i);
-    p = p.next;
+    p.next = new ListNode(i)
+    p = p.next
   }
-  return res.next;
+  return res.next
 }
 
 describe('反转链表 II', () => {
   it('1', () => {
-    const list = reverseBetween([1, 2, 3, 4, 5], 2, 4);
-    const res = createHelper([1, 4, 3, 2, 5]);
-    expect(reverseList(list)).toEqual(res);
-  });
+    const list = reverseBetween([1, 2, 3, 4, 5], 2, 4)
+    const res = createHelper([1, 4, 3, 2, 5])
+    expect(reverseList(list)).toEqual(res)
+  })
   it('2', () => {
-    const list = createHelper([5], 1, 1);
-    const res = createHelper([5]);
-    expect(reverseList(list)).toEqual(res);
-  });
-});
+    const list = createHelper([5], 1, 1)
+    const res = createHelper([5])
+    expect(reverseList(list)).toEqual(res)
+  })
+})
 ```
 
 
@@ -175,14 +175,14 @@ function reverseN(
   n: number
 ) {
   if (n === 1) {
-    endNode = head.next;
-    return head;
+    endNode = head.next
+    return head
   }
 
-  const res = reverseN(head.next, n - 1);
-  head.next.next = head;
-  head.next = endNode;
-  return res;
+  const res = reverseN(head.next, n - 1)
+  head.next.next = head
+  head.next = endNode
+  return res
 }
 // 反转给定区间的节点
 function reverseBetween(
@@ -192,10 +192,10 @@ function reverseBetween(
 ): ListNode | null {
   if (left === 1) {
     // 相当于反转前 N 个元素
-    return reverseN(head, right);
+    return reverseN(head, right)
   }
   // 指针前进至反转起点
-  head.next = reverseBetween(head.next, left - 1, right - 1);
-  return head;
+  head.next = reverseBetween(head.next, left - 1, right - 1)
+  return head
 }
 ```

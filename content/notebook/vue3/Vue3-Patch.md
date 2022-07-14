@@ -176,7 +176,7 @@ const attrs = useAttrs();
 **用于在选项式 API 配置属性时声明属性类型**
 
 ```ts
-import { PropType } from 'vue'
+import type { PropType } from 'vue'
 
 interface Book {
   title: string
@@ -200,7 +200,7 @@ export default {
 **新增自定义全局属性**
 
 ```ts
-import axios from 'axios'
+import type axios from 'axios'
 
 declare module 'vue' {
   interface ComponentCustomProperties {
@@ -274,14 +274,14 @@ const msg = ref('Hello World!');
 ```
 
 ```ts
-import { render } from 'vue';
+import { render } from 'vue'
 
-export declare const render: RootRenderFunction<Element | ShadowRoot>;
+export declare const render: RootRenderFunction<Element | ShadowRoot>
 export declare type RootRenderFunction<HostElement = RendererElement> = (
   vnode: VNode | null,
   container: HostElement,
   isSVG?: boolean
-) => void;
+) => void
 /**
  * 接收一个 VNode 节点和一个真实的宿主元素(DOM 或 shadowDOM)
  * 将 VNode 转换为真实 DOM 之后渲染到宿主元素内部

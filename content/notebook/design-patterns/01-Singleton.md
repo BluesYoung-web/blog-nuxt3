@@ -43,7 +43,7 @@ image: /img/design-mode.jpeg
 
 ```ts
 class Singleton {
-  private static instance: Singleton;
+  private static instance: Singleton
   /**
    * 构造函数私有化，保证外部无法使用 new 进行实例化
    */
@@ -52,20 +52,20 @@ class Singleton {
    * 通过静态方法控制单例的唯一性
    */
   public static getInstance(): Singleton {
-    if (!Singleton.instance) {
-      Singleton.instance = new Singleton();
-    }
-    return Singleton.instance;
+    if (!Singleton.instance)
+      Singleton.instance = new Singleton()
+
+    return Singleton.instance
   }
 }
 function fn() {
-  const s1 = Singleton.getInstance();
-  const s2 = Singleton.getInstance();
-  if (s1 === s2) {
-    console.log('单例模式成功');
-  } else {
-    console.log('单例模式失败');
-  }
+  const s1 = Singleton.getInstance()
+  const s2 = Singleton.getInstance()
+  if (s1 === s2)
+    console.log('单例模式成功')
+  else
+    console.log('单例模式失败')
+
 }
-fn();
+fn()
 ```

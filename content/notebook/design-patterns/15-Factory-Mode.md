@@ -41,15 +41,15 @@ abstract class Creator {
   /**
    * 工厂规定的接口
    */
-  public abstract factoryMethod(): Product;
+  public abstract factoryMethod(): Product
   /**
    * 具体操作
    */
   public someOperation(): string {
     // 调用工厂方法创建工厂对象
-    const product = this.factoryMethod();
+    const product = this.factoryMethod()
     // 使用产品
-    return `我是母工厂，生产了： ${product.operation()}`;
+    return `我是母工厂，生产了： ${product.operation()}`
   }
 }
 /**
@@ -60,7 +60,7 @@ class ConcreteCreator1 extends Creator {
    *重载工厂构造方法
    */
   public factoryMethod() {
-    return new ConcreteProduct1();
+    return new ConcreteProduct1()
   }
 }
 /**
@@ -71,21 +71,21 @@ class ConcreteCreator2 extends Creator {
    *重载工厂构造方法
    */
   public factoryMethod() {
-    return new ConcreteProduct2();
+    return new ConcreteProduct2()
   }
 }
 /**
  * 规定所有工厂必须实现的接口
  */
 interface Product {
-  operation(): string;
+  operation(): string
 }
 /**
  * 产品1实现产品
  */
 class ConcreteProduct1 implements Product {
   public operation() {
-    return '{产品1}';
+    return '{产品1}'
   }
 }
 /**
@@ -93,22 +93,22 @@ class ConcreteProduct1 implements Product {
  */
 class ConcreteProduct2 implements Product {
   public operation() {
-    return '{产品2}';
+    return '{产品2}'
   }
 }
 /**
  * 客户端
  */
 function clientCode1(creator: Creator) {
-  console.log('我是客户端，不关心调用哪个工厂');
-  console.log(creator.someOperation());
+  console.log('我是客户端，不关心调用哪个工厂')
+  console.log(creator.someOperation())
 }
 /**
  * 具体调用
  */
-console.log('使用工厂1');
-clientCode1(new ConcreteCreator1());
-console.log('\n');
-console.log('使用工厂2');
-clientCode1(new ConcreteCreator2());
+console.log('使用工厂1')
+clientCode1(new ConcreteCreator1())
+console.log('\n')
+console.log('使用工厂2')
+clientCode1(new ConcreteCreator2())
 ```

@@ -31,14 +31,14 @@ describe('旋转图像', () => {
       [1, 2, 3],
       [4, 5, 6],
       [7, 8, 9]
-    ];
+    ]
     const after = [
       [7, 4, 1],
       [8, 5, 2],
       [9, 6, 3]
-    ];
-    expect(rotate(before)).toEqual(after);
-  });
+    ]
+    expect(rotate(before)).toEqual(after)
+  })
 
   it('2', () => {
     const before = [
@@ -46,16 +46,16 @@ describe('旋转图像', () => {
       [2, 4, 8, 10],
       [13, 3, 6, 7],
       [15, 14, 12, 16]
-    ];
+    ]
     const after = [
       [15, 13, 2, 5],
       [14, 3, 4, 1],
       [12, 6, 8, 9],
       [16, 7, 10, 11]
-    ];
-    expect(rotate(before)).toEqual(after);
-  });
-});
+    ]
+    expect(rotate(before)).toEqual(after)
+  })
+})
 ```
 
 
@@ -70,7 +70,7 @@ describe('旋转图像', () => {
   4, 5, 6
   7, 8, 9
   ===>
-  1, 4, 7 
+  1, 4, 7
   2, 5, 8
   3, 6, 9
   ===>
@@ -79,20 +79,20 @@ describe('旋转图像', () => {
   9, 6, 3
 */
 function rotate(arr: number[][]): void {
-  const len = arr.length;
+  const len = arr.length
   // 沿对角线翻转
   for (let i = 0; i < len; i++) {
-    for (let j = i; j < len; j++) {
-      [arr[i][j], arr[j][i]] = [arr[j][i], arr[i][j]];
-    }
+    for (let j = i; j < len; j++)
+      [arr[i][j], arr[j][i]] = [arr[j][i], arr[i][j]]
+
   }
   // 翻转每一行
   for (const line of arr) {
-    let i = 0, j = len -1;
+    let i = 0; let j = len - 1
     while (j > i) {
-      [line[i], line[j]] = [line[j], line[i]];
-      i++;
-      j--;
+      [line[i], line[j]] = [line[j], line[i]]
+      i++
+      j--
     }
   }
 }
@@ -125,21 +125,21 @@ describe('螺旋矩阵', () => {
       [1, 2, 3],
       [4, 5, 6],
       [7, 8, 9]
-    ];
-    const after = [1, 2, 3, 6, 9, 8, 7, 4, 5];
-    expect(spiralOrder(before)).toEqual(after);
-  });
+    ]
+    const after = [1, 2, 3, 6, 9, 8, 7, 4, 5]
+    expect(spiralOrder(before)).toEqual(after)
+  })
 
   it('2', () => {
     const before = [
       [1, 2, 3, 4],
       [5, 6, 7, 8],
       [9, 10, 11, 12]
-    ];
-    const after = [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7];
-    expect(spiralOrder(before)).toEqual(after);
-  });
-});
+    ]
+    const after = [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]
+    expect(spiralOrder(before)).toEqual(after)
+  })
+})
 ```
 
 
@@ -147,50 +147,50 @@ describe('螺旋矩阵', () => {
 
 ```ts
 function spiralOrder(matrix: number[][]): number[] {
-  let m = matrix.length;
-  let n = matrix[0].length;
+  const m = matrix.length
+  const n = matrix[0].length
 
   // 上下左右的边界
-  let up = 0, down = m - 1;
-  let left = 0, right = n - 1;
+  let up = 0; let down = m - 1
+  let left = 0; let right = n - 1
 
-  const res: number[] = [];
+  const res: number[] = []
   // 将矩阵中所有元素的个数作为判断结束的条件
   while (res.length < m * n) {
     if (up <= down) {
       // 左 → 右
-      for (let i = left; i <= right; i++) {
-        res.push(matrix[up][i]);
-      }
+      for (let i = left; i <= right; i++)
+        res.push(matrix[up][i])
+
       // 修改上边界
-      up++;
+      up++
     }
     if (left <= right) {
       // 上 → 下
-      for (let i = up; i <= down; i++) {
-        res.push(matrix[i][right]);
-      }
+      for (let i = up; i <= down; i++)
+        res.push(matrix[i][right])
+
       // 修改右边界
-      right--;
+      right--
     }
     if (up <= down) {
       // 右 → 左
-      for (let i = right; i >= left; i--) {
-        res.push(matrix[down][i]);
-      }
+      for (let i = right; i >= left; i--)
+        res.push(matrix[down][i])
+
       // 修改下边界
-      down--;
+      down--
     }
     if (left <= right) {
       // 下 → 上
-      for (let i = down; i >= up; i--) {
-        res.push(matrix[i][left]);
-      }
+      for (let i = down; i >= up; i--)
+        res.push(matrix[i][left])
+
       // 修改左边界
-      left++;
+      left++
     }
   }
-  return res;
+  return res
 }
 ```
 
@@ -218,25 +218,25 @@ describe('螺旋矩阵 II', () => {
       [1, 2, 3],
       [8, 9, 4],
       [7, 6, 5]
-    ];
-    expect(generateMatrix(3)).toEqual(res);
-  });
+    ]
+    expect(generateMatrix(3)).toEqual(res)
+  })
 
   it('2', () => {
     const res = [
       [1, 2],
       [4, 3]
-    ];
-    expect(generateMatrix(2)).toEqual(res);
-  });
-  
+    ]
+    expect(generateMatrix(2)).toEqual(res)
+  })
+
   it('3', () => {
     const res = [
       [1]
-    ];
-    expect(generateMatrix(1)).toEqual(res);
-  });
-});
+    ]
+    expect(generateMatrix(1)).toEqual(res)
+  })
+})
 ```
 
 
@@ -246,56 +246,55 @@ describe('螺旋矩阵 II', () => {
 // 将上面的取值操作替换成赋值操作即可
 function generateMatrix(n: number): number[][] {
   // 初始化结果数组
-  const res = new Array(n);
-  for (let i = 0; i < n; i++) {
-    res[i] = new Array(n).fill(0);
-  }
+  const res = new Array(n)
+  for (let i = 0; i < n; i++)
+    res[i] = new Array(n).fill(0)
 
-  let num = 1;
+  let num = 1
 
   // 上下左右的边界
-  let up = 0, down = n - 1;
-  let left = 0, right = n - 1;
+  let up = 0; let down = n - 1
+  let left = 0; let right = n - 1
 
   // 将最终值作为判断结束的条件
   while (num <= n * n) {
     if (up <= down) {
       // 左 → 右
       for (let i = left; i <= right; i++) {
-        res[up][i] = num;
-        num++;
+        res[up][i] = num
+        num++
       }
       // 修改上边界
-      up++;
+      up++
     }
     if (left <= right) {
       // 上 → 下
       for (let i = up; i <= down; i++) {
-        res[i][right] = num;
-        num++;
+        res[i][right] = num
+        num++
       }
       // 修改右边界
-      right--;
+      right--
     }
     if (up <= down) {
       // 右 → 左
       for (let i = right; i >= left; i--) {
-        res[down][i] = num;
-        num++;
+        res[down][i] = num
+        num++
       }
       // 修改下边界
-      down--;
+      down--
     }
     if (left <= right) {
       // 下 → 上
       for (let i = down; i >= up; i--) {
-        res[i][left] = num;
-        num++;
+        res[i][left] = num
+        num++
       }
       // 修改左边界
-      left++;
+      left++
     }
   }
-  return res;
+  return res
 }
 ```

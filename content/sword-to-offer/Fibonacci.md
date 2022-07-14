@@ -30,7 +30,7 @@ describe('斐波那契', () => {
     expect(fib(0)).toBe(0)
     expect(fib(1)).toBe(1)
     expect(fib(2)).toBe(1)
-  });
+  })
 
   it('more', () => {
     expect(fib(3)).toBe(2)
@@ -43,13 +43,13 @@ describe('斐波那契', () => {
     expect(fib(10)).toBe(55)
     expect(fib(11)).toBe(89)
     expect(fib(12)).toBe(144)
-  });
+  })
 
   it('溢出取模', () => {
     expect(fib(45)).toBe(134903163)
     expect(fib(81)).toBe(107920472)
-  });
-});
+  })
+})
 ```
 
 ## 具体实现
@@ -57,18 +57,18 @@ describe('斐波那契', () => {
 ```ts
 function fib(n: number): number {
   // 基础情况直接返回
-  if (n === 0) {
-    return 0;
-  }
-  if (n === 1 || n === 2) {
-    return 1;
-  }
+  if (n === 0)
+    return 0
+
+  if (n === 1 || n === 2)
+    return 1
+
   // 其他情况，递推
-  let f1 = 0, f2 = 1;
+  let f1 = 0; let f2 = 1
   for (let i = 2; i < n + 1; i++) {
     // 计算过程中就要进行取模，防止溢出！！！
     [f1, f2] = [f2, (f1 + f2) % (1e9 + 7)]
   }
-  return f2;
+  return f2
 }
 ```

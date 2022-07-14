@@ -13,7 +13,7 @@ image: /img/vue.jpeg
 <n-alert type="info">**普通的 `ref` 创建的是深层监听的对象**</n-alert>
 
 ```ts
-type ShallowRef<T> = {
+interface ShallowRef<T> {
   value: T
 }
 function shallowRef<T>(value: T): ShallowRef<T>
@@ -179,7 +179,7 @@ console.log(isReactive(bar.nested)) // true
 **`effectScope` 就是为了在组件外部使用，而模拟出的一个类似作用域管理的函数**
 
 ```ts
-type EffectScope = {
+interface EffectScope {
   // 如果作用域处于 非激活 状态则返回 undefined
   run<T>(fn: () => T): T | undefined
   stop(): void

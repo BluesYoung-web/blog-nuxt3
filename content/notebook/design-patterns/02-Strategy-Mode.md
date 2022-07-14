@@ -50,16 +50,16 @@ image: /img/design-mode.jpeg
  * JS 实现，计算年终奖
  */
 const strategies = {
-  "S": (s) => s * 4,
-  "A": (s) => s * 3,
-  "B": (s) => s * 2
-};
-
-function calculateBonus(level, salary){
-  return strategies[level](salary);
+  S: s => s * 4,
+  A: s => s * 3,
+  B: s => s * 2
 }
-console.log(calculateBonus('S', 20000));
-console.log(calculateBonus('A', 10000));
+
+function calculateBonus(level, salary) {
+  return strategies[level](salary)
+}
+console.log(calculateBonus('S', 20000))
+console.log(calculateBonus('A', 10000))
 ```
 
 ```ts
@@ -67,30 +67,32 @@ console.log(calculateBonus('A', 10000));
  * 上下文接口(类)
  */
 class Context {
-  private strategy: Strategy;
+  private strategy: Strategy
   constructor(strategy: Strategy) {
-    this.strategy = strategy;
+    this.strategy = strategy
   }
+
   public setStrategy(strategy: Strategy) {
-    this.strategy = strategy;
+    this.strategy = strategy
   }
+
   public doSomeBusinessLogic(): void {
-    const result = this.strategy.doAlgorithm(['a', 'b', 'c', 'd', 'e']);
-    console.log(result.join(','));
+    const result = this.strategy.doAlgorithm(['a', 'b', 'c', 'd', 'e'])
+    console.log(result.join(','))
   }
 }
 /**
  * 算法接口
  */
 interface Strategy {
-  doAlgorithm(data: string[]): string[];
+  doAlgorithm(data: string[]): string[]
 }
 /**
  * 算法A实现
  */
 class ConcreteStrategyA implements Strategy {
   public doAlgorithm(data: string[]): string[] {
-    return data.sort();
+    return data.sort()
   }
 }
 /**
@@ -98,17 +100,17 @@ class ConcreteStrategyA implements Strategy {
  */
 class ConcreteStrategyB implements Strategy {
   public doAlgorithm(data: string[]): string[] {
-    return data.reverse();
+    return data.reverse()
   }
 }
 /**
  * 客户端
  */
-const context = new Context(new ConcreteStrategyA());
-console.log('正常排序');
-context.doSomeBusinessLogic();
-console.log('');
-console.log('逆序');
-context.setStrategy(new ConcreteStrategyB());
-context.doSomeBusinessLogic();
+const context = new Context(new ConcreteStrategyA())
+console.log('正常排序')
+context.doSomeBusinessLogic()
+console.log('')
+console.log('逆序')
+context.setStrategy(new ConcreteStrategyB())
+context.doSomeBusinessLogic()
 ```

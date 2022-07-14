@@ -24,17 +24,17 @@ declare module 'vue-router' {
 ## Composition API
 
 ```js
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router'
 // 响应式的路由对象，包含当前页面的路由信息及各种参数
-const route = useRoute();
+const route = useRoute()
 // 路由器对象，可以进行导航等操作
-const router = useRouter();
+const router = useRouter()
 ```
 
 ### `useLink`
 
 ```js
-import { RouterLink, useLink } from 'vue-router';
+import { RouterLink, useLink } from 'vue-router'
 export default {
   name: 'AppLink',
   props: {
@@ -47,9 +47,9 @@ export default {
     // isActive: 如果需要应用 active class 则为 true
     // isExactActive: 如果需要应用exact active class 则为 true
     // navigate 触发导航的函数，会在必要的时候自动阻止事件
-    const { route, href, isActive, isExactActive, navigate } = useLink(props);
-    const isExternalLink = computed(() => typeof props.to === 'string' && props.to.startsWith('http'));
-    return { isExternalLink, href, navigate, isActive };
+    const { route, href, isActive, isExactActive, navigate } = useLink(props)
+    const isExternalLink = computed(() => typeof props.to === 'string' && props.to.startsWith('http'))
+    return { isExternalLink, href, navigate, isActive }
   },
 }
 ```
@@ -57,21 +57,21 @@ export default {
 ## 滚动行为
 
 ```js
-import { router } from 'vue-router';
+import { router } from 'vue-router'
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     // 直接操作
-    return { left: 0, top: 0 };
+    return { left: 0, top: 0 }
     // 相对元素的偏移
-    return { el: '#main', top: -10 };
+    return { el: '#main', top: -10 }
     // 保持浏览器原生表现
-    return savedPosition;
+    return savedPosition
     // 滚动到指定的锚点
-    return { el: to.hash, behavior: 'smooth' };
+    return { el: to.hash, behavior: 'smooth' }
     // 延迟滚动
-    return new Promise(() => setTimeout(() => resolove({ top: 0, left: 0 }), 500));
+    return new Promise(() => setTimeout(() => resolove({ top: 0, left: 0 }), 500))
   }
-});
+})
 ```
 
 ## 导航故障
@@ -82,7 +82,8 @@ const router = createRouter({
 const navigationResult = await router.push('/my-profile')
 if (navigationResult) {
   // 导航被阻止
-} else {
+}
+else {
   // 导航成功 (包括重新导航的情况)
   this.isMenuOpen = false
 }
@@ -91,16 +92,16 @@ if (navigationResult) {
 **使用辅助函数**
 
 ```js
-import { NavigationFailureType, isNavigationFailure } from 'vue-router';
+import { NavigationFailureType, isNavigationFailure } from 'vue-router'
 // 试图离开未保存的编辑文本界面
-const failure = await router.push('/articles/2');
+const failure = await router.push('/articles/2')
 // aborted: 导航守卫返回了 false
 // cancelled: 导航完成之前又产生了新的导航
 // duplicated: 已经处于目标位置，导航被阻止
 if (isNavigationFailure(failure, NavigationFailureType.aborted)) {
   // failure.to.path failure.from.path
   // 给用户显示一个小通知
-  showToast('You have unsaved changes, discard and leave anyway?');
+  showToast('You have unsaved changes, discard and leave anyway?')
 }
 
 await router.push('/my-profile')
@@ -123,7 +124,7 @@ if (router.currentRoute.value.redirectedFrom) {
 **通过返回新的位置来触发重定向**
 
 ```js
-router.beforeEach(to => {
+router.beforeEach((to) => {
   if (!hasNecessaryRoute(to)) {
     router.addRoute(generateRoute(to))
     // 触发重定向
@@ -135,8 +136,8 @@ router.beforeEach(to => {
 ### 添加嵌套路由
 
 ```js
-outer.addRoute({ name: 'admin', path: '/admin', component: Admin });
-router.addRoute('admin', { path: 'settings', component: AdminSettings });
+outer.addRoute({ name: 'admin', path: '/admin', component: Admin })
+router.addRoute('admin', { path: 'settings', component: AdminSettings })
 // ===>
 router.addRoute({
   name: 'admin',
@@ -150,20 +151,20 @@ router.addRoute({
 
 ```js
 // 添加重名的路由，直接覆盖原路由
-router.addRoute({ path: '/about', name: 'about', component: About });
+router.addRoute({ path: '/about', name: 'about', component: About })
 
 // 这将会删除之前已经添加的路由，因为他们具有相同的名字且名字必须是唯一的
-router.addRoute({ path: '/other', name: 'about', component: Other });
+router.addRoute({ path: '/other', name: 'about', component: Other })
 
 // 调用添加路由返回的回调
-const removeRoute = router.addRoute(routeRecord);
+const removeRoute = router.addRoute(routeRecord)
 // 删除路由如果存在的话
-removeRoute();
+removeRoute()
 
 // 按名称删除路由，所有的别名和子路由也会被同时删除
-router.addRoute({ path: '/about', name: 'about', component: About });
+router.addRoute({ path: '/about', name: 'about', component: About })
 // 删除路由
-router.removeRoute('about');
+router.removeRoute('about')
 ```
 
 ### 查看现有路由

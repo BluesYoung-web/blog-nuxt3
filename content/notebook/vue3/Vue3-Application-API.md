@@ -88,7 +88,7 @@ interface App {
 **安装插件**
 
 ```ts
-type Plugin = {
+interface Plugin {
   install(app: AppInstance, ...options: any[]): void
 }
 

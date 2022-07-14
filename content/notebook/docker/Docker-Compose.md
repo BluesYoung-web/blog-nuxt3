@@ -34,11 +34,11 @@ services:
   mariadb:
     image: jsurf/rpi-mariadb
     ports: ['3306:3306']
-    volumes: 
+    volumes:
       - /home/pi/data-base/data:/var/lib/mysql
       - /home/pi/data-base/initdb.d:/docker-entrypoint-initdb.d
-    environment: 
-      MYSQL_ROOT_PASSWORD: 'my-secret-pw'
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
     restart: always
     networks:
       web-net:
@@ -54,10 +54,10 @@ services:
     image: node
     # 外部：内部
     ports: ['1443:1443', '9527:9527']
-    volumes: 
+    volumes:
       - /home/pi/node-server:/home/node
     restart: always
-    depends_on: 
+    depends_on:
       - mariadb
       - redis
     networks:
@@ -71,16 +71,16 @@ services:
       - /home/pi/www/.nginx/nginx.conf:/etc/nginx/nginx.conf
       - /home/pi/www:/etc/nginx/html
     restart: always
-    depends_on: 
+    depends_on:
       - node-server
     networks:
       web-net:
         ipv4_address: 172.18.0.2
 
-networks: ##定义网络组
-  web-net: ## 网络组名称
-    driver: bridge ## 网络的模式
-    ipam: ## 配置网络
+networks: # #定义网络组
+  web-net: # # 网络组名称
+    driver: bridge # # 网络的模式
+    ipam: # # 配置网络
       driver: default
       config:
         - subnet: 172.18.0.0/24

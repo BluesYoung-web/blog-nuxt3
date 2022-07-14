@@ -74,17 +74,17 @@ date: 2021-01-20 11:44:37
 `ralativeUrl ` 与当前 `URL` 必须同源，否则报错
 
 ```js
-location.href = 'https://www.mi.com';
-history.pushState({ foo: 'bar' }, '', '?pc=12138');
-console.log(history.state); // '{ foo: "bar" }'
-console.log(location.href); // 'https://www.mi.com/?pc=12138'
+location.href = 'https://www.mi.com'
+history.pushState({ foo: 'bar' }, '', '?pc=12138')
+console.log(history.state) // '{ foo: "bar" }'
+console.log(location.href) // 'https://www.mi.com/?pc=12138'
 
-window.addEventListener("popstate", (event) => {
-	let state = event.state;
-	if (state) { // 第一个页面加载时状态是 null
-		processState(state);
-	}
-});
+window.addEventListener('popstate', (event) => {
+  const state = event.state
+  if (state) { // 第一个页面加载时状态是 null
+    processState(state)
+  }
+})
 ```
 
 ### `history.replaceState()`

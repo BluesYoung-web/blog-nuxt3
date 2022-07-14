@@ -2,76 +2,79 @@
  * @Author: zhangyang
  * @Date: 2022-01-10 16:16:14
  * @LastEditTime: 2022-06-16 14:45:32
- * @Description: 
+ * @Description:
 -->
 <script lang="ts" setup>
-import PlumBg from '~/components/PlumBg.vue';
-import { NConfigProvider, darkTheme, NMenu } from 'naive-ui';
-import type { TocItem } from '~/pages/[...slug].vue';
-const color = useColorMode();
+import { NConfigProvider, NMenu, darkTheme } from 'naive-ui'
+import PlumBg from '~/components/PlumBg.vue'
+import type { TocItem } from '~/pages/[...slug].vue'
+const color = useColorMode()
 
-const router = useRouter();
-const content = ref<HTMLDivElement>();
+const router = useRouter()
+const content = ref<HTMLDivElement>()
 
 const navigate = () => {
   if (location.hash) {
-    const target = document.querySelector(decodeURIComponent(location.hash));
-    target?.scrollIntoView({ behavior: 'smooth' });
+    const target = document.querySelector(decodeURIComponent(location.hash))
+    target?.scrollIntoView({ behavior: 'smooth' })
   }
-};
+}
 
 const handleAnchors = (event: MouseEvent & { target: HTMLElement }) => {
-  const link = event.target.closest('a');
+  const link = event.target.closest('a')
   // const menu = document.querySelector('.table-of-contents');
   if (
     //  文章标题锚点
     link?.className === 'router-link-active router-link-exact-active'
     // ||
-    // @ts-ignore 菜单锚点
+    // @ts-expect-error 菜单锚点
     // Array.from(event.path).some((ele) => ele === menu)
-    ) {
-    const url = new URL(`${link?.href ?? location.href}`);
-    event.preventDefault();
-    const { pathname, hash } = url;
+  ) {
+    const url = new URL(`${link?.href ?? location.href}`)
+    event.preventDefault()
+    const { pathname, hash } = url
     if (hash && (!pathname || pathname === location.pathname)) {
-      window.history.replaceState({}, '', hash);
-      navigate();
+      window.history.replaceState({}, '', hash)
+      navigate()
     }
     else {
-      router.push({ path: pathname, hash });
+      router.push({ path: pathname, hash })
     }
   }
-};
+}
 
 onMounted(() => {
-  useEventListener(window, 'hashchange', navigate);
-  useEventListener(content.value!, 'click', handleAnchors, { passive: false });
+  useEventListener(window, 'hashchange', navigate)
+  useEventListener(content.value!, 'click', handleAnchors, { passive: false })
 
-  navigate();
-  setTimeout(navigate, 500);
-});
-const title = ref('');
+  navigate()
+  setTimeout(navigate, 500)
+})
+const title = ref('')
 const setTitle = (e: string) => {
-  title.value = e;
-};
+  title.value = e
+}
 
-const tocTree = ref<TocItem[]>([]);
+const tocTree = ref<TocItem[]>([])
 const setToc = (e: TocItem[]) => {
-  tocTree.value = e;
-};
+  tocTree.value = e
+}
 
 const navHandler = (key: string) => {
-  window.history.replaceState({}, '', `#${key}`);
-  navigate();
-};
+  window.history.replaceState({}, '', `#${key}`)
+  navigate()
+}
 </script>
+
 <template>
   <NConfigProvider :theme="color.value === 'dark' ? darkTheme : undefined">
     <div class="main">
       <Header class="dark:text-gray-100" />
       <div class="container">
         <article ref="content" class="artical">
-          <h1 v-if="title" class="text-3xl text-center mb-5">{{ title }}</h1>
+          <h1 v-if="title" class="text-3xl text-center mb-5">
+            {{ title }}
+          </h1>
           <NuxtPage
             class="prose prose-sm m-auto text-left"
             @change-title="setTitle"

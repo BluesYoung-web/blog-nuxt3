@@ -18,11 +18,11 @@ date: 2021-01-15 14:00:15
 
 ```js
 function fact(num) {
-  if(num <= 1) {
-    return 1;
-  } else {
-    return num * fact(num - 1);
-  }
+  if (num <= 1)
+    return 1
+  else
+    return num * fact(num - 1)
+
 }
 ```
 
@@ -32,11 +32,11 @@ function fact(num) {
 
 ```js
 function fact(num) {
-  if(num <= 1) {
-    return 1;
-  } else { 
-    return num * arguments.callee(num - 1);
-  }
+  if (num <= 1)
+    return 1
+  else
+    return num * arguments.callee(num - 1)
+
 }
 ```
 
@@ -45,13 +45,13 @@ function fact(num) {
 不受外界影响
 
 ```js
-const fact = (function f(num) {
-  if(num <= 1) {
-    return 1;
-  } else {
-    return num * f(num - 1);
-  }
-});
+const fact = function f(num) {
+  if (num <= 1)
+    return 1
+  else
+    return num * f(num - 1)
+
+}
 ```
 
 ### 优化
@@ -59,21 +59,21 @@ const fact = (function f(num) {
 尾调用优化，尽可能节省栈帧的使用
 
 ```js
-const fact = (function fn(a, b, n) {
-  if(n === 0) {
-    return a;
-  }
-  return fn(b, a + b, n - 1);
-});
+const fact = function fn(a, b, n) {
+  if (n === 0)
+    return a
+
+  return fn(b, a + b, n - 1)
+}
 function fib(n) {
-  return fact(0, 1, n);
+  return fact(0, 1, n)
 }
 ```
 
 ## 尾调用优化
 
 ```js
-function outFn() { return insFn(); }
+function outFn() { return insFn() }
 ```
 
 ### `ES6`之前
@@ -114,45 +114,45 @@ function outFn() { return insFn(); }
 ### 不符合优化条件
 
 ```js
-"use strict";
+'use strict'
 // 无优化：尾调用没有返回
 function outerFunction() {
-  innerFunction();
+  innerFunction()
 }
 // 无优化：尾调用没有直接返回
 function outerFunction() {
-  let innerFunctionResult = innerFunction();
-  return innerFunctionResult;
+  const innerFunctionResult = innerFunction()
+  return innerFunctionResult
 }
 // 无优化：尾调用返回后必须转型为字符串
 function outerFunction() {
-  return innerFunction().toString();
+  return innerFunction().toString()
 }
 // 无优化：尾调用是一个闭包
 function outerFunction() {
-  let foo = 'bar';
-  function innerFunction() { return foo; }
-  return innerFunction();
-} 
+  const foo = 'bar'
+  function innerFunction() { return foo }
+  return innerFunction()
+}
 ```
 
 ### 符合优化条件
 
 ```js
-"use strict";
+'use strict'
 // 有优化：栈帧销毁前执行参数计算
 function outerFunction(a, b) {
-  return innerFunction(a + b);
+  return innerFunction(a + b)
 }
 // 有优化：初始返回值不涉及栈帧
 function outerFunction(a, b) {
-  if (a < b) {
-    return a;
-  }
-  return innerFunction(a + b);
+  if (a < b)
+    return a
+
+  return innerFunction(a + b)
 }
 // 有优化：两个内部函数都在尾部
 function outerFunction(condition) {
-  return condition ? innerFunctionA() : innerFunctionB();
+  return condition ? innerFunctionA() : innerFunctionB()
 }
 ```

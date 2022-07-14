@@ -26,14 +26,14 @@ date: 2021-01-13 11:43:53
 如果 `target.propName` 不可配置且 `[[Get]]` 特性为 `undefined`，处理程序的返回值也必须是 `undefined`
 
 ```js
-const myTarget = {}; 
-const proxy = new Proxy(myTarget, { 
-  get(target, property, receiver) { 
-    console.log('get()'); 
-    return Reflect.get(...arguments) 
-  } 
-}); 
-proxy.foo; 
+const myTarget = {}
+const proxy = new Proxy(myTarget, {
+  get(target, property, receiver) {
+    console.log('get()')
+    return Reflect.get(...arguments)
+  }
+})
+proxy.foo
 // get()
 ```
 
@@ -64,14 +64,14 @@ proxy.foo;
 在严格模式下，处理程序中返回 `false` 会抛出 `TypeError`
 
 ```js
-const myTarget = {}; 
-const proxy = new Proxy(myTarget, { 
-  set(target, property, value, receiver) { 
-    console.log('set()'); 
-    return Reflect.set(...arguments);
-  } 
-}); 
-proxy.foo = 'bar'; 
+const myTarget = {}
+const proxy = new Proxy(myTarget, {
+  set(target, property, value, receiver) {
+    console.log('set()')
+    return Reflect.set(...arguments)
+  }
+})
+proxy.foo = 'bar'
 // set()
 ```
 
@@ -96,14 +96,14 @@ proxy.foo = 'bar';
 如果 `target.propName` 存在且目标对象不可扩展，则处理程序必须返回 `true`
 
 ```js
-const myTarget = {}; 
-const proxy = new Proxy(myTarget, { 
-  has(target, property) { 
-    console.log('has()'); 
-    return Reflect.has(...arguments);
-  } 
-}); 
-'foo' in proxy; 
+const myTarget = {}
+const proxy = new Proxy(myTarget, {
+  has(target, property) {
+    console.log('has()')
+    return Reflect.has(...arguments)
+  }
+})
+'foo' in proxy
 // has()
 ```
 
@@ -129,14 +129,14 @@ const proxy = new Proxy(myTarget, {
 如果目标对象有一个不可配置的属性，则不能添加同名的可配置属性
 
 ```js
-const myTarget = {}; 
-const proxy = new Proxy(myTarget, { 
-  defineProperty(target, property, descriptor) { 
-    console.log('defineProperty()'); 
-    return Reflect.defineProperty(...arguments);
-  } 
-}); 
-Object.defineProperty(proxy, 'foo', { value: 'bar' }); 
+const myTarget = {}
+const proxy = new Proxy(myTarget, {
+  defineProperty(target, property, descriptor) {
+    console.log('defineProperty()')
+    return Reflect.defineProperty(...arguments)
+  }
+})
+Object.defineProperty(proxy, 'foo', { value: 'bar' })
 // defineProperty()
 ```
 
@@ -165,14 +165,14 @@ Object.defineProperty(proxy, 'foo', { value: 'bar' });
 如果 `target.propName` 不存在，则处理程序不能返回表示该属性可配置的对象
 
 ```js
-const myTarget = {}; 
-const proxy = new Proxy(myTarget, { 
-  getOwnPropertyDescriptor(target, property) { 
-    console.log('getOwnPropertyDescriptor()'); 
-    return Reflect.getOwnPropertyDescriptor(...arguments);
-  } 
-}); 
-Object.getOwnPropertyDescriptor(proxy, 'foo'); 
+const myTarget = {}
+const proxy = new Proxy(myTarget, {
+  getOwnPropertyDescriptor(target, property) {
+    console.log('getOwnPropertyDescriptor()')
+    return Reflect.getOwnPropertyDescriptor(...arguments)
+  }
+})
+Object.getOwnPropertyDescriptor(proxy, 'foo')
 // getOwnPropertyDescriptor()
 ```
 
@@ -194,14 +194,14 @@ Object.getOwnPropertyDescriptor(proxy, 'foo');
 如果自有的 `target.property` 存在且不可配置，则处理程序不能删除这个属性
 
 ```js
-const myTarget = {}; 
-const proxy = new Proxy(myTarget, { 
-  deleteProperty(target, property) { 
-    console.log('deleteProperty()'); 
-    return Reflect.deleteProperty(...arguments);
-  } 
-}); 
-delete proxy.foo 
+const myTarget = {}
+const proxy = new Proxy(myTarget, {
+  deleteProperty(target, property) {
+    console.log('deleteProperty()')
+    return Reflect.deleteProperty(...arguments)
+  }
+})
+delete proxy.foo
 // deleteProperty()
 ```
 
@@ -222,14 +222,14 @@ delete proxy.foo
 如果 `target` 不可扩展，则返回可枚举对象必须准确地包含自有属性键
 
 ```js
-const myTarget = {}; 
-const proxy = new Proxy(myTarget, { 
-  ownKeys(target) { 
-    console.log('ownKeys()'); 
-    return Reflect.ownKeys(...arguments);
-  } 
-}); 
-Object.keys(proxy); 
+const myTarget = {}
+const proxy = new Proxy(myTarget, {
+  ownKeys(target) {
+    console.log('ownKeys()')
+    return Reflect.ownKeys(...arguments)
+  }
+})
+Object.keys(proxy)
 // ownKeys()
 ```
 
@@ -249,14 +249,14 @@ Object.keys(proxy);
 如果 `target` 不可扩展，则 `Object.getPrototypeOf(proxy)` 唯一有效的返回值就是 `Object.getPrototypeOf(target)` 的返回值
 
 ```js
-const myTarget = {}; 
-const proxy = new Proxy(myTarget, { 
-  getPrototypeOf(target) { 
-    console.log('getPrototypeOf()'); 
-    return Reflect.getPrototypeOf(...arguments);
-  } 
-}); 
-Object.getPrototypeOf(proxy); 
+const myTarget = {}
+const proxy = new Proxy(myTarget, {
+  getPrototypeOf(target) {
+    console.log('getPrototypeOf()')
+    return Reflect.getPrototypeOf(...arguments)
+  }
+})
+Object.getPrototypeOf(proxy)
 // getPrototypeOf()
 ```
 
@@ -273,14 +273,14 @@ Object.getPrototypeOf(proxy);
 如果 `target` 不可扩展，则唯一有效的 `prototype` 参数就是 `Object.getPrototypeOf(target)` 的返回值
 
 ```js
-const myTarget = {}; 
-const proxy = new Proxy(myTarget, { 
-  setPrototypeOf(target, prototype) { 
-    console.log('setPrototypeOf()'); 
-    return Reflect.setPrototypeOf(...arguments);
+const myTarget = {}
+const proxy = new Proxy(myTarget, {
+  setPrototypeOf(target, prototype) {
+    console.log('setPrototypeOf()')
+    return Reflect.setPrototypeOf(...arguments)
   }
-}); 
-Object.setPrototypeOf(proxy, Object); 
+})
+Object.setPrototypeOf(proxy, Object)
 // setPrototypeOf()
 ```
 
@@ -299,14 +299,14 @@ Object.setPrototypeOf(proxy, Object);
 如果 `target` 不可扩展，则处理程序必须返回 `false`
 
 ```js
-const myTarget = {}; 
-const proxy = new Proxy(myTarget, { 
-  isExtensible(target) { 
-    console.log('isExtensible()'); 
-    return Reflect.isExtensible(...arguments);
+const myTarget = {}
+const proxy = new Proxy(myTarget, {
+  isExtensible(target) {
+    console.log('isExtensible()')
+    return Reflect.isExtensible(...arguments)
   }
-}); 
-Object.isExtensible(proxy); 
+})
+Object.isExtensible(proxy)
 // isExtensible()
 ```
 
@@ -323,14 +323,14 @@ Object.isExtensible(proxy);
 如果 `Object.isExtensible(proxy)` 是 `false`，则处理程序必须返回 `true`
 
 ```js
-const myTarget = {}; 
-const proxy = new Proxy(myTarget, { 
-  preventExtensions(target) { 
-    console.log('preventExtensions()'); 
-    return Reflect.preventExtensions(...arguments);
-  } 
-}); 
-Object.preventExtensions(proxy); 
+const myTarget = {}
+const proxy = new Proxy(myTarget, {
+  preventExtensions(target) {
+    console.log('preventExtensions()')
+    return Reflect.preventExtensions(...arguments)
+  }
+})
+Object.preventExtensions(proxy)
 // preventExtensions()
 ```
 

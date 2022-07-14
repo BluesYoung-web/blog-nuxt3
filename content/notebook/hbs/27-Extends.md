@@ -13,27 +13,27 @@ date: 2021-01-07 11:53:16
 创建子类时，**不能向超类的构造函数传递参数**
 
 ```js
-function GrandFather(){
-	this.money = 'rich';
+function GrandFather() {
+  this.money = 'rich'
 }
 
-GrandFather.prototype.getGrandMoney = function(){
-	return this.money;
+GrandFather.prototype.getGrandMoney = function () {
+  return this.money
 }
 
-function Father(){
-	this.own = 'common';
+function Father() {
+  this.own = 'common'
 }
 
-Father.prototype = new GrandFather();
+Father.prototype = new GrandFather()
 
-Father.prototype.getFatherMoney = function(){
-	return this.own;
+Father.prototype.getFatherMoney = function () {
+  return this.own
 }
 
-var son = new Father();
-console.log(son.getGrandMoney()); // rich
-console.log(son.getFatherMoney());// common
+const son = new Father()
+console.log(son.getGrandMoney()) // rich
+console.log(son.getFatherMoney())// common
 /**
  * son instanceof Object, GrandFather, Father
  * [Object, GrandFather, Father].prototype.isPrototypeOf(son)
@@ -51,17 +51,17 @@ console.log(son.getFatherMoney());// common
 **超类原型中的方法对子类不可见**
 
 ```js
-function GrandFather(){
-	this.colors = ['red', 'green', 'blue'];
+function GrandFather() {
+  this.colors = ['red', 'green', 'blue']
 }
-function Father(){
-	GrandFather.call(this);
+function Father() {
+  GrandFather.call(this)
 }
-var son1 = new Father();
-son1.colors.push('black');
-var son2 = new Father();
-console.log(son1.colors); // ["red", "green", "blue", "black"]
-console.log(son2.colors); // ["red", "green", "blue"]
+const son1 = new Father()
+son1.colors.push('black')
+const son2 = new Father()
+console.log(son1.colors) // ["red", "green", "blue", "black"]
+console.log(son2.colors) // ["red", "green", "blue"]
 ```
 
 ## 组合继承
@@ -73,27 +73,27 @@ console.log(son2.colors); // ["red", "green", "blue"]
 `instanceof` 和 `isPrototypeOf()` 也适用
 
 ```js
-function GrandFather(name){
-	this.name = name;
-	this.colors = ['red', 'green', 'blue'];
+function GrandFather(name) {
+  this.name = name
+  this.colors = ['red', 'green', 'blue']
 }
-GrandFather.prototype.sayName = function(){
-	return this.name;
+GrandFather.prototype.sayName = function () {
+  return this.name
 }
-function Father(name, age){
-	GrandFather.call(this, name);
-	this.age = age;
+function Father(name, age) {
+  GrandFather.call(this, name)
+  this.age = age
 }
-Father.prototype = new GrandFather();
-Father.prototype.sayAge = function(){
-	return this.age;
+Father.prototype = new GrandFather()
+Father.prototype.sayAge = function () {
+  return this.age
 }
-var son1 = new Father('张三丰', 108);
-son1.colors.push('black');
-var son2 = new Father('张无忌', 18);
-console.log(son1.colors, son1.sayName(), son1.sayAge());
+const son1 = new Father('张三丰', 108)
+son1.colors.push('black')
+const son2 = new Father('张无忌', 18)
+console.log(son1.colors, son1.sayName(), son1.sayAge())
 // ["red", "green", "blue", "black"] "张三丰" 108
-console.log(son2.colors, son2.sayName(), son2.sayAge());
+console.log(son2.colors, son2.sayName(), son2.sayAge())
 // ["red", "green", "blue"] "张无忌" 18
 ```
 
@@ -106,21 +106,21 @@ console.log(son2.colors, son2.sayName(), son2.sayAge());
 共享原型对象的**引用属性**
 
 ```js
-var person = {
-	name: '张三丰',
-	friends: ['张翠山', '老和尚', '谢逊']
+const person = {
+  name: '张三丰',
+  friends: ['张翠山', '老和尚', '谢逊']
 }
-var p1 = Object.create(person);
-p1.name = '张翠山';
-p1.friends.push('殷素素');
-var p2 = Object.create(person, {
-	job: {
-		value: '明教教主'
-	}
-});
-p2.name = '张无忌';
-p2.friends.push('赵敏');
-console.log(person, p1, p2);
+const p1 = Object.create(person)
+p1.name = '张翠山'
+p1.friends.push('殷素素')
+const p2 = Object.create(person, {
+  job: {
+    value: '明教教主'
+  }
+})
+p2.name = '张无忌'
+p2.friends.push('赵敏')
+console.log(person, p1, p2)
 // 共享friends属性
 ```
 
@@ -131,18 +131,18 @@ console.log(person, p1, p2);
 无法实现函数复用
 
 ```js
-function createPerson(p){
-	var person = Object.create(p);
-	person.introduce = function(){
-		console.log(this.name);
-	}
-	return person;
+function createPerson(p) {
+  const person = Object.create(p)
+  person.introduce = function () {
+    console.log(this.name)
+  }
+  return person
 }
-var person = {
-	name: '张三丰'
+const person = {
+  name: '张三丰'
 }
-var p = createPerson(person);
-p.introduce();
+const p = createPerson(person)
+p.introduce()
 ```
 
 ## 寄生组合继承
@@ -154,32 +154,32 @@ p.introduce();
 **最优解决方案**
 
 ```js
-function inheritPrototype(sub, sup){
-	// 创建对象
-	var prototype = Object.create(sup.prototype);
-	// 增强对象
-	prototype.constructor = sub;
-	// 指定对象
-	sub.prototype = prototype;
+function inheritPrototype(sub, sup) {
+  // 创建对象
+  const prototype = Object.create(sup.prototype)
+  // 增强对象
+  prototype.constructor = sub
+  // 指定对象
+  sub.prototype = prototype
 }
-function SuperType(name){
-	this.name = name;
-	this.color = ['red', 'green', 'blue'];
+function SuperType(name) {
+  this.name = name
+  this.color = ['red', 'green', 'blue']
 }
-SuperType.prototype.sayName = function(){
-	console.log(this.name);
+SuperType.prototype.sayName = function () {
+  console.log(this.name)
 }
-function SubType(name, age){
-	SuperType.call(this, name);
-	this.age = age;
+function SubType(name, age) {
+  SuperType.call(this, name)
+  this.age = age
 }
-inheritPrototype(SubType, SuperType);
-SubType.prototype.sayAge = function(){
-	console.log(this.age);
+inheritPrototype(SubType, SuperType)
+SubType.prototype.sayAge = function () {
+  console.log(this.age)
 }
 
-var p = new SubType('张三丰', 108);
-console.log(p);
-console.log(p.sayName());
-console.log(p.sayAge());
+const p = new SubType('张三丰', 108)
+console.log(p)
+console.log(p.sayName())
+console.log(p.sayAge())
 ```

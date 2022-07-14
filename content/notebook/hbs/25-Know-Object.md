@@ -40,14 +40,14 @@ date: 2021-01-06 09:20:51
 <n-alert class="mt-4" title="configurable 定义为 false 之后不能再次定义为 true，再次修改任何非 writable 的属性都会导致错误" type="error"></n-alert>
 
 ```js
-var p = {};
+const p = {}
 Object.defineProperty(p, 'name', {
   writable: false,
   value: 'blues'
-});
-console.log(p.name); // blues
-p.name = '123124'; // 非严格模式下不生效，严格模式直接报错
-console.log(p.name); // blues
+})
+console.log(p.name) // blues
+p.name = '123124' // 非严格模式下不生效，严格模式直接报错
+console.log(p.name) // blues
 ```
 
 ### 访问器属性
@@ -77,26 +77,26 @@ console.log(p.name); // blues
 <n-alert title="只定义设置函数会导致无法读取" type="error">非严格模式下返回 `undeifned`，严格模式下抛出错误</n-alert>
 
 ```js
-var book = {
+const book = {
   _year: 2017,
   edition: 1
 }
 Object.defineProperty(book, 'year', {
   get() {
-    return this._year;
+    return this._year
   },
   set(n) {
-    if(n > 2017) {
-      this.edition += n - this._year;
-      this._year = n;
+    if (n > 2017) {
+      this.edition += n - this._year
+      this._year = n
     }
   }
-});
+})
 
-book.year = 2018;
-console.log(book.edition); // 2
-book.year = 2020;
-console.log(book.edition); // 4
+book.year = 2018
+console.log(book.edition) // 2
+book.year = 2020
+console.log(book.edition) // 4
 ```
 
 ### 静态方法
@@ -137,36 +137,36 @@ console.log(book.edition); // 4
     - **设置属性的默认值**
 
 ```js
-const v1 = 'abc';
-const v2 = true;
-const v3 = 10;
+const v1 = 'abc'
+const v2 = true
+const v3 = 10
 
-const obj = Object.assign({}, v1, v2, v3);
-console.log(obj); // { "0": "a", "1": "b", "2": "c" }
+const obj = Object.assign({}, v1, v2, v3)
+console.log(obj) // { "0": "a", "1": "b", "2": "c" }
 // --------------------------------------------------------
 Object.assign([1, 2, 3], [4, 5])
 // [4, 5, 3]
 // --------------------------------------------------------
 // 基本克隆
 function clone(origin) {
-  return Object.assign({}, origin);
+  return Object.assign({}, origin)
 }
 // 保持原型链克隆
 function clone(origin) {
-  let originProto = Object.getPrototypeOf(origin);
-  return Object.assign(Object.create(originProto), origin);
+  const originProto = Object.getPrototypeOf(origin)
+  return Object.assign(Object.create(originProto), origin)
 }
 // --------------------------------------------------------
-const merge = (...sources) => Object.assign({}, ...sources);
+const merge = (...sources) => Object.assign({}, ...sources)
 // --------------------------------------------------------
 const DEFAULTS = {
   logLevel: 0,
   outputFormat: 'html'
-};
+}
 
 function processContent(options) {
-  options = Object.assign({}, DEFAULTS, options);
-  console.log(options);
+  options = Object.assign({}, DEFAULTS, options)
+  console.log(options)
   // ...
 }
 ```
@@ -197,28 +197,28 @@ function processContent(options) {
 ```js
 Object.defineProperty(Object.prototype, '__proto__', {
   get() {
-    let _thisObj = Object(this);
-    return Object.getPrototypeOf(_thisObj);
+    const _thisObj = Object(this)
+    return Object.getPrototypeOf(_thisObj)
   },
   set(proto) {
-    if (this === undefined || this === null) {
-      throw new TypeError();
-    }
-    if (!isObject(this)) {
-      return undefined;
-    }
-    if (!isObject(proto)) {
-      return undefined;
-    }
-    let status = Reflect.setPrototypeOf(this, proto);
-    if (!status) {
-      throw new TypeError();
-    }
+    if (this === undefined || this === null)
+      throw new TypeError()
+
+    if (!isObject(this))
+      return undefined
+
+    if (!isObject(proto))
+      return undefined
+
+    const status = Reflect.setPrototypeOf(this, proto)
+    if (!status)
+      throw new TypeError()
+
   },
-});
+})
 
 function isObject(value) {
-  return Object(value) === value;
+  return Object(value) === value
 }
 ```
 
@@ -233,12 +233,12 @@ function isObject(value) {
 **可能会严重影响代码性能**，不建议直接使用
 
 ```js
-let proto = {};
-let obj = { x: 10 };
-Object.setPrototypeOf(obj, proto);
+const proto = {}
+const obj = { x: 10 }
+Object.setPrototypeOf(obj, proto)
 
-proto.y = 20;
-proto.z = 40;
+proto.y = 20
+proto.z = 40
 
 obj.x // 10
 obj.y // 20
@@ -297,8 +297,8 @@ obj.z // 40
 const p = {
   name: '张三疯',
   age: 108
-};
-const { name, age: nowAge, default_test = 666 } = p;
+}
+const { name, age: nowAge, default_test = 666 } = p
 // name = '张三疯', nowAge = 108, default_test = 666
 ```
 
@@ -307,16 +307,16 @@ const { name, age: nowAge, default_test = 666 } = p;
 在外层属性没有定义的情况下不能使用嵌套解构
 
 ```js
-let person = {
+const person = {
   name: 'Matt',
   age: 27,
   job: {
     title: 'Software engineer'
   }
-};
+}
 // 声明 title 变量并将 person.job.title 的值赋给它
-let { job: { title } } = person;
-console.log(title); // Software engineer 
+const { job: { title } } = person
+console.log(title) // Software engineer
 ```
 
 ### 部分解构
@@ -326,17 +326,18 @@ console.log(title); // Software engineer
 如果一个解构表达式涉及多个赋值，开始的赋值成功而后面的赋值出错，则整个解构赋值只会完成一部分
 
 ```js
-let person = {
+const person = {
   name: 'Matt',
   age: 27
-};
-let personName, personBar, personAge;
+}
+let personName, personBar, personAge
 try {
   // person.foo 是 undefined，因此会抛出错误
-  ({name: personName, foo: { bar: personBar }, age: personAge} = person);
-} catch(e) {}
-console.log(personName, personBar, personAge);
-// Matt, undefined, undefined 
+  ({ name: personName, foo: { bar: personBar }, age: personAge } = person)
+}
+catch (e) {}
+console.log(personName, personBar, personAge)
+// Matt, undefined, undefined
 ```
 
 ### 函数参数解构

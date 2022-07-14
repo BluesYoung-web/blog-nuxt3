@@ -120,37 +120,39 @@ Other-header: other-header-value
 ```js
 class Cookie {
   static get(name) {
-    const c_name = `${encodeURIComponent(name)}=`;
-    const start = document.cookie.indexOf(c_name);
-    let val = null;
-    
+    const c_name = `${encodeURIComponent(name)}=`
+    const start = document.cookie.indexOf(c_name)
+    let val = null
+
     if (start > -1) {
-      let end = document.cookie.indexOf(';', start);
-      if (end === -1) {
-        end = document.cookie.length;
-      }
-      val = decodeURIComponent(document.cookie.substring(start + c_name.length, end));
-      return val;
+      let end = document.cookie.indexOf(';', start)
+      if (end === -1)
+        end = document.cookie.length
+
+      val = decodeURIComponent(document.cookie.substring(start + c_name.length, end))
+      return val
     }
   }
+
   static set(name, value, expires, path, domain, secure) {
-    let text = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
-    if (expires instanceof Date) {
-      text += `; expires=${expires.toGMTString()}`;
-    }
-    if (path) {
-      text += `; path=${path}`;
-    }
-    if (domain) {
-      text += `; domain=${domain}`;
-    }
-    if (secure) {
-      text += `; secure`;
-    }
-    document.cookie = text;
+    let text = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
+    if (expires instanceof Date)
+      text += `; expires=${expires.toGMTString()}`
+
+    if (path)
+      text += `; path=${path}`
+
+    if (domain)
+      text += `; domain=${domain}`
+
+    if (secure)
+      text += '; secure'
+
+    document.cookie = text
   }
+
   static unset(name, path, domain, secure) {
-    Cookie.set(name, '', new Date(0), path, domain, secure);
+    Cookie.set(name, '', new Date(0), path, domain, secure)
   }
 }
 ```

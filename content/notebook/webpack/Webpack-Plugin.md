@@ -66,67 +66,67 @@ image: /img/webpack.jpeg
 
 ```js
 // 该代码中有注册的同步钩子函数和异步钩子函数和其触发过程
-const { SyncHook, AsyncSeriesHook } = require('tapable');
+const { SyncHook, AsyncSeriesHook } = require('tapable')
 
 class MyPlugin {
   constructor(options) {}
-  
+
   apply(compiler) {
     // 挂载自定义钩子
-    compiler.hooks.myHook = new SyncHook(['arg1', 'arg2']);
-    compiler.hooks.myAsyncHook = new AsyncSeriesHook(['arg1', 'arg2']);
+    compiler.hooks.myHook = new SyncHook(['arg1', 'arg2'])
+    compiler.hooks.myAsyncHook = new AsyncSeriesHook(['arg1', 'arg2'])
 
     // 注册自定义钩子
     compiler.hooks.myHook.tap('myHook', (arg1, arg2) => {
-      console.log('自己定义的钩子函数被触发', arg1, arg2);
-    });
+      console.log('自己定义的钩子函数被触发', arg1, arg2)
+    })
 
     // 异步1
     compiler.hooks.myAsyncHook.tapAsync('myHook', (arg1, arg2, callback) => {
-      console.log('异步钩子 tapAsync ', arg1, arg2);
-      callback();
-    });
+      console.log('异步钩子 tapAsync ', arg1, arg2)
+      callback()
+    })
     // 异步2
     compiler.hooks.myAsyncHook.tapPromise('myHook', (arg1, arg2) => {
       return new Promise((resolve) => {
-        resolve({arg1, arg2});
+        resolve({ arg1, arg2 })
       }).then((context) => {
         console.log('异步钩子 tapPromise', context)
-      });
-    });
+      })
+    })
 
     compiler.hooks.environment.tap('MyPlugin', () => {
       // 触发
       // 同步
-      compiler.hooks.myHook.call(1, 2);
+      compiler.hooks.myHook.call(1, 2)
       // 异步1
-      compiler.hooks.myAsyncHook.callAsync(1, 2, err => {
+      compiler.hooks.myAsyncHook.callAsync(1, 2, (err) => {
         console.log('触发完毕……   callAsync')
       })
       // 异步2
-      compiler.hooks.myAsyncHook.promise(1, 2).then(err => {
+      compiler.hooks.myAsyncHook.promise(1, 2).then((err) => {
         console.log('触发完毕……   promise')
-      });
-    });
+      })
+    })
 
-    console.log(compiler);
+    console.log(compiler)
     // 注册同步或者异步钩子函数
     compiler.hooks.compile.tap('MyPlugin', (params) => {
       // do sth
-    });
+    })
     // 注册异步钩子1
     compiler.hooks.run.tapAsync('MyPlugin', (compiler, callback) => {
-      console.log('tapAsync 异步');
-      callback();
-    });
+      console.log('tapAsync 异步')
+      callback()
+    })
     // 注册异步钩子2
     compiler.hooks.run.tapPromise('MyPlugin', async (compiler) => {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 1000))
       console.log('tapPromise 异步')
-    });
+    })
   }
 }
-module.exports = MyPlugin;
+module.exports = MyPlugin
 ```
 
 ### 自定义
@@ -137,28 +137,28 @@ class MyPlugin {
 
   apply(compiler) {
     compiler.hooks.emit.tapAsync('MyPlugin', (compilation, callback) => {
-      console.log('plugin is used!!!', "emit事件");
+      console.log('plugin is used!!!', 'emit事件')
       const mainfest = {}
       for (const name of Object.keys(compilation.assets)) {
         // compilation.assets[name].size()获取输出文件的大小
         // compilation.assets[name].source()获取内容
-        mainfest[name] = compilation.assets[name].size();
+        mainfest[name] = compilation.assets[name].size()
         console.log(compilation.assets[name].source())
       }
 
       compilation.assets['mainfest.json'] = {
         source() {
-          return JSON.stringify(mainfest);
+          return JSON.stringify(mainfest)
         },
         size() {
-          return this.source().length;
+          return this.source().length
         }
-      };
+      }
 
-      callback();
-    });
+      callback()
+    })
   }
 }
 
-module.exports = MyPlugin;
+module.exports = MyPlugin
 ```

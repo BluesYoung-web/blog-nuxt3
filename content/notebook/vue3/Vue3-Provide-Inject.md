@@ -13,15 +13,16 @@ image: /img/vue.jpeg
 **必须在 `setup` 的顶层同步调用**
 
 ```ts
+import type { InjectionKey } from 'vue'
+import { inject, provide } from 'vue'
+
 function provide<T>(
   key: InjectionKey<T> | string,
   value: T
 ): void
 
 // 全局提供
-app.provide('key', 'value');
-
-import { provide, inject, InjectionKey } from 'vue'
+app.provide('key', 'value')
 
 const key = Symbol() as InjectionKey<string>
 provide(key, 'foo') // 若提供的是非字符串值会导致错误

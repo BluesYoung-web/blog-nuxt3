@@ -68,8 +68,8 @@ date: 2021-01-25 08:38:36
 ## 取消动画
 
 ```js
-const reqId = requestAnimationFrame(() => console.log('repaint'));
-cancelAnimationFrame(reqId);
+const reqId = requestAnimationFrame(() => console.log('repaint'))
+cancelAnimationFrame(reqId)
 ```
 
 ## 通过`requestAnimationFrame`节流
@@ -83,15 +83,15 @@ cancelAnimationFrame(reqId);
 再加入定时器，可以限制一段时间内只执行一次
 
 ```js
-let enabled = true;
+let enabled = true
 function exe() {
-  console.log(Date.now());
+  console.log(Date.now())
 }
 window.addEventListener('scroll', () => {
-  if(enabled) {
-    enabled = false;
-    window.requestAnimationFrame(exe);
-    window.setTimeout(() => enabled = true, 50);
+  if (enabled) {
+    enabled = false
+    window.requestAnimationFrame(exe)
+    window.setTimeout(() => enabled = true, 50)
   }
-});
+})
 ```

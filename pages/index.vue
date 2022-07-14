@@ -2,13 +2,14 @@
  * @Author: zhangyang
  * @Date: 2022-06-15 10:54:23
  * @LastEditTime: 2022-06-15 15:58:56
- * @Description: 
+ * @Description:
 -->
 <script lang="ts" setup>
 definePageMeta({
   layout: 'home',
 })
 </script>
+
 <template>
   <main id="main-content">
     <DocList />

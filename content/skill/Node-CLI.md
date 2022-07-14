@@ -28,20 +28,23 @@ cli-name # 执行脚本
 - 基本使用：
 
 ```js
-const { program } = require('commander');
-program.version('1.0.0');
+const { program } = require('commander')
+program.version('1.0.0')
 program
   .option('-d, --debug', 'output extra debugging')
   .option('-s, --small', 'small pizza size')
-  .option('-p, --pizza-type <type>', 'flavour of pizza');
+  .option('-p, --pizza-type <type>', 'flavour of pizza')
 
-program.parse(process.argv);
+program.parse(process.argv)
 
-const options = program.opts();
-if (options.debug) console.log(options);
-console.log('pizza details:');
-if (options.small) console.log('- small pizza size');
-if (options.pizzaType) console.log(`- ${options.pizzaType}`);
+const options = program.opts()
+if (options.debug)
+  console.log(options)
+console.log('pizza details:')
+if (options.small)
+  console.log('- small pizza size')
+if (options.pizzaType)
+  console.log(`- ${options.pizzaType}`)
 /*
 $ pizza-options -d
 { debug: true, small: undefined, pizzaType: undefined }
@@ -65,7 +68,7 @@ pizza details:
 - 基本使用：
 
 ```js
-const inquirer = require('inquirer');
+const inquirer = require('inquirer')
 const optionList = [
   {
     name: 'type',
@@ -81,7 +84,7 @@ const optionList = [
       'chore    -> 构建或者依赖的修改'
     ],
     filter: (val) => {
-      return val.match(/\w+/)[0];
+      return val.match(/\w+/)[0]
     }
   },
   {
@@ -94,13 +97,13 @@ const optionList = [
     type: 'input',
     message: '请输入你想使用的 gitmoji（只需名称，无需引号）：',
     when: ({ use_default_icon }) => {
-      return !use_default_icon;
+      return !use_default_icon
     },
     validate: (val) => {
-      if (!val.indexOf(':') > -1) {
-        return true;
-      }
-      return '只需名称，无需引号';
+      if (!val.indexOf(':') > -1)
+        return true
+
+      return '只需名称，无需引号'
     }
   },
   {
@@ -108,14 +111,14 @@ const optionList = [
     type: 'input',
     message: '请输入此次提交的描述：',
     validate: (val) => {
-      if (val.trim() !== '') {
-        return true;
-      }
-      return '请勿输入空字符串！！！';
+      if (val.trim() !== '')
+        return true
+
+      return '请勿输入空字符串！！！'
     }
   }
-];
-inquirer.prompt(optionList).then(({type, use_default_icon, icon, msg}) => {}).catch();
+]
+inquirer.prompt(optionList).then(({ type, use_default_icon, icon, msg }) => {}).catch()
 ```
 
 **`shelljs`**
@@ -123,39 +126,39 @@ inquirer.prompt(optionList).then(({type, use_default_icon, icon, msg}) => {}).ca
 - 用于执行系统命令
 
 ```js
-//引入shelljs
+// 引入shelljs
 const shell = require('shelljs')
- 
-//检查控制台是否以运行`git `开头的命令
+
+// 检查控制台是否以运行`git `开头的命令
 if (!shell.which('git')) {
-  //在控制台输出内容
-  shell.echo('Sorry, this script requires git');
-  shell.exit(1);
+  // 在控制台输出内容
+  shell.echo('Sorry, this script requires git')
+  shell.exit(1)
 }
- 
-shell.rm('-rf','out/Release'); //强制递归删除`out/Release目录`
-shell.cp('-R','stuff/','out/Release'); //将`stuff/`中所有内容拷贝至`out/Release`目录
- 
-shell.cd('lib'); //进入`lib`目录
-//找出所有的扩展名为js的文件，并遍历进行操作
-shell.ls('*.js').forEach(function (file) {
+
+shell.rm('-rf', 'out/Release') // 强制递归删除`out/Release目录`
+shell.cp('-R', 'stuff/', 'out/Release') // 将`stuff/`中所有内容拷贝至`out/Release`目录
+
+shell.cd('lib') // 进入`lib`目录
+// 找出所有的扩展名为js的文件，并遍历进行操作
+shell.ls('*.js').forEach((file) => {
   /* 这是第一个难点：sed流编辑器,建议专题学习，-i表示直接作用源文件 */
-  //将build_version字段替换为'v0.1.2'
-  shell.sed('-i', 'BUILD_VERSION', 'v0.1.2', file);
-  //将包含`REMOVE_THIS_LINE`字符串的行删除
-  shell.sed('-i', /^.*REMOVE_THIS_LINE.*$/, '', file);
-  //将包含`REPLACE_LINE_WITH_MACRO`字符串的行替换为`macro.js`中的内容
-  shell.sed('-i', /.*REPLACE_LINE_WITH_MACRO.*\n/, shell.cat('macro.js'), file);
-});
- 
-//返回上一级目录
-shell.cd('..');
- 
-//run external tool synchronously
-//即同步运行外部工具
-if (shell.exec('git commit -am "Auto-commit"').code !== 0){
-  shell.echo('Error: Git commit failed');
-  shell.exit(1);
+  // 将build_version字段替换为'v0.1.2'
+  shell.sed('-i', 'BUILD_VERSION', 'v0.1.2', file)
+  // 将包含`REMOVE_THIS_LINE`字符串的行删除
+  shell.sed('-i', /^.*REMOVE_THIS_LINE.*$/, '', file)
+  // 将包含`REPLACE_LINE_WITH_MACRO`字符串的行替换为`macro.js`中的内容
+  shell.sed('-i', /.*REPLACE_LINE_WITH_MACRO.*\n/, shell.cat('macro.js'), file)
+})
+
+// 返回上一级目录
+shell.cd('..')
+
+// run external tool synchronously
+// 即同步运行外部工具
+if (shell.exec('git commit -am "Auto-commit"').code !== 0) {
+  shell.echo('Error: Git commit failed')
+  shell.exit(1)
 }
 ```
 

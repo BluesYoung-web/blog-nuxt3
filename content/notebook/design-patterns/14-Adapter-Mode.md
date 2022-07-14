@@ -35,53 +35,54 @@ image: /img/design-mode.jpeg
  * 定义客户端接口
  */
 class Target {
-	public request(): string {
-		return '默认值';
-	}
+  public request(): string {
+    return '默认值'
+  }
 }
 /**
  * 现有接口
  */
 class Adaptee {
-	public specificRequest(): string {
-		return '你是年少的欢喜';
-	}
+  public specificRequest(): string {
+    return '你是年少的欢喜'
+  }
 }
 /**
  * 适配器
  */
 class Adapter extends Target {
-	private adaptee: Adaptee;
-	constructor(adaptee: Adaptee) {
-		super();
-		this.adaptee = adaptee;
-	}
-	/**
+  private adaptee: Adaptee
+  constructor(adaptee: Adaptee) {
+    super()
+    this.adaptee = adaptee
+  }
+
+  /**
 	 * 方法重载
 	 */
-	public request(): string {
-		const result = this.adaptee
+  public request(): string {
+    const result = this.adaptee
       .specificRequest()
       .split('')
       .reverse()
-      .join('');
-		return `适配器处理过的值： ${result}`;
-	}
+      .join('')
+    return `适配器处理过的值： ${result}`
+  }
 }
 /**
  * 客户端
  */
 function clientCode(target: Target) {
-	console.log(target.request());
+  console.log(target.request())
 }
-console.log('使用原有接口：');
-const target = new Target();
-clientCode(target);
-console.log('\n');
-const adaptee = new Adaptee();
-console.log(`适配器处理之前的接口：${adaptee.specificRequest()}`);
-console.log('\n');
-console.log('加入适配器：');
-const adapter = new Adapter(adaptee);
-clientCode(adapter);
+console.log('使用原有接口：')
+const target = new Target()
+clientCode(target)
+console.log('\n')
+const adaptee = new Adaptee()
+console.log(`适配器处理之前的接口：${adaptee.specificRequest()}`)
+console.log('\n')
+console.log('加入适配器：')
+const adapter = new Adapter(adaptee)
+clientCode(adapter)
 ```

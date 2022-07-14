@@ -30,54 +30,54 @@ image: /img/algorithm.webp
 <strong>测试代码：</strong>
 
 ```ts
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
 describe('爱吃香蕉的珂珂', () => {
   it('1', () => {
-    const piles = [3, 6, 7, 11];
-    const h = 8;
-    expect(minEatingSpeed(piles, h)).toBe(4);
-  });
+    const piles = [3, 6, 7, 11]
+    const h = 8
+    expect(minEatingSpeed(piles, h)).toBe(4)
+  })
 
   it('2', () => {
-    const piles = [30, 11, 23, 4, 20];
-    const h = 5;
-    expect(minEatingSpeed(piles, h)).toBe(30);
-  });
+    const piles = [30, 11, 23, 4, 20]
+    const h = 5
+    expect(minEatingSpeed(piles, h)).toBe(30)
+  })
 
   it('3', () => {
-    const piles = [30, 11, 23, 4, 20];
-    const h = 6;
-    expect(minEatingSpeed(piles, h)).toBe(23);
-  });
-});
+    const piles = [30, 11, 23, 4, 20]
+    const h = 6
+    expect(minEatingSpeed(piles, h)).toBe(23)
+  })
+})
 ```
 
 ### 具体实现
 
 ```ts
-function canFinish (piles: number[], n: number) {
-  let hours = 0;
-  for (const banana of piles) {
-    hours += Math.ceil(banana / n);
-  }
-  return hours;
+function canFinish(piles: number[], n: number) {
+  let hours = 0
+  for (const banana of piles)
+    hours += Math.ceil(banana / n)
+
+  return hours
 }
 
 function minEatingSpeed(piles: number[], h: number): number {
-  let left = 1;
+  let left = 1
   // h 大于等于香蕉堆数，最坏情况取最大值
-  let right = Math.max(...piles);
+  let right = Math.max(...piles)
 
   while (left < right) {
-    const mid = left + Math.floor((right - left) / 2);
-    if (canFinish(piles, mid) <= h) {
-      right = mid;
-    } else {
-      left = mid + 1;
-    }
+    const mid = left + Math.floor((right - left) / 2)
+    if (canFinish(piles, mid) <= h)
+      right = mid
+    else
+      left = mid + 1
+
   }
-  return right;
+  return right
 }
 ```
 
@@ -103,81 +103,81 @@ function minEatingSpeed(piles: number[], h: number): number {
 <strong>测试代码：</strong>
 
 ```ts
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
 describe('在 D 天内送达包裹的能力', () => {
   it('1', () => {
-    const weights = [1,2,3,4,5,6,7,8,9,10];
-    const days = 5;
-    expect(shipWithinDays(weights, days)).toBe(15);
-  });
+    const weights = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    const days = 5
+    expect(shipWithinDays(weights, days)).toBe(15)
+  })
 
   it('2', () => {
-    const weights = [3, 2, 2, 4, 1, 4];
-    const days = 3;
-    expect(shipWithinDays(weights, days)).toBe(6);
-  });
+    const weights = [3, 2, 2, 4, 1, 4]
+    const days = 3
+    expect(shipWithinDays(weights, days)).toBe(6)
+  })
 
   it('3. 最小运载量不得小于单个货物的最大重量', () => {
-    const weights = [1, 2, 3, 1, 1];
-    const days = 4;
-    expect(shipWithinDays(weights, days)).toBe(3);
-  });
+    const weights = [1, 2, 3, 1, 1]
+    const days = 4
+    expect(shipWithinDays(weights, days)).toBe(3)
+  })
 
   it('4. 刚好装满', () => {
-    const weights = [3, 3, 3, 3, 3, 3];
-    const days = 2;
-    expect(shipWithinDays(weights, days)).toBe(9);
-  });
-});
+    const weights = [3, 3, 3, 3, 3, 3]
+    const days = 2
+    expect(shipWithinDays(weights, days)).toBe(9)
+  })
+})
 ```
 
 
 ### 具体实现
 
 ```ts
-function canFinish (weights: number[], n: number) {
-  let d = 1;
-  let tempShip = 0;
-  const len = weights.length;
+function canFinish(weights: number[], n: number) {
+  let d = 1
+  let tempShip = 0
+  const len = weights.length
   for (let i = 0; i < len; i++) {
     if (tempShip + weights[i] < n) {
-      tempShip += weights[i];
-    } else {
-      d++;
-      tempShip = tempShip + weights[i] === n ? 0 : weights[i];
+      tempShip += weights[i]
+    }
+    else {
+      d++
+      tempShip = tempShip + weights[i] === n ? 0 : weights[i]
     }
   }
   // 刚好装满
-  if (tempShip === 0) {
-    d--;
-  }
-  return d;
+  if (tempShip === 0)
+    d--
+
+  return d
 }
 
 function shipWithinDays(weights: number[], days: number): number {
-  let left = 1;
-  let right = weights.reduce((pre, curr) => pre + curr, 0);
-  let maxValue = Math.max(...weights);
+  let left = 1
+  let right = weights.reduce((pre, curr) => pre + curr, 0)
+  const maxValue = Math.max(...weights)
 
   // base case
-  if (days === 1) {
-    return right;
-  }
-  if (days === weights.length) {
-    return maxValue;
-  }
+  if (days === 1)
+    return right
+
+  if (days === weights.length)
+    return maxValue
 
   while (left < right) {
-    const mid = left + Math.floor((right - left) / 2);
-    if (canFinish(weights, mid) <= days) {
-      right = mid;
-    } else {
-      left = mid + 1;
-    }
+    const mid = left + Math.floor((right - left) / 2)
+    if (canFinish(weights, mid) <= days)
+      right = mid
+    else
+      left = mid + 1
+
   }
   // 最小装载量不能小于单个货物的重量
-  return Math.max(right, maxValue);
+  return Math.max(right, maxValue)
 }
 ```
 
@@ -201,33 +201,33 @@ function shipWithinDays(weights: number[], days: number): number {
 <strong>测试代码：</strong>
 
 ```ts
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
 describe('分割数组的最大值', () => {
   it('1', () => {
-    const nums = [7, 2, 5, 10, 8];
-    const m = 2;
-    expect(splitArray(nums, m)).toBe(18);
-  });
+    const nums = [7, 2, 5, 10, 8]
+    const m = 2
+    expect(splitArray(nums, m)).toBe(18)
+  })
 
   it('2', () => {
-    const nums = [1, 2, 3, 4, 5];
-    const m = 2;
-    expect(splitArray(nums, m)).toBe(9);
-  });
+    const nums = [1, 2, 3, 4, 5]
+    const m = 2
+    expect(splitArray(nums, m)).toBe(9)
+  })
 
   it('3', () => {
-    const nums = [1, 4, 4];
-    const m = 3;
-    expect(splitArray(nums, m)).toBe(4);
-  });
+    const nums = [1, 4, 4]
+    const m = 3
+    expect(splitArray(nums, m)).toBe(4)
+  })
 
   it('4. 子数组的最大值不会小于单个元素的最大值', () => {
-    const nums = [2, 3, 1, 2, 4, 3];
-    const m = 5;
-    expect(splitArray(nums, m)).toBe(4);
-  });
-});
+    const nums = [2, 3, 1, 2, 4, 3]
+    const m = 5
+    expect(splitArray(nums, m)).toBe(4)
+  })
+})
 ```
 
 
@@ -236,46 +236,47 @@ describe('分割数组的最大值', () => {
 **其实思路跟上一题类似，稍微改一改代码就行**
 
 ```ts
-function canFinish (weights: number[], n: number) {
-  let d = 1;
-  let tempShip = 0;
-  const len = weights.length;
+function canFinish(weights: number[], n: number) {
+  let d = 1
+  let tempShip = 0
+  const len = weights.length
   for (let i = 0; i < len; i++) {
     if (tempShip + weights[i] < n) {
-      tempShip += weights[i];
-    } else {
-      d++;
-      tempShip = tempShip + weights[i] === n ? 0 : weights[i];
+      tempShip += weights[i]
+    }
+    else {
+      d++
+      tempShip = tempShip + weights[i] === n ? 0 : weights[i]
     }
   }
   // 刚好装满
-  if (tempShip === 0) {
-    d--;
-  }
-  return d;
+  if (tempShip === 0)
+    d--
+
+  return d
 }
 
 function splitArray(nums: number[], m: number): number {
-  let left = Math.min(...nums);
-  let right = nums.reduce((pre, curr) => pre + curr, 0);
-  let maxValue = Math.max(...nums);
+  let left = Math.min(...nums)
+  let right = nums.reduce((pre, curr) => pre + curr, 0)
+  const maxValue = Math.max(...nums)
 
   // base case
-  if (m === 1) {
-    return right;
-  }
-  if (m === nums.length) {
-    return maxValue;
-  }
+  if (m === 1)
+    return right
+
+  if (m === nums.length)
+    return maxValue
+
   while (left < right) {
-    const mid = (right + left) >> 1;
-    if (canFinish(nums, mid) <= m) {
-      right = mid;
-    } else {
-      left = mid + 1;
-    }
+    const mid = (right + left) >> 1
+    if (canFinish(nums, mid) <= m)
+      right = mid
+    else
+      left = mid + 1
+
   }
   // 子数组的最大值不会小于单个元素的最大值
-  return Math.max(right, maxValue);
-};
+  return Math.max(right, maxValue)
+}
 ```

@@ -66,25 +66,25 @@ date: 2021-01-23 09:29:17
 
 ```js
 const EventUtil = {
-	addHandler: function(element, type, handler) {
-		if (element.addEventListener) {
-			element.addEventListener(type, handler, false);
-		} else if (element.attachEvent) {
-			element.attachEvent("on" + type, handler);
-		} else {
-			element["on" + type] = handler;
-		}
-	},
-	removeHandler: function(element, type, handler) {
-		if (element.removeEventListener) {
-			element.removeEventListener(type, handler, false);
-		} else if (element.detachEvent) {
-			element.detachEvent("on" + type, handler);
-		} else {
-			element["on" + type] = null;
-		}
-	}
-}; 
+  addHandler(element, type, handler) {
+    if (element.addEventListener)
+      element.addEventListener(type, handler, false)
+		 else if (element.attachEvent)
+      element.attachEvent(`on${type}`, handler)
+		 else
+      element[`on${type}`] = handler
+
+  },
+  removeHandler(element, type, handler) {
+    if (element.removeEventListener)
+      element.removeEventListener(type, handler, false)
+		 else if (element.detachEvent)
+      element.detachEvent(`on${type}`, handler)
+		 else
+      element[`on${type}`] = null
+
+  }
+}
 ```
 
 ## `DOM` 事件对象
@@ -121,28 +121,28 @@ const EventUtil = {
 ## 跨浏览器事件对象
 
 ```js
-var getEvent = function(e){
-	return e ? e : window.event;
+const getEvent = function (e) {
+  return e || window.event
 }
 
-var getTarget = function(e){
-	return e.target || e.srcElement;
+const getTarget = function (e) {
+  return e.target || e.srcElement
 }
 
-var preventDefault = function(e){
-	if(e.preventDefault){
-		e.preventDefault();
-	} else {
-		e.returnValue = false;
-	}
+const preventDefault = function (e) {
+  if (e.preventDefault)
+    e.preventDefault()
+	 else
+    e.returnValue = false
+
 }
 
-var stopPropagation = function(e){
-	if(e.stopPropagation){
-		e.stopPropagation();
-	} else {
-		e.cancelBubble = true;
-	}
+const stopPropagation = function (e) {
+  if (e.stopPropagation)
+    e.stopPropagation()
+	 else
+    e.cancelBubble = true
+
 }
 ```
 

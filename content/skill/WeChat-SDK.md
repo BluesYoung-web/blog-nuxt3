@@ -46,11 +46,11 @@ location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${app
 
 ```json
 {
-  "access_token":"ACCESS_TOKEN", // 授权接口凭证
-  "expires_in":7200, // 凭证超时时间
-  "refresh_token":"REFRESH_TOKEN", // 刷新凭证(自身有效期  30 天，https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN)
-  "openid":"OPENID", // 用户唯一标识
-  "scope":"SCOPE"  // 用户授权的作用域
+  "access_token": "ACCESS_TOKEN", // 授权接口凭证
+  "expires_in": 7200, // 凭证超时时间
+  "refresh_token": "REFRESH_TOKEN", // 刷新凭证(自身有效期  30 天，https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN)
+  "openid": "OPENID", // 用户唯一标识
+  "scope": "SCOPE" // 用户授权的作用域
 }
 ```
 
@@ -87,41 +87,40 @@ location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${app
 **前端根据后端返回的参数，使用微信内置对象调起支付面板：**
 
 ```js
-// eslint-disable-next-line
 WeixinJSBridge.invoke(
-	'getBrandWCPayRequest', {
-		"appId":"wx2421b1c4370ec43b",     //公众号ID，由商户传入     
-		"timeStamp":"1395712654",         //时间戳，自1970年以来的秒数     
-		"nonceStr":"e61463f8efa94090b1f366cccfbbb444", //随机串     
-		"package":"prepay_id=u802345jgfjsdfgsdg888",     
-		"signType":"MD5",         //微信签名方式：     
-		"paySign":"70EA570631E4BB79628FBCA90534C63FF7FADD89" //微信签名 
-	},
-	(res) => {
-		switch (res.err_msg) {
-			case "get_brand_wcpay_request:ok": {
-				alert("支付成功");
-				ctx.$router.push({ path: '/wx/success' })
-				break;
-			}
-			case "get_brand_wcpay_request:fail": {
-				alert("支付失败，请重试");
-				ctx.hasClicked = false;
-				break;
-			}
-			case "get_brand_wcpay_request:cancel": {
-				alert("已取消支付");
-				ctx.hasClicked = false;
-				break;
-			}
-			default: {
-				alert(res.err_msg);
-				ctx.hasClicked = false;
-				break;
-			}
-		}
-	}
-);
+  'getBrandWCPayRequest', {
+    appId: 'wx2421b1c4370ec43b', // 公众号ID，由商户传入
+    timeStamp: '1395712654', // 时间戳，自1970年以来的秒数
+    nonceStr: 'e61463f8efa94090b1f366cccfbbb444', // 随机串
+    package: 'prepay_id=u802345jgfjsdfgsdg888',
+    signType: 'MD5', // 微信签名方式：
+    paySign: '70EA570631E4BB79628FBCA90534C63FF7FADD89' // 微信签名
+  },
+  (res) => {
+    switch (res.err_msg) {
+      case 'get_brand_wcpay_request:ok': {
+        alert('支付成功')
+        ctx.$router.push({ path: '/wx/success' })
+        break
+      }
+      case 'get_brand_wcpay_request:fail': {
+        alert('支付失败，请重试')
+        ctx.hasClicked = false
+        break
+      }
+      case 'get_brand_wcpay_request:cancel': {
+        alert('已取消支付')
+        ctx.hasClicked = false
+        break
+      }
+      default: {
+        alert(res.err_msg)
+        ctx.hasClicked = false
+        break
+      }
+    }
+  }
+)
 ```
 
 **注意点：**
@@ -145,10 +144,10 @@ WeixinJSBridge.invoke(
 
 ```json
 {
-  "errcode":0,
-  "errmsg":"ok",
-  "ticket":"bxLdikRXVbTPdHSM05e5u5sUoXNKd8-41ZO3MhKoyN5OfkWITDGgnr2fwJ0m9E8NYzWKVZvdVtaUgWvsdshFKA",
-  "expires_in":7200
+  "errcode": 0,
+  "errmsg": "ok",
+  "ticket": "bxLdikRXVbTPdHSM05e5u5sUoXNKd8-41ZO3MhKoyN5OfkWITDGgnr2fwJ0m9E8NYzWKVZvdVtaUgWvsdshFKA",
+  "expires_in": 7200
 }
 ```
 

@@ -2,24 +2,27 @@
  * @Author: zhangyang
  * @Date: 2022-01-16 14:16:48
  * @LastEditTime: 2022-06-15 16:14:20
- * @Description: 
+ * @Description:
 -->
 <script lang="ts" setup>
-const { nav } = useConfig();
+const { nav } = useConfig()
 const scorll = () => {
-  const { offsetTop } = document.querySelector('#main-content') as HTMLElement;
+  const { offsetTop } = document.querySelector('#main-content') as HTMLElement
   window.scrollTo({
     top: offsetTop || 0,
-    behavior: 'smooth'
-  });
-};
+    behavior: 'smooth',
+  })
+}
 </script>
+
 <template>
   <div class="main">
     <div class="header">
       <Header />
       <div class="h-full flex flex-col justify-center items-center">
-        <p class="text-2xl font-bold mb-1 lg:text-4xl">{{ nav.title }}</p>
+        <p class="text-2xl font-bold mb-1 lg:text-4xl">
+          {{ nav.title }}
+        </p>
         <OneSay class="text-xl lg:text-2xl text-center" />
       </div>
       <div class="down">
@@ -47,7 +50,7 @@ const scorll = () => {
   @apply w-full h-100vh transition-all duration-500;
   .down {
     @apply absolute bottom-2 w-full text-center z-1 font-bold text-4xl;
-    
+
     @keyframes icon-jump {
       0% {
         opacity: 0.4;

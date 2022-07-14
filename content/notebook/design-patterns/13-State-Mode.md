@@ -41,21 +41,24 @@ image: /img/design-mode.jpeg
  */
 class Context {
   constructor(private state: State) {
-    this.transitionTo(state);
+    this.transitionTo(state)
   }
+
   /**
    * 状态转换
    */
   public transitionTo(state: State) {
-    console.log(`上下文状态转换： ${(state as unknown as any).constructor.name}.`);
-    this.state = state;
-    this.state.setContext(this);
+    console.log(`上下文状态转换： ${(state as unknown as any).constructor.name}.`)
+    this.state = state
+    this.state.setContext(this)
   }
+
   public request1() {
-    this.state.handle1();
+    this.state.handle1()
   }
+
   public request2() {
-    this.state.handle2();
+    this.state.handle2()
   }
 }
 /**
@@ -65,53 +68,54 @@ abstract class State {
   /**
    * 上下文
    */
-  protected context: Context | null = null;
+  protected context: Context | null = null
   /**
    * 设置上下文
    */
   public setContext(context: Context) {
-    this.context = context;
+    this.context = context
   }
   /**
    * 状态1
    */
-  public abstract handle1(): void;
+  public abstract handle1(): void
   /**
    * 状态2
    */
-  public abstract handle2(): void;
+  public abstract handle2(): void
 }
 /**
  * 状态关联
  */
 class ConcreteStateA extends State {
   public handle1() {
-    console.log('ConcreteStateA 处理请求1');
-    console.log('ConcreteStateA 改变上下文');
-    this.context?.transitionTo(new ConcreteStateB());
+    console.log('ConcreteStateA 处理请求1')
+    console.log('ConcreteStateA 改变上下文')
+    this.context?.transitionTo(new ConcreteStateB())
   }
+
   public handle2() {
-    console.log('ConcreteStateA 处理请求2');
+    console.log('ConcreteStateA 处理请求2')
   }
 }
 class ConcreteStateB extends State {
   public handle1() {
-    console.log('ConcreteStateB 处理请求1');
+    console.log('ConcreteStateB 处理请求1')
   }
 
   public handle2() {
-    console.log('ConcreteStateB 处理请求2');
-    console.log('ConcreteStateB 改变上下文');
-    this.context?.transitionTo(new ConcreteStateA());
+    console.log('ConcreteStateB 处理请求2')
+    console.log('ConcreteStateB 改变上下文')
+    this.context?.transitionTo(new ConcreteStateA())
   }
 }
 /**
  * 客户端
  */
-const context = new Context(new ConcreteStateA());
-context.request1();
-context.request2();
-context.request2();
+const context = new Context(new ConcreteStateA())
+context.request1()
+context.request2()
+context.request2()
 // 上下文状态转换： ConcreteStateA.
 // ConcreteStateA 处理请求1
 // ConcreteStateA 改变上下文

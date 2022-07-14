@@ -14,14 +14,16 @@ date: 2021-01-20 14:03:33
 
 ```js
 function getElement(id) {
-	if(document.getElementById) {
-		return document.getElementById(id);
-	} else if (document.all) {
-		// < IE5
-		return document.all[id];
-	} else {
-		throw new Error('无法获取元素节点');
-	}
+  if (document.getElementById) {
+    return document.getElementById(id)
+  }
+  else if (document.all) {
+    // < IE5
+    return document.all[id]
+  }
+  else {
+    throw new Error('无法获取元素节点')
+  }
 }
 ```
 
@@ -29,55 +31,61 @@ function getElement(id) {
 
 ```js
 // 检测浏览器是否支持 Netscape 式的插件
-let hasNSPlugins = !!(navigator.plugins && navigator.plugins.length);
+const hasNSPlugins = !!(navigator.plugins && navigator.plugins.length)
 // 检测浏览器是否具有 DOM Level 1 能力
-let hasDOM1 = !!(document.getElementById && document.createElement && document.getElementsByTagName); 
+const hasDOM1 = !!(document.getElementById && document.createElement && document.getElementsByTagName)
 ```
 
 ## 浏览器检测
 
 ```js
 class BrowserDetector {
-	constructor() {
-		// 测试条件编译
-		// IE6~10
-		this.isIE_6_10 = /*@cc_on!@*/false;
-		// 测试documentMode
-		// IE7~11
-		this.isIE_7_11 = !!document.documentMode;
-		// Edge20+
-		this.isEdge_20_plus = !!window.StyleMedia;
-		// Firefox
-		this.isFirefox = typeof InstallTrigger !== 'undefined';
-		// Chrome
-		this.isChrome = !!window.chrome && !!window.chrome.app;
-		// Safari3~9.1
-		this.isSafari_3_9 = /constructor/i.test(window.Element);
-		// Safari7+
-		this.isSafari_7_plus = (({ pushNotification = {} } = {}) => {
-			return pushNotification.toString() === '[object SafariRemoteNotification]';
-		})(window.safari);
-		// Opera20+
-		this.isOpera_20_plus = !!window.opr && !!window.opr.addons;
-	}
-	isIE() {
-		return this.isIE_6_10 || this.isIE_7_11;
-	}
-	isEdge() {
-		return this.isEdge_20_plus && !this.isIE();
-	}
-	isFirefox() {
-		return this.isFirefox;
-	}
-	isChrome() {
-		return this.isChrome;
-	}
-	isSafari() {
-		return this.isSafari_3_9 || this.isSafari_7_plus;
-	}
-	isOpera() {
-		return this.isOpera_20_plus;
-	}
+  constructor() {
+    // 测试条件编译
+    // IE6~10
+    this.isIE_6_10 = /* @cc_on!@ */false
+    // 测试documentMode
+    // IE7~11
+    this.isIE_7_11 = !!document.documentMode
+    // Edge20+
+    this.isEdge_20_plus = !!window.StyleMedia
+    // Firefox
+    this.isFirefox = typeof InstallTrigger !== 'undefined'
+    // Chrome
+    this.isChrome = !!window.chrome && !!window.chrome.app
+    // Safari3~9.1
+    this.isSafari_3_9 = /constructor/i.test(window.Element)
+    // Safari7+
+    this.isSafari_7_plus = (({ pushNotification = {} } = {}) => {
+      return pushNotification.toString() === '[object SafariRemoteNotification]'
+    })(window.safari)
+    // Opera20+
+    this.isOpera_20_plus = !!window.opr && !!window.opr.addons
+  }
+
+  isIE() {
+    return this.isIE_6_10 || this.isIE_7_11
+  }
+
+  isEdge() {
+    return this.isEdge_20_plus && !this.isIE()
+  }
+
+  isFirefox() {
+    return this.isFirefox
+  }
+
+  isChrome() {
+    return this.isChrome
+  }
+
+  isSafari() {
+    return this.isSafari_3_9 || this.isSafari_7_plus
+  }
+
+  isOpera() {
+    return this.isOpera_20_plus
+  }
 }
 ```
 
@@ -111,30 +119,31 @@ class BrowserDetector {
 
 ```js
 function isWeChat(ua = navigator.userAgent) {
-  const wechat = ua.match(/(MicroMessenger)\/([\d\.]+)/i);
-  if(wechat) {
-    return { version: wechat[2].replace(/_/g, '.') };
-  } else {
-    return false;
-  }
+  const wechat = ua.match(/(MicroMessenger)\/([\d\.]+)/i)
+  if (wechat)
+    return { version: wechat[2].replace(/_/g, '.') }
+  else
+    return false
+
 }
 function isAndriod(ua = navigator.userAgent) {
-  const andriod = ua.match(/(Android);?[\s\/]+([\d.]+)?/);
-  if(andriod) {
+  const andriod = ua.match(/(Android);?[\s\/]+([\d.]+)?/)
+  if (andriod) {
     return {
       version: android[2],
       isBadAndroid: !(/Chrome\/\d/.test(ua.appVersion))
-    };
-  } else {
-    return false;
+    }
+  }
+  else {
+    return false
   }
 }
 function isIOS(ua = navigator.userAgent) {
-  const ios = ua.match(/(iPhone\sOS)\s([\d_]+)/) || ua.match(/(iPad).*OS\s([\d_]+)/);
-  if(ios) {
-    return { version: ios[2].replace(/_/g, '.') };
-  } else {
-    return false;
-  }
+  const ios = ua.match(/(iPhone\sOS)\s([\d_]+)/) || ua.match(/(iPad).*OS\s([\d_]+)/)
+  if (ios)
+    return { version: ios[2].replace(/_/g, '.') }
+  else
+    return false
+
 }
 ```

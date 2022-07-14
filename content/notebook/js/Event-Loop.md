@@ -67,20 +67,20 @@ JS 引擎是**单线程**的，一个时间点只能做一件事情
 4. 重复 2、3 两步
 
 ```js
-console.log('开始执行');
-Promise.resolve().then(()=> {
-  console.log('第一个回调函数：微任务1');
-  setTimeout(()=> {
-    console.log('第三个回调函数：宏任务2');
-    console.log('结束执行');
-  }, 0);
-});
-setTimeout(()=> {
-  console.log('第二个回调函数：宏任务1');
-  Promise.resolve().then(()=> {
-    console.log('第四个回调函数：微任务2');
-  });
-}, 0);
+console.log('开始执行')
+Promise.resolve().then(() => {
+  console.log('第一个回调函数：微任务1')
+  setTimeout(() => {
+    console.log('第三个回调函数：宏任务2')
+    console.log('结束执行')
+  }, 0)
+})
+setTimeout(() => {
+  console.log('第二个回调函数：宏任务1')
+  Promise.resolve().then(() => {
+    console.log('第四个回调函数：微任务2')
+  })
+}, 0)
 // 1. 微任务、宏任务入队
 // 2. 开始清空微任务队列
 //    微任务 1
@@ -116,24 +116,24 @@ setTimeout(()=> {
 ```js
 console.log('Script开始')
 setTimeout(() => {
-  console.log('宏任务1（setTimeout)');
+  console.log('宏任务1（setTimeout)')
   Promise.resolve().then(() => {
-    console.log('微任务promise2');
-  });
-}, 0);
+    console.log('微任务promise2')
+  })
+}, 0)
 setImmediate(() => {
-  console.log('宏任务2');
-});
+  console.log('宏任务2')
+})
 setTimeout(() => {
-  console.log('宏任务3（setTimeout)');
-}, 0);
-console.log('Script结束');
+  console.log('宏任务3（setTimeout)')
+}, 0)
+console.log('Script结束')
 Promise.resolve().then(() => {
-  console.log('微任务promise1');
+  console.log('微任务promise1')
 })
 process.nextTick(() => {
-  console.log('微任务nextTick');
-});
+  console.log('微任务nextTick')
+})
 ```
 
 ### Node 11 之前

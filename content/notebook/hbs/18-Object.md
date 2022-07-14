@@ -18,9 +18,9 @@ date: 2020-12-29 09:15:00
 ### 使用`new`操作符
 
 ```js
-const person = new Object();
-person.name = 'Blues';
-person.age = 22;
+const person = new Object()
+person.name = 'Blues'
+person.age = 22
 ```
 
 ### 使用对象字面量
@@ -33,7 +33,7 @@ person.age = 22;
 const person = {
   name: 'Blues',
   age: 22
-};
+}
 ```
 
 ## 使用

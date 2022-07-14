@@ -20,13 +20,13 @@ Node1 和 Node2 **在同一文档中，且不会为相同的节点**
 
 ```js
 function findCommonParent(oNode1, oNode2) {
-  if (oNode1.contains(oNode2)) {
-    return oNode1;
-  } else if (oNode2.contains(oNode1)) {
-    return oNode2;
-  } else {
-    return findCommonParent(oNode1.parentNode, oNode2);
-  }
+  if (oNode1.contains(oNode2))
+    return oNode1
+  else if (oNode2.contains(oNode1))
+    return oNode2
+  else
+    return findCommonParent(oNode1.parentNode, oNode2)
+
 }
 ```
 
@@ -36,9 +36,9 @@ function findCommonParent(oNode1, oNode2) {
 function findCommonParent(oNode1, oNode2) {
   // 节点包含自身！！！
   // oNode1.contains(oNode1) === true;
-  while (!oNode1.contains(oNode2)) {
-    oNode1 = oNode1.parentNode;
-  }
-  return oNode1;
+  while (!oNode1.contains(oNode2))
+    oNode1 = oNode1.parentNode
+
+  return oNode1
 }
 ```

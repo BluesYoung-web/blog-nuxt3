@@ -34,40 +34,40 @@ class ListNode {
 }
 
 function createHelper(arr: number[]) {
-  let p = new ListNode();
-  const res = p;
+  let p = new ListNode()
+  const res = p
   for (const i of arr) {
-    p.next = new ListNode(i);
-    p = p.next;
+    p.next = new ListNode(i)
+    p = p.next
   }
-  return res.next;
+  return res.next
 }
 
 describe('官方示例：', () => {
   it('1', () => {
-    const l1 = createHelper([1, 2, 4]);
-    const l2 = createHelper([1, 3, 4]);
-    const res = createHelper([1, 1, 2, 3, 4, 4]);
+    const l1 = createHelper([1, 2, 4])
+    const l2 = createHelper([1, 3, 4])
+    const res = createHelper([1, 1, 2, 3, 4, 4])
 
-    expect(mergeTwoLists(l1, l2)).toEqual(res);
-  });
+    expect(mergeTwoLists(l1, l2)).toEqual(res)
+  })
 
   it('2', () => {
-    const l1 = createHelper([]);
-    const l2 = createHelper([]);
-    const res = createHelper([]);
+    const l1 = createHelper([])
+    const l2 = createHelper([])
+    const res = createHelper([])
 
-    expect(mergeTwoLists(l1, l2)).toEqual(res);
-  });
+    expect(mergeTwoLists(l1, l2)).toEqual(res)
+  })
 
   it('3', () => {
-    const l1 = createHelper([]);
-    const l2 = createHelper([0]);
-    const res = createHelper([0]);
+    const l1 = createHelper([])
+    const l2 = createHelper([0])
+    const res = createHelper([0])
 
-    expect(mergeTwoLists(l1, l2)).toEqual(res);
-  });
-});
+    expect(mergeTwoLists(l1, l2)).toEqual(res)
+  })
+})
 ```
 
 
@@ -78,31 +78,30 @@ function mergeTwoLists(
   list1: ListNode | null,
   list2: ListNode | null
 ): ListNode | null {
-  let p = new ListNode();
+  let p = new ListNode()
   // 保留对头指针的索引
-  const head = p;
+  const head = p
   while (list1 !== null && list2 !== null) {
     // 从小到大开始拼接到新的链表上
     if (list1.val > list2.val) {
-      p.next = list2;
-      list2 = list2.next;
-    } else {
-      p.next = list1;
-      list1 = list1.next;
+      p.next = list2
+      list2 = list2.next
+    }
+    else {
+      p.next = list1
+      list1 = list1.next
     }
     // 指针前进
-    p = p.next;
+    p = p.next
   }
 
-  if (list1 !== null) {
-    p.next = list1;
-  }
+  if (list1 !== null)
+    p.next = list1
 
-  if (list2 !== null) {
-    p.next = list2;
-  }
+  if (list2 !== null)
+    p.next = list2
 
-  return head.next;
+  return head.next
 }
 ```
 
@@ -136,13 +135,13 @@ class ListNode {
 }
 
 function createHelper(arr: number[]) {
-  let p = new ListNode();
-  const res = p;
+  let p = new ListNode()
+  const res = p
   for (const i of arr) {
-    p.next = new ListNode(i);
-    p = p.next;
+    p.next = new ListNode(i)
+    p = p.next
   }
-  return res.next;
+  return res.next
 }
 
 describe('官方示例：', () => {
@@ -152,22 +151,22 @@ describe('官方示例：', () => {
       [1, 3, 4],
       [2, 6]
     ].map(createHelper)
-    const res = createHelper([1, 1, 2, 3, 4, 4, 5, 6]);
-    expect(mergeKLists(lists)).toEqual(res);
-  });
+    const res = createHelper([1, 1, 2, 3, 4, 4, 5, 6])
+    expect(mergeKLists(lists)).toEqual(res)
+  })
 
   it('2', () => {
     const lists = [].map(createHelper)
-    const res = createHelper([]);
-    expect(mergeKLists(lists)).toEqual(res);
-  });
+    const res = createHelper([])
+    expect(mergeKLists(lists)).toEqual(res)
+  })
 
   it('3', () => {
     const lists = [[]].map(createHelper)
-    const res = createHelper([]);
-    expect(mergeKLists(lists)).toEqual(res);
-  });
-});
+    const res = createHelper([])
+    expect(mergeKLists(lists)).toEqual(res)
+  })
+})
 ```
 
 
@@ -177,28 +176,28 @@ describe('官方示例：', () => {
 
 ```ts
 function mergeKLists(lists: Array<ListNode | null>): ListNode | null {
-  let p = new ListNode();
-  const head = p;
-  const arr: Array<ListNode | null> = [];
+  let p = new ListNode()
+  const head = p
+  const arr: Array<ListNode | null> = []
   // 首先将所有的链表的头结点都放入一个数组
-  for (const l of lists) {
-    l !== null && arr.push(l);
-  }
+  for (const l of lists)
+    l !== null && arr.push(l)
+
   while (arr.length) {
     // 数组升序排序
-    arr.sort((a, b) => a.val - b.val);
+    arr.sort((a, b) => a.val - b.val)
     // 开始从小到大拼接指针
-    p.next = arr[0];
-    if (arr[0].next !== null) {
-      arr[0] = arr[0].next;
-    } else {
-      arr.shift();
-    }
+    p.next = arr[0]
+    if (arr[0].next !== null)
+      arr[0] = arr[0].next
+    else
+      arr.shift()
+
     // 指针前进
-    p = p.next;
+    p = p.next
   }
-  
-  return head.next;
+
+  return head.next
 }
 ```
 
@@ -233,34 +232,34 @@ class ListNode {
 }
 
 function createHelper(arr: number[]) {
-  let p = new ListNode();
-  const res = p;
+  let p = new ListNode()
+  const res = p
   for (const i of arr) {
-    p.next = new ListNode(i);
-    p = p.next;
+    p.next = new ListNode(i)
+    p = p.next
   }
-  return res.next;
+  return res.next
 }
 
 describe('官方示例：', () => {
   it('1', () => {
     const p = createHelper([1, 2, 3, 4, 5])
-    const res = createHelper([1, 2, 3, 5]);
-    expect(removeNthFromEnd(p, 2)).toEqual(res);
-  });
+    const res = createHelper([1, 2, 3, 5])
+    expect(removeNthFromEnd(p, 2)).toEqual(res)
+  })
 
   it('2', () => {
     const p = createHelper([1])
-    const res = createHelper([]);
-    expect(removeNthFromEnd(p, 1)).toEqual(res);
-  });
+    const res = createHelper([])
+    expect(removeNthFromEnd(p, 1)).toEqual(res)
+  })
 
   it('3', () => {
     const p = createHelper([1, 2])
-    const res = createHelper([1]);
-    expect(removeNthFromEnd(p, 1)).toEqual(res);
-  });
-});
+    const res = createHelper([1])
+    expect(removeNthFromEnd(p, 1)).toEqual(res)
+  })
+})
 ```
 
 
@@ -272,27 +271,27 @@ describe('官方示例：', () => {
 
 ```ts
 function findFromLast(head: ListNode | null, n: number) {
-  let fast = head;
-  let slow = head;
+  let fast = head
+  let slow = head
   // 快指针先走 n 步
-  for (let index = 0; index < n; index++) {
-    fast = fast.next;
-  }
+  for (let index = 0; index < n; index++)
+    fast = fast.next
+
   // 两个指针同时再走 sz - n 步
   while (fast !== null) {
-    fast = fast.next;
-    slow = slow.next;
+    fast = fast.next
+    slow = slow.next
   }
   // 找到倒数第 n 个节点(sz - n)
-  return slow;
+  return slow
 }
 
 function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
-  const vertual = new ListNode(0, head);
-  let n1 = findFromLast(vertual, n + 1);
+  const vertual = new ListNode(0, head)
+  const n1 = findFromLast(vertual, n + 1)
   // 删除目标节点
-  n1.next = n1.next.next;
-  return vertual.next;
+  n1.next = n1.next.next
+  return vertual.next
 }
 ```
 
@@ -323,33 +322,33 @@ class ListNode {
 }
 
 function createHelper(arr: number[]) {
-  let p = new ListNode();
-  const res = p;
+  let p = new ListNode()
+  const res = p
   for (const i of arr) {
-    p.next = new ListNode(i);
-    p = p.next;
+    p.next = new ListNode(i)
+    p = p.next
   }
-  return res.next;
+  return res.next
 }
 
 describe('官方示例：', () => {
   it('1', () => {
-    const p = createHelper([1, 2, 3, 4, 5]);
-    const res = createHelper([3, 4, 5]);
-    expect(middleNode(p)).toEqual(res);
-  });
+    const p = createHelper([1, 2, 3, 4, 5])
+    const res = createHelper([3, 4, 5])
+    expect(middleNode(p)).toEqual(res)
+  })
 
   it('2', () => {
-    const p = createHelper([1]);
-    expect(middleNode(p)).toEqual(p);
-  });
+    const p = createHelper([1])
+    expect(middleNode(p)).toEqual(p)
+  })
 
   it('3', () => {
-    const p = createHelper([1, 2, 3, 4, 5, 6]);
-    const res = createHelper([4, 5, 6]);
-    expect(middleNode(p)).toEqual(res);
-  });
-});
+    const p = createHelper([1, 2, 3, 4, 5, 6])
+    const res = createHelper([4, 5, 6])
+    expect(middleNode(p)).toEqual(res)
+  })
+})
 ```
 
 
@@ -357,16 +356,16 @@ describe('官方示例：', () => {
 
 ```ts
 function middleNode(head: ListNode | null): ListNode | null {
-  let fast = head;
-  let slow = head;
+  let fast = head
+  let slow = head
 
   while (fast !== null && fast.next !== null) {
     // 慢指针走一步，快指针走两步
-    slow = slow.next;
-    fast = fast.next.next;
+    slow = slow.next
+    fast = fast.next.next
   }
   // 慢指针指向中点，偶数个为第二个中间节点
-  return slow;
+  return slow
 }
 ```
 
@@ -385,20 +384,20 @@ function middleNode(head: ListNode | null): ListNode | null {
 ```ts
 // 与寻找中间节点类似的代码
 function hasCycle(head: ListNode | null): boolean {
-  let fast = head;
-  let slow = head;
+  let fast = head
+  let slow = head
 
   while (fast !== null && fast.next !== null) {
     // 慢指针走一步，快指针走两步
-    slow = slow.next;
-    fast = fast.next.next;
+    slow = slow.next
+    fast = fast.next.next
     // 快指针追上了慢指针，存在环
-    if (fast === slow) {
-      return true;
-    }
+    if (fast === slow)
+      return true
+
   }
   // 快指针到达终点，不存在环
-  return false;
+  return false
 }
 ```
 
@@ -410,30 +409,30 @@ function hasCycle(head: ListNode | null): boolean {
 
 ```ts
 function detectCycle(head: ListNode | null): ListNode | null {
-  let fast = head;
-  let slow = head;
+  let fast = head
+  let slow = head
 
   while (fast !== null && fast.next !== null) {
     // 慢指针走一步，快指针走两步
-    slow = slow.next;
-    fast = fast.next.next;
+    slow = slow.next
+    fast = fast.next.next
     // 两指针相遇，跳出循环
-    if (fast === slow) {
-      break;
-    }
+    if (fast === slow)
+      break
+
   }
   if (fast === null || fast.next === null) {
     // 链表无环
-    return null;
+    return null
   }
   // 慢指针重新回到起点
-  slow = head;
+  slow = head
   while (slow !== fast) {
     // 两指针同步前进，再次相遇即为环的起点
-    slow = slow.next;
-    fast = fast.next;
+    slow = slow.next
+    fast = fast.next
   }
-  return slow;
+  return slow
 }
 ```
 
@@ -457,22 +456,21 @@ function getIntersectionNode(
   headA: ListNode | null,
   headB: ListNode | null
 ): ListNode | null {
-  let p1 = headA;
-  let p2 = headB;
+  let p1 = headA
+  let p2 = headB
   // 两边相遇或同时走到终点
   while (p1 !== p2) {
-    if (p1 === null) {
-      p1 = headB;
-    } else {
-      p1 = p1.next;
-    }
+    if (p1 === null)
+      p1 = headB
+    else
+      p1 = p1.next
 
-    if (p2 === null) {
-      p2 = headA;
-    } else {
-      p2 = p2.next;
-    }
+    if (p2 === null)
+      p2 = headA
+    else
+      p2 = p2.next
+
   }
-  return p1;
+  return p1
 }
 ```

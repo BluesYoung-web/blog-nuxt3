@@ -39,23 +39,24 @@ image: /img/design-mode.jpeg
  * 基类接口
  */
 interface Handler {
-  setNext(handler: Handler): Handler;
-  handle(request: string): string | null;
+  setNext(handler: Handler): Handler
+  handle(request: string): string | null
 }
 /**
  * 抽象类
  */
 abstract class AbstractHandler implements Handler {
-  private nextHandler?: Handler;
+  private nextHandler?: Handler
   public setNext(handler: Handler): Handler {
-    this.nextHandler = handler;
-    return handler;
+    this.nextHandler = handler
+    return handler
   }
+
   public handle(request: string) {
-    if (this.nextHandler) {
-      return this.nextHandler.handle(request);
-    }
-    return null;
+    if (this.nextHandler)
+      return this.nextHandler.handle(request)
+
+    return null
   }
 }
 /**
@@ -63,10 +64,10 @@ abstract class AbstractHandler implements Handler {
  */
 class MonkeyHandler extends AbstractHandler {
   public handle(request: string) {
-    if (request === 'Banana') {
-      return `猴子吃 ${request}.`;
-    }
-    return super.handle(request);
+    if (request === 'Banana')
+      return `猴子吃 ${request}.`
+
+    return super.handle(request)
 
   }
 }
@@ -75,10 +76,10 @@ class MonkeyHandler extends AbstractHandler {
  */
 class SquirrelHandler extends AbstractHandler {
   public handle(request: string) {
-    if (request === 'Nut') {
-      return `松鼠吃 ${request}.`;
-    }
-    return super.handle(request);
+    if (request === 'Nut')
+      return `松鼠吃 ${request}.`
+
+    return super.handle(request)
   }
 }
 /**
@@ -86,35 +87,35 @@ class SquirrelHandler extends AbstractHandler {
  */
 class DogHandler extends AbstractHandler {
   public handle(request: string) {
-    if (request === 'MeatBall') {
-      return `狗吃 ${request}.`;
-    }
-    return super.handle(request);
+    if (request === 'MeatBall')
+      return `狗吃 ${request}.`
+
+    return super.handle(request)
   }
 }
 /**
  * 客户端
  */
 function clientCode(handler: Handler) {
-  const foods = ['Nut', 'Banana', 'Cup of coffee'];
+  const foods = ['Nut', 'Banana', 'Cup of coffee']
   for (const food of foods) {
-    console.log(`谁吃 ${food}?`);
-    const result = handler.handle(food);
-    if (result) {
-      console.log(`  ${result}`);
-    } else {
-      console.log(`  ${food} 没人吃`);
-    }
+    console.log(`谁吃 ${food}?`)
+    const result = handler.handle(food)
+    if (result)
+      console.log(`  ${result}`)
+    else
+      console.log(`  ${food} 没人吃`)
+
   }
 }
-const monkey = new MonkeyHandler();
-const squirrel = new SquirrelHandler();
-const dog = new DogHandler();
-monkey.setNext(squirrel).setNext(dog);
+const monkey = new MonkeyHandler()
+const squirrel = new SquirrelHandler()
+const dog = new DogHandler()
+monkey.setNext(squirrel).setNext(dog)
 // ----------------------------------------------------------
-console.log('责任链（处理顺序）: Monkey > Squirrel > Dog\n');
-clientCode(monkey);
-console.log('');
-console.log('子责任链: Squirrel > Dog\n');
-clientCode(squirrel);
+console.log('责任链（处理顺序）: Monkey > Squirrel > Dog\n')
+clientCode(monkey)
+console.log('')
+console.log('子责任链: Squirrel > Dog\n')
+clientCode(squirrel)
 ```

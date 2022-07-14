@@ -113,15 +113,15 @@ date: 2021-02-02 09:43:07
 document.body.innerHTML = `
  <div id="foo"></div>
  <div id="bar"></div>
-`;
-const foo = document.querySelector('#foo');
-const bar = document.querySelector('#bar');
-const openShadowDOM = foo.attachShadow({ mode: 'open' });
-const closedShadowDOM = bar.attachShadow({ mode: 'closed' });
-console.log(openShadowDOM); // #shadow-root (open)
-console.log(closedShadowDOM); // #shadow-root (closed)
-console.log(foo.shadowRoot); // #shadow-root (open)
-console.log(bar.shadowRoot); // null 
+`
+const foo = document.querySelector('#foo')
+const bar = document.querySelector('#bar')
+const openShadowDOM = foo.attachShadow({ mode: 'open' })
+const closedShadowDOM = bar.attachShadow({ mode: 'closed' })
+console.log(openShadowDOM) // #shadow-root (open)
+console.log(closedShadowDOM) // #shadow-root (closed)
+console.log(foo.shadowRoot) // #shadow-root (open)
+console.log(bar.shadowRoot) // null
 ```
 
 ### 常规使用
@@ -159,9 +159,9 @@ for (let color of ['red', 'green', 'blue']) {
 默认情况下，挂载影子 `DOM` 的元素内部的子元素不会显示
 
 ```js
-document.body.innerHTML = `<div><p>Foo</p></div>`;
+document.body.innerHTML = '<div><p>Foo</p></div>'
 // 1s 之后，页面会显示为一片空白
-setTimeout(() => document.querySelector('div').attachShadow({ mode: 'open' }), 1000); 
+setTimeout(() => document.querySelector('div').attachShadow({ mode: 'open' }), 1000)
 ```
 
 匿名插槽，将实际子元素**投射**到影子 `DOM`
@@ -171,11 +171,11 @@ document.body.innerHTML = `
 <div id="foo">
  <p>Foo</p>
 </div>
-`; 
+`
 document.querySelector('div').attachShadow({ mode: 'open' }).innerHTML = `
 <div id="bar">
  <slot></slot>
-<div>`;
+<div>`
 ```
 
 - 命名插槽，通过匹配进行对应的投射
@@ -186,14 +186,14 @@ document.body.innerHTML = `
  <p slot="foo">Foo</p>
  <p slot="bar">Bar</p>
 </div>
-`;
+`
 document.querySelector('div').attachShadow({ mode: 'open' }).innerHTML = `
  <slot name="bar"></slot>
  <slot name="foo"></slot>
-`;
+`
 // Renders:
 // Bar
-// Foo 
+// Foo
 ```
 
 ### 事件重定向
@@ -206,14 +206,14 @@ document.querySelector('div').attachShadow({ mode: 'open' }).innerHTML = `
 // 创建一个元素作为影子宿主
 document.body.innerHTML = `
 <div onclick="console.log('Handled outside:', event.target)"></div>
-`;
+`
 // 添加影子 DOM 并向其中插入 HTML
 document.querySelector('div').attachShadow({ mode: 'open' }).innerHTML = `
 <button onclick="console.log('Handled inside:', event.target)">Foo</button>
-`;
+`
 // 点击按钮时：(因为浏览器安全策略的限制，现在会报错)
 // Handled inside: <button onclick="..."></button>
-// Handled outside: <div onclick="..."></div> 
+// Handled outside: <div onclick="..."></div>
 ```
 
 ## 自定义元素
@@ -223,8 +223,8 @@ document.querySelector('div').attachShadow({ mode: 'open' }).innerHTML = `
 同时，这些元素默认也不会做任何通用 `HTML` 元素不能做的事
 
 ```js
-document.body.innerHTML = `<x-foo >I'm inside a nonsense element.</x-foo >`;
-console.log(document.querySelector('x-foo') instanceof HTMLElement); // true 
+document.body.innerHTML = '<x-foo >I\'m inside a nonsense element.</x-foo >'
+console.log(document.querySelector('x-foo') instanceof HTMLElement) // true
 ```
 
 <n-alert type="info">自定义元素名必须**至少包含一个**不在名称开头和末尾的**连字符**(`-`)，而且元素标签不能**自关闭**</n-alert>
@@ -232,12 +232,12 @@ console.log(document.querySelector('x-foo') instanceof HTMLElement); // true
 ```js
 class FooElement extends HTMLElement {
   constructor() {
-    super();
-    console.log('来了老弟');
+    super()
+    console.log('来了老弟')
   }
 }
-customElements.define('x-foo', FooElement);
-customElements.define('y-foo', FooElement, { extends: 'div' });
+customElements.define('x-foo', FooElement)
+customElements.define('y-foo', FooElement, { extends: 'div' })
 document.body.innerHTML = `
 <x-foo>1</x-foo>
 <x-foo>2</x-foo>
@@ -245,7 +245,7 @@ document.body.innerHTML = `
 <div is="y-foo">4</div>
 <div is="y-foo">5</div>
 <div is="y-foo">6</div>
-`;
+`
 ```
 
 ### 添加 `Web` 组件的内容
@@ -287,21 +287,21 @@ document.body.innerHTML = `<x-foo></x-foo>`;
 
 ```js
 // 返回一个期约，当相应的自定义元素定义之后解决
-customElements.whenDefined('x-foo').then(() => console.log('defined!'));
-console.log(customElements.get('x-foo'));
+customElements.whenDefined('x-foo').then(() => console.log('defined!'))
+console.log(customElements.get('x-foo'))
 // undefined
-customElements.define('x-foo', class {});
+customElements.define('x-foo', class {})
 // defined!
-console.log(customElements.get('x-foo'));
-// class FooElement {} 
+console.log(customElements.get('x-foo'))
+// class FooElement {}
 
 // 在自定义元素有定义之前会创建 HTMLUnknownElement 对象
-const fooElement = document.createElement('x-foo');
+const fooElement = document.createElement('x-foo')
 // 创建自定义元素
 class FooElement extends HTMLElement {}
-customElements.define('x-foo', FooElement);
-console.log(fooElement instanceof FooElement); // false
+customElements.define('x-foo', FooElement)
+console.log(fooElement instanceof FooElement) // false
 // 强制升级
-customElements.upgrade(fooElement);
-console.log(fooElement instanceof FooElement); // true
+customElements.upgrade(fooElement)
+console.log(fooElement instanceof FooElement) // true
 ```

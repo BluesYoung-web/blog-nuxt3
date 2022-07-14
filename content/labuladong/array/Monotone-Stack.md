@@ -29,16 +29,16 @@ image: /img/algorithm.webp
 <strong>测试代码：</strong>
 
 ```ts
-import { it, expect, describe } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
 describe('demo', () => {
   it.each([
     ['baabc', 'abc'],
     ['cbacdcbc', 'acdb']
   ])('去除重复字母(%s) -> %s', (s, res) => {
-    expect(removeDuplicateLetters(s)).toBe(res);
-  });
-});
+    expect(removeDuplicateLetters(s)).toBe(res)
+  })
+})
 ```
 
 
@@ -48,28 +48,28 @@ describe('demo', () => {
 
 ```ts
 function removeDuplicateLetters(str: string) {
-  const len = str.length;
+  const len = str.length
   // 单调栈
-  const stack: string[] = [];
+  const stack: string[] = []
 
   for (let i = 0; i < len; i++) {
     // 栈中存在相同的元素，直接跳过
-    if (stack.includes(str[i])) {
-      continue;
-    }
+    if (stack.includes(str[i]))
+      continue
+
     while (
       // 要入栈的元素小于等于当前栈顶的元素
-      str[i] < stack[stack.length - 1] &&
+      str[i] < stack[stack.length - 1]
       // 字符串后面存在与栈顶元素相同的元素
-      str.indexOf(stack[stack.length - 1], i) > -1
+      && str.includes(stack[stack.length - 1], i)
     ) {
       // 弹出当前的栈顶元素
-      stack.pop();
+      stack.pop()
     }
-    stack.push(str[i]);
+    stack.push(str[i])
   }
 
-  return stack.join('');
+  return stack.join('')
 }
 ```
 
@@ -96,7 +96,7 @@ function removeDuplicateLetters(str: string) {
 <strong>测试代码：</strong>
 
 ```ts
-import { it, expect, describe } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
 describe('demo', () => {
   it.each([
@@ -111,9 +111,9 @@ describe('demo', () => {
       [3, -1]
     ]
   ])('下一个更大的元素(%s, %s) -> %s', (nums1, nums2, res) => {
-    expect(nextGreaterElement(nums1, nums2)).toEqual(res);
-  });
-});
+    expect(nextGreaterElement(nums1, nums2)).toEqual(res)
+  })
+})
 ```
 
 
@@ -124,28 +124,28 @@ function nextGreaterElement(
   nums1: number[],
   nums2: number[]
 ): number[] {
-  const len = nums2.length;
-  const recordMap = new Map<number, number>();
-  const stack: number[] = [];
+  const len = nums2.length
+  const recordMap = new Map<number, number>()
+  const stack: number[] = []
   for (let i = len - 1; i >= 0; i--) {
     while (stack.length > 0) {
-      const n = stack.shift();
+      const n = stack.shift()
       // 取出栈顶元素与当前元素进行对比
       if (nums2[i] < n) {
-        recordMap.set(nums2[i], n);
+        recordMap.set(nums2[i], n)
         // 栈顶元素大于当前元素，重新入栈
-        stack.unshift(n);
-        stack.unshift(nums2[i]);
-        break;
+        stack.unshift(n)
+        stack.unshift(nums2[i])
+        break
       }
     }
     // 栈为空
     if (stack.length === 0) {
-      recordMap.set(nums2[i], -1);
-      stack.unshift(nums2[i]);   
+      recordMap.set(nums2[i], -1)
+      stack.unshift(nums2[i])
     }
   }
-  return nums1.map((v) => recordMap.get(v));
+  return nums1.map(v => recordMap.get(v))
 }
 ```
 
@@ -168,7 +168,7 @@ function nextGreaterElement(
 <strong>测试代码：</strong>
 
 ```ts
-import { it, expect, describe } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
 describe('demo', () => {
   it.each([
@@ -181,9 +181,9 @@ describe('demo', () => {
       [2, 3, 4, -1, 4]
     ]
   ])('下一个更大的元素(%s) -> %s', (nums, res) => {
-    expect(nextGreaterElements(nums)).toEqual(res);
-  });
-});
+    expect(nextGreaterElements(nums)).toEqual(res)
+  })
+})
 ```
 
 
@@ -191,23 +191,23 @@ describe('demo', () => {
 
 ```ts
 function nextGreaterElements(nums: number[]): number[] {
-  const len = nums.length;
-  const stack: number[] = [];
-  const res: number[] = [];
+  const len = nums.length
+  const stack: number[] = []
+  const res: number[] = []
   // 假装拥有双倍长度的数组
   for (let i = 2 * len - 1; i >= 0; i--) {
     while (
       // 堆栈不为空
-      stack.length > 0 &&
+      stack.length > 0
       // 并且栈顶元素小于等于当前元素
-      stack[0] <= nums[i % len] 
-    ) {
-      stack.shift();
-    }
-    res[i % len] = stack[0] ?? -1;
-    stack.unshift(nums[i % len]);
+      && stack[0] <= nums[i % len]
+    )
+      stack.shift()
+
+    res[i % len] = stack[0] ?? -1
+    stack.unshift(nums[i % len])
   }
-  return res;
+  return res
 }
 ```
 
@@ -230,7 +230,7 @@ function nextGreaterElements(nums: number[]): number[] {
 <strong>测试代码：</strong>
 
 ```ts
-import { it, expect, describe } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
 describe('demo', () => {
   it.each([
@@ -247,9 +247,9 @@ describe('demo', () => {
       [1, 1, 0]
     ]
   ])('每日温度(%s) -> %s', (nums, res) => {
-    expect(dailyTemperatures(nums)).toEqual(res);
-  });
-});
+    expect(dailyTemperatures(nums)).toEqual(res)
+  })
+})
 ```
 
 
@@ -257,30 +257,30 @@ describe('demo', () => {
 
 ```ts
 function dailyTemperatures(nums: number[]): number[] {
-  const len = nums.length;
+  const len = nums.length
   // 单调栈直接存放索引
-  const stack: number[] = [];
-  const res: number[] = [];
+  const stack: number[] = []
+  const res: number[] = []
   for (let i = len - 1; i >= 0; i--) {
     while (
       // 堆栈不为空
-      stack.length > 0 &&
+      stack.length > 0
       // 并且栈顶元素小于等于当前元素
-      nums[stack[0]] <= nums[i]
-    ) {
-      stack.shift();
-    }
+      && nums[stack[0]] <= nums[i]
+    )
+      stack.shift()
 
-    let n = stack[0] ?? -1;
+    const n = stack[0] ?? -1
     if (n === -1) {
       // 不存在
-      res[i] = 0;
-    } else {
-      // 距离下一个温度更高的日子
-      res[i] = n - i;
+      res[i] = 0
     }
-    stack.unshift(i);
+    else {
+      // 距离下一个温度更高的日子
+      res[i] = n - i
+    }
+    stack.unshift(i)
   }
-  return res;
+  return res
 }
 ```

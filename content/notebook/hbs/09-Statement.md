@@ -16,13 +16,13 @@ date: 2020-12-28 17:18:34
 **`ECMAScript` 会自动调用 `Boolean()` 函数将这个表达式的值转换为布尔值**
 
 ```js
-if (i > 25) {
-	console.log("Greater than 25.");
-} else if (i < 0) {
-	console.log("Less than 0.");
-} else {
-	console.log("Between 0 and 25, inclusive.");
-} 
+if (i > 25)
+  console.log('Greater than 25.')
+else if (i < 0)
+  console.log('Less than 0.')
+else
+  console.log('Between 0 and 25, inclusive.')
+
 ```
 
 ## `do-while`
@@ -30,10 +30,10 @@ if (i > 25) {
 后测试循环语句，循环体内的代码至少执行一次
 
 ```js
-let i = 0;
-do {
-	i += 2;
-} while (i < 10); 
+let i = 0
+do
+  i += 2
+while (i < 10)
 ```
 
 ## `while`
@@ -41,10 +41,10 @@ do {
 先测试循环语句，即先检测退出条件，再执行循环体内的代码
 
 ```js
-let i = 0;
-while (i < 10) {
-	i += 2;
-} 
+let i = 0
+while (i < 10)
+  i += 2
+
 ```
 
 ## `for`
@@ -56,20 +56,20 @@ while (i < 10) {
 无法通过 `while` 循环实现的逻辑，同样也无法使用 `for` 循环实现
 
 ```js
-let count = 10;
-for (let i = 0; i < count; i++) {
-	console.log(i);
-} 
+let count = 10
+for (let i = 0; i < count; i++)
+  console.log(i)
+
 for (;;) { // 无穷循环
-	doSomething();
-} 
+  doSomething()
+}
 // 等同于 while 循环
-let count = 10;
-let i = 0;
-for (; i < count; ) {
-	console.log(i);
-	i++;
-} 
+let count = 10
+let i = 0
+for (; i < count;) {
+  console.log(i)
+  i++
+}
 ```
 
 ## `for-in`
@@ -81,9 +81,9 @@ for (; i < count; ) {
 如果 `for-in` 循环要迭代的变量是 `null` 或 `undefined`，则不执行循环体
 
 ```js
-for (const propName in window) {
-	document.write(propName);
-} 
+for (const propName in window)
+  document.write(propName)
+
 ```
 
 ## `for-of`
@@ -95,9 +95,9 @@ for (const propName in window) {
 **如果尝试迭代的变量不支持迭代，则 `for-of` 语句会抛出错误**
 
 ```js
-for (const el of [2,4,6,8]) {
-	document.write(el);
-} 
+for (const el of [2, 4, 6, 8])
+  document.write(el)
+
 ```
 
 ## 标签
@@ -108,12 +108,12 @@ for (const el of [2,4,6,8]) {
 
 ```js
 start: for (let i = 0; i < 8; i++) {
-	for(j = 0; j < i; j++) {
-		console.log(i);
-		if (j === 1) {
-			break start;
-		}
-	}
+  for (j = 0; j < i; j++) {
+    console.log(i)
+    if (j === 1)
+      break start
+
+  }
 }
 // 1 2 2
 ```
@@ -125,23 +125,23 @@ start: for (let i = 0; i < 8; i++) {
 `continue` 立即结束当次循环，继续开始下一轮循环
 
 ```js
-let num = 0;
+let num = 0
 for (let i = 1; i < 10; i++) {
-	if (i % 5 == 0) {
-		break;
-	}
-	num++;
-}
-console.log(num); // 4
+  if (i % 5 == 0)
+    break
 
-let num = 0;
-for (let i = 1; i < 10; i++) {
-	if (i % 5 == 0) {
-		continue;
-	}
-	num++;
+  num++
 }
-console.log(num); // 8 
+console.log(num) // 4
+
+let num = 0
+for (let i = 1; i < 10; i++) {
+  if (i % 5 == 0)
+    continue
+
+  num++
+}
+console.log(num) // 8
 ```
 
 ## `with`
@@ -153,15 +153,15 @@ console.log(num); // 8
 影响性能且难于调试其中的代码，不推荐使用
 
 ```js
-let qs = location.search.substring(1);
-let hostName = location.hostname;
-let url = location.href; 
+const qs = location.search.substring(1)
+const hostName = location.hostname
+const url = location.href
 // ===>
-with(location) {
-	let qs = search.substring(1);
-	let hostName = hostname;
-	let url = href;
-} 
+with (location) {
+  const qs = search.substring(1)
+  const hostName = hostname
+  const url = href
+}
 ```
 
 ## `switch`
@@ -178,16 +178,16 @@ with(location) {
 
 ```js
 switch (i) {
-	case 25:
-		console.log("25");
-		break;
-	case 35:
-		console.log("35");
-		break;
-	case 45:
-		console.log("45");
-		break;
-	default:
-		console.log("Other");
-} 
+  case 25:
+    console.log('25')
+    break
+  case 35:
+    console.log('35')
+    break
+  case 45:
+    console.log('45')
+    break
+  default:
+    console.log('Other')
+}
 ```

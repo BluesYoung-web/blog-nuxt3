@@ -12,7 +12,7 @@ date: 2020-12-28 17:28:59
 `ECMAScript` 通过 `RegExp` 类型支持正则表达式
 
 ```js
-let expression = /pattern/flags;
+const expression = /pattern/flags
 ```
 
 ## `flags`
@@ -239,27 +239,27 @@ console.log(pattern.lastIndex); // 8
 
 
 ```js
-let text = "this has been a short summer";
-let pattern = /(.)hort/g;
+const text = 'this has been a short summer'
+const pattern = /(.)hort/g
 if (pattern.test(text)) {
- console.log(RegExp.input); // this has been a short summer
- console.log(RegExp.leftContext); // this has been a
- console.log(RegExp.rightContext); // summer
- console.log(RegExp.lastMatch); // short
- console.log(RegExp.lastParen); // s
-} 
+  console.log(RegExp.input) // this has been a short summer
+  console.log(RegExp.leftContext) // this has been a
+  console.log(RegExp.rightContext) // summer
+  console.log(RegExp.lastMatch) // short
+  console.log(RegExp.lastParen) // s
+}
 
 /*
  * 注意：Opera 不支持简写属性名
  * IE 不支持多行匹配
  */
 if (pattern.test(text)) {
- console.log(RegExp.$_);    // this has been a short summer
- console.log(RegExp["$`"]); // this has been a
- console.log(RegExp["$'"]); // summer
- console.log(RegExp["$&"]); // short
- console.log(RegExp["$+"]); // s
-} 
+  console.log(RegExp.$_) // this has been a short summer
+  console.log(RegExp['$`']) // this has been a
+  console.log(RegExp['$\'']) // summer
+  console.log(RegExp['$&']) // short
+  console.log(RegExp['$+']) // s
+}
 ```
 
 **`RegExp` 构造函数的所有属性(静态属性)都没有任何 `Web` 标准出处，因此不推荐在生产环境中使用它们**
@@ -298,25 +298,25 @@ if (pattern.test(text)) {
 </NTable>
 
 ```js
-let text = "cat, bat, sat, fat";
-result = text.replace(/(.at)/g, "word ($1)");
-console.log(result); // word (cat), word (bat), word (sat), word (fat) 
+const text = 'cat, bat, sat, fat'
+result = text.replace(/(.at)/g, 'word ($1)')
+console.log(result) // word (cat), word (bat), word (sat), word (fat)
 //////////////////////////////////////////////////////////////////////////
 function htmlEscape(text) {
- return text.replace(/[<>"&]/g, function(match, pos, originalText) {
-   switch(match) {
-     case "<":
-       return "&lt;";
-     case ">":
-       return "&gt;";
-     case "&":
-       return "&amp;";
-     case "\"":
-       return "&quot;";
-   }
- });
+  return text.replace(/[<>"&]/g, (match, pos, originalText) => {
+    switch (match) {
+      case '<':
+        return '&lt;'
+      case '>':
+        return '&gt;'
+      case '&':
+        return '&amp;'
+      case '"':
+        return '&quot;'
+    }
+  })
 }
-console.log(htmlEscape("<p class=\"greeting\">Hello world!</p>"));
+console.log(htmlEscape('<p class="greeting">Hello world!</p>'))
 // "&lt;p class=&quot;greeting&quot;&gt;Hello world!</p>"
 ```
 

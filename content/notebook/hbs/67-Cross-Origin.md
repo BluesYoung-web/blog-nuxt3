@@ -111,22 +111,22 @@ Access-Control-Max-Age: 1728000
 
 ```js
 // 默认情况下会保持与服务器的活动连接，自动断线重连
-const source = new EventSource(url);
-source.onreadystatechange = function(){
+const source = new EventSource(url)
+source.onreadystatechange = function () {
   // source.readyState 0-正连接到服务器，1-连接已打开，2-连接已关闭
-};
-source.onopen = function(){
+}
+source.onopen = function () {
   // 建立连接时触发
-};
-source.onmessage = function(event){
+}
+source.onmessage = function (event) {
   // 从服务器接收到新事件时触发
-  var data = event.data;
-};
-source.onerror = function(){
+  const data = event.data
+}
+source.onerror = function () {
   // 无法建立连接时触发
-};
+}
 // 强制断开连接且不再重新连接
-source.close();
+source.close()
 ```
 
 ## 事件流

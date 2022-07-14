@@ -29,17 +29,17 @@ import { describe, expect, it } from 'vitest'
 
 describe('二分查找', () => {
   it('1', () => {
-    const nums = [-1, 0, 3, 5, 9, 12];
-    const target = 9;
-    expect(search(nums, target)).toBe(4);
-  });
+    const nums = [-1, 0, 3, 5, 9, 12]
+    const target = 9
+    expect(search(nums, target)).toBe(4)
+  })
 
   it('2', () => {
-    const nums = [-1, 0, 3, 5, 9, 12];
-    const target = 2;
-    expect(search(nums, target)).toBe(-1);
-  });
-});
+    const nums = [-1, 0, 3, 5, 9, 12]
+    const target = 2
+    expect(search(nums, target)).toBe(-1)
+  })
+})
 ```
 
 
@@ -47,24 +47,26 @@ describe('二分查找', () => {
 
 ```ts
 function search(nums: number[], target: number): number {
-  const len = nums.length;
-  let left = 0;
-  let right = len - 1;
+  const len = nums.length
+  let left = 0
+  let right = len - 1
   while (left <= right) {
     // 防止整型数值溢出
-    let mid = left + Math.floor((right - left) / 2);
-    const temp = nums[mid];
+    const mid = left + Math.floor((right - left) / 2)
+    const temp = nums[mid]
     if (temp === target) {
-      return mid;
-    } else if (temp < target) {
+      return mid
+    }
+    else if (temp < target) {
       // 右移区间
-      left = mid + 1;
-    } else if (temp > target) {
+      left = mid + 1
+    }
+    else if (temp > target) {
       // 左移区间
-      right = mid - 1;
+      right = mid - 1
     }
   }
-  return -1;
+  return -1
 }
 ```
 
@@ -90,23 +92,23 @@ import { describe, expect, it } from 'vitest'
 
 describe('二分查找', () => {
   it('1', () => {
-    const nums = [5, 7, 7, 8, 8, 10];
-    const target = 8;
-    expect(searchRange(nums, target)).toEqual([3, 4]);
-  });
+    const nums = [5, 7, 7, 8, 8, 10]
+    const target = 8
+    expect(searchRange(nums, target)).toEqual([3, 4])
+  })
 
   it('2', () => {
-    const nums = [5, 7, 7, 8, 8, 10];
-    const target = 6;
-    expect(searchRange(nums, target)).toEqual([-1, -1]);
-  });
+    const nums = [5, 7, 7, 8, 8, 10]
+    const target = 6
+    expect(searchRange(nums, target)).toEqual([-1, -1])
+  })
 
   it('3', () => {
-    const nums = [];
-    const target = 0;
-    expect(searchRange(nums, target)).toEqual([-1, -1]);
-  });
-});
+    const nums = []
+    const target = 0
+    expect(searchRange(nums, target)).toEqual([-1, -1])
+  })
+})
 ```
 
 
@@ -116,36 +118,38 @@ describe('二分查找', () => {
 
 ```ts
 function searchRange(nums: number[], target: number): number[] {
-  const len = nums.length;
-  let left = 0;
-  let right = len - 1;
+  const len = nums.length
+  let left = 0
+  let right = len - 1
 
-  let start = -1, end = -1;
+  let start = -1; let end = -1
   while (left <= right) {
     // 防止整型数值溢出
-    let mid = left + Math.floor((right - left) / 2);
-    const temp = nums[mid];
+    const mid = left + Math.floor((right - left) / 2)
+    const temp = nums[mid]
     if (temp === target) {
-      start = mid - 1;
-      end = mid + 1;
+      start = mid - 1
+      end = mid + 1
       // 寻找左边界
-      while (start >= 0 && nums[start] === target) {
-        start--;
-      }
+      while (start >= 0 && nums[start] === target)
+        start--
+
       // 寻找右边界
-      while (end <= len - 1 && nums[end] === target) {
-        end++;
-      }
-      return [start + 1, end - 1];
-    } else if (temp < target) {
+      while (end <= len - 1 && nums[end] === target)
+        end++
+
+      return [start + 1, end - 1]
+    }
+    else if (temp < target) {
       // 右移区间
-      left = mid + 1;
-    } else if (temp > target) {
+      left = mid + 1
+    }
+    else if (temp > target) {
       // 左移区间
-      right = mid - 1;
+      right = mid - 1
     }
   }
-  return [start, end];
+  return [start, end]
 }
 ```
 
@@ -153,62 +157,66 @@ function searchRange(nums: number[], target: number): number[] {
 
 ```ts
 function searchRange(nums: number[], target: number): number[] {
-  const start = findLeft(nums, target);
-  const end = findRight(nums, target);
-  return [start, end];
+  const start = findLeft(nums, target)
+  const end = findRight(nums, target)
+  return [start, end]
 }
 
-function findLeft (nums: number[], target: number): number {
-  const len = nums.length;
-  let left = 0;
-  let right = len - 1;
+function findLeft(nums: number[], target: number): number {
+  const len = nums.length
+  let left = 0
+  let right = len - 1
 
   while (left <= right) {
     // 防止整型数值溢出
-    let mid = left + Math.floor((right - left) / 2);
-    const temp = nums[mid];
+    const mid = left + Math.floor((right - left) / 2)
+    const temp = nums[mid]
     if (temp === target) {
       // 锁定左边界的最大值
-      right = mid - 1;
-    } else if (temp < target) {
+      right = mid - 1
+    }
+    else if (temp < target) {
       // 右移区间
-      left = mid + 1;
-    } else if (temp > target) {
+      left = mid + 1
+    }
+    else if (temp > target) {
       // 左移区间
-      right = mid - 1;
+      right = mid - 1
     }
   }
   // 保证数组没有越界
-  if (left >= len || nums[left] !== target) {
-    return -1;
-  }
-  return left;
+  if (left >= len || nums[left] !== target)
+    return -1
+
+  return left
 }
 
-function findRight (nums: number[], target: number): number {
-  const len = nums.length;
-  let left = 0;
-  let right = len - 1;
+function findRight(nums: number[], target: number): number {
+  const len = nums.length
+  let left = 0
+  let right = len - 1
 
   while (left <= right) {
     // 防止整型数值溢出
-    let mid = left + Math.floor((right - left) / 2);
-    const temp = nums[mid];
+    const mid = left + Math.floor((right - left) / 2)
+    const temp = nums[mid]
     if (temp === target) {
       // 锁定右边界的最小值
-      left = mid + 1;
-    } else if (temp < target) {
+      left = mid + 1
+    }
+    else if (temp < target) {
       // 右移区间
-      left = mid + 1;
-    } else if (temp > target) {
+      left = mid + 1
+    }
+    else if (temp > target) {
       // 左移区间
-      right = mid - 1;
+      right = mid - 1
     }
   }
   // 保证数组没有越界
-  if (right < 0 || nums[right] !== target) {
-    return -1;
-  }
-  return right;
+  if (right < 0 || nums[right] !== target)
+    return -1
+
+  return right
 }
 ```

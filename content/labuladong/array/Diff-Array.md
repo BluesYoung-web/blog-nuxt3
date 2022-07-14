@@ -23,24 +23,24 @@ image: /img/algorithm.webp
 import { describe, expect, it } from 'vitest'
 
 describe('差分数组', () => {
-  const originArr = new Array(5).fill(0);
-  const diffArray = new DiffArray(originArr);
+  const originArr = new Array(5).fill(0)
+  const diffArray = new DiffArray(originArr)
 
   it('1', () => {
-    diffArray.inc(1, 3, 2);
-    expect(diffArray.res()).toEqual([0, 2, 2, 2, 0]);
-  });
+    diffArray.inc(1, 3, 2)
+    expect(diffArray.res()).toEqual([0, 2, 2, 2, 0])
+  })
 
   it('2', () => {
-    diffArray.inc(2, 4, 3);
-    expect(diffArray.res()).toEqual([0, 2, 5, 5, 3]);
-  });
+    diffArray.inc(2, 4, 3)
+    expect(diffArray.res()).toEqual([0, 2, 5, 5, 3])
+  })
 
   it('3', () => {
-    diffArray.inc(0, 2, -2);
-    expect(diffArray.res()).toEqual([-2, 0, 3, 5, 3]);
-  });
-});
+    diffArray.inc(0, 2, -2)
+    expect(diffArray.res()).toEqual([-2, 0, 3, 5, 3])
+  })
+})
 ```
 
 
@@ -48,32 +48,32 @@ describe('差分数组', () => {
 
 ```ts
 class DiffArray {
-  public diffArr: number[] = [];
+  public diffArr: number[] = []
   constructor(arr: number[]) {
     // 构造差分数组
-    this.diffArr[0] = arr[0];
-    const len = arr.length;
-    for (let i = 1; i < len; i++) {
-      this.diffArr[i] = arr[i] - arr[i - 1];
-    }
+    this.diffArr[0] = arr[0]
+    const len = arr.length
+    for (let i = 1; i < len; i++)
+      this.diffArr[i] = arr[i] - arr[i - 1]
+
   }
 
   inc(i: number, j: number, k: number) {
     // 左边界加 k，相当于此元素之后的所有元素都加 k
-    this.diffArr[i] += k;
+    this.diffArr[i] += k
     if (j + 1 < this.diffArr.length) {
       // 右边界到达数组尾元素之前，抵消副作用，保证仅区间内的元素变化
-      this.diffArr[j + 1] -= k;
+      this.diffArr[j + 1] -= k
     }
   }
 
   res() {
-    const resArr = [this.diffArr[0]];
-    const len = this.diffArr.length;
-    for (let i = 1; i < len; i++) {
-      resArr[i] = resArr[i - 1] + this.diffArr[i];
-    }
-    return resArr;
+    const resArr = [this.diffArr[0]]
+    const len = this.diffArr.length
+    for (let i = 1; i < len; i++)
+      resArr[i] = resArr[i - 1] + this.diffArr[i]
+
+    return resArr
   }
 }
 ```
@@ -100,12 +100,12 @@ function corpFlightBookings(
   bookings: number[][],
   n: number
 ): number[] {
-  const diffArr = new DiffArray(new Array(n).fill(0));
-  for(const [start, end, num] of bookings) {
+  const diffArr = new DiffArray(new Array(n).fill(0))
+  for (const [start, end, num] of bookings) {
     // 航班索引从 1 开始
-    diffArr.inc(start - 1, end - 1, num);
+    diffArr.inc(start - 1, end - 1, num)
   }
-  return diffArr.res();
+  return diffArr.res()
 }
 ```
 
@@ -138,13 +138,13 @@ import { describe, expect, it } from 'vitest'
 
 describe('拼车', () => {
   it('1', () => {
-    expect(carPooling([[2, 1, 5], [3, 3, 7]], 4)).toEqual(false);
-  });
+    expect(carPooling([[2, 1, 5], [3, 3, 7]], 4)).toEqual(false)
+  })
 
   it('2', () => {
-    expect(carPooling([[2, 1, 5], [3, 3, 7]], 5)).toEqual(true);
-  });
-});
+    expect(carPooling([[2, 1, 5], [3, 3, 7]], 5)).toEqual(true)
+  })
+})
 ```
 
 
@@ -156,14 +156,14 @@ function carPooling(
   capacity: number
 ): boolean {
   // 最多 1001 个车站
-  const diffArr = new DiffArray(new Array(1001).fill(0));
+  const diffArr = new DiffArray(new Array(1001).fill(0))
 
   for (const [n, start, end] of trips) {
     // 乘客在车上的区间
-    diffArr.inc(start, end - 1, n);
+    diffArr.inc(start, end - 1, n)
   }
   // 每一站都没有超载
-  return diffArr.res().every((n) => n <= capacity);
+  return diffArr.res().every(n => n <= capacity)
 }
 ```
 

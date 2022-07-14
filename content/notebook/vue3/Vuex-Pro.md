@@ -9,12 +9,12 @@ date: 2021-07-21 16:24:25
 ## `Composition API`
 
 ```js
-import { useStore, computed } from 'vuex';
+import { computed, useStore } from 'vuex'
 
-const store = useStore();
-const count = computed(store.state.count);
-store.commit('add', { num: 2 });
-store.dispatch('addAsync', { num: 2, time: 3000 });
+const store = useStore()
+const count = computed(store.state.count)
+store.commit('add', { num: 2 })
+store.dispatch('addAsync', { num: 2, time: 3000 })
 ```
 
 ## `plugins`
@@ -28,17 +28,17 @@ store.dispatch('addAsync', { num: 2, time: 3000 });
   - 记录日志
 
 ```js
+import { createStore } from 'vuex'
 const myPlugin = (store) => {
   // store 初始化完成之后调用
   store.subscribe((mutation, state) => {
     // 每次 mutation 之后调用
-    const { type, payload } = mutation;
-  });
-};
-import { createStore } from 'vuex';
+    const { type, payload } = mutation
+  })
+}
 const store = createStore({
   plugins: [myPlugin]
-});
+})
 ```
 
 ## 严格模式

@@ -26,26 +26,25 @@ date: 2022-03-26 11:00:00
 ### 核心代码
 
 ```js
-const robot = require("@jitsi/robotjs");
+const robot = require('@jitsi/robotjs')
 // 设置字符间隔
-robot.setKeyboardDelay(50);
+robot.setKeyboardDelay(50)
 // 设置鼠标移动间隔
-robot.setMouseDelay(50);
+robot.setMouseDelay(50)
 // 移动鼠标到特定的位置
-robot.moveMouse(x, y);
+robot.moveMouse(x, y)
 // 点击鼠标
-robot.mouseClick();
+robot.mouseClick()
 
 // 按下特定的按键
-robot.keyTap('delete');
+robot.keyTap('delete')
 
 // 切换窗口(按键加修饰键)
-robot.keyTap('tab', 'alt');
-    
+robot.keyTap('tab', 'alt')
 
-const shell = require('shelljs');
+const shell = require('shelljs')
 // 复制字符串到剪切板
-shell.exec(`echo ${str} | clip`);
+shell.exec(`echo ${str} | clip`)
 // 粘贴替代输入
-robot.keyTap('v', 'control');
+robot.keyTap('v', 'control')
 ```

@@ -33,31 +33,31 @@ class ListNode {
 }
 
 function createHelper(arr: number[]) {
-  let p = new ListNode();
-  const res = p;
+  let p = new ListNode()
+  const res = p
   for (const i of arr) {
-    p.next = new ListNode(i);
-    p = p.next;
+    p.next = new ListNode(i)
+    p = p.next
   }
-  return res.next;
+  return res.next
 }
 
 describe('示例：', () => {
   it('1', () => {
-    const p = createHelper([1, 2, 2, 1]);
-    expect(isPalindrome(p)).toBe(true);
-  });
+    const p = createHelper([1, 2, 2, 1])
+    expect(isPalindrome(p)).toBe(true)
+  })
 
   it('2', () => {
-    const p = createHelper([1, 2]);
-    expect(isPalindrome(p)).toBe(false);
-  });
+    const p = createHelper([1, 2])
+    expect(isPalindrome(p)).toBe(false)
+  })
 
   it('3', () => {
-    const p = createHelper([1]);
-    expect(isPalindrome(p)).toBe(true);
-  });
-});
+    const p = createHelper([1])
+    expect(isPalindrome(p)).toBe(true)
+  })
+})
 ```
 
 
@@ -77,46 +77,45 @@ describe('示例：', () => {
 
 ```ts
 function reverse(head: ListNode | null): ListNode | null {
-  let pre = null;
-  let curr = head;
+  let pre = null
+  let curr = head
   while (curr != null) {
-    let next = curr.next;
-    curr.next = pre;
-    pre = curr;
-    curr = next;
+    const next = curr.next
+    curr.next = pre
+    pre = curr
+    curr = next
   }
-  return pre;
+  return pre
 }
 
 function isPalindrome(head: ListNode | null): boolean {
-  if (head === null || head.next === null) {
-    return true;
-  }
-  let slow = head;
-  let fast = head;
+  if (head === null || head.next === null)
+    return true
+
+  let slow = head
+  let fast = head
   while (fast !== null && fast.next !== null) {
-    slow = slow.next;
-    fast = fast.next.next;
+    slow = slow.next
+    fast = fast.next.next
   }
   // 链表拥有奇数个节点
-  if (fast !== null) {
-    slow = slow.next;
-  }
+  if (fast !== null)
+    slow = slow.next
 
-  let left = head;
-  let right = reverse(slow);
+  let left = head
+  let right = reverse(slow)
 
   while (right !== null) {
     if (left.val !== right.val) {
       // 恢复链表顺序
-      slow.next = reverse(fast);
-      return false;
+      slow.next = reverse(fast)
+      return false
     }
-    left = left.next;
-    right = right.next;
+    left = left.next
+    right = right.next
   }
-  slow.next = reverse(fast);
-  return true;
+  slow.next = reverse(fast)
+  return true
 }
 ```
 

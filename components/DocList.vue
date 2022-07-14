@@ -5,34 +5,33 @@
  * @Description: 文章列表
 -->
 <script lang="ts" setup>
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types';
-import { NCard, NImage, NTime, NButton } from 'naive-ui';
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+import { NButton, NCard, NImage, NTime } from 'naive-ui'
 
 const props = withDefaults(defineProps<{
-  isList?: boolean;
-}>(), ({ isList: false }));
+  isList?: boolean
+}>(), ({ isList: false }))
 
-const page = ref(0);
-const hasMore = ref(props.isList);
-const allData = ref<ParsedContent[]>([]);
+const page = ref(0)
+const hasMore = ref(props.isList)
+const allData = ref<ParsedContent[]>([])
 
 const getList = async () => {
   const data = await queryContent()
     .sort({ date: -1 })
     .skip(page.value * 10)
     .limit(10)
-    .find();
-  if (data.length) {
-    allData.value.push(...data);
-  } else {
-    hasMore.value = false;
-  }
-  if (props.isList) {
-    page.value++;
-  }
-};
+    .find()
+  if (data.length)
+    allData.value.push(...data)
+  else
+    hasMore.value = false
 
-await getList();
+  if (props.isList)
+    page.value++
+}
+
+await getList()
 </script>
 
 <template>
@@ -52,7 +51,9 @@ await getList();
         </template>
       </NCard>
     </div>
-    <NButton v-if="hasMore" block @click="getList">More...</NButton>
+    <NButton v-if="hasMore" block @click="getList">
+      More...
+    </NButton>
   </div>
 </template>
 

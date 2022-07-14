@@ -22,22 +22,22 @@ date: 2021-01-28 13:43:47
   - **如果定型数组的空间不够，编码就会提前终止**，返回的字典会体现这个结果
 
 ```js
-const textEncoder = new TextEncoder();
-const decodedText = 'foo';
-const encodedText = textEncoder.encode(decodedText);
+const textEncoder = new TextEncoder()
+const decodedText = 'foo'
+const encodedText = textEncoder.encode(decodedText)
 // f 的 UTF-8 编码是 0x66（即十进制 102）
 // o 的 UTF-8 编码是 0x6F（即二进制 111）
-console.log(encodedText); // Uint8Array(3) [102, 111, 111]
+console.log(encodedText) // Uint8Array(3) [102, 111, 111]
 // ----------------------------------------------
-const textEncoder = new TextEncoder();
-const fooArr = new Uint8Array(3);
-const barArr = new Uint8Array(2);
-const fooResult = textEncoder.encodeInto('foo', fooArr);
-const barResult = textEncoder.encodeInto('bar', barArr);
-console.log(fooArr); // Uint8Array(3) [102, 111, 111]
-console.log(fooResult); // { read: 3, written: 3 }
-console.log(barArr); // Uint8Array(2) [98, 97]
-console.log(barResult); // { read: 2, written: 2 }
+const textEncoder = new TextEncoder()
+const fooArr = new Uint8Array(3)
+const barArr = new Uint8Array(2)
+const fooResult = textEncoder.encodeInto('foo', fooArr)
+const barResult = textEncoder.encodeInto('bar', barArr)
+console.log(fooArr) // Uint8Array(3) [102, 111, 111]
+console.log(fooResult) // { read: 3, written: 3 }
+console.log(barArr) // Uint8Array(2) [98, 97]
+console.log(barResult) // { read: 2, written: 2 }
 ```
 <n-alert type="warning">文本编码会始终使用 `UTF-8` 格式，而且必须写入 `Unit8Array` 实例。**使用其他类型数组会导致 `encodeInto()` 抛出错误**</n-alert>
 
@@ -48,34 +48,34 @@ console.log(barResult); // { read: 2, written: 2 }
 
 ```js
 async function* chars() {
-  const decodeText = 'foo';
-  for(const char of decodeText) {
-    yield await new Promise((resolve) => setTimeout(resolve, 1000, char));
-  }
+  const decodeText = 'foo'
+  for (const char of decodeText)
+    yield await new Promise(resolve => setTimeout(resolve, 1000, char))
+
 }
 const decodeTextStream = new ReadableStream({
   async start(controller) {
-    for await(const chunk of chars()) {
-      controller.enqueue(chunk);
-    }
-    controller.close();
+    for await (const chunk of chars())
+      controller.enqueue(chunk)
+
+    controller.close()
   }
-});
-const encodedTextStream = decodeTextStream.pipeThrough(new TextEncoderStream());
+})
+const encodedTextStream = decodeTextStream.pipeThrough(new TextEncoderStream())
 const rs = encodedTextStream.getReader();
-(async function() {
-  while(true) {
-    const { done, value } = await rs.read();
-    if(done) {
-      break;
-    } else {
-      console.log(value);
-    }
+(async function () {
+  while (true) {
+    const { done, value } = await rs.read()
+    if (done)
+      break
+    else
+      console.log(value)
+
   }
-})();
+})()
 // Uint8Array[102]
 // Uint8Array[111]
-// Uint8Array[111] 
+// Uint8Array[111]
 ```
 
 ## 文本解码
@@ -93,21 +93,21 @@ const rs = encodedTextStream.getReader();
 解码器不关心传入的是哪种定型数组，它只会专心解码整个二进制表示
 
 ```js
-const decoder = new TextDecoder();
+const decoder = new TextDecoder()
 // f 的 UTF-8 编码是 0x66（即十进制 102）
 // o 的 UTF-8 编码是 0x6F（即二进制 111）
-const encodedText8 = Uint8Array.of(102, 111, 111);
-const decodedText80 = decoder.decode(encodedText8);
-console.log(decodedText80); // foo 
+const encodedText8 = Uint8Array.of(102, 111, 111)
+const decodedText80 = decoder.decode(encodedText8)
+console.log(decodedText80) // foo
 // --------------------------
-const encodedText32 = Uint32Array.of(102, 111, 111);
-const decodedText81 = decoder.decode(encodedText32);
-console.log(decodedText81); // "f o o " 
+const encodedText32 = Uint32Array.of(102, 111, 111)
+const decodedText81 = decoder.decode(encodedText32)
+console.log(decodedText81) // "f o o "
 // 与 TextEncoder 不同，TextDecoder 可以兼容很多字符编码
-const decoder16 = new TextDecoder('utf-16');
-const encodedText16 = Uint16Array.of(102, 111, 111);
-const decodeText16 = decoder16.decode(encodedText16);
-console.log(decodeText16); // foo
+const decoder16 = new TextDecoder('utf-16')
+const encodedText16 = Uint16Array.of(102, 111, 111)
+const decodeText16 = decoder16.decode(encodedText16)
+console.log(decodeText16) // foo
 ```
 
 ### 流解码
@@ -117,31 +117,31 @@ console.log(decodeText16); // foo
 ```js
 async function* chars() {
   // 每个块必须是一个定型数组
-  const encodeText = [102, 111, 111].map((x) => Uint8Array.of(x));
-  for(const char of encodeText) {
-    yield await new Promise((resolve) => setTimeout(resolve, 1000, char));
-  }
+  const encodeText = [102, 111, 111].map(x => Uint8Array.of(x))
+  for (const char of encodeText)
+    yield await new Promise(resolve => setTimeout(resolve, 1000, char))
+
 }
 const encodeTextStream = new ReadableStream({
   async start(controller) {
-    for await(const chunk of chars()) {
-      controller.enqueue(chunk);
-    }
-    controller.close();
+    for await (const chunk of chars())
+      controller.enqueue(chunk)
+
+    controller.close()
   }
-});
-const decodedTextStream = encodeTextStream.pipeThrough(new TextDecoderStream());
+})
+const decodedTextStream = encodeTextStream.pipeThrough(new TextDecoderStream())
 const rs = decodedTextStream.getReader();
-(async function() {
-  while(true) {
-    const { done, value } = await rs.read();
-    if(done) {
-      break;
-    } else {
-      console.log(value);
-    }
+(async function () {
+  while (true) {
+    const { done, value } = await rs.read()
+    if (done)
+      break
+    else
+      console.log(value)
+
   }
-})();
+})()
 // f
 // o
 // o

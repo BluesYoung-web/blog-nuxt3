@@ -26,12 +26,12 @@ description: JavaScript 操作符
 如果是对象，则调用其 `valueOf()` 方法取得可以操作的值。对得到的值应用上述规则。如果是 `NaN`，则调用 `toString()` 并再次应用其他规则。变量类型从对象变成数值
 
 ```js
-let a = 1;
-let b = a++; 
-//===> b = a = 1, a = a + 1 = 2（减同理）
-let c = 1;
-let d = ++c;
-//===> d = c + 1 = 2, c = c + 1 = 2（减同理）
+let a = 1
+const b = a++
+// ===> b = a = 1, a = a + 1 = 2（减同理）
+let c = 1
+const d = ++c
+// ===> d = c + 1 = 2, c = c + 1 = 2（减同理）
 ```
 
 ### 一元加减
@@ -59,8 +59,8 @@ let d = ++c;
 `ECMAScript `会帮我们记录这些信息。在把负值输出为一个二进制字符串时，我们会得到一个前面加了减号的绝对值
 
 ```js
-let num = -18;
-console.log(num.toString(2));
+const num = -18
+console.log(num.toString(2))
 // "-10010" 转换过程会求得补码，然后再以更符合逻辑的形式表示出来
 ```
 
@@ -79,9 +79,9 @@ console.log(num.toString(2));
 返回数值的一补数（<span class="text-red-600 font-bold">取反减一</span>）
 
 ```js
-let num1 = 25; // 二进制 00000000000000000000000000011001
-let num2 = ~num1; // 二进制 11111111111111111111111111100110
-console.log(num2); // -26 
+const num1 = 25 // 二进制 00000000000000000000000000011001
+const num2 = ~num1 // 二进制 11111111111111111111111111100110
+console.log(num2) // -26
 ```
 
 ### 按位与(`&`)
@@ -135,7 +135,7 @@ XOR = 0000 0000 0000 0000 0000 0000 0001 1010
 ////////////////////////////////////////////////////////
 2 === 0b0010
 // << 5
-0b01000000 === 2 ** (5 + 1) === 64
+2 ** (5 + 1) === 0b01000000 === 64
 ```
 
 
@@ -154,14 +154,14 @@ XOR = 0000 0000 0000 0000 0000 0000 0001 1010
 ////////////////////////////////////////////////////////
 64 === 0b01000000
 // >> 5
-0b0010 === 64 ** (1 / (5 + 1)) === 2
+64 ** (1 / (5 + 1)) === 0b0010 === 2
 
 // 有符号数保留符号位
--64 >> 5 === -2
--64 >> 6 === -1
--64 >> 7 === -1
+- 64 >> 5 === -2
+- 64 >> 6 === -1
+- 64 >> 7 === -1
 // ...
--64 >> n === -1 // n ∈ [7, 31], >> 32 === >> 0
+- 64 >> n === -1 // n ∈ [7, 31], >> 32 === >> 0
 ```
 
 ### 无符号右移(`>>>`)
@@ -193,18 +193,18 @@ XOR = 0000 0000 0000 0000 0000 0000 0001 1010
 同时使用两个叹号（`!!`），相当于调用了转型函数 `Boolean()`
 
 ```js
-console.log(!false); // true
-console.log(!"blue"); // false
-console.log(!0); // true
-console.log(!NaN); // true
-console.log(!""); // true
-console.log(!12345); // false 
+console.log(!false) // true
+console.log(!'blue') // false
+console.log(!0) // true
+console.log(!NaN) // true
+console.log(!'') // true
+console.log(!12345) // false
 //////////////////////////////////////
-console.log(!!"blue"); // true
-console.log(!!0); // false
-console.log(!!NaN); // false
-console.log(!!""); // false
-console.log(!!12345); // true
+console.log(!!'blue') // true
+console.log(!!0) // false
+console.log(!!NaN) // false
+console.log(!!'') // false
+console.log(!!12345) // true
 ```
 
 ### 逻辑与(`&&`)
@@ -317,12 +317,12 @@ console.log(!!12345); // true
   - 如果有任一操作数是对象，则调用其 `valueOf()` 方法取得表示它的数值。如果该值是 `NaN`，则减法计算的结果是 `NaN`。如果对象没有 `valueOf()` 方法，则调用其 `toString()` 方法，然后再将得到的字符串转换为数值
 
 ```js
-let result1 = 5 - true; // true 被转换为 1，所以结果是 4
-let result2 = NaN - 1; // NaN
-let result3 = 5 - 3; // 2
-let result4 = 5 - ""; // ""被转换为 0，所以结果是 5
-let result5 = 5 - "2"; // "2"被转换为 2，所以结果是 3
-let result6 = 5 - null; // null 被转换为 0，所以结果是 5 
+const result1 = 5 - true // true 被转换为 1，所以结果是 4
+const result2 = NaN - 1 // NaN
+const result3 = 5 - 3 // 2
+const result4 = 5 - '' // ""被转换为 0，所以结果是 5
+const result5 = 5 - '2' // "2"被转换为 2，所以结果是 3
+const result6 = 5 - null // null 被转换为 0，所以结果是 5
 ```
 
 
@@ -358,9 +358,9 @@ let result6 = 5 - null; // null 被转换为 0，所以结果是 5
   - 如果两个操作数都是对象，则比较它们是不是同一个对象。如果两个操作数都指向同一个对象， 则相等操作符返回 `true`。否则，两者不相等
 
 ```js
-null == undefined 	// true
-"NaN" == NaN 		// false
-5 == NaN 			// false
+undefined == null 	// true
+NaN == 'NaN' 		// false
+NaN == 5 			// false
 NaN == NaN 			// false
 NaN != NaN 			// true
 false == 0 			// true
@@ -368,7 +368,7 @@ true == 1 			// true
 true == 2 			// false
 undefined == 0 		// false
 null == 0 			// false
-"5" == 5 			// true
+'5' == 5 			// true
 ```
 
 ### 全等和不全等

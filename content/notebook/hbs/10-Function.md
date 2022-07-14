@@ -22,9 +22,9 @@ date: 2020-12-28 17:21:20
 **不存在重载，后定义的会覆盖先定义的**
 
 ```js
-function fn (a) {
-  consloe.log(a);
-  return ++a;
+function fn(a) {
+  consloe.log(a)
+  return ++a
 }
 ```
 
@@ -36,7 +36,7 @@ function fn (a) {
 
 ```js
 function sum(num1, num2) {
-  return num1 + num2;
+  return num1 + num2
 }
 ```
 
@@ -45,9 +45,9 @@ function sum(num1, num2) {
 **不存在提升**
 
 ```js
-const sum = function(num1, num2) {
-  return num1 + num2;
-};
+const sum = function (num1, num2) {
+  return num1 + num2
+}
 ```
 
 ### 使用构造函数
@@ -59,7 +59,7 @@ const sum = function(num1, num2) {
 **影响性能，不推荐使用**
 
 ```js
-const sum = new Function('num1', 'num2', 'return num1 + num2');
+const sum = new Function('num1', 'num2', 'return num1 + num2')
 ```
 
 

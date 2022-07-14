@@ -39,8 +39,8 @@ image: /img/design-mode.jpeg
 class Abstraction {
   constructor(protected implementation: Implementation) {}
   public operation() {
-    const result = this.implementation.operationImplementation();
-    return `原有抽象类:\n${result}`;
+    const result = this.implementation.operationImplementation()
+    return `原有抽象类:\n${result}`
   }
 }
 /**
@@ -48,27 +48,27 @@ class Abstraction {
  */
 class ExtendedAbstraction extends Abstraction {
   public operation() {
-    const result = this.implementation.operationImplementation();
-    return `扩展后的抽象类:\n${result}`;
+    const result = this.implementation.operationImplementation()
+    return `扩展后的抽象类:\n${result}`
   }
 }
 /**
  * 定义实现方法接口
  */
 interface Implementation {
-  operationImplementation(): string;
+  operationImplementation(): string
 }
 /**
  * 接口的具体实现
  */
 class ConcreteImplementationA implements Implementation {
   public operationImplementation() {
-    return '使用A平台实现';
+    return '使用A平台实现'
   }
 }
 class ConcreteImplementationB implements Implementation {
   public operationImplementation() {
-    return '使用B平台实现';
+    return '使用B平台实现'
   }
 }
 /**
@@ -76,17 +76,17 @@ class ConcreteImplementationB implements Implementation {
  */
 function clientCode(abstraction: Abstraction) {
   // ..
-  console.log(abstraction.operation());
+  console.log(abstraction.operation())
   // ..
 }
 /**
  * 调用不同的实现接口
  */
-let implementation = new ConcreteImplementationA();
-let abstraction = new Abstraction(implementation);
-clientCode(abstraction);
-console.log('\n');
-implementation = new ConcreteImplementationB();
-abstraction = new ExtendedAbstraction(implementation);
-clientCode(abstraction);
+let implementation = new ConcreteImplementationA()
+let abstraction = new Abstraction(implementation)
+clientCode(abstraction)
+console.log('\n')
+implementation = new ConcreteImplementationB()
+abstraction = new ExtendedAbstraction(implementation)
+clientCode(abstraction)
 ```

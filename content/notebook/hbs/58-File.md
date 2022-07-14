@@ -66,15 +66,15 @@ date: 2021-01-28 14:54:23
 ```js
 // worker.js
 self.omessage = (messageEvent) => {
-	const syncReader = new FileReaderSync();
-	console.log(syncReader); // FileReaderSync {}
-	// 读取文件时阻塞工作线程
-	const result = syncReader.readAsDataUrl(messageEvent.data);
-	// PDF 文件的示例响应
-	console.log(result); // data:application/pdf;base64,JVBERi0xLjQK...
-	// 把 URL 发回去
-	self.postMessage(result);
-}; 
+  const syncReader = new FileReaderSync()
+  console.log(syncReader) // FileReaderSync {}
+  // 读取文件时阻塞工作线程
+  const result = syncReader.readAsDataUrl(messageEvent.data)
+  // PDF 文件的示例响应
+  console.log(result) // data:application/pdf;base64,JVBERi0xLjQK...
+  // 把 URL 发回去
+  self.postMessage(result)
+}
 ```
 
 ## `Blob`
@@ -94,12 +94,12 @@ self.omessage = (messageEvent) => {
 **只读取部分文件可以极大的节省时间**
 
 ```js
-console.log(new Blob(['foo']));
+console.log(new Blob(['foo']))
 // Blob {size: 3, type: ""}
-console.log(new Blob(['{"a": "b"}'], { type: 'application/json' }));
+console.log(new Blob(['{"a": "b"}'], { type: 'application/json' }))
 // {size: 10, type: "application/json"}
-console.log(new Blob(['<p>Foo</p>', '<p>Bar</p>'], { type: 'text/html' }));
-// {size: 20, type: "text/html"} 
+console.log(new Blob(['<p>Foo</p>', '<p>Bar</p>'], { type: 'text/html' }))
+// {size: 20, type: "text/html"}
 ```
 
 ## 对象 `URL` 与 `Blob`
@@ -113,7 +113,7 @@ console.log(new Blob(['<p>Foo</p>', '<p>Bar</p>'], { type: 'text/html' }));
 如果想表明不在使用某个对象的 `URL`，`window.URL.revokeObjectURL(blobUrl)`
 
 ```js
-window.URL.createObjectURL(f);
+window.URL.createObjectURL(f)
 // "blob:null/1a16c573-c7d5-4d82-a88d-bc1293d4dff0"
 ```
 

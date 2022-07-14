@@ -40,19 +40,19 @@ image: /img/design-mode.jpeg
 
 ```ts
 /**
- * 享元类 
+ * 享元类
  */
 class Flyweight<T extends any = any, R extends any = any> {
-  private sharedState: T;
+  private sharedState: T
 
   constructor(sharedState: T) {
-    this.sharedState = sharedState;
+    this.sharedState = sharedState
   }
 
   public operation(uniqueState: R) {
-    const s = JSON.stringify(this.sharedState);
-    const u = JSON.stringify(uniqueState);
-    console.log(`Flyweight: Displaying shared (${s}) and unique (${u}) state.`);
+    const s = JSON.stringify(this.sharedState)
+    const u = JSON.stringify(uniqueState)
+    console.log(`Flyweight: Displaying shared (${s}) and unique (${u}) state.`)
   }
 }
 
@@ -60,42 +60,43 @@ class Flyweight<T extends any = any, R extends any = any> {
  * 工厂类，对享元对象进行管理
  */
 class FlyweightFactory {
-  private flyweights: Record<string, Flyweight> = {};
+  private flyweights: Record<string, Flyweight> = {}
 
   constructor(initialFlyweights: string[][]) {
-    for (const state of initialFlyweights) {
-      this.flyweights[this.getKey(state)] = new Flyweight(state);
-    }
+    for (const state of initialFlyweights)
+      this.flyweights[this.getKey(state)] = new Flyweight(state)
+
   }
 
   /**
    * 计算享元状态的键名
    */
   private getKey(state: string[]) {
-    return state.join('_');
+    return state.join('_')
   }
 
   /**
    * 有则复用，无则新建
    */
   public getFlyweight(sharedState: string[]) {
-    const key = this.getKey(sharedState);
+    const key = this.getKey(sharedState)
 
     if (!(key in this.flyweights)) {
-      console.log('FlyweightFactory: Can\'t find a flyweight, creating new one.');
-      this.flyweights[key] = new Flyweight(sharedState);
-    } else {
-      console.log('FlyweightFactory: Reusing existing flyweight.');
+      console.log('FlyweightFactory: Can\'t find a flyweight, creating new one.')
+      this.flyweights[key] = new Flyweight(sharedState)
     }
-    return this.flyweights[key];
+    else {
+      console.log('FlyweightFactory: Reusing existing flyweight.')
+    }
+    return this.flyweights[key]
   }
 
   public listFlyweights() {
-    const count = Object.keys(this.flyweights).length;
-    console.log(`\nFlyweightFactory: I have ${count} flyweights:`);
-    for (const key in this.flyweights) {
-      console.log(key);
-    }
+    const count = Object.keys(this.flyweights).length
+    console.log(`\nFlyweightFactory: I have ${count} flyweights:`)
+    for (const key in this.flyweights)
+      console.log(key)
+
   }
 }
 
@@ -108,8 +109,8 @@ const factory = new FlyweightFactory([
   ['Mercedes Benz', 'C500', 'red'],
   ['BMW', 'M5', 'red'],
   ['BMW', 'X6', 'white'],
-]);
-factory.listFlyweights();
+])
+factory.listFlyweights()
 
 function addCarToPoliceDatabase(
   ff: FlyweightFactory,
@@ -119,14 +120,14 @@ function addCarToPoliceDatabase(
   model: string,
   color: string
 ) {
-  console.log('\nClient: Adding a car to database.');
-  const flyweight = ff.getFlyweight([brand, model, color]);
-  flyweight.operation([plates, owner]);
+  console.log('\nClient: Adding a car to database.')
+  const flyweight = ff.getFlyweight([brand, model, color])
+  flyweight.operation([plates, owner])
 }
 // 存在对应的车型，直接复用
-addCarToPoliceDatabase(factory, 'CL234IR', 'James Doe', 'BMW', 'M5', 'red');
+addCarToPoliceDatabase(factory, 'CL234IR', 'James Doe', 'BMW', 'M5', 'red')
 // 不存在对应的车型，添加
-addCarToPoliceDatabase(factory, 'CL234IR', 'James Doe', 'BMW', 'X1', 'red');
+addCarToPoliceDatabase(factory, 'CL234IR', 'James Doe', 'BMW', 'X1', 'red')
 
-factory.listFlyweights();
+factory.listFlyweights()
 ```

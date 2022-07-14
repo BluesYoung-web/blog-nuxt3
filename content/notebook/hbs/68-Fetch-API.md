@@ -31,33 +31,33 @@ date: 2021-02-04 14:48:14
 ```js
 fetch('bar.txt').then((res) => {
   res.text().then((data) => {
-    console.log(data);
-  });
-});
+    console.log(data)
+  })
+})
 // 等效
 fetch('bar.txt')
-  .then((res) => res.text())
-  .then((data) => console.log(data));
+  .then(res => res.text())
+  .then(data => console.log(data))
 ```
 
 ### 处理状态码和请求失败
 
 ```js
 fetch('/bar').then((response) => {
-	console.log(response.status); // 200
-	console.log(response.statusText); // OK
-});
+  console.log(response.status) // 200
+  console.log(response.statusText) // OK
+})
 fetch('/does-not-exist').then((response) => {
-	console.log(response.status); // 404
-	console.log(response.statusText); // Not Found
-}); 
+  console.log(response.status) // 404
+  console.log(response.statusText) // Not Found
+})
 fetch('/throw-server-error').then((response) => {
-	console.log(response.status); // 500
-	console.log(response.statusText); // Internal Server Error
+  console.log(response.status) // 500
+  console.log(response.statusText) // Internal Server Error
 }).catch((err) => {
-   // 错误处理
-	console.log(err);
-});
+  // 错误处理
+  console.log(err)
+})
 ```
 
 ### 自定义对象(`reqObj`)
@@ -177,46 +177,46 @@ fetch('/throw-server-error').then((response) => {
 ### 发送 `JSON` 数据
 
 ```js
-const playload = JSON.stringify({ foo: 'bar' });
-const hd = new Headers({ 'Content-Type': 'application/json' });
+const playload = JSON.stringify({ foo: 'bar' })
+const hd = new Headers({ 'Content-Type': 'application/json' })
 fetch('/get-json', {
   method: 'POST',
   body: playload,
   headers: hd
-});
+})
 ```
 
 ### 在请求体中发送参数
 
 ```js
 // 请求体支持查询字符串
-const body = 'foo=bar&baz=qux';
-const hd = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+const body = 'foo=bar&baz=qux'
+const hd = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' })
 fetch('/api', {
   method: 'POST',
   body,
   headers: hd
-});
+})
 ```
 
 ### 发送文件
 
 ```js
-const f_data = new FormData();
-f_data.append('f', new File());
+const f_data = new FormData()
+f_data.append('f', new File())
 fetch('/upload', {
   method: 'POST',
   body: f_data
-});
+})
 ```
 
 ### 加载 `Blob` 文件
 
 ```js
-const img = documet.querySelector('.img');
+const img = documet.querySelector('.img')
 fetch('test.jpg')
-  .then((res) => res.blob())
-  .then((blob) => img.src = URL.createObjectURL(blob));
+  .then(res => res.blob())
+  .then(blob => img.src = URL.createObjectURL(blob))
 ```
 
 ### 发送跨域请求
@@ -226,7 +226,7 @@ fetch('test.jpg')
 没有这些头部，跨域请求会失败并抛出错误
 
 ```js
-fetch('//cross-origin.com');
+fetch('//cross-origin.com')
 // TypeError: Failed to fetch
 // No 'Access-Control-Allow-Origin' header is present on the requested resource
 ```
@@ -239,17 +239,17 @@ fetch('//cross-origin.com');
 
 ```js
 fetch('//cross-origin.com', { method: 'no-cors' })
-  .then((response) => console.log(response.type));
+  .then(response => console.log(response.type))
 // opaque
 ```
 
 ### 中断请求
 
 ```js
-const abortController = new AbortController();
+const abortController = new AbortController()
 fetch('test.txt', {
   signal: abortController.signal
-}).catch(() => console.log('aborted!'));
+}).catch(() => console.log('aborted!'))
 // 1s 之后中断请求
-setTimeout(() => abortController.abort(), 1000);
+setTimeout(() => abortController.abort(), 1000)
 ```

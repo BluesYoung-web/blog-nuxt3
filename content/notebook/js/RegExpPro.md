@@ -124,8 +124,8 @@ const {
   month,
   year
 } = '03-28-2022'
-      .match(/(?<month>\d{2})-(?<day>\d{2})-(?<year>\d{4})/)
-      .groups ;
+  .match(/(?<month>\d{2})-(?<day>\d{2})-(?<year>\d{4})/)
+  .groups
 ```
 
 ## 相关 API
@@ -150,11 +150,11 @@ const {
 - 传入的字符串也会被转换为正则
 
 ```js
-'apple, pear!, orange'.split(/\w+/);
+'apple, pear!, orange'.split(/\w+/)
 // ['', ', ', '!, ', '']
-'apple, pear!, orange'.split(/\W+/);
+'apple, pear!, orange'.split(/\W+/)
 // ['apple', 'pear', 'orange']
-'apple, pear!, orange'.split(/\W+/, 1);
+'apple, pear!, orange'.split(/\W+/, 1)
 // ['apple']
 
 // 分组匹配，结果数组包含分隔符！！！
@@ -178,7 +178,7 @@ const {
 - 比 match 更加强大
 
 ```js
-while (res = regexp.exec(str)) {
-  console.log(res, regexp.lastIndex);
-}
+while (res = regexp.exec(str))
+  console.log(res, regexp.lastIndex)
+
 ```

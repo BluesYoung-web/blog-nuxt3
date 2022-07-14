@@ -26,31 +26,31 @@ image: /img/algorithm.webp
 <strong>测试代码：</strong>
 
 ```ts
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
 describe('分割数组的最大值', () => {
   it('1', () => {
-    const nums1 = [2, 7, 11, 15];
-    const nums2 = [1, 10, 4, 11];
-    const res = [2, 11, 7, 15];
-    expect(advantageCount(nums1, nums2)).toEqual(res);
-  });
+    const nums1 = [2, 7, 11, 15]
+    const nums2 = [1, 10, 4, 11]
+    const res = [2, 11, 7, 15]
+    expect(advantageCount(nums1, nums2)).toEqual(res)
+  })
 
   it('2', () => {
-    const nums1 = [12, 24, 8, 32];
-    const nums2 = [13, 25, 32, 11];
-    const res = [24, 32, 8, 12];
-    expect(advantageCount(nums1, nums2)).toEqual(res);
-  });
+    const nums1 = [12, 24, 8, 32]
+    const nums2 = [13, 25, 32, 11]
+    const res = [24, 32, 8, 12]
+    expect(advantageCount(nums1, nums2)).toEqual(res)
+  })
 
   it('3. 元素重复', () => {
-    const nums1 = [2, 0, 4, 1, 2];
-    const nums2 = [1, 3, 0, 0, 2];
+    const nums1 = [2, 0, 4, 1, 2]
+    const nums2 = [1, 3, 0, 0, 2]
     // 此处可能存在多个答案，合理即可
-    const res = [2, 4, 2, 1, 0];
-    expect(advantageCount(nums1, nums2)).toEqual(res);
+    const res = [2, 4, 2, 1, 0]
+    expect(advantageCount(nums1, nums2)).toEqual(res)
   })
-});
+})
 ```
 
 
@@ -60,23 +60,24 @@ describe('分割数组的最大值', () => {
 
 ```ts
 function advantageCount(nums1: number[], nums2: number[]): any {
-  const resArr: number[] = [];
-  nums1.sort((a, b) => b - a);
+  const resArr: number[] = []
+  nums1.sort((a, b) => b - a)
   // 以二维数组存储原始索引，防止重复元素对结果的影响
-  const temp = nums2.map((v, i) => [i, v]).sort((a, b) => b[1] - a[1]);
+  const temp = nums2.map((v, i) => [i, v]).sort((a, b) => b[1] - a[1])
 
-  let left = 0, right = nums1.length - 1;
+  let left = 0; let right = nums1.length - 1
 
   temp.forEach(([origin_index, v]) => {
     // 打得过就打，打不过就以最小的换最大的
     if (nums1[left] > v) {
-      resArr[origin_index] = nums1[left];
-      left++;
-    } else {
-      resArr[origin_index] = nums1[right];
-      right--;
+      resArr[origin_index] = nums1[left]
+      left++
     }
-  });
-  return resArr;
+    else {
+      resArr[origin_index] = nums1[right]
+      right--
+    }
+  })
+  return resArr
 }
 ```

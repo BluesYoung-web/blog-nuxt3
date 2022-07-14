@@ -31,20 +31,20 @@ image: /img/algorithm.webp
 import { describe, expect, it } from 'vitest'
 
 describe('区域和搜索', () => {
-  const numArray = new NumArray([-2, 0, 3, -5, 2, -1]);
+  const numArray = new NumArray([-2, 0, 3, -5, 2, -1])
 
   it('1', () => {
-    expect(numArray.sumRange(0, 2)).toEqual(1);
-  });
+    expect(numArray.sumRange(0, 2)).toEqual(1)
+  })
 
   it('2', () => {
-    expect(numArray.sumRange(2, 5)).toEqual(-1);
-  });
+    expect(numArray.sumRange(2, 5)).toEqual(-1)
+  })
 
   it('3', () => {
-    expect(numArray.sumRange(0, 5)).toEqual(-3);
-  });
-});
+    expect(numArray.sumRange(0, 5)).toEqual(-3)
+  })
+})
 ```
 
 
@@ -53,19 +53,20 @@ describe('区域和搜索', () => {
 ```ts
 class NumArray {
   // 存储所有元素顺序累加和的数组
-  public sumArr: number[] = [0];
+  public sumArr: number[] = [0]
   constructor(
     public nums: number[]
   ) {
-    const len = this.nums.length + 1;
+    const len = this.nums.length + 1
     // 遍历元素，计算累加和
-    for (let i = 1; i < len; i++) {
-      this.sumArr[i] = this.sumArr[i - 1] + nums[i - 1];
-    }
+    for (let i = 1; i < len; i++)
+      this.sumArr[i] = this.sumArr[i - 1] + nums[i - 1]
+
   }
+
   // [1, 4] 内的所有元素之和 => sumArr[5] - sumArr[1]
   sumRange(left: number, right: number): number {
-    return this.sumArr[right + 1] - this.sumArr[left];
+    return this.sumArr[right + 1] - this.sumArr[left]
   }
 }
 ```
@@ -101,20 +102,20 @@ describe('二维区域和搜索', () => {
     [1, 2, 0, 1, 5],
     [4, 1, 0, 1, 7],
     [1, 0, 3, 0, 5]
-  ]);
+  ])
 
   it('1', () => {
-    expect(numMatrix.sumRegion(2, 1, 4, 3)).toEqual(8);
-  });
+    expect(numMatrix.sumRegion(2, 1, 4, 3)).toEqual(8)
+  })
 
   it('2', () => {
-    expect(numMatrix.sumRegion(1, 1, 2, 2)).toEqual(11);
-  });
+    expect(numMatrix.sumRegion(1, 1, 2, 2)).toEqual(11)
+  })
 
   it('3', () => {
-    expect(numMatrix.sumRegion(1, 2, 2, 4)).toEqual(12);
-  });
-});
+    expect(numMatrix.sumRegion(1, 2, 2, 4)).toEqual(12)
+  })
+})
 ```
 
 
@@ -128,28 +129,27 @@ describe('二维区域和搜索', () => {
 
 ```ts
 class NumMatrix {
-  public sumArr: number[][] = [];
+  public sumArr: number[][] = []
   constructor(
     public matrix: number[][]
   ) {
-    const m = matrix.length;
-    const n = matrix[0].length;
+    const m = matrix.length
+    const n = matrix[0].length
     // 初始化结果矩阵
-    for (let index = 0; index <= m; index++) {
-      this.sumArr[index] = new Array(n + 1).fill(0);
-    }
-    
-    if (m === 0 || n === 0) {
-      return;
-    }
+    for (let index = 0; index <= m; index++)
+      this.sumArr[index] = new Array(n + 1).fill(0)
+
+    if (m === 0 || n === 0)
+      return
+
     for (let i = 1; i <= m; i++) {
       for (let j = 1; j <= n; j++) {
-        this.sumArr[i][j] = 
-          this.sumArr[i - 1][j]
+        this.sumArr[i][j]
+          = this.sumArr[i - 1][j]
            + this.sumArr[i][j - 1]
            + matrix[i - 1][j - 1]
-           - this.sumArr[i -1][j - 1];
-        
+           - this.sumArr[i - 1][j - 1]
+
       }
     }
   }
@@ -158,7 +158,7 @@ class NumMatrix {
     return this.sumArr[x2 + 1][y2 + 1]
             - this.sumArr[x1][y2 + 1]
             - this.sumArr[x2 + 1][y1]
-            + this.sumArr[x1][y1];
+            + this.sumArr[x1][y1]
   }
 }
 ```
@@ -185,17 +185,17 @@ import { describe, expect, it } from 'vitest'
 
 describe('和为 k 的子数组', () => {
   it('1', () => {
-    expect(subarraySum([1, 1, 1], 2)).toEqual(2);
-  });
+    expect(subarraySum([1, 1, 1], 2)).toEqual(2)
+  })
 
   it('2', () => {
-    expect(subarraySum([1, 2, 3], 3)).toEqual(2);
-  });
+    expect(subarraySum([1, 2, 3], 3)).toEqual(2)
+  })
 
   it('3', () => {
-    expect(subarraySum([2, 3, 3], 4)).toEqual(0);
-  });
-});
+    expect(subarraySum([2, 3, 3], 4)).toEqual(0)
+  })
+})
 ```
 
 
@@ -204,17 +204,17 @@ describe('和为 k 的子数组', () => {
 ```ts
 function subarraySum(nums: number[], k: number): number {
   // 当前缀和足够时，无需额外的元素
-  const sumMap = new Map<number, number>([[0, 1]]);
-  let res = 0, sum0_i = 0;
+  const sumMap = new Map<number, number>([[0, 1]])
+  let res = 0; let sum0_i = 0
   for (const n of nums) {
-    sum0_i += n;
-    const diff = sum0_i - k;
+    sum0_i += n
+    const diff = sum0_i - k
     if (sumMap.has(diff)) {
       // 统计所需值在之前的前缀和之中出现的次数
-      res += sumMap.get(diff);
+      res += sumMap.get(diff)
     }
-    sumMap.set(sum0_i, (sumMap.get(sum0_i) ?? 0) + 1);
+    sumMap.set(sum0_i, (sumMap.get(sum0_i) ?? 0) + 1)
   }
-  return res;
+  return res
 }
 ```

@@ -65,16 +65,16 @@ image: /img/vue.jpeg
 
 ```ts
 // 转换成的渲染函数
-createElementVNode("div", {
+createElementVNode('div', {
   class: _normalizeClass({ active: _ctx.active })
 }, null, 2 /* CLASS */)
 
-createElementVNode("input", {
+createElementVNode('input', {
   id: _ctx.id,
   value: _ctx.value
-}, null, 8 /* PROPS */, ["id", "value"])
+}, null, 8 /* PROPS */, ['id', 'value'])
 
-createElementVNode("div", null, _toDisplayString(_ctx.dynamic), 1 /* TEXT */)
+createElementVNode('div', null, _toDisplayString(_ctx.dynamic), 1 /* TEXT */)
 ```
 
 ```ts

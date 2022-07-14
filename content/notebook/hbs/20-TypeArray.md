@@ -29,10 +29,10 @@ Mozilla 为解决这个问题而实现了 CanvasFloatArray
 `ArrayBuffer` **一经创建就不能再调整大小**。不过，可以使用 `slice()` 复制其全部或部分到一个新实例中
 
 ```js
-const buf = new ArrayBuffer(16); // 在内存中分配 16 字节(128 位)
-console.log(buf.byteLength);     // 16
-const buf2 = buf1.slice(4, 12);
-alert(buf2.byteLength);          // 8 
+const buf = new ArrayBuffer(16) // 在内存中分配 16 字节(128 位)
+console.log(buf.byteLength) // 16
+const buf2 = buf1.slice(4, 12)
+alert(buf2.byteLength) // 8
 ```
 
 ### 与 `c++` 的 `malloc` 函数对比
@@ -64,26 +64,26 @@ alert(buf2.byteLength);          // 8
 这个实例可以使用全部或部分 `ArrayBuffer`，且维护着对该缓冲实例的引用，以及视图在缓冲中开始的位置
 
 ```js
-const buf = new ArrayBuffer(16);
+const buf = new ArrayBuffer(16)
 // DataView 默认使用整个 ArrayBuffer
-const fullDataView = new DataView(buf);
-alert(fullDataView.byteOffset); // 0
-alert(fullDataView.byteLength); // 16
-alert(fullDataView.buffer === buf); // true
+const fullDataView = new DataView(buf)
+alert(fullDataView.byteOffset) // 0
+alert(fullDataView.byteLength) // 16
+alert(fullDataView.buffer === buf) // true
 // 构造函数接收一个可选的字节偏移量和字节长度
 // byteOffset=0 表示视图从缓冲起点开始
 // byteLength=8 限制视图为前 8 个字节
-const firstHalfDataView = new DataView(buf, 0, 8);
-alert(firstHalfDataView.byteOffset); // 0
-alert(firstHalfDataView.byteLength); // 8
-alert(firstHalfDataView.buffer === buf); // true
+const firstHalfDataView = new DataView(buf, 0, 8)
+alert(firstHalfDataView.byteOffset) // 0
+alert(firstHalfDataView.byteLength) // 8
+alert(firstHalfDataView.buffer === buf) // true
 // 如果不指定，则 DataView 会使用剩余的缓冲
 // byteOffset=8 表示视图从缓冲的第 9 个字节开始
 // byteLength 未指定，默认为剩余缓冲
-const secondHalfDataView = new DataView(buf, 8);
-alert(secondHalfDataView.byteOffset); // 8 
-alert(secondHalfDataView.byteLength); // 8
-alert(secondHalfDataView.buffer === buf); // true 
+const secondHalfDataView = new DataView(buf, 8)
+alert(secondHalfDataView.byteOffset) // 8
+alert(secondHalfDataView.byteLength) // 8
+alert(secondHalfDataView.buffer === buf) // true
 ```
 
 ### `ElementType`
@@ -109,36 +109,36 @@ alert(secondHalfDataView.buffer === buf); // true
 
 ```js
 // 在内存中分配两个字节并声明一个 DataView
-const buf = new ArrayBuffer(2);
-const view = new DataView(buf);
+const buf = new ArrayBuffer(2)
+const view = new DataView(buf)
 // 填充缓冲，让第一位和最后一位都是 1
-view.setUint8(0, 0x80); // 设置最左边的位等于 1
-view.setUint8(1, 0x01); // 设置最右边的位等于 1
+view.setUint8(0, 0x80) // 设置最左边的位等于 1
+view.setUint8(1, 0x01) // 设置最右边的位等于 1
 // 缓冲内容（为方便阅读，人为加了空格）
 // 0x8 0x0 0x0 0x1
 // 1000 0000 0000 0001
 // 按大端字节序读取 Uint16
 // 0x80 是高字节，0x01 是低字节
 // 0x8001 = 2^15 + 2^0 = 32768 + 1 = 32769
-alert(view.getUint16(0)); // 32769
+alert(view.getUint16(0)) // 32769
 // 按小端字节序读取 Uint16
 // 0x01 是高字节，0x80 是低字节
 // 0x0180 = 2^8 + 2^7 = 256 + 128 = 384
-alert(view.getUint16(0, true)); // 384
+alert(view.getUint16(0, true)) // 384
 // 按大端字节序写入 Uint16
-view.setUint16(0, 0x0004);
+view.setUint16(0, 0x0004)
 // 缓冲内容（为方便阅读，人为加了空格）
 // 0x0 0x0 0x0 0x4
 // 0000 0000 0000 0100
-alert(view.getUint8(0)); // 0
-alert(view.getUint8(1)); // 4
+alert(view.getUint8(0)) // 0
+alert(view.getUint8(1)) // 4
 // 按小端字节序写入 Uint16
-view.setUint16(0, 0x0002, true);
+view.setUint16(0, 0x0002, true)
 // 缓冲内容（为方便阅读，人为加了空格）
 // 0x0 0x2 0x0 0x0
 // 0000 0010 0000 0000
-alert(view.getUint8(0)); // 2
-alert(view.getUint8(1)); // 0
+alert(view.getUint8(0)) // 2
+alert(view.getUint8(1)) // 0
 ```
 
 ### 边界情况
@@ -243,30 +243,30 @@ alert(view.getUint8(1)); // 0
 
 ```js
 // 创建长度为 8 的 int16 数组
-const container = new Int16Array(8);
+const container = new Int16Array(8)
 // 把定型数组复制为前 4 个值
 // 偏移量默认为索引 0
-container.set(Int8Array.of(1, 2, 3, 4));
-console.log(container); // [1,2,3,4,0,0,0,0]
+container.set(Int8Array.of(1, 2, 3, 4))
+console.log(container) // [1,2,3,4,0,0,0,0]
 // 把普通数组复制为后 4 个值
 // 偏移量 4 表示从索引 4 开始插入
-container.set([5,6,7,8], 4);
-console.log(container); // [1,2,3,4,5,6,7,8]
+container.set([5, 6, 7, 8], 4)
+console.log(container) // [1,2,3,4,5,6,7,8]
 // 溢出会抛出错误
-container.set([5,6,7,8], 7);
-// RangeError 
+container.set([5, 6, 7, 8], 7)
+// RangeError
 
 /////////////////////////////////////////////
 
-const source = Int16Array.of(2, 4, 6, 8);
+const source = Int16Array.of(2, 4, 6, 8)
 // 把整个数组复制为一个同类型的新数组
-const fullCopy = source.subarray();
-console.log(fullCopy); // [2, 4, 6, 8]
+const fullCopy = source.subarray()
+console.log(fullCopy) // [2, 4, 6, 8]
 // 从索引 2 开始复制数组
-const halfCopy = source.subarray(2);
-console.log(halfCopy); // [6, 8]
+const halfCopy = source.subarray(2)
+console.log(halfCopy) // [6, 8]
 // 从索引 1 开始复制到索引 3
-const partialCopy = source.subarray(1, 3);
-console.log(partialCopy); // [4, 6] 
+const partialCopy = source.subarray(1, 3)
+console.log(partialCopy) // [4, 6]
 ```
 

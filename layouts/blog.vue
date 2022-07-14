@@ -6,6 +6,7 @@
 -->
 <script lang="ts" setup>
 </script>
+
 <template>
   <div class="main">
     <Header class="dark:text-gray-100" />

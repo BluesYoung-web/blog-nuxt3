@@ -28,10 +28,10 @@ date: 2021-01-29 14:54:08
 
 ```js
 async function hasPermission() {
-  const res = await Notification.requestPermission();
-  return res === 'granted';
+  const res = await Notification.requestPermission()
+  return res === 'granted'
 }
-hasPermission().then(console.log); // true
+hasPermission().then(console.log) // true
 ```
 
 ### 显示和隐藏通知
@@ -47,13 +47,13 @@ const msg = new Notification('我是标题', {
   vibrate: true,
   icon: '我是小图标',
   badge: '我是徽标'
-});
-msg.onshow = () => console.log('显示---------');
-msg.onclick = () => console.log('点击---------');
-msg.onclose = () => console.log('关闭---------');
-msg.onerror = () => console.log('出错---------');
+})
+msg.onshow = () => console.log('显示---------')
+msg.onclick = () => console.log('点击---------')
+msg.onclose = () => console.log('关闭---------')
+msg.onerror = () => console.log('出错---------')
 
-setTimeout(() => msg.close(), 5000);
+setTimeout(() => msg.close(), 5000)
 ```
 
 ## 页面可视状态
@@ -110,37 +110,37 @@ setTimeout(() => msg.close(), 5000);
 ```js
 async function* ints() {
   // 每一秒都生成一个递增的整数
-  for(let i = 0; i < 5; i++) {
-    yield await new Promise((resolve) => setTimeout(resolve, 1000, i));
-  }
+  for (let i = 0; i < 5; i++)
+    yield await new Promise(resolve => setTimeout(resolve, 1000, i))
+
 }
 // 创建可读流
 const rd = new ReadableStream({
   async start(controller) {
     for await (const chunk of ints()) {
       // 数据块加入队列
-      controller.enqueue(chunk);
+      controller.enqueue(chunk)
     }
-    controller.close();
+    controller.close()
   }
-});
+})
 // 未加锁
-console.log(rd.locked); //false
+console.log(rd.locked) // false
 // 获得读取器，加锁
-const reader = rd.getReader();
+const reader = rd.getReader()
 //  已加锁
-console.log(rd.locked); //true
+console.log(rd.locked); // true
 // 消费者
 (async () => {
-  while(true) {
-    const { done, value } = await reader.read();
-    if(done) {
-      break;
-    } else {
-      console.log(value); 
-    }
+  while (true) {
+    const { done, value } = await reader.read()
+    if (done)
+      break
+    else
+      console.log(value)
+
   }
-})();
+})()
 // 0 1 2 3 4
 ```
 
@@ -149,31 +149,31 @@ console.log(rd.locked); //true
 ```js
 async function* ints() {
   // 每一秒都生成一个递增的整数
-  for(let i = 0; i < 5; i++) {
-    yield await new Promise((resolve) => setTimeout(resolve, 1000, i));
-  }
+  for (let i = 0; i < 5; i++)
+    yield await new Promise(resolve => setTimeout(resolve, 1000, i))
+
 }
 // 创建可写流
 const wt = new WritableStream({
   write(chunk) {
     // 获得写入数据
-    console.log(chunk);
+    console.log(chunk)
   }
-});
+})
 // 未加锁
-console.log(wt.locked); //false
+console.log(wt.locked) // false
 // 获得写入器，加锁
-const writer = wt.getWriter();
-console.log(wt.locked); //true
+const writer = wt.getWriter()
+console.log(wt.locked); // true
 // 生产者
 (async () => {
   for await (const chunk of ints()) {
-    await wt.ready;
-    writer.write(chunk);
+    await wt.ready
+    writer.write(chunk)
   }
   // 写入完成，关闭流
-  writer.close();
-})();
+  writer.close()
+})()
 // 0 1 2 3 4
 ```
 
@@ -182,39 +182,39 @@ console.log(wt.locked); //true
 ```js
 async function* ints() {
   // 每一秒都生成一个递增的整数
-  for(let i = 0; i < 5; i++) {
-    yield await new Promise((resolve) => setTimeout(resolve, 1000, i));
-  }
+  for (let i = 0; i < 5; i++)
+    yield await new Promise(resolve => setTimeout(resolve, 1000, i))
+
 }
 const { writable, readable } = new TransformStream({
   transform(chunk, controller) {
-    controller.enqueue(chunk * 2);
+    controller.enqueue(chunk * 2)
   }
-});
+})
 
-const reader = readable.getReader();
+const reader = readable.getReader()
 const writer = writable.getWriter();
 
 // 消费者
 (async () => {
-  while(true) {
-    const { done, value } = await reader.read();
-    if(done) {
-      break;
-    } else {
-      console.log(value); 
-    }
+  while (true) {
+    const { done, value } = await reader.read()
+    if (done)
+      break
+    else
+      console.log(value)
+
   }
 })();
 // 生产者
 (async () => {
   for await (const chunk of ints()) {
-    await writable.ready;
-    writer.write(chunk);
+    await writable.ready
+    writer.write(chunk)
   }
   // 写入完成，关闭流
-  writer.close();
-})();
+  writer.close()
+})()
 // 0 2 4 6 8
 ```
 
@@ -229,67 +229,67 @@ const writer = writable.getWriter();
 ```js
 async function* ints() {
   // 每一秒都生成一个递增的整数
-  for(let i = 0; i < 5; i++) {
-    yield await new Promise((resolve) => setTimeout(resolve, 1000, i));
-  }
+  for (let i = 0; i < 5; i++)
+    yield await new Promise(resolve => setTimeout(resolve, 1000, i))
+
 }
 // 创建可读流
 const integerStream = new ReadableStream({
   async start(controller) {
-    for await (const chunk of ints()) {
-      controller.enqueue(chunk);
-    }
-    controller.close();
+    for await (const chunk of ints())
+      controller.enqueue(chunk)
+
+    controller.close()
   }
-});
+})
 // 创建转换流
 const doublingStream = new TransformStream({
   transform(chunk, controller) {
-    controller.enqueue(chunk * 2);
+    controller.enqueue(chunk * 2)
   }
-});
+})
 // 管道连接
-const pipedStream = integerStream.pipeThrough(doublingStream);
+const pipedStream = integerStream.pipeThrough(doublingStream)
 // 从连接流获得读取器
 const p_rd = pipedStream.getReader();
 // 消费者
 (async () => {
-  while(true) {
-    const { done, value } = await p_rd.read();
-    if(done) {
-      break;
-    } else {
-      console.log(value); 
-    }
+  while (true) {
+    const { done, value } = await p_rd.read()
+    if (done)
+      break
+    else
+      console.log(value)
+
   }
-})();
+})()
 // 0 2 4 6 8
 ```
 
 ```js
 async function* ints() {
   // 每一秒都生成一个递增的整数
-  for(let i = 0; i < 5; i++) {
-    yield await new Promise((resolve) => setTimeout(resolve, 1000, i));
-  }
+  for (let i = 0; i < 5; i++)
+    yield await new Promise(resolve => setTimeout(resolve, 1000, i))
+
 }
 // 创建可读流
 const integerStream = new ReadableStream({
   async start(controller) {
-    for await (const chunk of ints()) {
-      controller.enqueue(chunk);
-    }
-    controller.close();
+    for await (const chunk of ints())
+      controller.enqueue(chunk)
+
+    controller.close()
   }
-});
+})
 // 创建可写流
 const writableStream = new WritableStream({
   write(value) {
-    console.log(value);
+    console.log(value)
   }
-});
+})
 // 管道连接, 隐式从 ReadableStream 获得了一个读取器，并把产生的值填充到 WritableStream
-const pipedStream = integerStream.pipeTo(writableStream);
+const pipedStream = integerStream.pipeTo(writableStream)
 // 0 1 2 3 4
 ```
 
@@ -322,11 +322,11 @@ const pipedStream = integerStream.pipeTo(writableStream);
 压入顺序 `unshift`
 
 ```js
-performance.mark('foo');
-for (let i = 0; i < 1E6; ++i) {}
-performance.mark('bar');
-const [endMark, startMark] = performance.getEntriesByType('mark');
-console.log(startMark.startTime - endMark.startTime); // 1.3299999991431832 
+performance.mark('foo')
+for (let i = 0; i < 1e6; ++i) {}
+performance.mark('bar')
+const [endMark, startMark] = performance.getEntriesByType('mark')
+console.log(startMark.startTime - endMark.startTime) // 1.3299999991431832
 ```
 
 ### `performance.measure(tag, s_tag, e_tag)`
@@ -334,12 +334,12 @@ console.log(startMark.startTime - endMark.startTime); // 1.3299999991431832
 分析两个标记之间的持续时间
 
 ```js
-performance.mark('foo');
-for (let i = 0; i < 1E6; ++i) {}
-performance.mark('bar');
-performance.measure('baz', 'foo', 'bar');
-const [differenceMark] = performance.getEntriesByType('measure');
-console.log(differenceMark);
+performance.mark('foo')
+for (let i = 0; i < 1e6; ++i) {}
+performance.mark('bar')
+performance.measure('baz', 'foo', 'bar')
+const [differenceMark] = performance.getEntriesByType('measure')
+console.log(differenceMark)
 // PerformanceMeasure {
 // name: "baz",
 // entryType: "measure",

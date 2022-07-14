@@ -77,7 +77,7 @@ date: 2020-12-28 17:31:47
 ## window
 
 ```js
-var global = (function(){return this;})()
+const global = (function () { return this })()
 ```
 
 ## Math

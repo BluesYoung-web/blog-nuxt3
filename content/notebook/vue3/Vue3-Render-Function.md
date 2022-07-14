@@ -16,7 +16,7 @@ type Children = string | number | boolean | VNode | null | Children[]
 // 匿名插槽
 type Slot = () => Children
 // 具名插槽
-type Slots = { [name: string]: Slot }
+interface Slots { [name: string]: Slot }
 // 完整的函数签名
 function h(
   // 接受元素名称或者组件
@@ -40,6 +40,9 @@ function h(
 
 ```ts
 import { h } from 'vue'
+
+// 组件 & 插槽
+import Foo from './Foo.vue'
 // 正常使用
 // <div></div>
 h('div')
@@ -57,9 +60,6 @@ h('div', 'hello')
 h('div', [h('span', 'hello')])
 // <div>hello1<span>hello2</span></div>
 h('div', ['hello1', h('span', 'hello2')])
-
-// 组件 & 插槽
-import Foo from './Foo.vue'
 // <Foo some-prop="hello" @update="() => {}" />
 h(Foo, {
   someProp: 'hello',
@@ -99,9 +99,9 @@ h(Foo, null, {
 
 ```ts
 // 函数签名
-function mergeProps(...args: object[]): object
 // 使用示例
 import { mergeProps } from 'vue'
+function mergeProps(...args: object[]): object
 
 const one = {
   class: 'foo',
@@ -128,14 +128,14 @@ const merged = mergeProps(one, two)
 
 ```ts
 // 函数签名
+// 使用示例
+import { cloneVNode, h } from 'vue'
 function cloneVNode(
   // 需要克隆的目标 vnode
   vnode: VNode,
   // 需要额外添加进合并之后的 vnode 的参数
   extraProps?: object
 ): VNode
-// 使用示例
-import { h, cloneVNode } from 'vue'
 
 const original = h('div')
 const cloned = cloneVNode(original, { id: 'foo' })
@@ -159,9 +159,9 @@ function isVNode(value: unknown): boolean
 
 ```ts
 // 函数签名
-function resolveComponent(name: string): Component | string
 // 使用示例
 import { h, resolveComponent } from 'vue'
+function resolveComponent(name: string): Component | string
 
 export default {
   setup() {

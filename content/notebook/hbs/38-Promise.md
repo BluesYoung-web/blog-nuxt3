@@ -25,11 +25,11 @@ date: 2021-01-19 10:31:57
 为避免期约卡在待定状态，可以添加一个定时退出功能
 
 ```js
-let p1 = new Promise((resolve, reject) => resolve());
-setTimeout(console.log, 0, p1); // Promise <resolved>
-let p2 = new Promise((resolve, reject) => reject());
-setTimeout(console.log, 0, p2); // Promise <rejected>
-// Uncaught error (in promise) 
+const p1 = new Promise((resolve, reject) => resolve())
+setTimeout(console.log, 0, p1) // Promise <resolved>
+const p2 = new Promise((resolve, reject) => reject())
+setTimeout(console.log, 0, p2) // Promise <rejected>
+// Uncaught error (in promise)
 ```
 
 ### `Promise.resolve(result)`
@@ -55,37 +55,37 @@ setTimeout(console.log, 0, p2); // Promise <rejected>
 分别对应“兑现”以及“拒绝”状态的回调函数
 
 ```js
-let p1 = Promise.reject('foo');
+const p1 = Promise.reject('foo')
 // 调用 then()时不传处理程序则原样向后传
-let p2 = p1.then();
-// Uncaught (in promise) foo 
-setTimeout(console.log, 0, p2); // Promise <rejected>: foo
+const p2 = p1.then()
+// Uncaught (in promise) foo
+setTimeout(console.log, 0, p2) // Promise <rejected>: foo
 
 // 这些都一样
-let p3 = p1.then(null, () => undefined);
-let p4 = p1.then(null, () => {});
-let p5 = p1.then(null, () => Promise.resolve());
-setTimeout(console.log, 0, p3); // Promise <resolved>: undefined
-setTimeout(console.log, 0, p4); // Promise <resolved>: undefined
-setTimeout(console.log, 0, p5); // Promise <resolved>: undefined 
+const p3 = p1.then(null, () => undefined)
+const p4 = p1.then(null, () => {})
+const p5 = p1.then(null, () => Promise.resolve())
+setTimeout(console.log, 0, p3) // Promise <resolved>: undefined
+setTimeout(console.log, 0, p4) // Promise <resolved>: undefined
+setTimeout(console.log, 0, p5) // Promise <resolved>: undefined
 
 // 这些都一样
-let p6 = p1.then(null, () => 'bar');
-let p7 = p1.then(null, () => Promise.resolve('bar'));
-setTimeout(console.log, 0, p6); // Promise <resolved>: bar
-setTimeout(console.log, 0, p7); // Promise <resolved>: bar 
+const p6 = p1.then(null, () => 'bar')
+const p7 = p1.then(null, () => Promise.resolve('bar'))
+setTimeout(console.log, 0, p6) // Promise <resolved>: bar
+setTimeout(console.log, 0, p7) // Promise <resolved>: bar
 
 // Promise.resolve()保留返回的期约
-let p8 = p1.then(null, () => new Promise(() => {}));
-let p9 = p1.then(null, () => Promise.reject());
+const p8 = p1.then(null, () => new Promise(() => {}))
+const p9 = p1.then(null, () => Promise.reject())
 // Uncaught (in promise): undefined
-setTimeout(console.log, 0, p8); // Promise <pending>
-setTimeout(console.log, 0, p9); // Promise <rejected>: undefined
-let p10 = p1.then(null, () => { throw 'baz'; });
+setTimeout(console.log, 0, p8) // Promise <pending>
+setTimeout(console.log, 0, p9) // Promise <rejected>: undefined
+const p10 = p1.then(null, () => { throw 'baz' })
 // Uncaught (in promise) baz
-setTimeout(console.log, 0, p10); // Promise <rejected>: baz
-let p11 = p1.then(null, () => Error('qux'));
-setTimeout(console.log, 0, p11); // Promise <resolved>: Error: qux 
+setTimeout(console.log, 0, p10) // Promise <rejected>: baz
+const p11 = p1.then(null, () => Error('qux'))
+setTimeout(console.log, 0, p11) // Promise <resolved>: Error: qux
 ```
 
 ### `Promise.prototype.catch(onRejected)`
@@ -99,32 +99,32 @@ setTimeout(console.log, 0, p11); // Promise <resolved>: Error: qux
 无法获知此时期约的状态
 
 ```js
-let p1 = Promise.resolve('foo');
+const p1 = Promise.resolve('foo')
 // 这里都会原样后传
-let p2 = p1.finally();
-let p3 = p1.finally(() => undefined);
-let p4 = p1.finally(() => {});
-let p5 = p1.finally(() => Promise.resolve());
-let p6 = p1.finally(() => 'bar');
-let p7 = p1.finally(() => Promise.resolve('bar'));
-let p8 = p1.finally(() => Error('qux'));
-setTimeout(console.log, 0, p2); // Promise <resolved>: foo
-setTimeout(console.log, 0, p3); // Promise <resolved>: foo
-setTimeout(console.log, 0, p4); // Promise <resolved>: foo
-setTimeout(console.log, 0, p5); // Promise <resolved>: foo
-setTimeout(console.log, 0, p6); // Promise <resolved>: foo
-setTimeout(console.log, 0, p7); // Promise <resolved>: foo
-setTimeout(console.log, 0, p8); // Promise <resolved>: foo 
+const p2 = p1.finally()
+const p3 = p1.finally(() => undefined)
+const p4 = p1.finally(() => {})
+const p5 = p1.finally(() => Promise.resolve())
+const p6 = p1.finally(() => 'bar')
+const p7 = p1.finally(() => Promise.resolve('bar'))
+const p8 = p1.finally(() => Error('qux'))
+setTimeout(console.log, 0, p2) // Promise <resolved>: foo
+setTimeout(console.log, 0, p3) // Promise <resolved>: foo
+setTimeout(console.log, 0, p4) // Promise <resolved>: foo
+setTimeout(console.log, 0, p5) // Promise <resolved>: foo
+setTimeout(console.log, 0, p6) // Promise <resolved>: foo
+setTimeout(console.log, 0, p7) // Promise <resolved>: foo
+setTimeout(console.log, 0, p8) // Promise <resolved>: foo
 
 // Promise.resolve()保留返回的期约
-let p9 = p1.finally(() => new Promise(() => {}));
-let p10 = p1.finally(() => Promise.reject());
+const p9 = p1.finally(() => new Promise(() => {}))
+const p10 = p1.finally(() => Promise.reject())
 // Uncaught (in promise): undefined
-setTimeout(console.log, 0, p9); // Promise <pending>
-setTimeout(console.log, 0, p10); // Promise <rejected>: undefined
-let p11 = p1.finally(() => { throw 'baz'; });
+setTimeout(console.log, 0, p9) // Promise <pending>
+setTimeout(console.log, 0, p10) // Promise <rejected>: undefined
+const p11 = p1.finally(() => { throw 'baz' })
 // Uncaught (in promise) baz
-setTimeout(console.log, 0, p11); // Promise <rejected>: baz 
+setTimeout(console.log, 0, p11) // Promise <rejected>: baz
 ```
 
 ### 邻近处理程序的执行顺序
@@ -132,26 +132,26 @@ setTimeout(console.log, 0, p11); // Promise <rejected>: baz
 如果给期约函数添加了**多个**处理程序，当期约变化时，相关处理程序会**按照添加它们的顺序依次执行**
 
 ```js
-let p1 = Promise.resolve();
-let p2 = Promise.reject();
-p1.then(() => setTimeout(console.log, 0, 1));
-p1.then(() => setTimeout(console.log, 0, 2));
+const p1 = Promise.resolve()
+const p2 = Promise.reject()
+p1.then(() => setTimeout(console.log, 0, 1))
+p1.then(() => setTimeout(console.log, 0, 2))
 // 1 2
-p2.catch(() => setTimeout(console.log, 0, 5));
-p2.catch(() => setTimeout(console.log, 0, 6));
+p2.catch(() => setTimeout(console.log, 0, 5))
+p2.catch(() => setTimeout(console.log, 0, 6))
 // 5 6
-p1.finally(() => setTimeout(console.log, 0, 7));
-p1.finally(() => setTimeout(console.log, 0, 8));
+p1.finally(() => setTimeout(console.log, 0, 7))
+p1.finally(() => setTimeout(console.log, 0, 8))
 // 7 8
 ```
 
 ### 拒绝期约与拒绝错误处理
 
 ```js
-let p1 = new Promise((resolve, reject) => reject(Error('foo1')));
-let p2 = new Promise((resolve, reject) => { throw Error('foo2'); });
-let p3 = Promise.resolve().then(() => { throw Error('foo4'); }); // 在最终抛出未捕获错误之前还会创建另一个期约
-let p4 = Promise.reject(Error('foo3')); 
+const p1 = new Promise((resolve, reject) => reject(Error('foo1')))
+const p2 = new Promise((resolve, reject) => { throw new Error('foo2') })
+const p3 = Promise.resolve().then(() => { throw new Error('foo4') }) // 在最终抛出未捕获错误之前还会创建另一个期约
+const p4 = Promise.reject(Error('foo3'))
 ```
 
 ## 期约连锁与期约合成
@@ -164,33 +164,33 @@ let p4 = Promise.reject(Error('foo3'));
 
 ```js
 function delayedResolve(str) {
- return new Promise((resolve, reject) => {
-   console.log(str);
-   setTimeout(resolve, 1000);
- });
-} 
+  return new Promise((resolve, reject) => {
+    console.log(str)
+    setTimeout(resolve, 1000)
+  })
+}
 delayedResolve('p1 executor')
- .then(() => delayedResolve('p2 executor'))
- .then(() => delayedResolve('p3 executor'))
- .then(() => delayedResolve('p4 executor'))
+  .then(() => delayedResolve('p2 executor'))
+  .then(() => delayedResolve('p3 executor'))
+  .then(() => delayedResolve('p4 executor'))
 // p1 executor（0 秒后）
 // p2 executor（1 秒后）
 // p3 executor（2 秒后）
 // p4 executor（3 秒后）
 // ----------- 回调地狱 --------------
 function delayedExecute(str, callback = null) {
- setTimeout(() => {
-   console.log(str);
-   callback && callback();
-   }, 1000)
+  setTimeout(() => {
+    console.log(str)
+    callback && callback()
+  }, 1000)
 }
 delayedExecute('p1 callback', () => {
-   delayedExecute('p2 callback', () => {
-     delayedExecute('p3 callback', () => {
-     		delayedExecute('p4 callback');
-     });
-   });
-}); 
+  delayedExecute('p2 callback', () => {
+    delayedExecute('p3 callback', () => {
+     		delayedExecute('p4 callback')
+    })
+  })
+})
 // p1 callback（1 秒后）
 // p2 callback（2 秒后）
 // p3 callback（3 秒后）
@@ -208,17 +208,17 @@ delayedExecute('p1 callback', () => {
 //   B      C
 //  / \    / \
 // D   E  F   G
-let A = new Promise((resolve, reject) => {
- console.log('A');
- resolve();
-});
-let B = A.then(() => console.log('B'));
-let C = A.then(() => console.log('C'));
-B.then(() => console.log('D'));
-B.then(() => console.log('E'));
-C.then(() => console.log('F'));
-C.then(() => console.log('G'));
-// A B C D E F G 
+const A = new Promise((resolve, reject) => {
+  console.log('A')
+  resolve()
+})
+const B = A.then(() => console.log('B'))
+const C = A.then(() => console.log('C'))
+B.then(() => console.log('D'))
+B.then(() => console.log('E'))
+C.then(() => console.log('F'))
+C.then(() => console.log('G'))
+// A B C D E F G
 ```
 
 ### 期约合成
@@ -239,35 +239,35 @@ C.then(() => console.log('G'));
 
 ```js
 let p1 = Promise.all([
-   Promise.resolve(),
-   Promise.resolve()
-]);
+  Promise.resolve(),
+  Promise.resolve()
+])
 // 可迭代对象中的元素会通过 Promise.resolve()转换为期约
-let p2 = Promise.all([3, 4]);
+let p2 = Promise.all([3, 4])
 // 空的可迭代对象等价于 Promise.resolve()
-let p3 = Promise.all([]);
+const p3 = Promise.all([])
 // 无效的语法
-let p4 = Promise.all();
-// TypeError: cannot read Symbol.iterator of undefined 
+const p4 = Promise.all()
+// TypeError: cannot read Symbol.iterator of undefined
 // -------------------
 // 永远待定
-let p1 = Promise.all([new Promise(() => {})]);
-setTimeout(console.log, 0, p1); // Promise <pending>
+let p1 = Promise.all([new Promise(() => {})])
+setTimeout(console.log, 0, p1) // Promise <pending>
 // 一次拒绝会导致最终期约拒绝
 let p2 = Promise.all([
-   Promise.resolve(),
-   Promise.reject(),
-   Promise.resolve()
-]);
-setTimeout(console.log, 0, p2); // Promise <rejected>
-// Uncaught (in promise) undefined 
+  Promise.resolve(),
+  Promise.reject(),
+  Promise.resolve()
+])
+setTimeout(console.log, 0, p2) // Promise <rejected>
+// Uncaught (in promise) undefined
 // ---------------------------
-let p = Promise.all([
-   Promise.resolve(3),
-   Promise.resolve(),
-   Promise.resolve(4)
-]);
-p.then((values) => setTimeout(console.log, 0, values)); // [3, undefined, 4] 
+const p = Promise.all([
+  Promise.resolve(3),
+  Promise.resolve(),
+  Promise.resolve(4)
+])
+p.then(values => setTimeout(console.log, 0, values)) // [3, undefined, 4]
 ```
 
 **`Promise.race()`**
@@ -280,58 +280,58 @@ p.then((values) => setTimeout(console.log, 0, values)); // [3, undefined, 4]
 
 ```js
 // 解决先发生，超时后的拒绝被忽略
-let p1 = Promise.race([
-   Promise.resolve(3),
-   new Promise((resolve, reject) => setTimeout(reject, 1000))
-]);
-setTimeout(console.log, 0, p1); // Promise <resolved>: 3
+const p1 = Promise.race([
+  Promise.resolve(3),
+  new Promise((resolve, reject) => setTimeout(reject, 1000))
+])
+setTimeout(console.log, 0, p1) // Promise <resolved>: 3
 // 拒绝先发生，超时后的解决被忽略
-let p2 = Promise.race([
-   Promise.reject(4),
-   new Promise((resolve, reject) => setTimeout(resolve, 1000))
-]);
-setTimeout(console.log, 0, p2); // Promise <rejected>: 4
+const p2 = Promise.race([
+  Promise.reject(4),
+  new Promise((resolve, reject) => setTimeout(resolve, 1000))
+])
+setTimeout(console.log, 0, p2) // Promise <rejected>: 4
 // 迭代顺序决定了落定顺序
-let p3 = Promise.race([
-   Promise.resolve(5),
-   Promise.resolve(6),
-   Promise.resolve(7)
-]);
-setTimeout(console.log, 0, p3); // Promise <resolved>: 5 
+const p3 = Promise.race([
+  Promise.resolve(5),
+  Promise.resolve(6),
+  Promise.resolve(7)
+])
+setTimeout(console.log, 0, p3) // Promise <resolved>: 5
 ```
 
 #### 串行期约合成
 
 ```js
 // 1.0
-function addTwo(x) {return x + 2;}
-function addThree(x) {return x + 3;}
-function addFive(x) {return x + 5;}
+function addTwo(x) { return x + 2 }
+function addThree(x) { return x + 3 }
+function addFive(x) { return x + 5 }
 function addTen(x) {
- return addFive(addTwo(addThree(x)));
+  return addFive(addTwo(addThree(x)))
 }
-console.log(addTen(8)); // 18
+console.log(addTen(8)) // 18
 // 2.0
 function addTen(x) {
- return Promise.resolve(x)
- .then(addTwo)
- .then(addThree)
- .then(addFive);
-} 
-addTen(8).then(console.log); // 18
+  return Promise.resolve(x)
+    .then(addTwo)
+    .then(addThree)
+    .then(addFive)
+}
+addTen(8).then(console.log) // 18
 // 3.0
 function addTen(x) {
- // Array.prototype.reduce((pre, cur, index, arr) => do sth, startValue)
- return [addTwo, addThree, addFive].reduce((promise, fn) => promise.then(fn), Promise.resolve(x));
- // 等同于 [Promise.resolve(x), addTwo, addThree, addFive].reduce((promise, fn) => promise.then(fn))
+  // Array.prototype.reduce((pre, cur, index, arr) => do sth, startValue)
+  return [addTwo, addThree, addFive].reduce((promise, fn) => promise.then(fn), Promise.resolve(x))
+  // 等同于 [Promise.resolve(x), addTwo, addThree, addFive].reduce((promise, fn) => promise.then(fn))
 }
-addTen(8).then(console.log); // 18 
+addTen(8).then(console.log) // 18
 // 3.1 通用函数
 function compose(...fns) {
- 	return (x) => fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x))
+ 	return x => fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x))
 }
-let addTen = compose(addTwo, addThree, addFive);
-addTen(8).then(console.log); // 18 
+let addTen = compose(addTwo, addThree, addFive)
+addTen(8).then(console.log) // 18
 ```
 
 ## 期约扩展

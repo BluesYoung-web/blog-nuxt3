@@ -37,28 +37,32 @@ image: /img/design-mode.jpeg
  */
 abstract class AbstractClass {
   public templateMethod(): void {
-    this.baseOperation1();
-    this.requiredOperations1();
-    this.baseOperation2();
-    this.hook1();
-    this.requiredOperation2();
-    this.baseOperation3();
-    this.hook2();
+    this.baseOperation1()
+    this.requiredOperations1()
+    this.baseOperation2()
+    this.hook1()
+    this.requiredOperation2()
+    this.baseOperation3()
+    this.hook2()
   }
+
   protected baseOperation1(): void {
-    console.log('模板默认基础操作1');
+    console.log('模板默认基础操作1')
   }
+
   protected baseOperation2(): void {
-    console.log('模板默认基础操作2');
+    console.log('模板默认基础操作2')
   }
+
   protected baseOperation3(): void {
-    console.log('模板默认基础操作3');
+    console.log('模板默认基础操作3')
   }
+
   /**
    * 子类的请求操作
    */
-  protected abstract requiredOperations1(): void;
-  protected abstract requiredOperation2(): void;
+  protected abstract requiredOperations1(): void
+  protected abstract requiredOperation2(): void
   /**
    * 生命周期钩子
    */
@@ -70,10 +74,11 @@ abstract class AbstractClass {
  */
 class ConcreteClass1 extends AbstractClass {
   protected requiredOperations1(): void {
-    console.log('我是具体类1的请求1');
+    console.log('我是具体类1的请求1')
   }
+
   protected requiredOperation2(): void {
-    console.log('我是具体类1的请求2');
+    console.log('我是具体类1的请求2')
   }
 }
 /**
@@ -81,42 +86,44 @@ class ConcreteClass1 extends AbstractClass {
  */
 class ConcreteClass2 extends AbstractClass {
   protected requiredOperations1(): void {
-    console.log('我是具体类2的请求1');
+    console.log('我是具体类2的请求1')
   }
+
   protected requiredOperation2(): void {
-    console.log('我是具体类2的请求2');
+    console.log('我是具体类2的请求2')
   }
+
   protected hook1(): void {
-    console.log('我是具体类2的钩子1');
+    console.log('我是具体类2的钩子1')
   }
 }
 /**
  * 客户端
  */
 function clientCode(abstractClass: AbstractClass) {
-  abstractClass.templateMethod();
+  abstractClass.templateMethod()
 }
-console.log('具体类1:');
-const c1 = new ConcreteClass1();
-clientCode(c1);
-console.log('');
-console.log('具体类2:');
-const c2 = new ConcreteClass2();
-clientCode(c2);
+console.log('具体类1:')
+const c1 = new ConcreteClass1()
+clientCode(c1)
+console.log('')
+console.log('具体类2:')
+const c2 = new ConcreteClass2()
+clientCode(c2)
 /**
-"具体类1:" 
-"模板默认基础操作1" 
-"我是具体类1的请求1" 
-"模板默认基础操作2" 
-"我是具体类1的请求2" 
-"模板默认基础操作3" 
-"" 
-"具体类2:" 
-"模板默认基础操作1" 
-"我是具体类2的请求1" 
-"模板默认基础操作2" 
-"我是具体类2的钩子1" 
-"我是具体类2的请求2" 
-"模板默认基础操作3"  
+"具体类1:"
+"模板默认基础操作1"
+"我是具体类1的请求1"
+"模板默认基础操作2"
+"我是具体类1的请求2"
+"模板默认基础操作3"
+""
+"具体类2:"
+"模板默认基础操作1"
+"我是具体类2的请求1"
+"模板默认基础操作2"
+"我是具体类2的钩子1"
+"我是具体类2的请求2"
+"模板默认基础操作3"
  */
 ```

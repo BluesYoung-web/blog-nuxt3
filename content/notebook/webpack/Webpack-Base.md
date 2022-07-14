@@ -98,7 +98,7 @@ module.exports = {
           // 将 css 文件装换为 commonjs 模块加载到 js 中
           'css-loader',
           // 处理 css 兼容(加入特定的前缀之类的)
-          'postcss-loader' 
+          'postcss-loader'
         ]
       },
       {

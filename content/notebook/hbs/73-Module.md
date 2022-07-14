@@ -56,8 +56,8 @@ date: 2021-02-06 16:18:46
 ```js
 // 在模块 A 里面
 load('moduleB').then((moduleB) => {
- moduleB.doStuff();
-}); 
+  moduleB.doStuff()
+})
 ```
 
 ## 动态依赖
@@ -65,7 +65,8 @@ load('moduleB').then((moduleB) => {
 **依赖必须在模块执行前加载完毕**
 
 ```js
-if (loadCondition) { require('./moduleA'); } 
+if (loadCondition)
+  require('./moduleA')
 ```
 
 ## 循环依赖
@@ -77,18 +78,18 @@ if (loadCondition) { require('./moduleA'); }
 **只要恰当地封装模块，使它们没有副作用，加载顺序就应该不会影响应用程序的运行**
 
 ```js
-require('./moduleD');
-require('./moduleB');
-console.log('moduleA');
-require('./moduleA');
-require('./moduleC');
-console.log('moduleB');
-require('./moduleB');
-require('./moduleD');
-console.log('moduleC');
-require('./moduleA');
-require('./moduleC');
-console.log('moduleD');
+require('./moduleD')
+require('./moduleB')
+console.log('moduleA')
+require('./moduleA')
+require('./moduleC')
+console.log('moduleB')
+require('./moduleB')
+require('./moduleD')
+console.log('moduleC')
+require('./moduleA')
+require('./moduleC')
+console.log('moduleD')
 // moduleB moduleC moduleD moduleA
 // moduleD moduleA moduleB moduleC
 // 以上打印顺序都是正常的
@@ -130,16 +131,16 @@ define('moduleA', ['moduleB'], function(moduleB) {
 这样可以像请求模块一样请求它们，但 `AMD` 加载器会将它们识别为原生 `AMD` 结构而不是模块定义
 
 ```js
-define('moduleA', ['require', 'exports'], function(require, exports) {
-	var moduleB = require('moduleB');
-	exports.stuff = moduleB.doStuff();
-});
+define('moduleA', ['require', 'exports'], (require, exports) => {
+  const moduleB = require('moduleB')
+  exports.stuff = moduleB.doStuff()
+})
 // 动态依赖也是通过这种方式支持的：
-define('moduleA', ['require'], function(require) {
-	if (condition) {
-		var moduleB = require('moduleB');
-	}
-});
+define('moduleA', ['require'], (require) => {
+  if (condition)
+    var moduleB = require('moduleB')
+
+})
 ```
 
 ## `UMD`
@@ -150,22 +151,24 @@ define('moduleA', ['require'], function(require) {
 
 ```js
 (function (root, factory) {
-	if (typeof define === 'function' && define.amd) {
-		// AMD。注册为匿名模块
-		define(['moduleB'], factory);
-	} else if (typeof module === 'object' && module.exports) {
-		// Node。不支持严格 CommonJS
-		// 但可以在 Node 这样支持 module.exports 的类 CommonJS 环境下使用
-		module.exports = factory(require('moduleB'));
-	} else {
-		// 浏览器全局上下文（root 是 window）
-		root.returnExports = factory(root.moduleB);
-}
-}(this, function (moduleB) {
-	// 以某种方式使用 moduleB，将返回值作为模块的导出
-	// 这个例子返回了一个对象，但是模块也可以返回函数作为导出值
-	return {};
-})); 
+  if (typeof define === 'function' && define.amd) {
+    // AMD。注册为匿名模块
+    define(['moduleB'], factory)
+  }
+  else if (typeof module === 'object' && module.exports) {
+    // Node。不支持严格 CommonJS
+    // 但可以在 Node 这样支持 module.exports 的类 CommonJS 环境下使用
+    module.exports = factory(require('moduleB'))
+  }
+  else {
+    // 浏览器全局上下文（root 是 window）
+    root.returnExports = factory(root.moduleB)
+  }
+}(this, (moduleB) => {
+  // 以某种方式使用 moduleB，将返回值作为模块的导出
+  // 这个例子返回了一个对象，但是模块也可以返回函数作为导出值
+  return {}
+}))
 ```
 
 ## `ES6` 模块
@@ -221,16 +224,16 @@ define('moduleA', ['require'], function(require) {
 
 ```js
 // 命名导出
-export const foo = 'foo';
+export const foo = 'foo'
 // 等效命名导出
-const foo = 'foo';
-export { foo };
+const foo = 'foo'
+export { foo }
 // 别名导出
-export { foo as YoungFoo };
+export { foo as YoungFoo }
 // 默认导出
-export default foo;
+export default foo
 // 等效默认导出
-export { foo as default };
+export { foo as default }
 ```
 
 ### 模块导入
@@ -245,20 +248,20 @@ export { foo as default };
 
 ```js
 // 把一个模块的所有命名导出集中在一块，忽略默认导出
-export * from './foo.js';
+// --- main.js
+import { baz } from './bar.js'
+export * from './foo.js'
 // 重写导出
 // --- foo.js
-export const baz = 'origin:foo';
+export const baz = 'origin:foo'
 // --- bar.js
-export * from './foo.js';
-export const baz = 'origin:bar';
-// --- main.js
-import { baz } from './bar.js';
-console.log(baz); // origin:bar 
+export * from './foo.js'
+export const baz = 'origin:bar'
+console.log(baz) // origin:bar
 // 别名导出
-export { foo, bar as myBar } from './foo.js';
+export { foo, bar as myBar } from './foo.js'
 // 重用默认导出
-export { default } from './foo.js';
+export { default } from './foo.js'
 ```
 
 ### 工作者模块

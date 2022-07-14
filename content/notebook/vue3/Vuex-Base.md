@@ -13,11 +13,11 @@ date: 2021-07-20 09:13:07
 ### mapState 辅助函数
 
 ```js
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 const { count, dbCount } = mapState({
-  count: (state) => state.count, // 效果同 count: 'count' 或者 mapState(['count'])
-  dbCount: (state) => state.count * 2
-});
+  count: state => state.count, // 效果同 count: 'count' 或者 mapState(['count'])
+  dbCount: state => state.count * 2
+})
 // count => store.state.count
 ```
 
@@ -63,26 +63,26 @@ const { doneTodos, getById } = mapGetters(['doneTodos', 'getById']);
 参数 `(state, payload)`
 
 ```js
-import { createStore } from 'vuex';
+import { createStore } from 'vuex'
 const store = createStore({
   state: {
     count: 1
   },
   mutations: {
     add: (state, args) => {
-      state.count += args.num;
+      state.count += args.num
     }
   }
-});
-store.commit('add', { num: 1 });
+})
+store.commit('add', { num: 1 })
 // store.commit({ type: 'add', num: 1 });
 ```
 
 ### mapMutations 辅助函数
 
 ```js
-import { mapMutations } from 'vuex';
-const { add } = mapMutations(['add']);
+import { mapMutations } from 'vuex'
+const { add } = mapMutations(['add'])
 // mapMutations({ addNum: 'add' })
 ```
 
@@ -91,33 +91,33 @@ const { add } = mapMutations(['add']);
 执行**异步操作**，**提交 mutation**
 
 ```js
-import { createStore } from 'vuex';
+import { createStore } from 'vuex'
 const store = createStore({
   state: {
     count: 1
   },
   mutations: {
     add: (state, args) => {
-      state.count += args.num;
+      state.count += args.num
     }
   },
   actions: {
     addAsync: async (context, args) => {
-      await sleep(args.time);
-      context.commit('add', args);
+      await sleep(args.time)
+      context.commit('add', args)
     }
   }
-});
+})
 // const { commit, dispatch, state, rootState } = context;
 // 3 秒之后再执行 add 操作
-store.dispatch('add', { time: 3000, num: 1 });
+store.dispatch('add', { time: 3000, num: 1 })
 ```
 
 ### mapActions 辅助函数
 
 ```js
-import { mapActions } from 'vuex';
-const { addAsync } = mapActions(['addAsync']);
+import { mapActions } from 'vuex'
+const { addAsync } = mapActions(['addAsync'])
 // mapActions({ add: addAsync })
 ```
 

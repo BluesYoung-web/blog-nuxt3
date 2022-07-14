@@ -37,18 +37,20 @@ date: 2021-07-27 15:34:17
 router.beforeResolve(async (to) => {
   if (to.meta.requiresCamera) {
     try {
-      await askForCameraPermission();
-    } catch (error) {
+      await askForCameraPermission()
+    }
+    catch (error) {
       if (error instanceof NotAllowedError) {
         // ... 处理错误，然后取消导航
-        return false;
-      } else {
+        return false
+      }
+      else {
         // 意料之外的错误，取消导航并把错误传给全局处理器
-        throw error;
+        throw error
       }
     }
   }
-});
+})
 ```
 
 **`router.afterEach()`**
@@ -76,23 +78,24 @@ router.beforeResolve(async (to) => {
 **`Composition API`**
 
 ```js
-import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router';
+import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 export default {
   setup() {
     // 与 beforeRouteLeave 相同，无法访问 `this`
     onBeforeRouteLeave((to, from) => {
-      const answer = window.confirm('Do you really want to leave? you have unsaved changes!');
+      const answer = window.confirm('Do you really want to leave? you have unsaved changes!')
       // 取消导航并停留在同一页面上
-      if (!answer) return false;
-    });
-    const userData = ref();
+      if (!answer)
+        return false
+    })
+    const userData = ref()
     // 与 beforeRouteLeave 相同，无法访问 `this`
     onBeforeRouteUpdate(async (to, from) => {
-      //仅当 id 更改时才获取用户，例如仅 query 或 hash 值已更改
-      if (to.params.id !== from.params.id) {
-        userData.value = await fetchUser(to.params.id);
-      }
-    });
+      // 仅当 id 更改时才获取用户，例如仅 query 或 hash 值已更改
+      if (to.params.id !== from.params.id)
+        userData.value = await fetchUser(to.params.id)
+
+    })
   }
 }
 ```

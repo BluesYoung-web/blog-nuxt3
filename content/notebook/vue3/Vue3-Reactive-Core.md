@@ -88,10 +88,10 @@ watch(x, (newX, oldX) => {
 // 单个 reactive 对象，隐式监听深层属性，相当于配置了 deep: true
 watch(obj, (newObj, oldObj) => {
   // obj 的属性发生变化时也会触发
-});
+})
 
 // 单个 reactive 对象的属性，必须使用函数！！！
-watch(() => obj.v, (newV, oldV) => {});
+watch(() => obj.v, (newV, oldV) => {})
 
 // 函数
 watch(

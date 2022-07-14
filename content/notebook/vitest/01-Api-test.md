@@ -30,11 +30,11 @@ type Test = (
 ## 基础使用
 
 ```ts
-import { it, expect } from 'vitest';
+import { expect, it } from 'vitest'
 
 it('should work as expected', () => {
-  expect(Math.sqrt(4)).toBe(2);
-});
+  expect(Math.sqrt(4)).toBe(2)
+})
 ```
 
 ### `it.skip`
@@ -44,8 +44,8 @@ it('should work as expected', () => {
 ```ts
 // 测试被跳过，不会导致测试结果失败
 it.skip('should work as expected', () => {
-  expect(Math.sqrt(4)).toBe(3);
-});
+  expect(Math.sqrt(4)).toBe(3)
+})
 ```
 
 ### `it.skipIf(cond)`
@@ -53,11 +53,11 @@ it.skip('should work as expected', () => {
 **在满足特定条件的情况下跳过该测试**
 
 ```ts
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development'
 
 it.skipIf(isDev)('prod only test', () => {
   // this test only runs in production
-});
+})
 ```
 
 ### `it.runIf(cond)`
@@ -65,11 +65,11 @@ it.skipIf(isDev)('prod only test', () => {
 **在满足特定条件的情况下执行该测试**
 
 ```ts
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development'
 
 it.runIf(isDev)('dev only test', () => {
   // this test only runs in development
-});
+})
 ```
 
 ### `it.only`
@@ -79,8 +79,8 @@ it.runIf(isDev)('dev only test', () => {
 ```ts
 // 仅运行 此类 测试，未被标记的会自动跳过
 it.only('should work as expected', () => {
-  expect(Math.sqrt(4)).toBe(2);
-});
+  expect(Math.sqrt(4)).toBe(2)
+})
 ```
 
 ### `it.todo`
@@ -88,7 +88,7 @@ it.only('should work as expected', () => {
 **标记待实现的测试**
 
 ```ts
-it.todo('unimplemented test');
+it.todo('unimplemented test')
 ```
 
 ### `it.concurrent`
@@ -100,33 +100,33 @@ it.todo('unimplemented test');
 ```ts
 // 整个测试大概需要消耗 3s = 1 + 1 + 1
 it('串行测试1', async () => {
-  return new Promise((res) => setTimeout(() => {
-    console.log('串行测试1');
-    res();
-  }, 1000));
-});
+  return new Promise(res => setTimeout(() => {
+    console.log('串行测试1')
+    res()
+  }, 1000))
+})
 it('串行测试2', async () => {
-  return new Promise((res) => setTimeout(() => {
-    console.log('串行测试2');
-    res();
-  }, 1000));
-});
+  return new Promise(res => setTimeout(() => {
+    console.log('串行测试2')
+    res()
+  }, 1000))
+})
 // 并行测试需要使用快照(toMatchSnapshot)时，必须使用上下文的expect!!!
 it.concurrent('并行测试1', async ({ expect }) => {
-  return new Promise((res) => setTimeout(() => {
-    console.log('并行测试1');
-    res();
-  }, 1000));
-});
+  return new Promise(res => setTimeout(() => {
+    console.log('并行测试1')
+    res()
+  }, 1000))
+})
 
 it.concurrent('并行测试2', async ({ expect }) => {
-  return new Promise((res) => setTimeout(() => {
-    console.log('并行测试2');
-    res();
-  }, 1000));
-});
+  return new Promise(res => setTimeout(() => {
+    console.log('并行测试2')
+    res()
+  }, 1000))
+})
 
-it.todo.concurrent('待实现的并行测试');
+it.todo.concurrent('待实现的并行测试')
 ```
 
 
@@ -136,8 +136,8 @@ it.todo.concurrent('待实现的并行测试');
 
 ```ts
 it.fails('should work as expected', () => {
-  expect(Math.sqrt(4)).toBe(3);
-});
+  expect(Math.sqrt(4)).toBe(3)
+})
 ```
 
 ### `it.each`
@@ -160,8 +160,8 @@ it.each([
   [1, 2, 3],
   [2, 1, 3]
 ])('add(%i, %i) -> %i', (a, b, res) => {
-  expect(a + b).toBe(res);
-});
+  expect(a + b).toBe(res)
+})
 // this will return
 // √ add(1, 1) -> 2
 // √ add(1, 2) -> 3
@@ -178,23 +178,23 @@ it.each([
 const person = {
   isActive: true,
   age: 32,
-};
+}
 
 describe('person', () => {
   it('person is defined', () => {
     expect(person).toBeDefined()
-  });
+  })
 
   it('is active', () => {
-    expect(person.isActive).toBeTruthy();
-  });
+    expect(person.isActive).toBeTruthy()
+  })
   // describe 可以嵌套使用
   describe('the age can\'t be larger than 32', () => {
     it('age limit', () => {
-      expect(person.age).toBeLessThanOrEqual(32);
-    });
+      expect(person.age).toBeLessThanOrEqual(32)
+    })
   })
-});
+})
 ```
 
 ### `describe.skip`
@@ -226,13 +226,13 @@ describe.each([
   { a: 2, b: 1, expected: 3 },
 ])('describe object add(%i, %i)', ({ a, b, expected }) => {
   it(`returns ${expected}`, () => {
-    expect(a + b).toBe(expected);
-  });
+    expect(a + b).toBe(expected)
+  })
   it(`returned value not be greater than ${expected}`, () => {
-    expect(a + b).not.toBeGreaterThan(expected);
-  });
+    expect(a + b).not.toBeGreaterThan(expected)
+  })
   it(`returned value not be less than ${expected}`, () => {
-    expect(a + b).not.toBeLessThan(expected);
-  });
-});
+    expect(a + b).not.toBeLessThan(expected)
+  })
+})
 ```

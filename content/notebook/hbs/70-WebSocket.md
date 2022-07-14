@@ -22,38 +22,38 @@ date: 2021-02-06 09:17:37
 
 ```js
 // 初始化，不受跨域限制
-const socket = new WebSocket('ws://www.abc.com:8080');
-socket.readyState;
+const socket = new WebSocket('ws://www.abc.com:8080')
+socket.readyState
 /*
  * WebSocket.OPENING 0 连接正在建立
  * WebSocket.OPEN    1 连接已经建立
  * WebSocket.CLOSING 2 连接正在关闭
  * WebSocket.CLOSE   3 连接已经关闭
  */
-socket.close(); // 关闭连接
+socket.close() // 关闭连接
 
-let stringData = "Hello world!";
-let arrayBufferData = Uint8Array.from(['f', 'o', 'o']);
-let blobData = new Blob(['f', 'o', 'o']);
+const stringData = 'Hello world!'
+const arrayBufferData = Uint8Array.from(['f', 'o', 'o'])
+const blobData = new Blob(['f', 'o', 'o'])
 // 发送数据
-socket.send(stringData);
-socket.send(arrayBufferData.buffer);
-socket.send(blobData);
+socket.send(stringData)
+socket.send(arrayBufferData.buffer)
+socket.send(blobData)
 // 监听收到消息的事件
 // event.data 返回的数据也可能是 ArrayBuffer 或 Blob。
 // 这由 WebSocket 对象的 binaryType 属性决定，该属性可能是"blob"或"arraybuffer"
-socket.onmessage = ({ data }) => console.log(data);
+socket.onmessage = ({ data }) => console.log(data)
 
 // 连接建立成功时触发
-socket.onopen = () => {};
+socket.onopen = () => {}
 // 连接发生错误时触发，连接无法存续
-socket.onerror = () => {};
+socket.onerror = () => {}
 // 连接关闭时触发
 socket.onclose = (event) => {
-  event.wasClean; // 布尔值，表示连接是否干净地关闭
-  event.code;     // 一个来自服务器的数值状态码
-  event.reason;   // 一个字符串，包含服务器发来的消息
-};
+  event.wasClean // 布尔值，表示连接是否干净地关闭
+  event.code // 一个来自服务器的数值状态码
+  event.reason // 一个字符串，包含服务器发来的消息
+}
 ```
 
 ## 安全

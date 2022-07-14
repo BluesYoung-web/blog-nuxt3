@@ -25,18 +25,18 @@ JavaScript 中的所有节点类型都继承自 Node 类型
 可使用 `[number]` 也可使用 `.item(number)` 访问
 
 ```js
-Node.ELEMENT_NODE === 1;
-Node.ATTRIBUTE_NODE === 2;
-Node.TEXT_NODE === 3;
-Node.CDATA_SECTION_NODE === 4;
-Node.ENTITY_REFERENCE_NODE === 5;
-Node.ENTITY_NODE === 6;
-Node.PROCESSING_INSTRUCTION_NODE === 7;
-Node.COMMENT_NODE === 8;
-Node.DOCUMENT_NODE === 9;
-Node.DOCUMENT_TYPE_NODE === 10;
-Node.DOCUMENT_FRAGMENT_NODE === 11;
-Node.NOTATION_NODE === 12;
+Node.ELEMENT_NODE === 1
+Node.ATTRIBUTE_NODE === 2
+Node.TEXT_NODE === 3
+Node.CDATA_SECTION_NODE === 4
+Node.ENTITY_REFERENCE_NODE === 5
+Node.ENTITY_NODE === 6
+Node.PROCESSING_INSTRUCTION_NODE === 7
+Node.COMMENT_NODE === 8
+Node.DOCUMENT_NODE === 9
+Node.DOCUMENT_TYPE_NODE === 10
+Node.DOCUMENT_FRAGMENT_NODE === 11
+Node.NOTATION_NODE === 12
 ```
 
 ## 节点之间的关系
@@ -226,15 +226,15 @@ Node.NOTATION_NODE === 12;
 在指定的偏移位置拆分文本节点，一分为二，返回偏移位置至结尾的文本节点
 
 ```js
-let element = document.createElement("div");
-element.className = "message";
-let textNode = document.createTextNode("Hello world!");
-element.appendChild(textNode);
-document.body.appendChild(element);
-let newNode = element.firstChild.splitText(5);
-alert(element.firstChild.nodeValue); // "Hello"
-alert(newNode.nodeValue); // " world!"
-alert(element.childNodes.length); // 2
+const element = document.createElement('div')
+element.className = 'message'
+const textNode = document.createTextNode('Hello world!')
+element.appendChild(textNode)
+document.body.appendChild(element)
+const newNode = element.firstChild.splitText(5)
+alert(element.firstChild.nodeValue) // "Hello"
+alert(newNode.nodeValue) // " world!"
+alert(element.childNodes.length) // 2
 ```
 
 ## `Comment`
@@ -300,14 +300,14 @@ alert(element.childNodes.length); // 2
 类似于**虚拟DOM**的操作
 
 ```js
-let fragment = document.createDocumentFragment();
-let ul = document.getElementById("myList");
+const fragment = document.createDocumentFragment()
+const ul = document.getElementById('myList')
 for (let i = 0; i < 3; ++i) {
-  let li = document.createElement("li");
-  li.appendChild(document.createTextNode(`Item ${i + 1}`));
-  fragment.appendChild(li);
+  const li = document.createElement('li')
+  li.appendChild(document.createTextNode(`Item ${i + 1}`))
+  fragment.appendChild(li)
 }
-ul.appendChild(fragment); 
+ul.appendChild(fragment)
 ```
 
 ## `Attr`
@@ -327,7 +327,7 @@ ul.appendChild(fragment);
 不推荐使用
 
 ```js
-let attr = document.createAttribute("align");
-attr.value = "left";
-element.setAttributeNode(attr); 
+const attr = document.createAttribute('align')
+attr.value = 'left'
+element.setAttributeNode(attr)
 ```

@@ -81,38 +81,38 @@ solution.pickIndex();
 
 ```ts
 class Solution {
-  private sumArr: number[] = [0];
-  private len: number = 0;
-  private max: number = 0;
+  private sumArr: number[] = [0]
+  private len = 0
+  private max = 0
   constructor(w: number[]) {
     w.forEach((v, i) => {
-      this.sumArr[i + 1] = this.sumArr[i] + v;
-    });
-    this.len = this.sumArr.length;
-    this.max = this.sumArr[this.len - 1];
+      this.sumArr[i + 1] = this.sumArr[i] + v
+    })
+    this.len = this.sumArr.length
+    this.max = this.sumArr[this.len - 1]
   }
 
   pickIndex(): number {
-    let randNum = Math.floor(Math.random() * this.sumArr[this.len - 1]);
-    randNum = randNum + 1 <=  this.max ? randNum + 1 : this.max;
-    return this.findLeft(randNum) - 1;
+    let randNum = Math.floor(Math.random() * this.sumArr[this.len - 1])
+    randNum = randNum + 1 <= this.max ? randNum + 1 : this.max
+    return this.findLeft(randNum) - 1
   }
 
   findLeft(target: number): number {
-    let left = 0;
-    let right = this.len - 1;
+    let left = 0
+    let right = this.len - 1
 
     while (left <= right) {
       // 防止整型数值溢出
-      let mid = left + Math.floor((right - left) / 2);
-      const temp = this.sumArr[mid];
-      if (temp >= target) {
-        right = mid - 1;
-      } else if (temp < target) {
-        left = mid + 1;
-      }
+      const mid = left + Math.floor((right - left) / 2)
+      const temp = this.sumArr[mid]
+      if (temp >= target)
+        right = mid - 1
+      else if (temp < target)
+        left = mid + 1
+
     }
-    return left;
+    return left
   }
 }
 ```

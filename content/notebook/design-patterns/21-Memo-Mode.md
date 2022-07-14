@@ -37,161 +37,171 @@ class Originator {
   /**
    * 快照
    */
-  private state: string;
+  private state: string
   constructor(state: string) {
-    this.state = state;
-    console.log(`初始快照: ${state}`);
+    this.state = state
+    console.log(`初始快照: ${state}`)
   }
+
   /**
    * 一顿操作
    */
   public doSomething() {
-    console.log('此处执行了一些重要操作...');
-    this.state = this.generateRandomString(30);
-    console.log(`快照变更: ${this.state}`);
+    console.log('此处执行了一些重要操作...')
+    this.state = this.generateRandomString(30)
+    console.log(`快照变更: ${this.state}`)
   }
+
   /**
    * 生成随机字符串
    * @param length 字符串的长度
    */
-  private generateRandomString(length: number = 10) {
-    const charSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  private generateRandomString(length = 10) {
+    const charSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     return new Array(length)
       .fill(1)
       .map(() => charSet.charAt(Math.floor(Math.random() * charSet.length)))
-      .join('');
+      .join('')
   }
+
   /**
    * 保存快照
    */
   public save() {
-    return new ConcreteMemento(this.state);
+    return new ConcreteMemento(this.state)
   }
+
   /**
    * 回滚
    */
   public restore(memento: Memento) {
-    this.state = memento.getState();
-    console.log(`状态已变更: ${this.state}`);
+    this.state = memento.getState()
+    console.log(`状态已变更: ${this.state}`)
   }
 }
 /**
  * 快照
  */
 interface Memento {
-  getState(): string;
-  getName(): string;
-  getDate(): string;
+  getState(): string
+  getName(): string
+  getDate(): string
 }
 /**
  * 快照实现
  */
 class ConcreteMemento implements Memento {
-  private state: string;
-  private date: string;
+  private state: string
+  private date: string
   constructor(state: string) {
-    this.state = state;
-    this.date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    this.state = state
+    this.date = new Date().toISOString().slice(0, 19).replace('T', ' ')
   }
+
   /**
    * 获取快照详细内容
    */
   public getState() {
-    return this.state;
+    return this.state
   }
+
   /**
    * 获取快照记录信息
    */
   public getName() {
-    return `${this.date} / (${this.state.slice(0, 9)}...)`;
+    return `${this.date} / (${this.state.slice(0, 9)}...)`
   }
+
   /**
    * 获取快照记录时间
    */
   public getDate() {
-    return this.date;
+    return this.date
   }
 }
 /**
  * 历史记录
  */
 class Caretaker {
-  private mementos: Memento[] = [];
-  private originator: Originator;
+  private mementos: Memento[] = []
+  private originator: Originator
   constructor(originator: Originator) {
-    this.originator = originator;
+    this.originator = originator
   }
+
   /**
    * 保存快照
    */
   public backup() {
-    console.log('\n保存快照');
-    this.mementos.push(this.originator.save());
+    console.log('\n保存快照')
+    this.mementos.push(this.originator.save())
   }
+
   /**
    * 回滚
    */
   public undo() {
-    const memento = this.mementos.pop();
+    const memento = this.mementos.pop()
     if (memento) {
-        console.log(`回滚: ${memento.getName()}`);
-        this.originator.restore(memento);
+      console.log(`回滚: ${memento.getName()}`)
+      this.originator.restore(memento)
     }
-    
+
   }
+
   /**
    * 查看快照历史记录
    */
   public showHistory() {
-    console.log('历史快照:');
-    for (const memento of this.mementos) {
-      console.log(memento.getName());
-    }
+    console.log('历史快照:')
+    for (const memento of this.mementos)
+      console.log(memento.getName())
+
   }
 }
 /**
  * 客户端
  */
-const originator = new Originator('Super-duper-super-puper-super.');
-const caretaker = new Caretaker(originator);
-caretaker.backup();
-originator.doSomething();
-caretaker.backup();
-originator.doSomething();
-caretaker.backup();
-originator.doSomething();
-console.log('');
-caretaker.showHistory();
-console.log('\n回滚吧牛宝宝');
-caretaker.undo();
-console.log('\n再滚一次');
-caretaker.undo();
+const originator = new Originator('Super-duper-super-puper-super.')
+const caretaker = new Caretaker(originator)
+caretaker.backup()
+originator.doSomething()
+caretaker.backup()
+originator.doSomething()
+caretaker.backup()
+originator.doSomething()
+console.log('')
+caretaker.showHistory()
+console.log('\n回滚吧牛宝宝')
+caretaker.undo()
+console.log('\n再滚一次')
+caretaker.undo()
 /*
-[LOG]: "初始快照: Super-duper-super-puper-super." 
+[LOG]: "初始快照: Super-duper-super-puper-super."
 [LOG]: "
-保存快照" 
-[LOG]: "此处执行了一些重要操作..." 
-[LOG]: "快照变更: bcHoJNJHOwaHotPZHrxuZEKMjYwpWv" 
+保存快照"
+[LOG]: "此处执行了一些重要操作..."
+[LOG]: "快照变更: bcHoJNJHOwaHotPZHrxuZEKMjYwpWv"
 [LOG]: "
-保存快照" 
-[LOG]: "此处执行了一些重要操作..." 
-[LOG]: "快照变更: nzGuXdAfOwEnEvIpKulrrkHUDbZMIH" 
+保存快照"
+[LOG]: "此处执行了一些重要操作..."
+[LOG]: "快照变更: nzGuXdAfOwEnEvIpKulrrkHUDbZMIH"
 [LOG]: "
-保存快照" 
-[LOG]: "此处执行了一些重要操作..." 
-[LOG]: "快照变更: stHNUiHkmAQoNphsNSyLfkkLGHAOuT" 
-[LOG]: "" 
-[LOG]: "历史快照:" 
-[LOG]: "2022-04-04 19:29:58 / (Super-dup...)" 
-[LOG]: "2022-04-04 19:29:58 / (bcHoJNJHO...)" 
-[LOG]: "2022-04-04 19:29:58 / (nzGuXdAfO...)" 
+保存快照"
+[LOG]: "此处执行了一些重要操作..."
+[LOG]: "快照变更: stHNUiHkmAQoNphsNSyLfkkLGHAOuT"
+[LOG]: ""
+[LOG]: "历史快照:"
+[LOG]: "2022-04-04 19:29:58 / (Super-dup...)"
+[LOG]: "2022-04-04 19:29:58 / (bcHoJNJHO...)"
+[LOG]: "2022-04-04 19:29:58 / (nzGuXdAfO...)"
 [LOG]: "
-回滚吧牛宝宝" 
-[LOG]: "回滚: 2022-04-04 19:29:58 / (nzGuXdAfO...)" 
-[LOG]: "状态已变更: nzGuXdAfOwEnEvIpKulrrkHUDbZMIH" 
+回滚吧牛宝宝"
+[LOG]: "回滚: 2022-04-04 19:29:58 / (nzGuXdAfO...)"
+[LOG]: "状态已变更: nzGuXdAfOwEnEvIpKulrrkHUDbZMIH"
 [LOG]: "
-再滚一次" 
-[LOG]: "回滚: 2022-04-04 19:29:58 / (bcHoJNJHO...)" 
-[LOG]: "状态已变更: bcHoJNJHOwaHotPZHrxuZEKMjYwpWv" 
+再滚一次"
+[LOG]: "回滚: 2022-04-04 19:29:58 / (bcHoJNJHO...)"
+[LOG]: "状态已变更: bcHoJNJHOwaHotPZHrxuZEKMjYwpWv"
 */
 ```

@@ -15,15 +15,15 @@ date: 2021-01-18 15:02:06
 **同步 > 微任务 > 宏任务**
 
 ```js
-new Promise((res) => res()).then(() => console.log('promise1'));
-setTimeout(() => console.log('settimeout1'), 0);
-console.log('tong bu 1');
-new Promise((res) => res()).then(() => console.log('promise2'));
-setTimeout(() => console.log('settimeout2'), 0);
-console.log('tong bu 2');
-new Promise((res) => res()).then(() => console.log('promise3'));
-setTimeout(() => console.log('settimeout3'), 0);
-console.log('tong bu 3');
+new Promise(res => res()).then(() => console.log('promise1'))
+setTimeout(() => console.log('settimeout1'), 0)
+console.log('tong bu 1')
+new Promise(res => res()).then(() => console.log('promise2'))
+setTimeout(() => console.log('settimeout2'), 0)
+console.log('tong bu 2')
+new Promise(res => res()).then(() => console.log('promise3'))
+setTimeout(() => console.log('settimeout3'), 0)
+console.log('tong bu 3')
 // tong bu 1
 // tong bu 2
 // tong bu 3

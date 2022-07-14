@@ -37,7 +37,7 @@ image: /img/design-mode.jpeg
  * 组件接口
  */
 interface Component {
-  accept(visitor: Visitor): void;
+  accept(visitor: Visitor): void
 }
 /**
  * 组件A实现
@@ -47,13 +47,14 @@ class ConcreteComponentA implements Component {
    * 接受访问者
    */
   public accept(visitor: Visitor) {
-    visitor.visitConcreteComponentA(this);
+    visitor.visitConcreteComponentA(this)
   }
+
   /**
    * 执行组件A的方法
    */
   public exclusiveMethodOfConcreteComponentA() {
-    return 'A';
+    return 'A'
   }
 }
 /**
@@ -61,28 +62,30 @@ class ConcreteComponentA implements Component {
  */
 class ConcreteComponentB implements Component {
   public accept(visitor: Visitor) {
-    visitor.visitConcreteComponentB(this);
+    visitor.visitConcreteComponentB(this)
   }
+
   public specialMethodOfConcreteComponentB() {
-    return 'B';
+    return 'B'
   }
 }
 /**
  * 访问者接口
  */
 interface Visitor {
-  visitConcreteComponentA(element: ConcreteComponentA): void;
-  visitConcreteComponentB(element: ConcreteComponentB): void;
+  visitConcreteComponentA(element: ConcreteComponentA): void
+  visitConcreteComponentB(element: ConcreteComponentB): void
 }
 /**
  * 访问者1实现
  */
 class ConcreteVisitor1 implements Visitor {
   public visitConcreteComponentA(element: ConcreteComponentA) {
-    console.log(`${element.exclusiveMethodOfConcreteComponentA()} + 访问者1`);
+    console.log(`${element.exclusiveMethodOfConcreteComponentA()} + 访问者1`)
   }
+
   public visitConcreteComponentB(element: ConcreteComponentB) {
-    console.log(`${element.specialMethodOfConcreteComponentB()} + 访问者1`);
+    console.log(`${element.specialMethodOfConcreteComponentB()} + 访问者1`)
   }
 }
 /**
@@ -90,38 +93,39 @@ class ConcreteVisitor1 implements Visitor {
  */
 class ConcreteVisitor2 implements Visitor {
   public visitConcreteComponentA(element: ConcreteComponentA) {
-    console.log(`${element.exclusiveMethodOfConcreteComponentA()} + 访问者2`);
+    console.log(`${element.exclusiveMethodOfConcreteComponentA()} + 访问者2`)
   }
+
   public visitConcreteComponentB(element: ConcreteComponentB) {
-    console.log(`${element.specialMethodOfConcreteComponentB()} + 访问者2`);
+    console.log(`${element.specialMethodOfConcreteComponentB()} + 访问者2`)
   }
 }
 /**
  * 客户端
  */
 function clientCode(components: Component[], visitor: Visitor) {
-  for (const component of components) {
-    component.accept(visitor);
-  }
+  for (const component of components)
+    component.accept(visitor)
+
 }
 const components = [
   new ConcreteComponentA(),
   new ConcreteComponentB(),
-];
-console.log('使用访问者1:');
-const visitor1 = new ConcreteVisitor1();
-clientCode(components, visitor1);
-console.log('');
-console.log('使用访问者2:');
-const visitor2 = new ConcreteVisitor2();
-clientCode(components, visitor2);
+]
+console.log('使用访问者1:')
+const visitor1 = new ConcreteVisitor1()
+clientCode(components, visitor1)
+console.log('')
+console.log('使用访问者2:')
+const visitor2 = new ConcreteVisitor2()
+clientCode(components, visitor2)
 /*
-[LOG]: "使用访问者1:" 
-[LOG]: "A + 访问者1" 
-[LOG]: "B + 访问者1" 
-[LOG]: "" 
-[LOG]: "使用访问者2:" 
-[LOG]: "A + 访问者2" 
-[LOG]: "B + 访问者2" 
+[LOG]: "使用访问者1:"
+[LOG]: "A + 访问者1"
+[LOG]: "B + 访问者1"
+[LOG]: ""
+[LOG]: "使用访问者2:"
+[LOG]: "A + 访问者2"
+[LOG]: "B + 访问者2"
 */
 ```

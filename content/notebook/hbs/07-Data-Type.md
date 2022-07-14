@@ -275,14 +275,14 @@ console.log(unFormal);
 #### 获取字符串的原始值
 
 ```js
-console.log(`\u00A9`); // ©
-console.log(String.raw`\u00A9`); // \u00A9 
+console.log('\u00A9') // ©
+console.log(String.raw`\u00A9`) // \u00A9
 // ------------------------------------------------------------
-console.log(`first line\nsecond line`);
+console.log('first line\nsecond line')
 // first line
 // second line
-console.log(String.raw`first line\nsecond line`);
-// "first line\nsecond line" 
+console.log(String.raw`first line\nsecond line`)
+// "first line\nsecond line"
 ```
 
 ## `Symbol`
@@ -300,13 +300,13 @@ console.log(String.raw`first line\nsecond line`);
 因为符号属性是对内存中符号的一个引用，所以直接创建并用作属性的符号不会丢失。但是，如果没有**显式地保存**对这些属性的引用，那么必须遍历对象的所有符号属性才能找到相应的属性键
 
 ```js
-let genericSymbol = Symbol();
-let otherGenericSymbol = Symbol();
-console.log(genericSymbol === otherGenericSymbol); // false 
-let fooSymbol = Symbol('foo');
-let otherFooSymbol = Symbol('foo');
-console.log(fooSymbol === otherFooSymbol); // false 
-typeof genericSymbol === 'symbol'; // true
+const genericSymbol = Symbol()
+const otherGenericSymbol = Symbol()
+console.log(genericSymbol === otherGenericSymbol) // false
+const fooSymbol = Symbol('foo')
+const otherFooSymbol = Symbol('foo')
+console.log(fooSymbol === otherFooSymbol) // false
+typeof genericSymbol === 'symbol' // true
 ```
 
 ### `Symbol.for()`
@@ -320,16 +320,16 @@ typeof genericSymbol === 'symbol'; // true
 **注册表中使用的键同时也会被用作符号描述(`Symbol.for('str').description === 'str'`)**
 
 ```js
-let fooGlobalSymbol = Symbol.for('foo'); // 创建新符号
-let otherFooGlobalSymbol = Symbol.for('foo'); // 重用已有符号
-console.log(fooGlobalSymbol === otherFooGlobalSymbol); // true 
+const fooGlobalSymbol = Symbol.for('foo') // 创建新符号
+const otherFooGlobalSymbol = Symbol.for('foo') // 重用已有符号
+console.log(fooGlobalSymbol === otherFooGlobalSymbol) // true
 
-let localSymbol = Symbol('foo');
-let globalSymbol = Symbol.for('foo');
-console.log(localSymbol === globalSymbol); // false 
+const localSymbol = Symbol('foo')
+const globalSymbol = Symbol.for('foo')
+console.log(localSymbol === globalSymbol) // false
 
-let emptyGlobalSymbol = Symbol.for();
-console.log(emptyGlobalSymbol); // Symbol(undefined) 
+const emptyGlobalSymbol = Symbol.for()
+console.log(emptyGlobalSymbol) // Symbol(undefined)
 ```
 
 ### `Symbol.keyFor()`
@@ -342,13 +342,13 @@ console.log(emptyGlobalSymbol); // Symbol(undefined)
 
 ```js
 // 创建全局符号
-let s = Symbol.for('foo');
-console.log(Symbol.keyFor(s)); // foo 
+const s = Symbol.for('foo')
+console.log(Symbol.keyFor(s)) // foo
 // 创建普通符号
-let s2 = Symbol('bar');
-console.log(Symbol.keyFor(s2)); // undefined 
+const s2 = Symbol('bar')
+console.log(Symbol.keyFor(s2)) // undefined
 // 类型不对
-Symbol.keyFor(123); // TypeError: 123 is not a symbol 
+Symbol.keyFor(123) // TypeError: 123 is not a symbol
 ```
 
 ### 获取对象属性
@@ -362,21 +362,21 @@ Symbol.keyFor(123); // TypeError: 123 is not a symbol
 `Reflect.ownKeys()`会返回**两种类型**的**键数组**
 
 ```js
-let s1 = Symbol('foo'), s2 = Symbol('bar');
-let o = {
+const s1 = Symbol('foo'); const s2 = Symbol('bar')
+const o = {
   [s1]: 'foo val',
   [s2]: 'bar val',
   baz: 'baz val',
   qux: 'qux val'
-};
-console.log(Object.getOwnPropertySymbols(o));
+}
+console.log(Object.getOwnPropertySymbols(o))
 // [Symbol(foo), Symbol(bar)]
-console.log(Object.getOwnPropertyNames(o));
+console.log(Object.getOwnPropertyNames(o))
 // ["baz", "qux"]
-console.log(Object.getOwnPropertyDescriptors(o));
+console.log(Object.getOwnPropertyDescriptors(o))
 // {baz: {...}, qux: {...}, Symbol(foo): {...}, Symbol(bar): {...}}
-console.log(Reflect.ownKeys(o));
-// ["baz", "qux", Symbol(foo), Symbol(bar)] 
+console.log(Reflect.ownKeys(o))
+// ["baz", "qux", Symbol(foo), Symbol(bar)]
 ```
 
 ### 常用内置符号
@@ -403,56 +403,56 @@ console.log(Reflect.ownKeys(o));
 
 
 ```js
-let initial = ['foo'];
-let array = ['bar'];
-console.log(array[Symbol.isConcatSpreadable]); // undefined
-console.log(initial.concat(array)); // ['foo', 'bar']
-array[Symbol.isConcatSpreadable] = false;
-console.log(initial.concat(array)); // ['foo', Array(1)] 
+const initial = ['foo']
+const array = ['bar']
+console.log(array[Symbol.isConcatSpreadable]) // undefined
+console.log(initial.concat(array)) // ['foo', 'bar']
+array[Symbol.isConcatSpreadable] = false
+console.log(initial.concat(array)) // ['foo', Array(1)]
 
-let arrayLikeObject = { length: 1, 0: 'baz' };
-console.log(arrayLikeObject[Symbol.isConcatSpreadable]); // undefined
-console.log(initial.concat(arrayLikeObject)); // ['foo', {...}]
-arrayLikeObject[Symbol.isConcatSpreadable] = true;
-console.log(initial.concat(arrayLikeObject)); // ['foo', 'baz'] 
+const arrayLikeObject = { length: 1, 0: 'baz' }
+console.log(arrayLikeObject[Symbol.isConcatSpreadable]) // undefined
+console.log(initial.concat(arrayLikeObject)) // ['foo', {...}]
+arrayLikeObject[Symbol.isConcatSpreadable] = true
+console.log(initial.concat(arrayLikeObject)) // ['foo', 'baz']
 
-let otherObject = new Set().add('qux');
-console.log(otherObject[Symbol.isConcatSpreadable]); // undefined
-console.log(initial.concat(otherObject)); // ['foo', Set(1)]
-otherObject[Symbol.isConcatSpreadable] = true;
-console.log(initial.concat(otherObject)); // ['foo'] 
+const otherObject = new Set().add('qux')
+console.log(otherObject[Symbol.isConcatSpreadable]) // undefined
+console.log(initial.concat(otherObject)) // ['foo', Set(1)]
+otherObject[Symbol.isConcatSpreadable] = true
+console.log(initial.concat(otherObject)) // ['foo']
 ////////////////////////////////////
 class Baz extends Array {
   static get [Symbol.species]() {
-    return Array;
+    return Array
   }
-} 
-let baz = new Baz();
-console.log(baz instanceof Array); // true
-console.log(baz instanceof Baz); // true
-baz = baz.concat('baz');
-console.log(baz instanceof Array); // true
-console.log(baz instanceof Baz); // false 
+}
+let baz = new Baz()
+console.log(Array.isArray(baz)) // true
+console.log(baz instanceof Baz) // true
+baz = baz.concat('baz')
+console.log(Array.isArray(baz)) // true
+console.log(baz instanceof Baz) // false
 /////////////////////////////////////
 class Bar {
   constructor() {
-    this[Symbol.toPrimitive] = function(hint) {
-    switch (hint) {
-      case 'number':
-        return 3;
-      case 'string':
-        return 'string bar';
-      case 'default':
-      default:
-        return 'default bar';
+    this[Symbol.toPrimitive] = function (hint) {
+      switch (hint) {
+        case 'number':
+          return 3
+        case 'string':
+          return 'string bar'
+        case 'default':
+        default:
+          return 'default bar'
       }
     }
   }
-} 
-let bar = new Bar();
-console.log(3 + bar); // "3default bar"
-console.log(3 - bar); // 0
-console.log(String(bar)); // "string bar" 
+}
+const bar = new Bar()
+console.log(3 + bar) // "3default bar"
+console.log(3 - bar) // 0
+console.log(String(bar)) // "string bar"
 ```
 
 ## `BigInt`

@@ -120,7 +120,7 @@ date: 2021-01-21 17:09:04
 不传参数默认为 `true`
 
 ```js
-element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+element.scrollIntoView({ behavior: 'smooth', block: 'start' })
 // 将元素平滑地滚入视口
 ```
 
@@ -148,6 +148,6 @@ element.scrollIntoView({ behavior: 'smooth', block: 'start' });
   - `0x10` 传入节点是参考节点的后代
 
 ```js
-let result = document.documentElement.compareDocumentPosition(document.body);
-console.log(!!(result & 0x10)); // true
+const result = document.documentElement.compareDocumentPosition(document.body)
+console.log(!!(result & 0x10)) // true
 ```
