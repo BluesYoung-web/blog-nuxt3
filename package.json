@@ -14,11 +14,11 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",
     "@css-render/vue3-ssr": "^0.15.10",
-    "@iconify/json": "^2.1.79",
+    "@iconify/json": "^2.1.80",
     "@nuxt/content": "^2.0.1",
     "@nuxtjs/color-mode": "^3.1.4",
     "@pinia/nuxt": "^0.3.0",
-    "@unocss/nuxt": "^0.44.3",
+    "@unocss/nuxt": "^0.44.5",
     "@vueuse/nuxt": "^8.9.4",
     "eslint": "^8.20.0",
     "naive-ui": "^2.31.0",
