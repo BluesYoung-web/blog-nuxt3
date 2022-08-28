@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-01-20 14:33:40
- * @LastEditTime: 2022-07-14 08:53:27
+ * @LastEditTime: 2022-08-28 10:03:50
  * @Description: 文章目录
 -->
 <script lang="ts" setup>
@@ -9,7 +9,7 @@ import { NCard, NInput, NSpace, NTree } from 'naive-ui'
 import type { DocTree } from '~/server/api/dirs'
 const router = useRouter()
 const { intro } = useConfig()
-const { data } = useFetch('/api/dirs')
+const { data } = await useLazyFetch('/api/dirs')
 const pattern = ref('')
 
 const jump = (_: any, [v, ...__]: DocTree[]) => {
@@ -30,7 +30,7 @@ const jump = (_: any, [v, ...__]: DocTree[]) => {
             <n-input v-model:value="pattern" :placeholder="intro.search" />
             <n-tree
               :pattern="pattern"
-              :data="data?.tree ?? []"
+              :data="data?.tree || []"
               block-line
               class="max-h-120 overflow-auto"
               :on-update:selected-keys="jump"
